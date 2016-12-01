@@ -28,7 +28,9 @@ public class CustomersArchive implements Serializable{
 	public Customer get(int index){
 		return customersArchive.get(index);
 	}
-	
+	public ArrayList<Customer> getListOfCustomers(){
+		return this.customersArchive;
+	}
 	public void addCustomer(Customer customer){
 		customersArchive.add(customer);
 	}
