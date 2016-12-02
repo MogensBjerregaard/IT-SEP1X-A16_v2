@@ -16,7 +16,11 @@ public class PassengersArchive implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Passenger> passengersArchive;
-	
+
+	public ArrayList<Passenger> getPassengersArchive() {
+		return passengersArchive;
+	}
+
 	public PassengersArchive(){
 		passengersArchive = new ArrayList<>();
 	}

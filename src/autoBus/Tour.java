@@ -13,8 +13,18 @@ public class Tour implements Serializable{
 		Chauffeur chauffeur;
 		Bus bus;
 		DateInterval dateInterval;
-		
-		public Tour(String destination) throws Exception{
+
+	public Tour(String destination, ArrayList<String> pickUpPlaces, double pricePerPassenger, Services services, Chauffeur chauffeur, Bus bus, DateInterval dateInterval) {
+		this.destination = destination;
+		this.pickUpPlaces = pickUpPlaces;
+		this.pricePerPassenger = pricePerPassenger;
+		this.services = services;
+		this.chauffeur = chauffeur;
+		this.bus = bus;
+		this.dateInterval = dateInterval;
+	}
+
+	public Tour(String destination) throws Exception{
 			this.destination=destination;
 			pickUpPlaces = new ArrayList<>();
 			pricePerPassenger = 0;

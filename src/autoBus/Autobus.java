@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.border.BevelBorder;
@@ -25,6 +27,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Autobus extends JFrame {
@@ -197,18 +200,11 @@ public class Autobus extends JFrame {
 	private JCheckBox chckbxAllInclusiveNewBus;
 	private JCheckBox chckbxEntranceTicketsNewBus;
 	private JTextPane textPaneSummaryNewBus;
-   private JTextField searchPassengersTextField;
-   private JLabel lblSelectPassengersButton;
-   private JLabel lblSearchPassengersByName;
-   private JLabel lblSelectedTour;
-   private JLabel lblSelectedCustomer;
    private JLabel lblSelectedPassengers;
    private JLabel lblCreateReservationButton;
    private JTextField searchTourTextField;
-   private JLabel lblSelectTourButton;
-   private JComponent searchCustomerTextField;
+   /*Fixed manually*/private JTextField searchCustomerTextField;
    private JLabel lblSearchCustomerByName;
-   private JLabel lblSelectCustomerButton;
    private JTextField lblPhoneInNewTourReservationtextField;
    private JTextField customerNameNewTourReservationTextField;
    private JTextField customerOrganisationtextField;
@@ -240,6 +236,16 @@ private JTextField passengerYearInNewTourReservation;
 private JLabel lblAddCusomerButtonNewTourReservation;
 private JRadioButton radioButtonIsCompanyNewTourReservation;
 private JRadioButton radioButtonIsSchoolNewTourReservation;
+	private JCheckBox boxIsAPassengerNewTourReservation;
+	private JLabel lblClearCustomerButtonNewTourReservation;
+	private JRadioButton radioButtonIsPrivateInNewTourReservation;
+	private JPanel summaryPanel;
+	private JLabel lblSelectedTour;
+	private JLabel lblSelectedCustomer;
+	private JLabel lblSearchForPassengerInNewTourReservationButton;
+	private JLabel lblRemoveButtonInNewTourReservation;
+	private JLabel lblClearAlButtonInNewTourReservation;
+	private JLabel lblCancelButtonInNewTourReservation;
 
 	/**
 	 * Launch the application.
@@ -298,6 +304,10 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 		toursArchive = new ToursArchive();
 		if (toursArchive.isFileFound()){
 			toursArchive.loadToursArchive();
+			/*TESTING FEATURE*/ toursArchive.addTour(new Tour("Nowhere", new ArrayList<String>(), 50,new Services(),
+					new Chauffeur("", "", "",0,0,0,"","", true,true),
+					new Bus(1,"",2,""),
+					new DateInterval()));
 			listTours();
 		} else {
 			toursArchive.createFile();
@@ -355,6 +365,382 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 	// This method contains all code for creating events
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	private void createEvents() {
+
+
+		lblCancelButtonInNewTourReservation.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				if(okOrCancel("Are you sure you want to cancel this reservation?") ==0){
+					passengerPhoneInNewTourReservation.setText("");
+					passengerNameInNewReservation.setText("");
+					passengerAddressInNewTourReservation.setText("");
+					passengerEmailInNewTourReservation.setText("");
+					passengerMonthInNewTourReservation.setText("");
+					passengerDayInNewTourReservation.setText("");
+					passengerYearInNewTourReservation.setText("");
+					customerNameNewTourReservationTextField.setText("");
+					customerOrganisationtextField.setText("");
+					customerAddressIncustomerEmailNewTourReservationTextField.setText("");
+					customerEmailNewTourReservationtextField.setText("");
+					customerMonthInNewTourReservationTextField.setText("");
+					customerDayInNewTourReservationTextField.setText("");
+					customerYearInNewTourReservationTextField.setText("");
+					lblPhoneInNewTourReservationtextField.setText("");
+					radioButtonIsCompanyNewTourReservation.setSelected(false);
+					radioButtonIsPrivateInNewTourReservation.setSelected(false);
+					radioButtonIsSchoolNewTourReservation.setSelected(false);
+					chckbxNewBusIsPassenger.setSelected(false);
+					deleteAllRows((DefaultTableModel) tablePassengersInNewTourReservation.getModel());
+					lblSelectedCustomer.setText("");
+					lblSelectedPassengers.setText("");
+					lblSelectedTour.setText("");
+				}
+
+			}
+		});
+
+		lblClearAlButtonInNewTourReservation.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				DefaultTableModel tablePassengersModelInNewTourReservation = (DefaultTableModel)tablePassengersInNewTourReservation.getModel();
+				tablePassengersModelInNewTourReservation.setRowCount(0);
+				boxIsAPassengerNewTourReservation.setSelected(false);
+			}
+		});
+
+		lblRemoveButtonInNewTourReservation.addMouseListener(new MouseAdapter(){
+			public void mouseReleased(MouseEvent event){
+				int index = tablePassengersInNewTourReservation.getSelectedRow();
+				DefaultTableModel tablePassengersModelInNewTourReservation = (DefaultTableModel)tablePassengersInNewTourReservation.getModel();
+				if (index!=-1){
+					if (okOrCancel("Are you sure you want to remove this passenger from the list?")==0) {
+						tablePassengersModelInNewTourReservation .removeRow(index);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "You need first to select the passenger you wish to remove!");
+				}
+			}
+		});
+
+		searchCustomerTextField.getDocument().addDocumentListener(new DocumentListener() {
+			public void deleteAllRows(final DefaultTableModel model) {
+				for (int i = model.getRowCount() - 1; i >= 0; i--) {
+					model.removeRow(i);
+				}
+			}
+
+			public void changedUpdate(DocumentEvent e) {
+				DefaultTableModel customersTableModelForNewReservation;
+				deleteAllRows(
+						customersTableModelForNewReservation = (DefaultTableModel) customersTableInNewTourReservation.getModel());
+				String searchText;
+				if (!(searchText = searchCustomerTextField.getText()).equals("")) {
+					Object[] rowData = new Object[7];
+					for (int i = 0; i < customersArchive.getListOfCustomers().size(); i++) {
+						String customersName = customersArchive.getListOfCustomers().get(i).getName();
+						String substringOfName = customersName.substring(0,searchText.length() <= customersName.length() ? searchText.length(): customersName.length());
+						if (substringOfName.equals(searchText)) {
+							rowData[0] = customersArchive.get(i).getOrganisationName();
+							rowData[1] = customersArchive.get(i).getOrganisationType();
+							rowData[2] = customersArchive.get(i).getPhonenumber();
+							rowData[3] = customersArchive.get(i).getName();
+							rowData[4] = customersArchive.get(i).getAddress();
+							rowData[5] = customersArchive.get(i).getEmail();
+							rowData[6] = customersArchive.get(i).getBirthday().displayDate();
+							customersTableModelForNewReservation.addRow(rowData);
+						}
+					}
+				} else {
+					deleteAllRows(customersTableModelForNewReservation = (DefaultTableModel) customersTableInNewTourReservation.getModel());
+					Object[] rowData = new Object[7];
+					for (int i = 0; i < customersArchive.getListOfCustomers().size(); i++) {
+						rowData[0] = customersArchive.get(i).getOrganisationName();
+						rowData[1] = customersArchive.get(i).getOrganisationType();
+						rowData[2] = customersArchive.get(i).getPhonenumber();
+						rowData[3] = customersArchive.get(i).getName();
+						rowData[4] = customersArchive.get(i).getAddress();
+						rowData[5] = customersArchive.get(i).getEmail();
+						rowData[6] = customersArchive.get(i).getBirthday().displayDate();
+						customersTableModelForNewReservation.addRow(rowData);
+					}
+				}
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				DefaultTableModel customersTableModelForNewReservation;
+				deleteAllRows(
+						customersTableModelForNewReservation = (DefaultTableModel) customersTableInNewTourReservation.getModel());
+				String searchText;
+				if (!(searchText = searchCustomerTextField.getText()).equals("")) {
+					Object[] rowData = new Object[7];
+					for (int i = 0; i < customersArchive.getListOfCustomers().size(); i++) {
+						String customersName = customersArchive.getListOfCustomers().get(i).getName();
+						String substringOfName = customersName.substring(0,searchText.length() <= customersName.length() ? searchText.length(): customersName.length());
+						if (substringOfName.equals(searchText)) {
+							rowData[0] = customersArchive.get(i).getOrganisationName();
+							rowData[1] = customersArchive.get(i).getOrganisationType();
+							rowData[2] = customersArchive.get(i).getPhonenumber();
+							rowData[3] = customersArchive.get(i).getName();
+							rowData[4] = customersArchive.get(i).getAddress();
+							rowData[5] = customersArchive.get(i).getEmail();
+							rowData[6] = customersArchive.get(i).getBirthday().displayDate();
+							customersTableModelForNewReservation.addRow(rowData);
+						}
+					}
+				} else {
+					deleteAllRows(customersTableModelForNewReservation = (DefaultTableModel) customersTableInNewTourReservation.getModel());
+					Object[] rowData = new Object[7];
+					for (int i = 0; i < customersArchive.getListOfCustomers().size(); i++) {
+						rowData[0] = customersArchive.get(i).getOrganisationName();
+						rowData[1] = customersArchive.get(i).getOrganisationType();
+						rowData[2] = customersArchive.get(i).getPhonenumber();
+						rowData[3] = customersArchive.get(i).getName();
+						rowData[4] = customersArchive.get(i).getAddress();
+						rowData[5] = customersArchive.get(i).getEmail();
+						rowData[6] = customersArchive.get(i).getBirthday().displayDate();
+						customersTableModelForNewReservation.addRow(rowData);
+					}
+				}
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				DefaultTableModel customersTableModelForNewReservation;
+				deleteAllRows(
+						customersTableModelForNewReservation = (DefaultTableModel) customersTableInNewTourReservation.getModel());
+				String searchText;
+				if (!(searchText = searchCustomerTextField.getText()).equals("")) {
+					Object[] rowData = new Object[7];
+					for (int i = 0; i < customersArchive.getListOfCustomers().size(); i++) {
+						String customersName = customersArchive.getListOfCustomers().get(i).getName();
+						String substringOfName = customersName.substring(0,searchText.length() <= customersName.length() ? searchText.length(): customersName.length());
+						if (substringOfName.equals(searchText)) {
+							rowData[0] = customersArchive.get(i).getOrganisationName();
+							rowData[1] = customersArchive.get(i).getOrganisationType();
+							rowData[2] = customersArchive.get(i).getPhonenumber();
+							rowData[3] = customersArchive.get(i).getName();
+							rowData[4] = customersArchive.get(i).getAddress();
+							rowData[5] = customersArchive.get(i).getEmail();
+							rowData[6] = customersArchive.get(i).getBirthday().displayDate();
+							customersTableModelForNewReservation.addRow(rowData);
+						}
+					}
+				} else {
+					deleteAllRows(customersTableModelForNewReservation = (DefaultTableModel) customersTableInNewTourReservation.getModel());
+					Object[] rowData = new Object[7];
+					for (int i = 0; i < customersArchive.getListOfCustomers().size(); i++) {
+						rowData[0] = customersArchive.get(i).getOrganisationName();
+						rowData[1] = customersArchive.get(i).getOrganisationType();
+						rowData[2] = customersArchive.get(i).getPhonenumber();
+						rowData[3] = customersArchive.get(i).getName();
+						rowData[4] = customersArchive.get(i).getAddress();
+						rowData[5] = customersArchive.get(i).getEmail();
+						rowData[6] = customersArchive.get(i).getBirthday().displayDate();
+						customersTableModelForNewReservation.addRow(rowData);
+					}
+				}				}
+		});
+
+
+		searchTourTextField.getDocument().addDocumentListener(new DocumentListener() {
+			public void deleteAllRows(final DefaultTableModel model) {
+				for (int i = model.getRowCount() - 1; i >= 0; i--) {
+					model.removeRow(i);
+				}
+			}
+
+			public void changedUpdate(DocumentEvent e) {
+				DefaultTableModel toursTableModelForNewReservation;
+				deleteAllRows(
+						toursTableModelForNewReservation = (DefaultTableModel) tableToursInNewTourReservation.getModel());
+				String searchText;
+				if (!(searchText = searchTourTextField.getText()).equals("")) {
+					Object[] rowData = new Object[7];
+					for (int i = 0; i < toursArchive.size(); i++) {
+						String destination = toursArchive.get(i).getDestination();
+						String substringOfDestination = destination.substring(0,
+								searchText.length() <= destination.length() ? searchText.length()
+										: destination.length());
+						if (substringOfDestination.equals(searchText)) {
+							rowData[0] = toursArchive.get(i).getDateIntervalString();
+							rowData[1] = toursArchive.get(i).getDestination();
+							rowData[2] = toursArchive.get(i).getPickUpPlacesString();
+							rowData[3] = toursArchive.get(i).getServicesString();
+							rowData[4] = toursArchive.get(i).getPricePerPassengerString();
+							rowData[5] = toursArchive.get(i).getBusAndType();
+							rowData[6] = toursArchive.get(i).getChauffeur();
+							toursTableModelForNewReservation.addRow(rowData);
+						}
+					}
+				} else {
+					deleteAllRows(toursTableModelForNewReservation = (DefaultTableModel) tableToursInNewTourReservation.getModel());
+					Object[] rowData = new Object[7];
+					for (int i = 0; i < toursArchive.size(); i++) {
+						rowData[0] = toursArchive.get(i).getDateIntervalString();
+						rowData[1] = toursArchive.get(i).getDestination();
+						rowData[2] = toursArchive.get(i).getPickUpPlacesString();
+						rowData[3] = toursArchive.get(i).getServicesString();
+						rowData[4] = toursArchive.get(i).getPricePerPassengerString();
+						rowData[5] = toursArchive.get(i).getBusAndType();
+						rowData[6] = toursArchive.get(i).getChauffeur();
+						toursTableModelForNewReservation.addRow(rowData);
+					}
+				}
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				DefaultTableModel toursTableModelForNewReservation;
+				deleteAllRows(
+						toursTableModelForNewReservation = (DefaultTableModel) tableToursInNewTourReservation.getModel());
+				String searchText;
+				if (!(searchText = searchTourTextField.getText()).equals("")) {
+					Object[] rowData = new Object[7];
+					for (int i = 0; i < toursArchive.size(); i++) {
+						String destination = toursArchive.get(i).getDestination();
+						String substringOfDestination = destination.substring(0,
+								searchText.length() <= destination.length() ? searchText.length()
+										: destination.length());
+						if (substringOfDestination.equals(searchText)) {
+							rowData[0] = toursArchive.get(i).getDateIntervalString();
+							rowData[1] = toursArchive.get(i).getDestination();
+							rowData[2] = toursArchive.get(i).getPickUpPlacesString();
+							rowData[3] = toursArchive.get(i).getServicesString();
+							rowData[4] = toursArchive.get(i).getPricePerPassengerString();
+							rowData[5] = toursArchive.get(i).getBusAndType();
+							rowData[6] = toursArchive.get(i).getChauffeur();
+							toursTableModelForNewReservation.addRow(rowData);
+						}
+					}
+				} else {
+					deleteAllRows(toursTableModelForNewReservation = (DefaultTableModel) tableToursInNewTourReservation.getModel());
+					Object[] rowData = new Object[7];
+					for (int i = 0; i < toursArchive.size(); i++) {
+						rowData[0] = toursArchive.get(i).getDateIntervalString();
+						rowData[1] = toursArchive.get(i).getDestination();
+						rowData[2] = toursArchive.get(i).getPickUpPlacesString();
+						rowData[3] = toursArchive.get(i).getServicesString();
+						rowData[4] = toursArchive.get(i).getPricePerPassengerString();
+						rowData[5] = toursArchive.get(i).getBusAndType();
+						rowData[6] = toursArchive.get(i).getChauffeur();
+						toursTableModelForNewReservation.addRow(rowData);
+					}
+				}
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				DefaultTableModel toursTableModelForNewReservation;
+				deleteAllRows(
+						toursTableModelForNewReservation = (DefaultTableModel) tableToursInNewTourReservation.getModel());
+				String searchText;
+				if (!(searchText = searchTourTextField.getText()).equals("")) {
+					Object[] rowData = new Object[7];
+					for (int i = 0; i < toursArchive.size(); i++) {
+						String destination = toursArchive.get(i).getDestination();
+						String substringOfDestination = destination.substring(0,
+								searchText.length() <= destination.length() ? searchText.length()
+										: destination.length());
+						if (substringOfDestination.equals(searchText)) {
+							rowData[0] = toursArchive.get(i).getDateIntervalString();
+							rowData[1] = toursArchive.get(i).getDestination();
+							rowData[2] = toursArchive.get(i).getPickUpPlacesString();
+							rowData[3] = toursArchive.get(i).getServicesString();
+							rowData[4] = toursArchive.get(i).getPricePerPassengerString();
+							rowData[5] = toursArchive.get(i).getBusAndType();
+							rowData[6] = toursArchive.get(i).getChauffeur();
+							toursTableModelForNewReservation.addRow(rowData);
+						}
+					}
+				} else {
+					deleteAllRows(toursTableModelForNewReservation = (DefaultTableModel) tableToursInNewTourReservation.getModel());
+					Object[] rowData = new Object[7];
+					for (int i = 0; i < toursArchive.size(); i++) {
+						rowData[0] = toursArchive.get(i).getDateIntervalString();
+						rowData[1] = toursArchive.get(i).getDestination();
+						rowData[2] = toursArchive.get(i).getPickUpPlacesString();
+						rowData[3] = toursArchive.get(i).getServicesString();
+						rowData[4] = toursArchive.get(i).getPricePerPassengerString();
+						rowData[5] = toursArchive.get(i).getBusAndType();
+						rowData[6] = toursArchive.get(i).getChauffeur();
+						toursTableModelForNewReservation.addRow(rowData);
+					}
+				}
+			}
+		});
+
+
+		tableToursInNewTourReservation.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+			@Override
+			public void valueChanged(ListSelectionEvent event) {
+				int index = tableToursInNewTourReservation.getSelectedRow();
+					lblSelectedTour.setText(toursArchive.getToursArchive().get(index).getDestination()
+					+ " " + toursArchive.getToursArchive().get(index).getDateInterval().getStartDate().displayDate());
+				}
+			});
+
+		customersTableInNewTourReservation.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+			@Override
+			public void valueChanged(ListSelectionEvent event) {
+				int index = customersTableInNewTourReservation.getSelectedRow();
+				lblSelectedCustomer.setText(customersArchive.getListOfCustomers().get(index).getName());
+			}
+		});
+
+
+
+
+		lblCreateReservationButton.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				String str = "";
+				if(customersTableInNewTourReservation.getRowCount() == 0)
+					str += "\nYou did not add any passengers to the list!";
+				if(tablePassengersInNewTourReservation.getRowCount() == 0)
+					str += "\nYou did not add any passengers to the list!";
+				if(tableToursInNewTourReservation.getRowCount() == 0)
+					str += "\nYou did not add any passengers to the list!";
+				if(str.equals("")){
+					Customer selectedCustomer = customersArchive.getListOfCustomers().get(customersTableInNewTourReservation.getSelectedRow());
+					ArrayList<Passenger> listOfSelectedPassengers= new ArrayList<>();
+					try {
+						reservationNumber=reservationNumberGenerator.getReservationNumber();
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					int passengersTableRowCount= tablePassengersInNewTourReservation.getRowCount();
+					for (int i = 0; i < passengersTableRowCount; i++) {
+						String passengersPhoneNumber = (String) tablePassengersInNewTourReservation.getModel().getValueAt(i,2);
+						String passengersName = (String) tablePassengersInNewTourReservation.getModel().getValueAt(i,0);
+
+						for (int j = 0; j < passengersArchive.size(); j++) {
+							if(passengersArchive.getPassengersArchive().get(j).getPhonenumber().equals(passengersPhoneNumber) &&
+							   passengersArchive.getPassengersArchive().get(j).getName().equals(passengersName)){
+
+									listOfSelectedPassengers.add(passengersArchive.getPassengersArchive().get(j));
+							}
+						}
+					}
+					Tour selectedTour = toursArchive.getToursArchive().get(tableToursInNewTourReservation.getSelectedRow());
+                 /*DO NOT FORGET TO IMPEMENT RESERVATION ID AND DISCOUNT */
+                 	TourReservation newTourReservation =new TourReservation(reservationNumber,0,selectedCustomer,selectedTour);
+					newTourReservation.setPassengers(listOfSelectedPassengers);
+					reservationsArchive.addReservation(newTourReservation);
+					try {
+						reservationsArchive.saveReservationsArchive();
+					}
+					catch (Exception ex){
+						ex.printStackTrace();
+					}
+					updateListTourReservations((TourReservation) reservationsArchive.getReservationsArchive().get(reservationsArchive.size() -1));
+					JOptionPane.showMessageDialog(null, "A new tour Reservation was successfully created");
+					deleteAllRows((DefaultTableModel) tablePassengersInNewTourReservation.getModel());
+
+				}
+				else{
+					JOptionPane.showMessageDialog(null,
+							"It seems you form was filled incorrectly" + str);
+				}
+			}
+		});
 		
 		mntmAboutAutobus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -1003,7 +1389,25 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 				textFieldNewBusCustomerPhone.setText("");
 				rdbtnNewBusCompany.setSelected(false);
 				rdbtnNewBusPrivate.setSelected(false);
-				rdbtnNewBusSchool.setSelected(false);	
+				rdbtnNewBusSchool.setSelected(false);
+				chckbxNewBusIsPassenger.setSelected(false);
+			}
+		});
+
+		lblClearCustomerButtonNewTourReservation.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				customerNameNewTourReservationTextField.setText("");
+				customerOrganisationtextField.setText("");
+				customerAddressIncustomerEmailNewTourReservationTextField.setText("");
+				customerEmailNewTourReservationtextField.setText("");
+				customerMonthInNewTourReservationTextField.setText("");
+				customerDayInNewTourReservationTextField.setText("");
+				customerYearInNewTourReservationTextField.setText("");
+				lblPhoneInNewTourReservationtextField.setText("");
+				radioButtonIsCompanyNewTourReservation.setSelected(false);
+				radioButtonIsPrivateInNewTourReservation.setSelected(false);
+				radioButtonIsSchoolNewTourReservation.setSelected(false);
 				chckbxNewBusIsPassenger.setSelected(false);
 			}
 		});
@@ -1138,7 +1542,213 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 				textFieldNewBusPassengerByear.setText("");
 			}
 		});
-		
+
+		lblClearButtonPassengerInNewTourReservation.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				passengerPhoneInNewTourReservation.setText("");
+				passengerNameInNewReservation.setText("");
+				passengerAddressInNewTourReservation.setText("");
+				passengerEmailInNewTourReservation.setText("");
+				passengerMonthInNewTourReservation.setText("");
+				passengerDayInNewTourReservation.setText("");
+				passengerYearInNewTourReservation.setText("");
+			}
+		});
+
+//IS A PASSENGER CHECKBOX IN NEW TOUR RESERVATION. THIS METHOD WILL CREATE BOTH CUSTOMER AND PASSENGER AND UPDATE ALL TABLES
+		this.boxIsAPassengerNewTourReservation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String str = new String();
+				int month = 0;
+				int day = 0;
+				int year = 0;
+				Calendar timeNow = Calendar.getInstance();
+				int currentYear = timeNow.get(Calendar.YEAR);
+				try {
+					int phone = Integer.parseInt(lblPhoneInNewTourReservationtextField.getText());
+					if (!(10000000<phone&&phone<=99999999)) {
+						str+= "\nPhone number does not have 8 digits!";
+					}
+				} catch (Exception e3) {
+					str+= "\nEntered phone number does not appear to be digits!";
+				}
+				if (customerOrganisationtextField.getText().equalsIgnoreCase("")) {
+					str+= "\nName/organisation cannot be empty!";
+				}
+				if (customerNameNewTourReservationTextField.getText().equalsIgnoreCase("")){
+					str+= "\nName/contact cannot be empty!";
+				}
+				if (customerAddressIncustomerEmailNewTourReservationTextField.getText().equalsIgnoreCase("")) {
+					str+= "\nAddress cannot be empty!";
+				}
+				if (customerEmailNewTourReservationtextField.getText().equalsIgnoreCase("")){
+					str+= "\nEmail address cannot be empty!";
+				}
+				if (!(customerEmailNewTourReservationtextField.getText().contains("@")&&customerEmailNewTourReservationtextField.getText().contains("."))){
+					str+= "\nEmail address does not appear to be in correct format!";
+				}
+				String organisationType = "PRIVATE";
+				if (radioButtonIsCompanyNewTourReservation.isSelected()) {
+					organisationType = "COMPANY";
+				}
+				if (radioButtonIsSchoolNewTourReservation.isSelected()){
+					organisationType = "SCHOOL";
+				}
+
+				try {
+					month = Integer.parseInt(customerMonthInNewTourReservationTextField.getText());
+					if (month>12||month<1) str = str + "\nMonth does not seem to be a number between 1-12!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nMonth does not seem to be a number between 1-12!";
+				}
+				try {
+					day = Integer.parseInt(customerDayInNewTourReservationTextField.getText());
+					if (month==1||month==3||month==5||month==7||month==8||month==10||month==12) {
+						if (!(1<=day&&day<=31)) {
+							str = str + "\nDay does not seem to be a number between 1-31!";
+						}
+					} else if (month==2){
+						if (!(1<=day&&day<=28)) {
+							str = str + "\nDay does not seem to be a number between 1-28!";
+						}
+					} else if (month==4||month==6||month==9||month==11){
+						if (!(1<=day&&day<=30)) {
+							str = str + "\nDay does not seem to be a number between 1-30!";
+						}
+					}
+				} catch (NumberFormatException e1) {
+					str = str + "\nDay does not seem to be a number between 1-31!";
+				}
+				try {
+					year = Integer.parseInt(customerYearInNewTourReservationTextField.getText());
+					if (year>currentYear||year<currentYear-120) str = str + "\nYear does not appear to be a valid number!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nYear does not appear to be a valid number!";
+				}
+
+				if (str.equalsIgnoreCase("")) {
+					customersArchive.addCustomer( new Customer(customerNameNewTourReservationTextField.getText(), customerOrganisationtextField.getText(), customerEmailNewTourReservationtextField.getText(),
+									customerAddressIncustomerEmailNewTourReservationTextField.getText(), new Date(month,day,year), lblPhoneInNewTourReservationtextField.getText(), organisationType));
+					passengersArchive.addPassenger(new Passenger(customerNameNewTourReservationTextField.getText(),customerEmailNewTourReservationtextField.getText(), customerAddressIncustomerEmailNewTourReservationTextField.getText(),new Date(month,day,year), lblPhoneInNewTourReservationtextField.getText()));
+					updateListPassengersInNewTourReservation(passengersArchive.getPassengersArchive().get(passengersArchive.getPassengersArchive().size() -1));
+					updateListPassengers(passengersArchive.getPassengersArchive().get(passengersArchive.getPassengersArchive().size() -1));
+					updateListCustomers(customersArchive.getListOfCustomers().get(customersArchive.getListOfCustomers().size() -1));
+					try {
+						customersArchive.saveCustomersArchive();
+						passengersArchive.savePassengersArchive();
+					} catch (Exception ex) {
+
+						ex.printStackTrace();
+					}
+
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "You have to fill out the fields correct:\n"+str);
+					chckbxNewBusIsPassenger.setSelected(false);
+				}
+
+			}
+		});
+
+		lblSearchForPassengerInNewTourReservationButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				String phoneNumber = passengerPhoneInNewTourReservation.getText();
+				for (int i = 0; i < passengersArchive.size(); i++) {
+					if(passengersArchive.getPassengersArchive().get(i).getPhonenumber().equals(phoneNumber)){
+						updateListPassengersInNewTourReservation(passengersArchive.getPassengersArchive().get(i));
+						lblSelectedPassengers.setText(lblSelectedPassengers.getText() +
+								passengersArchive.getPassengersArchive().get(passengersArchive.size() -1).getName() + " " +
+								passengersArchive.getPassengersArchive().get(passengersArchive.size() -1).getPhonenumber() + "\n");
+						return;
+					}
+				}
+				JOptionPane.showMessageDialog(null, "The passenger with entered phone number could not be found");
+			}
+		});
+
+//LISTENER FOR CREATING NEW PASSENGER IN "NEW TOUR RESERVATION"
+		lblAddNewPassengerInNewTourReservation.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				String str="";
+				int month = 0;
+				int day = 0;
+				int year = 0;
+				Calendar timeNow = Calendar.getInstance();
+				int currentYear = timeNow.get(Calendar.YEAR);
+				try {
+					int phone = Integer.parseInt(passengerPhoneInNewTourReservation.getText());
+					if (!(10000000<phone&&phone<=99999999)) {
+						str+= "\nPhone number does not have 8 digits!";
+					}
+				} catch (Exception e3) {
+					str+= "\nEntered phone number does not appear to be digits!";
+				}
+				if (passengerNameInNewReservation.getText().equalsIgnoreCase("")){
+					str+= "\nName cannot be empty!";
+				}
+				if (passengerAddressInNewTourReservation.getText().equalsIgnoreCase("")) {
+					str+= "\nAddress cannot be empty!";
+				}
+
+				if (!(passengerEmailInNewTourReservation.getText().contains("@")&&passengerEmailInNewTourReservation.getText().contains("."))){
+					str+= "\nEmail appears to be either empty or incorrect format!";
+				}
+
+				try {
+					month = Integer.parseInt(passengerMonthInNewTourReservation.getText());
+					if (month>12||month<1) str = str + "\nMonth does not seem to be a number between 1-12!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nMonth does not seem to be a number between 1-12!";
+				}
+				try {
+					day = Integer.parseInt(passengerDayInNewTourReservation.getText());
+					if (month==1||month==3||month==5||month==7||month==8||month==10||month==12) {
+						if (!(1<=day&&day<=31)) {
+							str = str + "\nDay does not seem to be a number between 1-31!";
+						}
+					} else if (month==2){
+						if (!(1<=day&&day<=28)) {
+							str = str + "\nDay does not seem to be a number between 1-28!";
+						}
+					} else if (month==4||month==6||month==9||month==11){
+						if (!(1<=day&&day<=30)) {
+							str = str + "\nDay does not seem to be a number between 1-30!";
+						}
+					}
+				} catch (NumberFormatException e1) {
+					str = str + "\nDay does not seem to be a number between 1-31!";
+				}
+				try {
+					year = Integer.parseInt(passengerYearInNewTourReservation.getText());
+					if (year>currentYear||year<currentYear-120) str = str + "\nYear does not appear to be a valid number!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nYear does not appear to be a valid number!";
+				}
+
+				if (str.equalsIgnoreCase("")) {
+					passengersArchive.addPassenger(new Passenger(passengerNameInNewReservation.getText(),passengerEmailInNewTourReservation.getText(), passengerAddressInNewTourReservation.getText(),new Date(month,day,year), passengerPhoneInNewTourReservation.getText()));
+					updateListPassengersInNewTourReservation(passengersArchive.getPassengersArchive().get(passengersArchive.getPassengersArchive().size() -1));
+					updateListPassengers(passengersArchive.getPassengersArchive().get(passengersArchive.getPassengersArchive().size() -1));
+					lblSelectedPassengers.setText(lblSelectedPassengers.getText() + "\n" +
+												  passengersArchive.getPassengersArchive().get(passengersArchive.size() -1).getName() + " " +
+												  passengersArchive.getPassengersArchive().get(passengersArchive.size() -1).getPhonenumber());
+
+					try {
+						passengersArchive.savePassengersArchive();
+					} catch (Exception ex) {
+
+						ex.printStackTrace();
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "You have to fill out the fields correct:\n"+str);
+				}
+			}
+		});
+
 		lblNewBusAddPassengerBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -1409,7 +2019,7 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 			}
 		});
 		
-		
+//LISTENER FOR ADDING NEW CUSTOMER IN NEW TOUR RESERVATION
 		lblAddCusomerButtonNewTourReservation.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -1494,9 +2104,9 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 							bYear = Integer.parseInt(customerYearInNewTourReservationTextField.getText());
 							birthday = new Date(bMonth, bDay, bYear);
 						}
-						Customer customer = new Customer(customerNameNewTourReservationTextField.getText(), customerOrganisationtextField.getText(), customerEmailNewTourReservationtextField.getText(), 
-								customerAddressIncustomerEmailNewTourReservationTextField.getText(), birthday, lblPhoneInNewTourReservationtextField.getText(), organisationType);
-						customersArchive.addCustomer(customer);
+						customersArchive.addCustomer( new Customer(customerNameNewTourReservationTextField.getText(), customerOrganisationtextField.getText(), customerEmailNewTourReservationtextField.getText(),
+								customerAddressIncustomerEmailNewTourReservationTextField.getText(), birthday, lblPhoneInNewTourReservationtextField.getText(), organisationType)
+						);
 						updateListCustomers(customersArchive.getListOfCustomers().get(customersArchive.getListOfCustomers().size() -1));
 						try {
 							customersArchive.saveCustomersArchive();
@@ -2034,6 +2644,28 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 			passengersTable.addRow(rowData);			
 		}
 	}
+
+	public void updateListPassengers(Passenger newPassenger){
+		passengersTable = (DefaultTableModel) tablePassengers.getModel();
+		Object[] rowData = new Object[5];
+		rowData[0] = newPassenger.getName();
+		rowData[1] = newPassenger.getAddress();
+		rowData[2] = newPassenger.getPhonenumber();
+		rowData[3] = newPassenger.getEmail();
+		rowData[4] = newPassenger.getBirthday().displayDate();
+		passengersTable.addRow(rowData);
+	}
+
+	public void updateListPassengersInNewTourReservation(Passenger newPassenger){
+		passengersTable = (DefaultTableModel) tablePassengersInNewTourReservation.getModel();
+		Object[] rowData = new Object[5];
+		rowData[0] = newPassenger.getName();
+		rowData[1] = newPassenger.getAddress();
+		rowData[2] = newPassenger.getPhonenumber();
+		rowData[3] = newPassenger.getEmail();
+		rowData[4] = newPassenger.getBirthday().displayDate();
+		passengersTable.addRow(rowData);
+	}
 	
 	public void updateListPickUps(){
 		pickupsTable = (DefaultTableModel) tablePickups.getModel();
@@ -2108,6 +2740,16 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 		}
 	}
 
+	public void updateListTourReservations(TourReservation newTourReservation){
+		tourReservationsTable = (DefaultTableModel) tableTourReservations.getModel();
+		Object[] rowData = new Object[4];
+		rowData[0] = newTourReservation.getReservationNumber();
+		rowData[1] = newTourReservation.getTour().getDestination() + " " + newTourReservation.getTour().getDateIntervalString();
+		rowData[2] = newTourReservation.getCustomer().getOrganisationName();
+		rowData[3] = newTourReservation.getPassengersString();
+		tourReservationsTable.addRow(rowData);
+	}
+
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// This method contains all code for creating and initializing components
@@ -2122,7 +2764,7 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Autobus.class.getResource("/ressources/icon_bus.png")));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1001, 752);
+		setBounds(100, 100, 1387, 887);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setMargin(new Insets(3, 3, 3, 3));
@@ -3438,44 +4080,19 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
       JLabel labelNewTourReservation = new JLabel("New Tour reservation");
       labelNewTourReservation.setForeground(Color.WHITE);
       labelNewTourReservation.setFont(new Font("Century Gothic", Font.PLAIN, 20));
-      
-            lblSelectedTour = new JLabel("Tour:");
-            lblSelectedTour.setForeground(new Color(255, 255, 255));
-            lblSelectedTour.setBorder(new LineBorder(new Color(255, 255, 255), 2));
-            lblSelectedTour.setFont(new Font("Tahoma", Font.PLAIN, 20));
-      
-            lblSelectedCustomer = new JLabel("Customer:");
-            lblSelectedCustomer.setForeground(Color.WHITE);
-            lblSelectedCustomer.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            lblSelectedCustomer.setBorder(new LineBorder(new Color(255, 255, 255), 2));
-      
-            lblSelectedPassengers = new JLabel("Passengers:");
-            lblSelectedPassengers.setForeground(Color.WHITE);
-            lblSelectedPassengers.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            lblSelectedPassengers.setBorder(new LineBorder(new Color(255, 255, 255), 2));
       GroupLayout gl_panelTopNewTourReservation = new GroupLayout(panelTopNewTourReservation);
       gl_panelTopNewTourReservation.setHorizontalGroup(
-         gl_panelTopNewTourReservation.createParallelGroup(Alignment.LEADING)
-            .addGroup(gl_panelTopNewTourReservation.createSequentialGroup()
-               .addContainerGap()
-               .addComponent(labelNewTourReservation, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE)
-               .addPreferredGap(ComponentPlacement.RELATED)
-               .addComponent(lblSelectedTour, GroupLayout.PREFERRED_SIZE, 279, GroupLayout.PREFERRED_SIZE)
-               .addPreferredGap(ComponentPlacement.RELATED)
-               .addComponent(lblSelectedCustomer, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
-               .addPreferredGap(ComponentPlacement.RELATED)
-               .addComponent(lblSelectedPassengers, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE)
-               .addContainerGap(24, Short.MAX_VALUE))
+      	gl_panelTopNewTourReservation.createParallelGroup(Alignment.LEADING)
+      		.addGroup(gl_panelTopNewTourReservation.createSequentialGroup()
+      			.addContainerGap()
+      			.addComponent(labelNewTourReservation, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE)
+      			.addContainerGap(1117, Short.MAX_VALUE))
       );
       gl_panelTopNewTourReservation.setVerticalGroup(
-         gl_panelTopNewTourReservation.createParallelGroup(Alignment.LEADING)
-            .addGroup(gl_panelTopNewTourReservation.createSequentialGroup()
-               .addGroup(gl_panelTopNewTourReservation.createParallelGroup(Alignment.BASELINE)
-                  .addComponent(labelNewTourReservation, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-                  .addComponent(lblSelectedTour, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-                  .addComponent(lblSelectedCustomer, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-                  .addComponent(lblSelectedPassengers, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
-               .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+      	gl_panelTopNewTourReservation.createParallelGroup(Alignment.LEADING)
+      		.addGroup(gl_panelTopNewTourReservation.createSequentialGroup()
+      			.addComponent(labelNewTourReservation, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+      			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
       );
       panelTopNewTourReservation.setLayout(gl_panelTopNewTourReservation);
 
@@ -3504,12 +4121,12 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
       lblAddCusomerButtonNewTourReservation.setFont(new Font("Century Gothic", Font.PLAIN, 19));
       lblAddCusomerButtonNewTourReservation.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
       
-      JLabel lblClearCustomerButtonNewTourReservation = new JLabel("Clear");
+       lblClearCustomerButtonNewTourReservation = new JLabel("Clear");
       lblClearCustomerButtonNewTourReservation.setForeground(Color.WHITE);
       lblClearCustomerButtonNewTourReservation.setFont(new Font("Century Gothic", Font.PLAIN, 14));
       lblClearCustomerButtonNewTourReservation.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
       
-      JCheckBox boxIsAPassengerNewTourReservation = new JCheckBox("is a passenger");
+       boxIsAPassengerNewTourReservation = new JCheckBox("is a passenger");
       boxIsAPassengerNewTourReservation.setForeground(Color.WHITE);
       boxIsAPassengerNewTourReservation.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       boxIsAPassengerNewTourReservation.setBackground(new Color(95, 158, 160));
@@ -3524,7 +4141,7 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
       radioButtonIsSchoolNewTourReservation.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       radioButtonIsSchoolNewTourReservation.setBackground(new Color(95, 158, 160));
       
-      JRadioButton radioButtonIsPrivateInNewTourReservation = new JRadioButton("Private");
+       radioButtonIsPrivateInNewTourReservation = new JRadioButton("Private");
       radioButtonIsPrivateInNewTourReservation.setForeground(Color.WHITE);
       radioButtonIsPrivateInNewTourReservation.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       radioButtonIsPrivateInNewTourReservation.setBackground(new Color(95, 158, 160));
@@ -3686,38 +4303,101 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
       			.addContainerGap(14, Short.MAX_VALUE))
       );
       addNewCustomerInNewTourReservation.setLayout(gl_addNewCustomerInNewTourReservation);
+      
+      summaryPanel = new JPanel();
+      summaryPanel.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Summary", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), null));
+      summaryPanel.setBackground(new Color(51, 153, 153));
+      
+      lblCancelButtonInNewTourReservation = new JLabel("Cancel");
+      lblCancelButtonInNewTourReservation.setForeground(Color.WHITE);
+      lblCancelButtonInNewTourReservation.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+      lblCancelButtonInNewTourReservation.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
       GroupLayout gl_panelNewTourReservation = new GroupLayout(panelNewTourReservation);
       gl_panelNewTourReservation.setHorizontalGroup(
-      	gl_panelNewTourReservation.createParallelGroup(Alignment.LEADING)
+      	gl_panelNewTourReservation.createParallelGroup(Alignment.TRAILING)
       		.addGroup(gl_panelNewTourReservation.createSequentialGroup()
-      			.addComponent(panelTopNewTourReservation, GroupLayout.DEFAULT_SIZE, 1413, Short.MAX_VALUE)
+      			.addComponent(panelTopNewTourReservation, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
       			.addGap(0))
       		.addGroup(gl_panelNewTourReservation.createSequentialGroup()
-      			.addGroup(gl_panelNewTourReservation.createParallelGroup(Alignment.LEADING)
-      				.addGroup(gl_panelNewTourReservation.createSequentialGroup()
-      					.addGap(51)
+      			.addContainerGap()
+      			.addGroup(gl_panelNewTourReservation.createParallelGroup(Alignment.TRAILING)
+      				.addGroup(Alignment.LEADING, gl_panelNewTourReservation.createSequentialGroup()
+      					.addComponent(lblCancelButtonInNewTourReservation, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+      					.addPreferredGap(ComponentPlacement.RELATED, 1061, Short.MAX_VALUE)
       					.addComponent(lblCreateReservationButton))
       				.addGroup(gl_panelNewTourReservation.createSequentialGroup()
-      					.addContainerGap()
-      					.addComponent(addNewCustomerInNewTourReservation, GroupLayout.PREFERRED_SIZE, 327, GroupLayout.PREFERRED_SIZE)))
-      			.addGap(18)
-      			.addComponent(newTourReservationTabbedPanel, GroupLayout.PREFERRED_SIZE, 642, Short.MAX_VALUE)
-      			.addGap(414))
+      					.addComponent(addNewCustomerInNewTourReservation, GroupLayout.PREFERRED_SIZE, 327, GroupLayout.PREFERRED_SIZE)
+      					.addGap(18)
+      					.addComponent(newTourReservationTabbedPanel, GroupLayout.PREFERRED_SIZE, 642, Short.MAX_VALUE)
+      					.addGap(18)
+      					.addComponent(summaryPanel, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE)))
+      			.addGap(64))
       );
       gl_panelNewTourReservation.setVerticalGroup(
       	gl_panelNewTourReservation.createParallelGroup(Alignment.LEADING)
       		.addGroup(gl_panelNewTourReservation.createSequentialGroup()
       			.addComponent(panelTopNewTourReservation, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-      			.addPreferredGap(ComponentPlacement.RELATED)
-      			.addGroup(gl_panelNewTourReservation.createParallelGroup(Alignment.LEADING)
+      			.addGroup(gl_panelNewTourReservation.createParallelGroup(Alignment.LEADING, false)
       				.addGroup(gl_panelNewTourReservation.createSequentialGroup()
-      					.addGap(23)
-      					.addComponent(addNewCustomerInNewTourReservation, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE)
       					.addPreferredGap(ComponentPlacement.RELATED)
-      					.addComponent(lblCreateReservationButton, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
-      				.addComponent(newTourReservationTabbedPanel, GroupLayout.PREFERRED_SIZE, 554, GroupLayout.PREFERRED_SIZE))
+      					.addGroup(gl_panelNewTourReservation.createParallelGroup(Alignment.LEADING)
+      						.addComponent(newTourReservationTabbedPanel, GroupLayout.PREFERRED_SIZE, 439, GroupLayout.PREFERRED_SIZE)
+      						.addComponent(addNewCustomerInNewTourReservation, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 430, GroupLayout.PREFERRED_SIZE)))
+      				.addGroup(gl_panelNewTourReservation.createSequentialGroup()
+      					.addGap(30)
+      					.addComponent(summaryPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+      			.addGap(30)
+      			.addGroup(gl_panelNewTourReservation.createParallelGroup(Alignment.LEADING)
+      				.addComponent(lblCancelButtonInNewTourReservation, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+      				.addComponent(lblCreateReservationButton, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+      			.addGap(89))
+      );
+      
+      lblSelectedTour = new JLabel("");
+      lblSelectedTour.setVerticalAlignment(SwingConstants.TOP);
+      lblSelectedTour.setForeground(Color.WHITE);
+      lblSelectedTour.setFont(new Font("Tahoma", Font.PLAIN, 20));
+      lblSelectedTour.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Selected Tour", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
+      
+      lblSelectedCustomer = new JLabel("");
+      lblSelectedCustomer.setVerticalAlignment(SwingConstants.TOP);
+      lblSelectedCustomer.setForeground(Color.WHITE);
+      lblSelectedCustomer.setFont(new Font("Tahoma", Font.PLAIN, 20));
+      lblSelectedCustomer.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Selected Customer", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
+      
+            lblSelectedPassengers = new JLabel("");
+            lblSelectedPassengers.setVerticalAlignment(SwingConstants.TOP);
+            lblSelectedPassengers.setForeground(Color.WHITE);
+            lblSelectedPassengers.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            lblSelectedPassengers.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Selected Passengers", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
+      GroupLayout gl_summaryPanel = new GroupLayout(summaryPanel);
+      gl_summaryPanel.setHorizontalGroup(
+      	gl_summaryPanel.createParallelGroup(Alignment.LEADING)
+      		.addGroup(gl_summaryPanel.createSequentialGroup()
+      			.addGroup(gl_summaryPanel.createParallelGroup(Alignment.LEADING)
+      				.addGroup(gl_summaryPanel.createSequentialGroup()
+      					.addContainerGap()
+      					.addComponent(lblSelectedTour, GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
+      				.addGroup(gl_summaryPanel.createSequentialGroup()
+      					.addContainerGap()
+      					.addComponent(lblSelectedCustomer, GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
+      				.addGroup(gl_summaryPanel.createSequentialGroup()
+      					.addContainerGap()
+      					.addComponent(lblSelectedPassengers, GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)))
       			.addContainerGap())
       );
+      gl_summaryPanel.setVerticalGroup(
+      	gl_summaryPanel.createParallelGroup(Alignment.LEADING)
+      		.addGroup(gl_summaryPanel.createSequentialGroup()
+      			.addGap(5)
+      			.addComponent(lblSelectedTour, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+      			.addGap(18)
+      			.addComponent(lblSelectedCustomer, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+      			.addGap(18)
+      			.addComponent(lblSelectedPassengers, GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+      			.addContainerGap())
+      );
+      summaryPanel.setLayout(gl_summaryPanel);
 
       JPanel selectCustomerPanel = new JPanel();
       selectCustomerPanel.setBackground(new Color(0, 153, 153));
@@ -3736,52 +4416,47 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
       JScrollPane selectCustomersInNewTourReservationScrollPane = new JScrollPane();
       selectCustomersInNewTourReservationScrollPane.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Customers archive", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(3, 3, 3, 3)));
       selectCustomersInNewTourReservationScrollPane.setBackground(new Color(95, 158, 160));
-      
-            lblSelectCustomerButton = new JLabel("Select");
-            lblSelectCustomerButton.setHorizontalAlignment(SwingConstants.CENTER);
-            lblSelectCustomerButton.setForeground(Color.WHITE);
-            lblSelectCustomerButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-            lblSelectCustomerButton.setBorder(new LineBorder(new Color(255, 255, 255), 2));
       GroupLayout gl_selectCustomerPanel = new GroupLayout(selectCustomerPanel);
       gl_selectCustomerPanel.setHorizontalGroup(
       	gl_selectCustomerPanel.createParallelGroup(Alignment.LEADING)
       		.addGroup(gl_selectCustomerPanel.createSequentialGroup()
+      			.addContainerGap()
       			.addGroup(gl_selectCustomerPanel.createParallelGroup(Alignment.LEADING)
+      				.addComponent(selectCustomersInNewTourReservationScrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
       				.addGroup(gl_selectCustomerPanel.createSequentialGroup()
-      					.addContainerGap()
-      					.addGroup(gl_selectCustomerPanel.createParallelGroup(Alignment.LEADING)
-      						.addComponent(selectCustomersInNewTourReservationScrollPane, GroupLayout.PREFERRED_SIZE, 958, GroupLayout.PREFERRED_SIZE)
-      						.addGroup(gl_selectCustomerPanel.createSequentialGroup()
-      							.addComponent(lblSearchCustomerByName, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
-      							.addPreferredGap(ComponentPlacement.RELATED)
-      							.addComponent(searchCustomerTextField, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE))))
-      				.addGroup(gl_selectCustomerPanel.createSequentialGroup()
-      					.addGap(27)
-      					.addComponent(lblSelectCustomerButton, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)))
-      			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+      					.addComponent(lblSearchCustomerByName, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
+      					.addPreferredGap(ComponentPlacement.RELATED)
+      					.addComponent(searchCustomerTextField, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE)))
+      			.addContainerGap())
       );
       gl_selectCustomerPanel.setVerticalGroup(
       	gl_selectCustomerPanel.createParallelGroup(Alignment.LEADING)
       		.addGroup(gl_selectCustomerPanel.createSequentialGroup()
       			.addContainerGap()
       			.addGroup(gl_selectCustomerPanel.createParallelGroup(Alignment.BASELINE)
-      				.addComponent(lblSearchCustomerByName, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-      				.addComponent(searchCustomerTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-      			.addPreferredGap(ComponentPlacement.RELATED)
+      				.addComponent(searchCustomerTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+      				.addComponent(lblSearchCustomerByName, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+      			.addGap(27)
       			.addComponent(selectCustomersInNewTourReservationScrollPane, GroupLayout.PREFERRED_SIZE, 236, GroupLayout.PREFERRED_SIZE)
-      			.addGap(18)
-      			.addComponent(lblSelectCustomerButton)
-      			.addContainerGap(66, Short.MAX_VALUE))
+      			.addContainerGap(225, Short.MAX_VALUE))
       );
       
       customersTableInNewTourReservation = new JTable();
+      customersTableInNewTourReservation.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
       customersTableInNewTourReservation.setModel(new DefaultTableModel(
       	new Object[][] {
       	},
       	new String[] {
-      		"Organisation", "Type", "Phone", "Name", "Email", "Birthday", "# of reservations", "New column", "New column"
+      		"Organisation", "Type", "Phone", "Name", "Email", "Birthday", "# of reservations"
       	}
-      ));
+      ) {
+      	boolean[] columnEditables = new boolean[] {
+      		false, false, false, false, false, false, false
+      	};
+      	public boolean isCellEditable(int row, int column) {
+      		return columnEditables[column];
+      	}
+      });
       selectCustomersInNewTourReservationScrollPane.setViewportView(customersTableInNewTourReservation);
       selectCustomerPanel.setLayout(gl_selectCustomerPanel);
 
@@ -3789,21 +4464,6 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
       selectPassengersPanel.setBackground(new Color(0, 153, 153));
       newTourReservationTabbedPanel.addTab("Select Passengers", null, selectPassengersPanel, null);
       newTourReservationTabbedPanel.setForegroundAt(1, new Color(0, 153, 102));
-
-      searchPassengersTextField = new JTextField();
-      searchPassengersTextField.setToolTipText("enter customer's name here");
-      searchPassengersTextField.setColumns(10);
-
-      lblSelectPassengersButton = new JLabel("Select");
-      lblSelectPassengersButton.setHorizontalAlignment(SwingConstants.CENTER);
-      lblSelectPassengersButton.setForeground(Color.WHITE);
-      lblSelectPassengersButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-      lblSelectPassengersButton.setBorder(new LineBorder(new Color(255, 255, 255), 2));
-
-      lblSearchPassengersByName = new JLabel("Search by name");
-      lblSearchPassengersByName.setForeground(Color.WHITE);
-      lblSearchPassengersByName.setFont(new Font("Tahoma", Font.PLAIN, 15));
-      lblSearchPassengersByName.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
       
       JScrollPane selectPassengersScrollPanelInNewTourReservation = new JScrollPane();
       selectPassengersScrollPanelInNewTourReservation.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "List of Selected Passengers", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(3, 3, 3, 3)));
@@ -3892,7 +4552,7 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
       passengerYearInNewTourReservation.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "YYYY", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(2, 2, 2, 2)));
       passengerYearInNewTourReservation.setBackground(new Color(95, 158, 160));
       
-      JLabel lblSearchForPassengerInNewTourReservationButton = new JLabel("Search");
+       lblSearchForPassengerInNewTourReservationButton = new JLabel("Search");
       lblSearchForPassengerInNewTourReservationButton.setForeground(Color.WHITE);
       lblSearchForPassengerInNewTourReservationButton.setFont(new Font("Century Gothic", Font.PLAIN, 14));
       lblSearchForPassengerInNewTourReservationButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
@@ -3974,51 +4634,63 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
       			.addContainerGap())
       );
       addNewPassengerInNewTourReservationPanel.setLayout(gl_addNewPassengerInNewTourReservationPanel);
+      
+      lblRemoveButtonInNewTourReservation = new JLabel("Remove");
+      lblRemoveButtonInNewTourReservation.setForeground(Color.WHITE);
+      lblRemoveButtonInNewTourReservation.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+      lblRemoveButtonInNewTourReservation.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
+      
+      lblClearAlButtonInNewTourReservation = new JLabel("Clear all");
+      lblClearAlButtonInNewTourReservation.setForeground(Color.WHITE);
+      lblClearAlButtonInNewTourReservation.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+      lblClearAlButtonInNewTourReservation.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
       GroupLayout gl_selectPassengersPanel = new GroupLayout(selectPassengersPanel);
       gl_selectPassengersPanel.setHorizontalGroup(
       	gl_selectPassengersPanel.createParallelGroup(Alignment.LEADING)
       		.addGroup(gl_selectPassengersPanel.createSequentialGroup()
       			.addContainerGap()
+      			.addComponent(addNewPassengerInNewTourReservationPanel, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
+      			.addGap(35)
       			.addGroup(gl_selectPassengersPanel.createParallelGroup(Alignment.LEADING)
+      				.addComponent(selectPassengersScrollPanelInNewTourReservation, GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
       				.addGroup(gl_selectPassengersPanel.createSequentialGroup()
-      					.addComponent(lblSearchPassengersByName, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
-      					.addPreferredGap(ComponentPlacement.RELATED)
-      					.addComponent(searchPassengersTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-      				.addGroup(gl_selectPassengersPanel.createSequentialGroup()
-      					.addComponent(addNewPassengerInNewTourReservationPanel, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
-      					.addGap(35)
-      					.addGroup(gl_selectPassengersPanel.createParallelGroup(Alignment.LEADING)
-      						.addComponent(selectPassengersScrollPanelInNewTourReservation, GroupLayout.PREFERRED_SIZE, 365, GroupLayout.PREFERRED_SIZE)
-      						.addComponent(lblSelectPassengersButton, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))))
-      			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+      					.addComponent(lblRemoveButtonInNewTourReservation, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+      					.addGap(18)
+      					.addComponent(lblClearAlButtonInNewTourReservation, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)))
+      			.addContainerGap())
       );
       gl_selectPassengersPanel.setVerticalGroup(
       	gl_selectPassengersPanel.createParallelGroup(Alignment.LEADING)
       		.addGroup(gl_selectPassengersPanel.createSequentialGroup()
-      			.addGap(19)
-      			.addGroup(gl_selectPassengersPanel.createParallelGroup(Alignment.LEADING)
-      				.addComponent(searchPassengersTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-      				.addComponent(lblSearchPassengersByName))
-      			.addGroup(gl_selectPassengersPanel.createParallelGroup(Alignment.LEADING)
+      			.addContainerGap()
+      			.addGroup(gl_selectPassengersPanel.createParallelGroup(Alignment.LEADING, false)
       				.addGroup(gl_selectPassengersPanel.createSequentialGroup()
-      					.addGap(18)
-      					.addComponent(selectPassengersScrollPanelInNewTourReservation, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
-      					.addGap(19)
-      					.addComponent(lblSelectPassengersButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-      				.addGroup(gl_selectPassengersPanel.createSequentialGroup()
-      					.addGap(3)
-      					.addComponent(addNewPassengerInNewTourReservationPanel, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE)))
-      			.addContainerGap(94, Short.MAX_VALUE))
+      					.addComponent(selectPassengersScrollPanelInNewTourReservation, GroupLayout.PREFERRED_SIZE, 335, GroupLayout.PREFERRED_SIZE)
+      					.addPreferredGap(ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+      					.addGroup(gl_selectPassengersPanel.createParallelGroup(Alignment.TRAILING)
+      						.addComponent(lblRemoveButtonInNewTourReservation, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+      						.addComponent(lblClearAlButtonInNewTourReservation, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
+      				.addComponent(addNewPassengerInNewTourReservationPanel, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE))
+      			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
       );
       
       tablePassengersInNewTourReservation = new JTable();
+      tablePassengersInNewTourReservation.setRowSelectionAllowed(false);
+      tablePassengersInNewTourReservation.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
       tablePassengersInNewTourReservation.setModel(new DefaultTableModel(
       	new Object[][] {
       	},
       	new String[] {
       		"Name", "Address", "Phone", "Email", "Birthday"
       	}
-      ));
+      ) {
+      	boolean[] columnEditables = new boolean[] {
+      		false, false, false, false, false
+      	};
+      	public boolean isCellEditable(int row, int column) {
+      		return columnEditables[column];
+      	}
+      });
       selectPassengersScrollPanelInNewTourReservation.setViewportView(tablePassengersInNewTourReservation);
       selectPassengersPanel.setLayout(gl_selectPassengersPanel);
       
@@ -4037,12 +4709,6 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
                               searchTourTextField.setBorder(new LineBorder(new Color(171, 173, 179), 2));
                               searchTourTextField.setToolTipText("enter Tour's destination here");
                               searchTourTextField.setColumns(10);
-                              
-                                    lblSelectTourButton = new JLabel("Select");
-                                    lblSelectTourButton.setHorizontalAlignment(SwingConstants.CENTER);
-                                    lblSelectTourButton.setForeground(Color.WHITE);
-                                    lblSelectTourButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-                                    lblSelectTourButton.setBorder(new LineBorder(new Color(255, 255, 255), 2));
                                     
                                     selectTourInNewTourReservationScrollPanel = new JScrollPane();
                                     selectTourInNewTourReservationScrollPanel.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Tours archive", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(3, 3, 3, 3)));
@@ -4053,36 +4719,41 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
                                     		.addGroup(gl_selectTourPanel.createSequentialGroup()
                                     			.addContainerGap()
                                     			.addGroup(gl_selectTourPanel.createParallelGroup(Alignment.LEADING)
-                                    				.addComponent(selectTourInNewTourReservationScrollPanel, GroupLayout.PREFERRED_SIZE, 460, GroupLayout.PREFERRED_SIZE)
+                                    				.addComponent(selectTourInNewTourReservationScrollPanel, GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
                                     				.addGroup(gl_selectTourPanel.createSequentialGroup()
                                     					.addComponent(lblSearchByDestination)
                                     					.addGap(18)
-                                    					.addComponent(searchTourTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                    				.addComponent(lblSelectTourButton, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
-                                    			.addContainerGap(165, Short.MAX_VALUE))
+                                    					.addComponent(searchTourTextField, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)))
+                                    			.addContainerGap())
                                     );
                                     gl_selectTourPanel.setVerticalGroup(
                                     	gl_selectTourPanel.createParallelGroup(Alignment.LEADING)
                                     		.addGroup(gl_selectTourPanel.createSequentialGroup()
-                                    			.addGap(37)
-                                    			.addGroup(gl_selectTourPanel.createParallelGroup(Alignment.BASELINE)
+                                    			.addContainerGap()
+                                    			.addGroup(gl_selectTourPanel.createParallelGroup(Alignment.LEADING)
                                     				.addComponent(lblSearchByDestination)
                                     				.addComponent(searchTourTextField, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
                                     			.addGap(18)
-                                    			.addComponent(selectTourInNewTourReservationScrollPanel, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
-                                    			.addGap(18)
-                                    			.addComponent(lblSelectTourButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-                                    			.addContainerGap(50, Short.MAX_VALUE))
+                                    			.addComponent(selectTourInNewTourReservationScrollPanel, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE)
+                                    			.addContainerGap(226, Short.MAX_VALUE))
                                     );
                                     
                                     tableToursInNewTourReservation = new JTable();
+                                    tableToursInNewTourReservation.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                                     tableToursInNewTourReservation.setModel(new DefaultTableModel(
                                     	new Object[][] {
                                     	},
                                     	new String[] {
                                     		"Date", "Destination", "Pick up", "Services", "Price", "Bus", "Chauffeur"
                                     	}
-                                    ));
+                                    ) {
+                                    	boolean[] columnEditables = new boolean[] {
+                                    		false, false, false, false, false, false, false
+                                    	};
+                                    	public boolean isCellEditable(int row, int column) {
+                                    		return columnEditables[column];
+                                    	}
+                                    });
                                     selectTourInNewTourReservationScrollPanel.setViewportView(tableToursInNewTourReservation);
                                           selectTourPanel.setLayout(gl_selectTourPanel);
       panelNewTourReservation.setLayout(gl_panelNewTourReservation);
@@ -5046,6 +5717,12 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 	public static int daysBetweenDates(java.util.Date startDate, java.util.Date endDate){
 		long days = ChronoUnit.DAYS.between(startDate.toInstant(), endDate.toInstant());
 		return (int)days;
+	}
+
+	public void deleteAllRows(final DefaultTableModel model) {
+		for (int i = model.getRowCount() - 1; i >= 0; i--) {
+			model.removeRow(i);
+		}
 	}
 }
 

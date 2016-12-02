@@ -107,6 +107,9 @@ public class ToursArchive implements Serializable{
 			objectInputStream.close();
 		}
 	}
-	
-	
+
+
+	public ArrayList<Tour> getToursArchive() {
+		return toursArchive;
+	}
 }

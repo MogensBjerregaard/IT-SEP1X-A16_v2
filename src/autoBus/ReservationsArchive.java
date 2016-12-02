@@ -16,7 +16,11 @@ public class ReservationsArchive implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Reservation> reservationsArchive;
-	
+
+	public ArrayList<Reservation> getReservationsArchive() {
+		return reservationsArchive;
+	}
+
 	public ReservationsArchive(){
 		reservationsArchive=new ArrayList<Reservation>();
 	}
