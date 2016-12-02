@@ -246,6 +246,8 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 	private JLabel lblRemoveButtonInNewTourReservation;
 	private JLabel lblClearAlButtonInNewTourReservation;
 	private JLabel lblCancelButtonInNewTourReservation;
+	private JLabel lblDeleteTourReservation;
+	private JLabel lblDeleteBus;
 
 	/**
 	 * Launch the application.
@@ -872,6 +874,7 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 			public void mouseReleased(MouseEvent arg0) {
 				int index = tableChauffeurs.getSelectedRow();
 				if (index!=-1){
+				   if (okOrCancel("Are you sure you want to delete this Chauffeur?") == 0) {
 					chauffeursTable.removeRow(index);
 					chauffeursArchive.removeChauffeur(index);
 					try {
@@ -879,7 +882,8 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 					} catch (Exception e) {
 					
 						e.printStackTrace();
-					}				
+					}
+				   }
 				} else {
 					JOptionPane.showMessageDialog(null, "You need first to select the row you wish to delete!");
 				}
@@ -1307,6 +1311,59 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 				}
 			}
 		});
+		
+		lblDeleteTourReservation.addMouseListener(new MouseAdapter() {
+		   public void mouseReleased(MouseEvent arg0) {
+		      int index = tableTourReservations.getSelectedRow();
+		      if (index != -1)
+            {
+               if (okOrCancel("Are you sure you want to delete this Tour Reservation?") == 0)
+               {
+                  tourReservationsTable.removeRow(index);
+                  reservationsArchive.removeReservation(index);
+                  try
+                  {
+                     reservationsArchive.saveReservationsArchive();
+                  }
+                  catch (Exception e)
+                  {
+                     e.printStackTrace();
+                  }
+               }
+            }
+		      else {
+               JOptionPane.showMessageDialog(null, "You need first to select the row you wish to delete!");
+            }
+		   }
+		});
+		
+		lblDeleteBus.addMouseListener(new MouseAdapter() {
+		   public void mouseReleased(MouseEvent arg0) {
+		      int index = tableBusReservations.getSelectedRow();
+		      if (index != -1)
+            {
+               if (okOrCancel("Are you sure you want to delete this Bus & Chauffeur Reservation?") == 0)
+               {
+                  busReservationsTable.removeRow(index);
+                  reservationsArchive.removeReservation(index);
+                  
+                  try
+                  {
+                     reservationsArchive.saveReservationsArchive();
+                  }
+                  catch (Exception e)
+                  {
+                     e.printStackTrace();
+                  }
+               }
+            }
+		      else {
+               JOptionPane.showMessageDialog(null, "You need first to select the row you wish to delete!");
+            }
+		   }
+		});
+		
+		
 		
 		lblUpdatePriceBtn.addMouseListener(new MouseAdapter() {
 			@Override
@@ -2866,25 +2923,36 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 		scrollPaneTourReservations.setForeground(new Color(255, 255, 255));
 		scrollPaneTourReservations.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		scrollPaneTourReservations.setBackground(new Color(95, 158, 160));
+		
+		lblDeleteTourReservation = new JLabel("Delete Tour Reservation");
+		lblDeleteTourReservation.setForeground(Color.WHITE);
+		lblDeleteTourReservation.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblDeleteTourReservation.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
 		GroupLayout gl_panelTourReservations = new GroupLayout(panelTourReservations);
 		gl_panelTourReservations.setHorizontalGroup(
-			gl_panelTourReservations.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panelTourReservations.createSequentialGroup()
-					.addGroup(gl_panelTourReservations.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panelTourReservations.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(scrollPaneTourReservations, GroupLayout.DEFAULT_SIZE, 957, Short.MAX_VALUE)
-							.addGap(31))
-						.addComponent(panelTopTourReservations, GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE))
-					.addGap(0))
+		   gl_panelTourReservations.createParallelGroup(Alignment.LEADING)
+		      .addGroup(gl_panelTourReservations.createSequentialGroup()
+		         .addGroup(gl_panelTourReservations.createParallelGroup(Alignment.TRAILING)
+		            .addGroup(gl_panelTourReservations.createSequentialGroup()
+		               .addContainerGap()
+		               .addComponent(scrollPaneTourReservations, GroupLayout.DEFAULT_SIZE, 1330, Short.MAX_VALUE)
+		               .addGap(31))
+		            .addComponent(panelTopTourReservations, GroupLayout.DEFAULT_SIZE, 1371, Short.MAX_VALUE))
+		         .addGap(0))
+		      .addGroup(gl_panelTourReservations.createSequentialGroup()
+		         .addGap(10)
+		         .addComponent(lblDeleteTourReservation)
+		         .addContainerGap())
 		);
 		gl_panelTourReservations.setVerticalGroup(
-			gl_panelTourReservations.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelTourReservations.createSequentialGroup()
-					.addComponent(panelTopTourReservations, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(scrollPaneTourReservations, GroupLayout.PREFERRED_SIZE, 345, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(73, Short.MAX_VALUE))
+		   gl_panelTourReservations.createParallelGroup(Alignment.LEADING)
+		      .addGroup(gl_panelTourReservations.createSequentialGroup()
+		         .addComponent(panelTopTourReservations, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+		         .addGap(18)
+		         .addComponent(scrollPaneTourReservations, GroupLayout.PREFERRED_SIZE, 345, GroupLayout.PREFERRED_SIZE)
+		         .addPreferredGap(ComponentPlacement.UNRELATED)
+		         .addComponent(lblDeleteTourReservation, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+		         .addContainerGap(224, Short.MAX_VALUE))
 		);
 		
 		tableTourReservations = new JTable();
@@ -2963,24 +3031,35 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 		scrollPaneBusReservations = new JScrollPane();
 		scrollPaneBusReservations.setBackground(new Color(95, 158, 160));
 		scrollPaneBusReservations.setForeground(new Color(255, 255, 255));
+		
+		lblDeleteBus = new JLabel("Delete Bus & Chauffeur Reservation");
+		lblDeleteBus.setForeground(Color.WHITE);
+		lblDeleteBus.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblDeleteBus.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
 		GroupLayout gl_panelBusReservations = new GroupLayout(panelBusReservations);
 		gl_panelBusReservations.setHorizontalGroup(
-			gl_panelBusReservations.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelBusReservations.createSequentialGroup()
-					.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGap(0))
-				.addGroup(gl_panelBusReservations.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(scrollPaneBusReservations, GroupLayout.DEFAULT_SIZE, 961, Short.MAX_VALUE)
-					.addGap(27))
+		   gl_panelBusReservations.createParallelGroup(Alignment.LEADING)
+		      .addGroup(gl_panelBusReservations.createSequentialGroup()
+		         .addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 1371, Short.MAX_VALUE)
+		         .addGap(0))
+		      .addGroup(gl_panelBusReservations.createSequentialGroup()
+		         .addContainerGap()
+		         .addComponent(scrollPaneBusReservations, GroupLayout.DEFAULT_SIZE, 1334, Short.MAX_VALUE)
+		         .addGap(27))
+		      .addGroup(gl_panelBusReservations.createSequentialGroup()
+		         .addContainerGap()
+		         .addComponent(lblDeleteBus)
+		         .addContainerGap(1110, Short.MAX_VALUE))
 		);
 		gl_panelBusReservations.setVerticalGroup(
-			gl_panelBusReservations.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelBusReservations.createSequentialGroup()
-					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(scrollPaneBusReservations, GroupLayout.PREFERRED_SIZE, 334, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(90, Short.MAX_VALUE))
+		   gl_panelBusReservations.createParallelGroup(Alignment.LEADING)
+		      .addGroup(gl_panelBusReservations.createSequentialGroup()
+		         .addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+		         .addPreferredGap(ComponentPlacement.UNRELATED)
+		         .addComponent(scrollPaneBusReservations, GroupLayout.PREFERRED_SIZE, 334, GroupLayout.PREFERRED_SIZE)
+		         .addPreferredGap(ComponentPlacement.UNRELATED)
+		         .addComponent(lblDeleteBus, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+		         .addContainerGap(242, Short.MAX_VALUE))
 		);
 		
 		tableBusReservations = new JTable();
