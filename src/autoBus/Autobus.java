@@ -859,6 +859,10 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 					updateListChauffeurs(textFieldEmployeeNo.getText(), chckbxExternalEmployee.isSelected(), textFieldChauffeurName.getText(), 
 							textFieldChauffeurAddress.getText(), textFieldChauffeurEmail.getText(), textFieldChauffeurPhone.getText(), 
 							month+"/"+day+"/"+year , chckbxOnlyOneDayTrips.isSelected());
+					updateListSelectChauffeur(new Chauffeur(textFieldChauffeurName.getText(), textFieldChauffeurEmail.getText(), 
+                     textFieldChauffeurAddress.getText(), month, day, year, 
+                     Integer.toString(phone), textFieldEmployeeNo.getText(), chckbxExternalEmployee.isSelected(), 
+                     chckbxOnlyOneDayTrips.isSelected()));
 					textFieldChauffeurName.setText("");
 					textFieldChauffeurEmail.setText("");
 					textFieldChauffeurAddress.setText("");
@@ -890,6 +894,7 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 				   if (okOrCancel("Are you sure you want to delete this Chauffeur?") == 0) {
 					chauffeursTable.removeRow(index);
 					chauffeursArchive.removeChauffeur(index);
+					selectChauffeurTable.removeRow(index);
 					try {
 						chauffeursArchive.saveChauffeursArchive();
 					} catch (Exception e) {
@@ -1004,6 +1009,7 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 				if (str.equals("")){
 					busesArchive.addBus(new Bus(maxSeats, textFieldVehicleID.getText(), priceHour, modelType));
 					updateListBuses(textFieldVehicleID.getText(), priceHour, maxSeats, maxSeats, modelType, true);
+					updateListSelectBus(new Bus(maxSeats, textFieldVehicleID.getText(), priceHour, modelType));
 					textFieldVehicleID.setText("");
 					textFieldPriceHour.setText("");
 					textFieldNumberSeats.setText("");
@@ -1050,6 +1056,7 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 				if (index!=-1){
 					if (okOrCancel("Are you sure you want to delete this bus?")==0) {
 						busesTable.removeRow(index);
+						selectBusTable.removeRow(index);
 						busesArchive.removeBus(index);
 						try {
 							busesArchive.saveBusesArchive();
@@ -2756,7 +2763,7 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 		selectChauffeurTable = (DefaultTableModel) tableSelectChauffeur.getModel();
 		Object[] rowData = new Object[2];
 		for (int i=0; i<chauffeursArchive.size(); i++){
-			if (!chauffeursArchive.get(i).isOnlyOneDayTrips()) {
+		   if (!chauffeursArchive.get(i).isOnlyOneDayTrips()) {
 				rowData[0] = chauffeursArchive.get(i).getEmployeeNumber();
 				rowData[1] = chauffeursArchive.get(i).getName();
 				selectChauffeurTable.addRow(rowData);				
@@ -2764,6 +2771,23 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 		}
 		
 		 
+	}
+	
+	public void updateListSelectChauffeur(Chauffeur newChauffeur) {
+	   selectChauffeurTable = (DefaultTableModel) tableSelectChauffeur.getModel();
+	   Object[] rowData = new Object[2];
+	   rowData[0] = newChauffeur.getEmployeeNumber();
+	   rowData[1] = newChauffeur.getName();
+	   selectChauffeurTable.addRow(rowData);
+	}
+	
+	public void updateListSelectBus(Bus newBus) {
+	   selectBusTable = (DefaultTableModel) tableSelectBus.getModel();
+	   Object[] rowData = new Object[3];
+	   rowData[0] = newBus.getVehicleID();
+	   rowData[1] = newBus.getModelString();
+	   rowData[2] = newBus.getMaxNumberOfSeats();
+	   selectBusTable.addRow(rowData);
 	}
 	
 	public void updatePrices(){
