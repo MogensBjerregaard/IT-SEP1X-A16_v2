@@ -33,223 +33,225 @@ import java.util.Calendar;
 public class Autobus extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JMenuItem mntmAboutAutobus;
-	private JMenuItem mntmExit;
-	private ImageIcon icon;
-	private JPanel experimentalPanel;
-	private ChauffeursArchive chauffeursArchive;
-	private BusesArchive busesArchive;
-	private ToursArchive toursArchive;
-	private CustomersArchive customersArchive;
-	private PassengersArchive passengersArchive;
-	private ReservationsArchive reservationsArchive;
-	private PriceList priceList;
-	private ReservationNumber reservationNumberGenerator;
-	private int reservationNumber;
-	private JMenuItem mntmTourReservations;
-	private JMenuItem mntmBusReservations;
-	private JPanel panelTourReservations;
-	private JPanel panelBusReservations;
-	private JPanel panelChauffeurs;
-	private JMenuItem mntmEditChauffeur;
-	private JTable tableChauffeurs;
-	private JLabel lblAddChauffeurButton;
-	private JTextField textFieldChauffeurName;
-	private JTextField textFieldChauffeurAddress;
-	private JTextField textFieldEmployeeNo;
-	private JTextField textFieldChauffeurEmail;
-	private JTextField textFieldChauffeurPhone;
-	private JTextField textFieldChauffeurBirthMonth;
-	private JTextField textFieldChauffeurBirthDay;
-	private JTextField textFieldChauffeurBirthYear;
-	private JCheckBox chckbxExternalEmployee;
-	private JCheckBox chckbxOnlyOneDayTrips;
-	private DefaultTableModel chauffeursTable;
-	private JLabel lblDeleteChauffeurBtn;
-	private JPanel panelBuses;
-	private JMenuItem mntmEditBus;
-	private JPanel panelTours;
-	private JMenuItem mntmEditTours;
-	private JMenuItem mntmEditCustomers;
-	private JPanel panelCustomers;
-	private JMenuItem mntmPassengers;
-	private JPanel panelPassengers;
-	private JMenuItem mntmNewTourReservation;
-	private JPanel panelNewTourReservation;
-	private JMenuItem mntmNewBusReservation;
-	private JPanel panelNewBusReservation;
-	private JTable tableBuses;
-	private DefaultTableModel busesTable;
-	private JLabel labelAddBusBtn;
-	private JTextField textFieldVehicleID;
-	private JTextField textFieldPriceHour;
-	private JTextField textFieldNumberSeats;
-	private JRadioButton rdbtnStandardBus;
-	private JRadioButton rdbtnPartyBus;
-	private JRadioButton rdbtnLuxuryBus;
-	private JLabel labelDeleteBusBtn;
-	private JPanel panelAddTour;
-	private JTextField textFieldDestination;
-	private JLabel lblStartDate;
-	private JTextField textFieldStartMonth;
-	private JTextField textFieldStartDay;
-	private JTextField textFieldStartYear;
-	private JLabel lblEndDate;
-	private JTextField textFieldEndMonth;
-	private JTextField textFieldEndDay;
-	private JTextField textFieldEndYear;
-	private JLabel lblClearPickUpBtn;
-	private JLabel lblAddTourBtn;
-	private JLabel lblDeleteTourBtn;
-	private JCheckBox chckbxBreakfast;
-	private JCheckBox chckbxAllInclusive;
-	private JCheckBox chckbxLunch;
-	private JTable tableTours;
-	private DefaultTableModel toursTable;
-	private JPanel panelTopPrices;
-	private JLabel labelPrices;
-	private JMenuItem mntmPrices;
-	private JPanel panelPrices;
-	private JTable tablePickups;
-	private DefaultTableModel pickupsTable;
-	private JTextField textFieldAddPickup;
-	private JLabel lblAddPickUpBtn;
-	private JScrollPane scrollPanePickUps;
-	private JScrollPane scrollPaneSelectBus;
-	private JScrollPane scrollPaneSelectChauffeur;
-	private JTable tableSelectBus;
-	private DefaultTableModel selectBusTable;
-	private JTable tableSelectChauffeur;
-	private DefaultTableModel selectChauffeurTable;
-	private JCheckBox chckbxEntranceTickets;
-	private JTextField textFieldPriceAllinclusive;
-	private JTextField textFieldPriceEntranceTickets;
-	private JTextField textFieldPriceBreakfast;
-	private JTextField textFieldPriceLunch;
-	private JLabel lblUpdatePriceBtn;
-	private JTable tableCustomers;
-	private DefaultTableModel customersTable;
-	private JScrollPane scrollPanePassengers;
-	private JTable tablePassengers;
-	private DefaultTableModel passengersTable;
-	private JScrollPane scrollPaneTourReservations;
-	private JTable tableTourReservations;
-	private DefaultTableModel tourReservationsTable;
-	private JScrollPane scrollPaneBusReservations;
-	private JTable tableBusReservations;
-	private DefaultTableModel busReservationsTable;
-	private JPanel panel;
-	private JLabel lblNewBusOrganisationName;
-	private JTextField textFieldNewBusOrganisationName;
-	private JTextField textFieldNewBusCustomerName;
-	private JTextField textFieldNewBusCustomerAddress;
-	private JTextField textFieldNewBusCustomerPhone;
-	private JTextField textFieldNewBusCustomerEmail;
-	private JTextField textFieldNewBusCustomerBmonth;
-	private JTextField textFieldNewBusCustomerBday;
-	private JTextField textFieldNewBusCustomerByear;
-	private JLabel lblNewBusSearchCustomerBtn;
-	private JRadioButton rdbtnNewBusCompany;
-	private JRadioButton rdbtnNewBusSchool;
-	private JRadioButton rdbtnNewBusPrivate;
-	private JLabel lblNewBusCustomerClear;
-	private JPanel panelNewBusAddPassenger;
-	private JScrollPane scrollPaneNewBusPassengers;
-	private JTable tableNewBusPassengers;
-	private DefaultTableModel newBusPassengersTable;
-	private JLabel lblNewBusRemovePassengerBtn;
-	private JLabel lblNewBusPassengerPhone;
-	private JLabel lblNewBusPassengerName;
-	private JLabel lblNewBusPassengerAddress;
-	private JLabel lblNewBusPassengerEmail;
-	private JLabel lblNewBusPassengerBirthday;
-	private JTextField textFieldNewBusPassengerPhone;
-	private JTextField textFieldNewBusPassengerName;
-	private JTextField textFieldNewBusPassengerAddress;
-	private JTextField textFieldNewBusPassengerEmail;
-	private JLabel lblNewBusSearchPassengerBtn;
-	private JTextField textFieldNewBusPassengerBmonth;
-	private JTextField textFieldNewBusPassengerBday;
-	private JTextField textFieldNewBusPassengerByear;
-	private JLabel lblNewBusPassengerClearBtn;
-	private JLabel lblNewBusAddPassengerBtn;
-	private JLabel lblNewBusNextBtn;
-	private JLabel lblNewBusClearAllBtn;
-	private JCheckBox chckbxNewBusIsPassenger;
-	private JPanel panelNewBusReservationNext;
-	private JLabel lblCancel;
-	private JLabel lblOkNewBusResevation;
-	private JScrollPane scrollPaneNewBusSelectChauffeur;
-	private JPanel panel_5;
-	private JLabel label_19;
-	private JTable tableNewBusSelectChauffeur;
-	private DefaultTableModel newBusSelectChauffeurTable;
-	private JPanel panelSelectBus;
-	private JScrollPane scrollPaneNewBusSelectBus;
-	private JTable tableNewBusSelectBus;
-	private DefaultTableModel newBusSelectBusTable;
-	private JTextField textFieldNewBusStartMonth;
-	private JTextField textFieldNewBusStartDay;
-	private JTextField textFieldNewBusEndYear;
-	private JTextField textFieldNewBusEndDay;
-	private JTextField textFieldNewBusEndMonth;
-	private JTextField textFieldNewBusStartYear;
-	private JPanel panelServicesNewBus;
-	private JCheckBox chckbxBreakfastNewBus;
-	private JCheckBox chckbxLunchNewBus;
-	private JCheckBox chckbxAllInclusiveNewBus;
-	private JCheckBox chckbxEntranceTicketsNewBus;
-	private JTextPane textPaneSummaryNewBus;
-   private JLabel lblCreateReservationButton;
-   private JTextField searchTourTextField;
-   /*Fixed manually*/private JTextField searchCustomerTextField;
-   private JLabel lblSearchCustomerByName;
-   private JTextField lblPhoneInNewTourReservationtextField;
-   private JTextField customerNameNewTourReservationTextField;
-   private JTextField customerOrganisationtextField;
-   private JTextField customerEmailNewTourReservationtextField;
-   private JTextField customerAddressIncustomerEmailNewTourReservationTextField;
-   private JTextField customerMonthInNewTourReservationTextField;
-   private JTextField customerDayInNewTourReservationTextField;
-   private JTextField customerYearInNewTourReservationTextField;
-   private JTable customersTableInNewTourReservation;
-   private JTable tablePassengersInNewTourReservation;
-   private JScrollPane selectTourInNewTourReservationScrollPanel;
-   private JTable tableToursInNewTourReservation;
-private DefaultTableModel toursTableInNewTourReservation;
-private JPanel addNewPassengerInNewTourReservationPanel;
-private JLabel lblClearButtonPassengerInNewTourReservation;
-private JLabel lblAddNewPassengerInNewTourReservation;
-private JLabel label_3;
-private JLabel label_5;
-private JTextField passengerEmailInNewTourReservation;
-private JTextField passengerAddressInNewTourReservation;
-private JLabel label_12;
-private JLabel label_14;
-private JTextField passengerPhoneInNewTourReservation;
-private JTextField passengerNameInNewReservation;
-private JLabel label_15;
-private JTextField passengerMonthInNewTourReservation;
-private JTextField passengerDayInNewTourReservation;
-private JTextField passengerYearInNewTourReservation;
-private JLabel lblAddCusomerButtonNewTourReservation;
-private JRadioButton radioButtonIsCompanyNewTourReservation;
-private JRadioButton radioButtonIsSchoolNewTourReservation;
-	private JCheckBox boxIsAPassengerNewTourReservation;
-	private JLabel lblClearCustomerButtonNewTourReservation;
-	private JRadioButton radioButtonIsPrivateInNewTourReservation;
-	private JPanel summaryPanel;
-	private JLabel lblSelectedTour;
-	private JLabel lblSelectedCustomer;
-	private JLabel lblSearchForPassengerInNewTourReservationButton;
-	private JLabel lblRemoveButtonInNewTourReservation;
-	private JLabel lblClearAlButtonInNewTourReservation;
-	private JLabel lblCancelButtonInNewTourReservation;
-	private JLabel lblDeleteTourReservation;
+	JMenuItem mntmAboutAutobus;
+	JMenuItem mntmExit;
+	ImageIcon icon;
+	JPanel experimentalPanel;
+	ChauffeursArchive chauffeursArchive;
+	BusesArchive busesArchive;
+	ToursArchive toursArchive;
+	CustomersArchive customersArchive;
+	PassengersArchive passengersArchive;
+	ReservationsArchive reservationsArchive;
+	PriceList priceList;
+	ReservationNumber reservationNumberGenerator;
+	int reservationNumber;
+	JMenuItem mntmTourReservations;
+	JMenuItem mntmBusReservations;
+	JPanel panelTourReservations;
+	JPanel panelBusReservations;
+	JPanel panelChauffeurs;
+	JMenuItem mntmEditChauffeur;
+	JTable tableChauffeurs;
+	JLabel lblAddChauffeurButton;
+	JTextField textFieldChauffeurName;
+	JTextField textFieldChauffeurAddress;
+	JTextField textFieldEmployeeNo;
+	JTextField textFieldChauffeurEmail;
+	JTextField textFieldChauffeurPhone;
+	JTextField textFieldChauffeurBirthMonth;
+	JTextField textFieldChauffeurBirthDay;
+	JTextField textFieldChauffeurBirthYear;
+	JCheckBox chckbxExternalEmployee;
+	JCheckBox chckbxOnlyOneDayTrips;
+	DefaultTableModel chauffeursTable;
+	JLabel lblDeleteChauffeurBtn;
+	JPanel panelBuses;
+	JMenuItem mntmEditBus;
+	JPanel panelTours;
+	JMenuItem mntmEditTours;
+	JMenuItem mntmEditCustomers;
+	JPanel panelCustomers;
+	JMenuItem mntmPassengers;
+	JPanel panelPassengers;
+	JMenuItem mntmNewTourReservation;
+	JPanel panelNewTourReservation;
+	JMenuItem mntmNewBusReservation;
+	JPanel panelNewBusReservation;
+	JTable tableBuses;
+	DefaultTableModel busesTable;
+	JLabel labelAddBusBtn;
+	JTextField textFieldVehicleID;
+	JTextField textFieldPriceHour;
+	JTextField textFieldNumberSeats;
+	JRadioButton rdbtnStandardBus;
+	JRadioButton rdbtnPartyBus;
+	JRadioButton rdbtnLuxuryBus;
+	JLabel labelDeleteBusBtn;
+	JPanel panelAddTour;
+	JTextField textFieldDestination;
+	JLabel lblStartDate;
+	JTextField textFieldStartMonth;
+	JTextField textFieldStartDay;
+	JTextField textFieldStartYear;
+	JLabel lblEndDate;
+	JTextField textFieldEndMonth;
+	JTextField textFieldEndDay;
+	JTextField textFieldEndYear;
+	JLabel lblClearPickUpBtn;
+	JLabel lblAddTourBtn;
+	JLabel lblDeleteTourBtn;
+	JCheckBox chckbxBreakfast;
+	JCheckBox chckbxAllInclusive;
+	JCheckBox chckbxLunch;
+	JTable tableTours;
+	DefaultTableModel toursTable;
+	JPanel panelTopPrices;
+	JLabel labelPrices;
+	JMenuItem mntmPrices;
+	JPanel panelPrices;
+	JTable tablePickups;
+	DefaultTableModel pickupsTable;
+	JTextField textFieldAddPickup;
+	JLabel lblAddPickUpBtn;
+	JScrollPane scrollPanePickUps;
+	JScrollPane scrollPaneSelectBus;
+	JScrollPane scrollPaneSelectChauffeur;
+	JTable tableSelectBus;
+	DefaultTableModel selectBusTable;
+	JTable tableSelectChauffeur;
+	DefaultTableModel selectChauffeurTable;
+	JCheckBox chckbxEntranceTickets;
+	JTextField textFieldPriceAllinclusive;
+	JTextField textFieldPriceEntranceTickets;
+	JTextField textFieldPriceBreakfast;
+	JTextField textFieldPriceLunch;
+	JLabel lblUpdatePriceBtn;
+	JTable tableCustomers;
+	DefaultTableModel customersTable;
+	JScrollPane scrollPanePassengers;
+	JTable tablePassengers;
+	DefaultTableModel passengersTable;
+	JScrollPane scrollPaneTourReservations;
+	JTable tableTourReservations;
+	DefaultTableModel tourReservationsTable;
+	JScrollPane scrollPaneBusReservations;
+	JTable tableBusReservations;
+	DefaultTableModel busReservationsTable;
+	JPanel panel;
+	JLabel lblNewBusOrganisationName;
+	JTextField textFieldNewBusOrganisationName;
+	JTextField textFieldNewBusCustomerName;
+	JTextField textFieldNewBusCustomerAddress;
+	JTextField textFieldNewBusCustomerPhone;
+	JTextField textFieldNewBusCustomerEmail;
+	JTextField textFieldNewBusCustomerBmonth;
+	JTextField textFieldNewBusCustomerBday;
+	JTextField textFieldNewBusCustomerByear;
+	JLabel lblNewBusSearchCustomerBtn;
+	JRadioButton rdbtnNewBusCompany;
+	JRadioButton rdbtnNewBusSchool;
+	JRadioButton rdbtnNewBusPrivate;
+	JLabel lblNewBusCustomerClear;
+	JPanel panelNewBusAddPassenger;
+	JScrollPane scrollPaneNewBusPassengers;
+	JTable tableNewBusPassengers;
+	DefaultTableModel newBusPassengersTable;
+	JLabel lblNewBusRemovePassengerBtn;
+	JLabel lblNewBusPassengerPhone;
+	JLabel lblNewBusPassengerName;
+	JLabel lblNewBusPassengerAddress;
+	JLabel lblNewBusPassengerEmail;
+	JLabel lblNewBusPassengerBirthday;
+	JTextField textFieldNewBusPassengerPhone;
+	JTextField textFieldNewBusPassengerName;
+	JTextField textFieldNewBusPassengerAddress;
+	JTextField textFieldNewBusPassengerEmail;
+	JLabel lblNewBusSearchPassengerBtn;
+	JTextField textFieldNewBusPassengerBmonth;
+	JTextField textFieldNewBusPassengerBday;
+	JTextField textFieldNewBusPassengerByear;
+	JLabel lblNewBusPassengerClearBtn;
+	JLabel lblNewBusAddPassengerBtn;
+	JLabel lblNewBusNextBtn;
+	JLabel lblNewBusClearAllBtn;
+	JCheckBox chckbxNewBusIsPassenger;
+	JPanel panelNewBusReservationNext;
+	JLabel lblCancel;
+	JLabel lblOkNewBusResevation;
+	JScrollPane scrollPaneNewBusSelectChauffeur;
+	JPanel panel_5;
+	JLabel label_19;
+	JTable tableNewBusSelectChauffeur;
+	DefaultTableModel newBusSelectChauffeurTable;
+	JPanel panelSelectBus;
+	JScrollPane scrollPaneNewBusSelectBus;
+	JTable tableNewBusSelectBus;
+	DefaultTableModel newBusSelectBusTable;
+	JTextField textFieldNewBusStartMonth;
+	JTextField textFieldNewBusStartDay;
+	JTextField textFieldNewBusEndYear;
+	JTextField textFieldNewBusEndDay;
+	JTextField textFieldNewBusEndMonth;
+	JTextField textFieldNewBusStartYear;
+	JPanel panelServicesNewBus;
+	JCheckBox chckbxBreakfastNewBus;
+	JCheckBox chckbxLunchNewBus;
+	JCheckBox chckbxAllInclusiveNewBus;
+	JCheckBox chckbxEntranceTicketsNewBus;
+	JTextPane textPaneSummaryNewBus;
+   JLabel lblCreateReservationButton;
+   JTextField searchTourTextField;
+   /*Fixed manually*/JTextField searchCustomerTextField;
+   JLabel lblSearchCustomerByName;
+   JTextField lblPhoneInNewTourReservationtextField;
+   JTextField customerNameNewTourReservationTextField;
+   JTextField customerOrganisationtextField;
+   JTextField customerEmailNewTourReservationtextField;
+   JTextField customerAddressIncustomerEmailNewTourReservationTextField;
+   JTextField customerMonthInNewTourReservationTextField;
+   JTextField customerDayInNewTourReservationTextField;
+   JTextField customerYearInNewTourReservationTextField;
+   JTable customersTableInNewTourReservation;
+   JTable tablePassengersInNewTourReservation;
+   JScrollPane selectTourInNewTourReservationScrollPanel;
+   JTable tableToursInNewTourReservation;
+DefaultTableModel toursTableInNewTourReservation;
+JPanel addNewPassengerInNewTourReservationPanel;
+JLabel lblClearButtonPassengerInNewTourReservation;
+JLabel lblAddNewPassengerInNewTourReservation;
+JLabel label_3;
+JLabel label_5;
+JTextField passengerEmailInNewTourReservation;
+JTextField passengerAddressInNewTourReservation;
+JLabel label_12;
+JLabel label_14;
+JTextField passengerPhoneInNewTourReservation;
+JTextField passengerNameInNewReservation;
+JLabel label_15;
+JTextField passengerMonthInNewTourReservation;
+JTextField passengerDayInNewTourReservation;
+JTextField passengerYearInNewTourReservation;
+JLabel lblAddCusomerButtonNewTourReservation;
+JRadioButton radioButtonIsCompanyNewTourReservation;
+JRadioButton radioButtonIsSchoolNewTourReservation;
+	JCheckBox boxIsAPassengerNewTourReservation;
+	JLabel lblClearCustomerButtonNewTourReservation;
+	JRadioButton radioButtonIsPrivateInNewTourReservation;
+	JPanel summaryPanel;
+	JLabel lblSelectedTour;
+	JLabel lblSelectedCustomer;
+	JLabel lblSearchForPassengerInNewTourReservationButton;
+	JLabel lblRemoveButtonInNewTourReservation;
+	JLabel lblClearAlButtonInNewTourReservation;
+	JLabel lblCancelButtonInNewTourReservation;
+	JLabel lblDeleteTourReservation;
+	DefaultTableModel newBusPassengerReservationTable;
+	JLabel lblUpdateBusReservation;
 	 JLabel lblDeleteBus;
 	 JList<String> lblSelectedPassengers;
 	public static Autobus frame;
-	private JMenuItem mntmExperimentalPanel;
+	JMenuItem mntmExperimentalPanel;
 	/**
 	 * Launch the application.
 	 */
@@ -695,6 +697,8 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 
 
 
+		
+		
 		lblCreateReservationButton.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -1453,6 +1457,12 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 			}
 		});
 		
+		lblUpdateBusReservation.addMouseListener(new MouseAdapter() {
+		   public void mouseReleased(MouseEvent arg0) {
+		      
+		   }
+		});
+		
 		lblNewBusCustomerClear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -1596,10 +1606,11 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblNewBusRemovePassengerBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				int index = tableNewBusPassengers.getSelectedRow();
+				newBusPassengerReservationTable = (DefaultTableModel) tableNewBusPassengers.getModel(); 
+			   int index = tableNewBusPassengers.getSelectedRow(); 
 				if (index!=-1){
 					if (okOrCancel("Are you sure you want to remove this passenger from the list?")==0) {
-						newBusPassengersTable.removeRow(index);								
+					   newBusPassengerReservationTable.removeRow(index);								
 					}
 				} else {
 					JOptionPane.showMessageDialog(null, "You need first to select the passenger you wish to remove!");
@@ -3075,6 +3086,11 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblDeleteBus.setForeground(Color.WHITE);
 		lblDeleteBus.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblDeleteBus.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
+		
+		JLabel lblUpdateBusReservation = new JLabel("Update Bus & Chauffeur Reservation");
+		lblUpdateBusReservation.setForeground(Color.WHITE);
+		lblUpdateBusReservation.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblUpdateBusReservation.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
 		GroupLayout gl_panelBusReservations = new GroupLayout(panelBusReservations);
 		gl_panelBusReservations.setHorizontalGroup(
 		   gl_panelBusReservations.createParallelGroup(Alignment.LEADING)
@@ -3087,8 +3103,10 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 		         .addGap(27))
 		      .addGroup(gl_panelBusReservations.createSequentialGroup()
 		         .addContainerGap()
+		         .addComponent(lblUpdateBusReservation)
+		         .addPreferredGap(ComponentPlacement.UNRELATED)
 		         .addComponent(lblDeleteBus)
-		         .addContainerGap(1110, Short.MAX_VALUE))
+		         .addContainerGap(841, Short.MAX_VALUE))
 		);
 		gl_panelBusReservations.setVerticalGroup(
 		   gl_panelBusReservations.createParallelGroup(Alignment.LEADING)
@@ -3096,9 +3114,11 @@ private JRadioButton radioButtonIsSchoolNewTourReservation;
 		         .addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 		         .addPreferredGap(ComponentPlacement.UNRELATED)
 		         .addComponent(scrollPaneBusReservations, GroupLayout.PREFERRED_SIZE, 334, GroupLayout.PREFERRED_SIZE)
-		         .addPreferredGap(ComponentPlacement.UNRELATED)
-		         .addComponent(lblDeleteBus, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-		         .addContainerGap(242, Short.MAX_VALUE))
+		         .addPreferredGap(ComponentPlacement.RELATED)
+		         .addGroup(gl_panelBusReservations.createParallelGroup(Alignment.BASELINE)
+		            .addComponent(lblUpdateBusReservation, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+		            .addComponent(lblDeleteBus, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+		         .addContainerGap(247, Short.MAX_VALUE))
 		);
 		
 		tableBusReservations = new JTable();
