@@ -257,6 +257,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	private JTextField textFieldStartMinute;
 	private JTextField textFieldEndHour;
 	private JTextField textFieldEndMinute;
+	JPanel updateBusReservations;
+	JDesktopPane desktopPane;
 
 	/**
 	 * Launch the application.
@@ -266,6 +268,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			 frame = null;
 			try {
 				frame = new Autobus();
+				frame.initExternalComponents();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -377,7 +380,9 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	private void createEvents() {
 
-		lblSearchForAvailableInToursPanel.addMouseListener(new MouseAdapter() {
+	   
+	   
+	   lblSearchForAvailableInToursPanel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				String str = new String("");
@@ -3094,7 +3099,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		JLabel lblTopBanner = new JLabel("");
 		lblTopBanner.setIcon(new ImageIcon(Autobus.class.getResource("/ressources/bus_banner.jpg")));
 		
-		JDesktopPane desktopPane = new JDesktopPane();
+		desktopPane = new JDesktopPane();
 	
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -3244,7 +3249,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblDeleteBus.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblDeleteBus.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
 		
-		JLabel lblUpdateBusReservation = new JLabel("Update Bus & Chauffeur Reservation");
+		lblUpdateBusReservation = new JLabel("Update Bus & Chauffeur Reservation");
 		lblUpdateBusReservation.setForeground(Color.WHITE);
 		lblUpdateBusReservation.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblUpdateBusReservation.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
@@ -6081,6 +6086,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		panelNewBusReservationNext.setVisible(false);
 		panelPrices.setVisible(false);
 		this.experimentalPanel.setVisible(false);
+		this.updateBusReservations.setVisible(false);
 	}
 
 	public static java.util.Date parseDate(String date) {
@@ -6113,6 +6119,10 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		for (int i = model.getRowCount() - 1; i >= 0; i--) {
 			model.removeRow(i);
 		}
+	}
+	public void initExternalComponents() {
+	   this.updateBusReservations = new UpdateBusReservations();
+      desktopPane.add(this.updateBusReservations);
 	}
 }
 

@@ -7,6 +7,9 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.Color;
 import javax.swing.AbstractListModel;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
@@ -45,7 +48,15 @@ public class UpdateBusReservations extends JPanel {
    
    public void createEventsForNewBusReservationUpdatePanel(){
       
-   
+      Autobus.frame.lblUpdateBusReservation.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseReleased(MouseEvent e) {
+            Autobus.frame.hideAllPanels();
+            Autobus.frame.updateBusReservations.setVisible(true);
+            
+         }
+      });
+      
    }
    
    public UpdateBusReservations() {
@@ -337,10 +348,10 @@ public class UpdateBusReservations extends JPanel {
       label_14.setFont(new Font("Century Gothic", Font.PLAIN, 14));
       label_14.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
       
-      JLabel label_15 = new JLabel("Add");
-      label_15.setForeground(Color.WHITE);
-      label_15.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-      label_15.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
+      JLabel lblUpdate = new JLabel("Update");
+      lblUpdate.setForeground(Color.WHITE);
+      lblUpdate.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+      lblUpdate.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
       GroupLayout gl_panel_2 = new GroupLayout(panel_2);
       gl_panel_2.setHorizontalGroup(
          gl_panel_2.createParallelGroup(Alignment.LEADING)
@@ -382,7 +393,7 @@ public class UpdateBusReservations extends JPanel {
                      .addGap(14)
                      .addComponent(label_14)
                      .addPreferredGap(ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
-                     .addComponent(label_15)))
+                     .addComponent(lblUpdate)))
                .addContainerGap())
       );
       gl_panel_2.setVerticalGroup(
@@ -415,7 +426,7 @@ public class UpdateBusReservations extends JPanel {
                .addPreferredGap(ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
                   .addComponent(label_14)
-                  .addComponent(label_15))
+                  .addComponent(lblUpdate))
                .addContainerGap())
       );
       panel_2.setLayout(gl_panel_2);
@@ -441,55 +452,49 @@ public class UpdateBusReservations extends JPanel {
       JPanel panel_3 = new JPanel();
       panel_3.setBackground(new Color(0, 128, 128));
       
-      JLabel label_19 = new JLabel("New Bus & Chauffeur reservation");
-      label_19.setForeground(Color.WHITE);
-      label_19.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+      JLabel lblNewBus = new JLabel("New Bus & Chauffeur Reservation Update");
+      lblNewBus.setForeground(Color.WHITE);
+      lblNewBus.setFont(new Font("Century Gothic", Font.PLAIN, 20));
       GroupLayout gl_panel_3 = new GroupLayout(panel_3);
       gl_panel_3.setHorizontalGroup(
          gl_panel_3.createParallelGroup(Alignment.LEADING)
-            .addGap(0, 1369, Short.MAX_VALUE)
             .addGroup(gl_panel_3.createSequentialGroup()
                .addContainerGap()
-               .addComponent(label_19, GroupLayout.PREFERRED_SIZE, 458, GroupLayout.PREFERRED_SIZE)
-               .addContainerGap(899, Short.MAX_VALUE))
+               .addComponent(lblNewBus, GroupLayout.PREFERRED_SIZE, 468, GroupLayout.PREFERRED_SIZE)
+               .addContainerGap(1219, Short.MAX_VALUE))
       );
       gl_panel_3.setVerticalGroup(
          gl_panel_3.createParallelGroup(Alignment.LEADING)
-            .addGap(0, 58, Short.MAX_VALUE)
             .addGroup(gl_panel_3.createSequentialGroup()
-               .addComponent(label_19, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+               .addComponent(lblNewBus, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
       );
       panel_3.setLayout(gl_panel_3);
       GroupLayout gl_panel = new GroupLayout(panel);
       gl_panel.setHorizontalGroup(
-         gl_panel.createParallelGroup(Alignment.TRAILING)
-            .addGap(0, 1369, Short.MAX_VALUE)
+         gl_panel.createParallelGroup(Alignment.LEADING)
             .addGroup(gl_panel.createSequentialGroup()
+               .addGap(12)
+               .addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 327, GroupLayout.PREFERRED_SIZE)
+               .addPreferredGap(ComponentPlacement.UNRELATED)
+               .addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
+               .addGap(18)
                .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
                   .addGroup(gl_panel.createSequentialGroup()
-                     .addGap(12)
-                     .addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 327, GroupLayout.PREFERRED_SIZE)
+                     .addComponent(label_16)
                      .addPreferredGap(ComponentPlacement.UNRELATED)
-                     .addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
-                     .addGap(18)
-                     .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_panel.createSequentialGroup()
-                           .addComponent(label_16)
-                           .addPreferredGap(ComponentPlacement.UNRELATED)
-                           .addComponent(label_17)
-                           .addPreferredGap(ComponentPlacement.RELATED, 481, Short.MAX_VALUE)
-                           .addComponent(label_18)
-                           .addGap(35))
-                        .addGroup(gl_panel.createSequentialGroup()
-                           .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
-                           .addGap(27))))
-                  .addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 1369, Short.MAX_VALUE))
+                     .addComponent(label_17)
+                     .addPreferredGap(ComponentPlacement.RELATED, 749, Short.MAX_VALUE)
+                     .addComponent(label_18)
+                     .addGap(35))
+                  .addGroup(gl_panel.createSequentialGroup()
+                     .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
+                     .addGap(27)))
                .addGap(0))
+            .addComponent(panel_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1697, Short.MAX_VALUE)
       );
       gl_panel.setVerticalGroup(
          gl_panel.createParallelGroup(Alignment.LEADING)
-            .addGap(0, 669, Short.MAX_VALUE)
             .addGroup(gl_panel.createSequentialGroup()
                .addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
                .addPreferredGap(ComponentPlacement.UNRELATED)
@@ -504,23 +509,21 @@ public class UpdateBusReservations extends JPanel {
                            .addComponent(label_16))
                         .addComponent(label_17)))
                   .addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE))
-               .addContainerGap(211, Short.MAX_VALUE))
+               .addContainerGap(415, Short.MAX_VALUE))
       );
       panel.setLayout(gl_panel);
       GroupLayout groupLayout = new GroupLayout(this);
       groupLayout.setHorizontalGroup(
          groupLayout.createParallelGroup(Alignment.LEADING)
-            .addGroup(groupLayout.createSequentialGroup()
-               .addComponent(panel, GroupLayout.PREFERRED_SIZE, 1369, GroupLayout.PREFERRED_SIZE)
-               .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(panel, GroupLayout.DEFAULT_SIZE, 1731, Short.MAX_VALUE)
       );
       groupLayout.setVerticalGroup(
          groupLayout.createParallelGroup(Alignment.LEADING)
             .addGroup(groupLayout.createSequentialGroup()
-               .addComponent(panel, GroupLayout.PREFERRED_SIZE, 669, GroupLayout.PREFERRED_SIZE)
-               .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+               .addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+               .addContainerGap(182, Short.MAX_VALUE))
       );
       setLayout(groupLayout);
-
+      createEventsForNewBusReservationUpdatePanel();
    }
 }
