@@ -252,6 +252,12 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	 JList<String> lblSelectedPassengers;
 	public static Autobus frame;
 	JMenuItem mntmExperimentalPanel;
+	private JLabel lblSearchForAvailableInToursPanel;
+	private JTextField textFieldStartHour;
+	private JTextField textFieldStartMinute;
+	private JTextField textFieldEndHour;
+	private JTextField textFieldEndMinute;
+
 	/**
 	 * Launch the application.
 	 */
@@ -288,22 +294,22 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		if (chauffeursArchive.isFileFound()) {
 			chauffeursArchive.loadChauffeursArchive();
 			listChauffeurs();
-			listSelectChauffeur();
+			//listSelectChauffeur();
 		} else {
 			chauffeursArchive.createFile();
 			listChauffeurs();
-			listSelectChauffeur();
+			//listSelectChauffeur();
 		}
 			
 		busesArchive = new BusesArchive();		
 		if (busesArchive.isFileFound()){
 			busesArchive.loadBusesArchive();
 			listBuses();
-			listSelectBus();
+			//listSelectBus();
 		} else {
 			busesArchive.createFile();
 			listBuses();
-			listSelectBus();
+			//listSelectBus();
 		}
 		
 		toursArchive = new ToursArchive();
@@ -371,6 +377,122 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	private void createEvents() {
 
+		lblSearchForAvailableInToursPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				String str = new String("");
+				int monthStart = 0;
+				int monthEnd = 0;
+				int dayStart = 0;
+				int dayEnd = 0;
+				int yearStart = 0;
+				int yearEnd = 0;
+				int hourStart =0;
+				int hourEnd =0;
+				int minuteStart =0;
+				int minuteEnd = 0;
+				java.util.Date startDate = null;
+				java.util.Date endDate = null;
+				//int dayCount = -1;
+				//int workHoursPerDay = 8; //for calculating price per passenger (8 hours per day * price per hour = day price)
+				Calendar timeNow = Calendar.getInstance();
+				int currentYear = timeNow.get(Calendar.YEAR);
+				try {
+					monthStart = Integer.parseInt(textFieldStartMonth.getText());
+					if (monthStart>12||monthStart<1) str = str + "\nStart month does not seem to be a number between 1-12!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart month does not seem to be a number between 1-12!";
+				}
+				try {
+					dayStart = Integer.parseInt(textFieldStartDay.getText());
+					if (monthStart==1||monthStart==3||monthStart==5||monthStart==7||monthStart==8||monthStart==10||monthStart==12) {
+						if (!(1<=dayStart&&dayStart<=31)) {
+							str = str + "\nStart day does not seem to be a number between 1-31!";
+						}
+					} else if (monthStart==2){
+						if (!(1<=dayStart&&dayStart<=28)) {
+							str = str + "\nStart day does not seem to be a number between 1-28!";
+						}
+					} else if (monthStart==4||monthStart==6||monthStart==9||monthStart==11){
+						if (!(1<=dayStart&&dayStart<=30)) {
+							str = str + "\nStart day does not seem to be a number between 1-30!";
+						}
+					}
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart day does not seem to be a number between 1-31!";
+				}
+				try {
+					yearStart = Integer.parseInt(textFieldStartYear.getText());
+					if (yearStart<currentYear) str = str + "\nStart year does not appear to be a valid number!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart year does not appear to be a valid number!";
+				}
+
+				try {
+					monthEnd = Integer.parseInt(textFieldEndMonth.getText());
+					if (monthEnd>12||monthEnd<1) str = str + "\nEnd month does not seem to be a number between 1-12!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEndt month does not seem to be a number between 1-12!";
+				}
+				try {
+					dayEnd = Integer.parseInt(textFieldEndDay.getText());
+					if (monthEnd==1||monthEnd==3||monthEnd==5||monthEnd==7||monthEnd==8||monthEnd==10||monthEnd==12) {
+						if (!(1<=dayEnd&&dayEnd<=31)) {
+							str = str + "\nEnd day does not seem to be a number between 1-31!";
+						}
+					} else if (monthEnd==2){
+						if (!(1<=dayEnd&&dayEnd<=28)) {
+							str = str + "\nEnd day does not seem to be a number between 1-28!";
+						}
+					} else if (monthEnd==4||monthEnd==6||monthEnd==9||monthEnd==11){
+						if (!(1<=dayEnd&&dayEnd<=30)) {
+							str = str + "\nEnd day does not seem to be a number between 1-30!";
+						}
+					}
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd day does not seem to be a number between 1-31!";
+				}
+				try {
+					yearEnd = Integer.parseInt(textFieldEndYear.getText());
+					if (yearEnd<currentYear) str = str + "\nEnd year does not appear to be a valid number!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd year does not appear to be a valid number!";
+				}
+				try {
+					hourStart= Integer.parseInt(textFieldStartHour.getText());
+					if (hourStart<0 && hourStart > 23) str = str + "\nStart hour does not appear to be a number between 0-23!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart hour does not appear to be a valid number!";
+				}
+				try {
+					hourEnd= Integer.parseInt(textFieldEndHour.getText());
+					if (hourEnd<0 && hourEnd > 23) str = str + "\nEnd hour does not appear to be a number between 0-23!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd hour does not appear to be a valid number!";
+				}
+				try {
+					minuteStart= Integer.parseInt(textFieldStartMinute.getText());
+					if (minuteStart<0 && minuteStart > 59) str = str + "\nStart minute does not appear to be a number between 0-59!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart minute does not appear to be a valid number!";
+				}
+				try {
+					minuteEnd= Integer.parseInt(textFieldEndMinute.getText());
+					if (minuteEnd<0 && minuteEnd> 59) str = str + "\nEnd minute does not appear to be a number between 0-59!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd minute does not appear to be a valid number!";
+				}
+				if(str.equals("")){
+					startDate = parseDate(yearStart+"-" + (monthStart-1) + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
+					endDate = parseDate(yearEnd+"-" + (monthEnd-1) + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
+					listSelectBus(startDate, (int)((endDate.getTime() - startDate.getTime()) / 3600000));
+					listSelectChauffeur(startDate, (int)((endDate.getTime() - startDate.getTime()) / 3600000));
+				}
+				else{
+
+				}
+			}
+		});
 
 		lblCancelButtonInNewTourReservation.addMouseListener(new MouseAdapter() {
 			@Override
@@ -863,10 +985,10 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					updateListChauffeurs(textFieldEmployeeNo.getText(), chckbxExternalEmployee.isSelected(), textFieldChauffeurName.getText(), 
 							textFieldChauffeurAddress.getText(), textFieldChauffeurEmail.getText(), textFieldChauffeurPhone.getText(), 
 							month+"/"+day+"/"+year , chckbxOnlyOneDayTrips.isSelected());
-					updateListSelectChauffeur(new Chauffeur(textFieldChauffeurName.getText(), textFieldChauffeurEmail.getText(), 
+					/*updateListSelectChauffeur(new Chauffeur(textFieldChauffeurName.getText(), textFieldChauffeurEmail.getText(),
                      textFieldChauffeurAddress.getText(), month, day, year, 
                      Integer.toString(phone), textFieldEmployeeNo.getText(), chckbxExternalEmployee.isSelected(), 
-                     chckbxOnlyOneDayTrips.isSelected()));
+                     chckbxOnlyOneDayTrips.isSelected()));*/
 					textFieldChauffeurName.setText("");
 					textFieldChauffeurEmail.setText("");
 					textFieldChauffeurAddress.setText("");
@@ -1013,7 +1135,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				if (str.equals("")){
 					busesArchive.addBus(new Bus(maxSeats, textFieldVehicleID.getText(), priceHour, modelType));
 					updateListBuses(textFieldVehicleID.getText(), priceHour, maxSeats, maxSeats, modelType, true);
-					updateListSelectBus(new Bus(maxSeats, textFieldVehicleID.getText(), priceHour, modelType));
+					//updateListSelectBus(new Bus(maxSeats, textFieldVehicleID.getText(), priceHour, modelType));
 					textFieldVehicleID.setText("");
 					textFieldPriceHour.setText("");
 					textFieldNumberSeats.setText("");
@@ -1060,6 +1182,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				if (index!=-1){
 					if (okOrCancel("Are you sure you want to delete this bus?")==0) {
 						busesTable.removeRow(index);
+						selectBusTable = (DefaultTableModel) tableBuses.getModel();
 						selectBusTable.removeRow(index);
 						busesArchive.removeBus(index);
 						try {
@@ -1129,8 +1252,14 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				int dayEnd = 0;
 				int yearStart = 0;
 				int yearEnd = 0;
+				int hourStart =0;
+				int hourEnd =0;
+				int minuteStart =0;
+				int minuteEnd = 0;
 				Date startDate = null;
 				Date endDate = null;
+				java.util.Date javastartDate = null;
+				java.util.Date javaendDate = null;
 				int dayCount = -1;
 				int workHoursPerDay = 8; //for calculating price per passenger (8 hours per day * price per hour = day price)
 				Calendar timeNow = Calendar.getInstance();
@@ -1235,6 +1364,30 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 					e.printStackTrace();
 				}
+				try {
+					hourStart= Integer.parseInt(textFieldStartHour.getText());
+					if (hourStart<0 && hourStart > 23) str = str + "\nStart hour does not appear to be a number between 0-23!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart hour does not appear to be a valid number!";
+				}
+				try {
+					hourEnd= Integer.parseInt(textFieldEndHour.getText());
+					if (hourEnd<0 && hourEnd > 23) str = str + "\nEnd hour does not appear to be a number between 0-23!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd hour does not appear to be a valid number!";
+				}
+				try {
+					minuteStart= Integer.parseInt(textFieldStartMinute.getText());
+					if (minuteStart<0 && minuteStart > 59) str = str + "\nStart minute does not appear to be a number between 0-59!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart minute does not appear to be a valid number!";
+				}
+				try {
+					minuteEnd= Integer.parseInt(textFieldEndMinute.getText());
+					if (minuteEnd<0 && minuteEnd> 59) str = str + "\nEnd minute does not appear to be a number between 0-59!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd minute does not appear to be a valid number!";
+				}
 
 				if (str.equals("")) {
 					if (currentDate.equals(startRentDate)&&startRentDate.before(endRentDate)||currentDate.before(startRentDate)&&startRentDate.before(endRentDate)) {
@@ -1257,6 +1410,9 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					}
 					String strBus = (String)tableSelectBus.getModel().getValueAt(tableSelectBus.getSelectedRow(), 0);
 					Bus bus = busesArchive.getBusById(strBus);
+					javastartDate = parseDate(yearStart+"-" + (monthStart-1) + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
+					javaendDate = parseDate(yearEnd+"-" + (monthEnd-1) + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
+					bus.addNewReservationPeriod(new java.util.Date[]{javastartDate,javaendDate});
 					toursArchive.get(toursArchive.size()-1).setBus(bus);
 					double price = round((double)(bus.getPricePerHour()*workHoursPerDay*dayCount)/bus.getMaxNumberOfSeats(),2); //price per passenger rounded to 2 decimals
 					if (chckbxAllInclusive.isSelected()){
@@ -1279,6 +1435,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					toursArchive.get(toursArchive.size()-1).setServices(services);
 					String strChauffeur =(String)tableSelectChauffeur.getModel().getValueAt(tableSelectChauffeur.getSelectedRow(), 0);
 					Chauffeur chauffeur = chauffeursArchive.getChauffeurById(strChauffeur);
+					chauffeur.addNewReservationPeriod(new java.util.Date[]{javastartDate,javaendDate});
 					toursArchive.get(toursArchive.size()-1).setChauffeur(chauffeur);
 					toursArchive.get(toursArchive.size()-1).setDateInterval(new DateInterval(startDate,endDate));
 					
@@ -1299,6 +1456,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					chckbxAllInclusive.setSelected(false);
 					chckbxEntranceTickets.setSelected(false);
 					textFieldAddPickup.setText("");
+					pickupsTable = (DefaultTableModel) tablePickups.getModel();
 					pickupsTable.setRowCount(0);
 					tableSelectBus.clearSelection();
 					tableSelectChauffeur.clearSelection();
@@ -1457,11 +1615,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			}
 		});
 		
-		lblUpdateBusReservation.addMouseListener(new MouseAdapter() {
-		   public void mouseReleased(MouseEvent arg0) {
-		      
-		   }
-		});
+		
 		
 		lblNewBusCustomerClear.addMouseListener(new MouseAdapter() {
 			@Override
@@ -2608,7 +2762,6 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		Object[] rowData = new Object[4];
 		for (int i=0; i<busesArchive.size(); i++){
 			if (tableNewBusPassengers.getRowCount()<=busesArchive.get(i).getMaxNumberOfSeats()) {
-				
 				rowData[0] = busesArchive.get(i).getVehicleID();
 				rowData[1] = busesArchive.get(i).getPricePerHour();
 				rowData[2] = busesArchive.get(i).getMaxNumberOfSeats();
@@ -2759,22 +2912,26 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		pickupsTable.addRow(rowData);	
 	}
 	
-	public void listSelectBus(){
+	public void listSelectBus(java.util.Date startDate, int durationInHours){
 		selectBusTable = (DefaultTableModel) tableSelectBus.getModel();
+		deleteAllRows(selectBusTable);
 		Object[] rowData = new Object[3];
 		for (int i=0; i<busesArchive.size(); i++){
-			rowData[0] = busesArchive.get(i).getVehicleID();
-			rowData[1] = busesArchive.get(i).getModel();
-			rowData[2] = Integer.toString(busesArchive.get(i).getMaxNumberOfSeats());
-			selectBusTable.addRow(rowData);			
+			if(busesArchive.get(i).isAvailable(startDate, durationInHours)) {
+				rowData[0] = busesArchive.get(i).getVehicleID();
+				rowData[1] = busesArchive.get(i).getModel();
+				rowData[2] = Integer.toString(busesArchive.get(i).getMaxNumberOfSeats());
+				selectBusTable.addRow(rowData);
+			}
 		}
 	}
 	
-	public void listSelectChauffeur(){
+	public void listSelectChauffeur(java.util.Date startDate, int durationInHours){
 		selectChauffeurTable = (DefaultTableModel) tableSelectChauffeur.getModel();
+		deleteAllRows(selectChauffeurTable);
 		Object[] rowData = new Object[2];
 		for (int i=0; i<chauffeursArchive.size(); i++){
-		   if (!chauffeursArchive.get(i).isOnlyOneDayTrips()) {
+		   if (!chauffeursArchive.get(i).isOnlyOneDayTrips() && chauffeursArchive.get(i).isAvailable(startDate, durationInHours)) {
 				rowData[0] = chauffeursArchive.get(i).getEmployeeNumber();
 				rowData[1] = chauffeursArchive.get(i).getName();
 				selectChauffeurTable.addRow(rowData);				
@@ -2784,22 +2941,22 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		 
 	}
 	
-	public void updateListSelectChauffeur(Chauffeur newChauffeur) {
+	/*public void updateListSelectChauffeur(Chauffeur newChauffeur) {
 	   selectChauffeurTable = (DefaultTableModel) tableSelectChauffeur.getModel();
 	   Object[] rowData = new Object[2];
 	   rowData[0] = newChauffeur.getEmployeeNumber();
 	   rowData[1] = newChauffeur.getName();
 	   selectChauffeurTable.addRow(rowData);
-	}
+	}*/
 	
-	public void updateListSelectBus(Bus newBus) {
+	/*public void updateListSelectBus(Bus newBus) {
 	   selectBusTable = (DefaultTableModel) tableSelectBus.getModel();
 	   Object[] rowData = new Object[3];
 	   rowData[0] = newBus.getVehicleID();
 	   rowData[1] = newBus.getModelString();
 	   rowData[2] = newBus.getMaxNumberOfSeats();
 	   selectBusTable.addRow(rowData);
-	}
+	}*/
 	
 	public void updatePrices(){
 		textFieldPriceBreakfast.setText(Double.toString(priceList.getPriceBreakfast()));
@@ -2865,7 +3022,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Autobus.class.getResource("/ressources/icon_bus.png")));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1387, 887);
+		setBounds(100, 100, 1387, 1019);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setMargin(new Insets(3, 3, 3, 3));
@@ -3692,7 +3849,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		gl_panelTours.setHorizontalGroup(
 			gl_panelTours.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelTours.createSequentialGroup()
-					.addComponent(panelTopTours, GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+					.addComponent(panelTopTours, GroupLayout.DEFAULT_SIZE, 1369, Short.MAX_VALUE)
 					.addGap(0))
 				.addGroup(gl_panelTours.createSequentialGroup()
 					.addContainerGap()
@@ -3700,7 +3857,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					.addGap(33)
 					.addGroup(gl_panelTours.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelTours.createSequentialGroup()
-							.addComponent(scrollPaneToursArchive, GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+							.addComponent(scrollPaneToursArchive, GroupLayout.DEFAULT_SIZE, 829, Short.MAX_VALUE)
 							.addGap(20))
 						.addGroup(gl_panelTours.createSequentialGroup()
 							.addComponent(lblDeleteTourBtn)
@@ -3710,14 +3867,16 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			gl_panelTours.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelTours.createSequentialGroup()
 					.addComponent(panelTopTours, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
 					.addGroup(gl_panelTours.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelTours.createSequentialGroup()
+							.addGap(18)
 							.addComponent(scrollPaneToursArchive, GroupLayout.PREFERRED_SIZE, 351, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
 							.addComponent(lblDeleteTourBtn))
-						.addComponent(panelAddTour, GroupLayout.PREFERRED_SIZE, 406, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
+						.addGroup(gl_panelTours.createSequentialGroup()
+							.addGap(26)
+							.addComponent(panelAddTour, GroupLayout.PREFERRED_SIZE, 680, GroupLayout.PREFERRED_SIZE)))
+					.addGap(37))
 		);
 		
 		tableTours = new JTable();
@@ -3864,24 +4023,64 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		scrollPaneSelectChauffeur = new JScrollPane();
 		scrollPaneSelectChauffeur.setBackground(new Color(95, 158, 160));
 		scrollPaneSelectChauffeur.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Select chauffeur", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(3, 3, 3, 3)));
+		
+		 lblSearchForAvailableInToursPanel = new JLabel("Search");
+		lblSearchForAvailableInToursPanel.setForeground(Color.WHITE);
+		lblSearchForAvailableInToursPanel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblSearchForAvailableInToursPanel.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
+		
+		JSeparator separator = new JSeparator();
+		
+		textFieldStartHour = new JTextField();
+		textFieldStartHour.setSelectionColor(new Color(102, 205, 170));
+		textFieldStartHour.setSelectedTextColor(Color.WHITE);
+		textFieldStartHour.setForeground(Color.WHITE);
+		textFieldStartHour.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		textFieldStartHour.setColumns(10);
+		textFieldStartHour.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "HH", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)));
+		textFieldStartHour.setBackground(new Color(95, 158, 160));
+		
+		textFieldStartMinute = new JTextField();
+		textFieldStartMinute.setSelectionColor(new Color(102, 205, 170));
+		textFieldStartMinute.setSelectedTextColor(Color.WHITE);
+		textFieldStartMinute.setForeground(Color.WHITE);
+		textFieldStartMinute.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		textFieldStartMinute.setColumns(10);
+		textFieldStartMinute.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "MIN", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)));
+		textFieldStartMinute.setBackground(new Color(95, 158, 160));
+		
+		textFieldEndHour = new JTextField();
+		textFieldEndHour.setSelectionColor(new Color(102, 205, 170));
+		textFieldEndHour.setSelectedTextColor(Color.WHITE);
+		textFieldEndHour.setForeground(Color.WHITE);
+		textFieldEndHour.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		textFieldEndHour.setColumns(10);
+		textFieldEndHour.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "HH", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)));
+		textFieldEndHour.setBackground(new Color(95, 158, 160));
+		
+		textFieldEndMinute = new JTextField();
+		textFieldEndMinute.setSelectionColor(new Color(102, 205, 170));
+		textFieldEndMinute.setSelectedTextColor(Color.WHITE);
+		textFieldEndMinute.setForeground(Color.WHITE);
+		textFieldEndMinute.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		textFieldEndMinute.setColumns(10);
+		textFieldEndMinute.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "MIN", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)));
+		textFieldEndMinute.setBackground(new Color(95, 158, 160));
 		GroupLayout gl_panelAddTour = new GroupLayout(panelAddTour);
 		gl_panelAddTour.setHorizontalGroup(
 			gl_panelAddTour.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panelAddTour.createSequentialGroup()
-					.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+					.addGap(12)
+					.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_panelAddTour.createSequentialGroup()
-							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panelAddTour.createParallelGroup(Alignment.TRAILING)
-									.addGroup(gl_panelAddTour.createSequentialGroup()
-										.addComponent(lblDestination)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldDestination, 193, 193, 193))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_panelAddTour.createParallelGroup(Alignment.TRAILING, false)
 									.addGroup(gl_panelAddTour.createSequentialGroup()
 										.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
-											.addComponent(lblStartDate)
-											.addComponent(lblEndDate))
-										.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(lblEndDate)
+											.addComponent(lblStartDate))
+										.addGap(13)
 										.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
 											.addComponent(textFieldEndMonth, 0, 0, Short.MAX_VALUE)
 											.addComponent(textFieldStartMonth, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
@@ -3892,74 +4091,120 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 										.addPreferredGap(ComponentPlacement.RELATED)
 										.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
 											.addComponent(textFieldStartYear, 0, 0, Short.MAX_VALUE)
-											.addComponent(textFieldEndYear, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))))
-								.addComponent(scrollPaneSelectBus, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED))
+											.addComponent(textFieldEndYear, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)))
+									.addGroup(gl_panelAddTour.createSequentialGroup()
+										.addComponent(lblDestination)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(textFieldDestination, 193, 193, 193)
+										.addGap(6))
+									.addComponent(scrollPaneSelectBus, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE))
+								.addComponent(scrollPaneSelectChauffeur, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_panelAddTour.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(scrollPaneSelectChauffeur, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addGroup(gl_panelAddTour.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblAddTourBtn)
-						.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
-							.addGroup(gl_panelAddTour.createSequentialGroup()
-								.addComponent(lblAddPickUpBtn)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(lblClearPickUpBtn))
-							.addComponent(textFieldAddPickup, 143, 143, Short.MAX_VALUE)
-							.addComponent(chckbxLunch)
-							.addComponent(chckbxBreakfast)
-							.addComponent(chckbxEntranceTickets)
-							.addComponent(chckbxAllInclusive)
-							.addComponent(scrollPanePickUps, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)))
-					.addGap(8))
+							.addGap(61)
+							.addComponent(separator, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panelAddTour.createSequentialGroup()
+							.addGap(120)
+							.addComponent(lblSearchForAvailableInToursPanel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)))
+					.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelAddTour.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+							.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+									.addGroup(gl_panelAddTour.createSequentialGroup()
+										.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+											.addGroup(gl_panelAddTour.createSequentialGroup()
+												.addGap(77)
+												.addComponent(lblAddTourBtn))
+											.addComponent(chckbxAllInclusive)
+											.addComponent(chckbxLunch)
+											.addComponent(chckbxBreakfast)
+											.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
+												.addGroup(gl_panelAddTour.createSequentialGroup()
+													.addGap(27)
+													.addComponent(lblAddPickUpBtn)
+													.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+													.addComponent(lblClearPickUpBtn, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+												.addComponent(chckbxEntranceTickets)))
+										.addGap(8))
+									.addGroup(gl_panelAddTour.createSequentialGroup()
+										.addComponent(textFieldAddPickup, 143, 145, Short.MAX_VALUE)
+										.addContainerGap()))
+								.addGroup(gl_panelAddTour.createSequentialGroup()
+									.addComponent(scrollPanePickUps, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
+									.addContainerGap())))
+						.addGroup(gl_panelAddTour.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panelAddTour.createSequentialGroup()
+									.addComponent(textFieldEndHour, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(textFieldEndMinute, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panelAddTour.createSequentialGroup()
+									.addComponent(textFieldStartHour, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(textFieldStartMinute, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)))
+							.addGap(64))))
 		);
 		gl_panelAddTour.setVerticalGroup(
 			gl_panelAddTour.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelAddTour.createSequentialGroup()
-					.addContainerGap()
 					.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelAddTour.createSequentialGroup()
+							.addContainerGap()
 							.addGroup(gl_panelAddTour.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblDestination)
 								.addComponent(textFieldDestination, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addGap(18)
 							.addGroup(gl_panelAddTour.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblStartDate)
 								.addComponent(textFieldStartMonth, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(textFieldStartDay, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldStartYear, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(textFieldStartYear, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblStartDate))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_panelAddTour.createParallelGroup(Alignment.TRAILING)
 								.addComponent(lblEndDate)
 								.addGroup(gl_panelAddTour.createParallelGroup(Alignment.BASELINE)
 									.addComponent(textFieldEndMonth, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 									.addComponent(textFieldEndDay, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-									.addComponent(textFieldEndYear, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-						.addComponent(scrollPanePickUps, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
-					.addGap(15)
-					.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+									.addComponent(textFieldEndYear, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addGap(30)
+							.addComponent(lblSearchForAvailableInToursPanel, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(separator, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panelAddTour.createSequentialGroup()
-							.addComponent(textFieldAddPickup, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(47)
+							.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+								.addComponent(textFieldStartMinute, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textFieldStartHour, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panelAddTour.createParallelGroup(Alignment.TRAILING)
+							.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+								.addComponent(textFieldEndMinute, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textFieldEndHour, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))))
+					.addGap(30)
+					.addGroup(gl_panelAddTour.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panelAddTour.createSequentialGroup()
+							.addComponent(scrollPaneSelectBus, GroupLayout.PREFERRED_SIZE, 191, GroupLayout.PREFERRED_SIZE)
+							.addGap(21)
+							.addComponent(scrollPaneSelectChauffeur, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panelAddTour.createSequentialGroup()
+							.addComponent(scrollPanePickUps, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+							.addGap(16)
+							.addComponent(textFieldAddPickup, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addGroup(gl_panelAddTour.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblAddPickUpBtn)
-								.addComponent(lblClearPickUpBtn))
+								.addComponent(lblClearPickUpBtn, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
 							.addGap(18)
 							.addComponent(chckbxBreakfast)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(chckbxLunch)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(chckbxAllInclusive)
-							.addGap(4)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(chckbxEntranceTickets)
 							.addGap(18)
-							.addComponent(lblAddTourBtn))
-						.addGroup(gl_panelAddTour.createSequentialGroup()
-							.addComponent(scrollPaneSelectBus, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(scrollPaneSelectChauffeur, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap())
+							.addComponent(lblAddTourBtn)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		
 		tableSelectChauffeur = new JTable();
@@ -5836,6 +6081,14 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		panelNewBusReservationNext.setVisible(false);
 		panelPrices.setVisible(false);
 		this.experimentalPanel.setVisible(false);
+	}
+
+	public static java.util.Date parseDate(String date) {
+		try {
+			return new SimpleDateFormat("yyyy-MM-d-H-m").parse(date);
+		} catch (ParseException e) {
+			return null;
+		}
 	}
 	
 	public static double round(double value, int places) {
