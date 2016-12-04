@@ -259,6 +259,11 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	private JTextField textFieldEndMinute;
 	JPanel updateBusReservations;
 	JDesktopPane desktopPane;
+	private JTextField startHourInNewBusRes;
+	private JTextField startMinuteInNewBusRes;
+	private JTextField endtHourInNewBusRes;
+	private JTextField endMinuteInNewBusRes;
+	private JLabel lblSearchForAvailableInNewBusRes;
 
 	/**
 	 * Launch the application.
@@ -380,7 +385,121 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	private void createEvents() {
 
-	   
+	   lblSearchForAvailableInNewBusRes.addMouseListener(new MouseAdapter() {
+		   @Override
+		   public void mouseReleased(MouseEvent e) {
+			   String str = new String("");
+			   int monthStart = 0;
+			   int monthEnd = 0;
+			   int dayStart = 0;
+			   int dayEnd = 0;
+			   int yearStart = 0;
+			   int yearEnd = 0;
+			   int hourStart =0;
+			   int hourEnd =0;
+			   int minuteStart =0;
+			   int minuteEnd = 0;
+			   java.util.Date startDate = null;
+			   java.util.Date endDate = null;
+			   //int dayCount = -1;
+			   //int workHoursPerDay = 8; //for calculating price per passenger (8 hours per day * price per hour = day price)
+			   Calendar timeNow = Calendar.getInstance();
+			   int currentYear = timeNow.get(Calendar.YEAR);
+			   try {
+				   monthStart = Integer.parseInt(textFieldNewBusStartMonth.getText());
+				   if (monthStart>12||monthStart<1) str = str + "\nStart month does not seem to be a number between 1-12!";
+			   } catch (NumberFormatException e1) {
+				   str = str + "\nStart month does not seem to be a number between 1-12!";
+			   }
+			   try {
+				   dayStart = Integer.parseInt(textFieldNewBusStartDay.getText());
+				   if (monthStart==1||monthStart==3||monthStart==5||monthStart==7||monthStart==8||monthStart==10||monthStart==12) {
+					   if (!(1<=dayStart&&dayStart<=31)) {
+						   str = str + "\nStart day does not seem to be a number between 1-31!";
+					   }
+				   } else if (monthStart==2){
+					   if (!(1<=dayStart&&dayStart<=28)) {
+						   str = str + "\nStart day does not seem to be a number between 1-28!";
+					   }
+				   } else if (monthStart==4||monthStart==6||monthStart==9||monthStart==11){
+					   if (!(1<=dayStart&&dayStart<=30)) {
+						   str = str + "\nStart day does not seem to be a number between 1-30!";
+					   }
+				   }
+			   } catch (NumberFormatException e1) {
+				   str = str + "\nStart day does not seem to be a number between 1-31!";
+			   }
+			   try {
+				   yearStart = Integer.parseInt(textFieldNewBusStartYear.getText());
+				   if (yearStart<currentYear) str = str + "\nStart year does not appear to be a valid number!";
+			   } catch (NumberFormatException e1) {
+				   str = str + "\nStart year does not appear to be a valid number!";
+			   }
+			   try {
+				   monthEnd = Integer.parseInt(textFieldNewBusEndMonth.getText());
+				   if (monthEnd>12||monthEnd<1) str = str + "\nEnd month does not seem to be a number between 1-12!";
+			   } catch (NumberFormatException e1) {
+				   str = str + "\nEndt month does not seem to be a number between 1-12!";
+			   }
+			   try {
+				   dayEnd = Integer.parseInt(textFieldNewBusEndDay.getText());
+				   if (monthEnd==1||monthEnd==3||monthEnd==5||monthEnd==7||monthEnd==8||monthEnd==10||monthEnd==12) {
+					   if (!(1<=dayEnd&&dayEnd<=31)) {
+						   str = str + "\nEnd day does not seem to be a number between 1-31!";
+					   }
+				   } else if (monthEnd==2){
+					   if (!(1<=dayEnd&&dayEnd<=28)) {
+						   str = str + "\nEnd day does not seem to be a number between 1-28!";
+					   }
+				   } else if (monthEnd==4||monthEnd==6||monthEnd==9||monthEnd==11){
+					   if (!(1<=dayEnd&&dayEnd<=30)) {
+						   str = str + "\nEnd day does not seem to be a number between 1-30!";
+					   }
+				   }
+			   } catch (NumberFormatException e1) {
+				   str = str + "\nEnd day does not seem to be a number between 1-31!";
+			   }
+			   try {
+				   yearEnd = Integer.parseInt(textFieldNewBusEndYear.getText());
+				   if (yearEnd<currentYear) str = str + "\nEnd year does not appear to be a valid number!";
+			   } catch (NumberFormatException e1) {
+				   str = str + "\nEnd year does not appear to be a valid number!";
+			   }
+			   try {
+				   hourStart= Integer.parseInt(startHourInNewBusRes.getText());
+				   if (hourStart<0 && hourStart > 23) str = str + "\nStart hour does not appear to be a number between 0-23!";
+			   } catch (NumberFormatException e1) {
+				   str = str + "\nStart hour does not appear to be a valid number!";
+			   }
+			   try {
+				   hourEnd= Integer.parseInt(endtHourInNewBusRes.getText());
+				   if (hourEnd<0 && hourEnd > 23) str = str + "\nEnd hour does not appear to be a number between 0-23!";
+			   } catch (NumberFormatException e1) {
+				   str = str + "\nEnd hour does not appear to be a valid number!";
+			   }
+			   try {
+				   minuteStart= Integer.parseInt(startMinuteInNewBusRes.getText());
+				   if (minuteStart<0 && minuteStart > 59) str = str + "\nStart minute does not appear to be a number between 0-59!";
+			   } catch (NumberFormatException e1) {
+				   str = str + "\nStart minute does not appear to be a valid number!";
+			   }
+			   try {
+				   minuteEnd= Integer.parseInt(endMinuteInNewBusRes.getText());
+				   if (minuteEnd<0 && minuteEnd> 59) str = str + "\nEnd minute does not appear to be a number between 0-59!";
+			   } catch (NumberFormatException e1) {
+				   str = str + "\nEnd minute does not appear to be a valid number!";
+			   }
+			   if(str.equals("")){
+				   startDate = parseDate(yearStart+"-" + (monthStart-1) + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
+				   endDate = parseDate(yearEnd+"-" + (monthEnd-1) + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
+				   listNewBusSelectBus(startDate, (int)((endDate.getTime() - startDate.getTime()) / 3600000));
+				   listNewBusSelectChauffeur(startDate, (int)((endDate.getTime() - startDate.getTime()) / 3600000));
+			   }
+			   else{
+				   JOptionPane.showMessageDialog(null, "Some of the fields were filled incorrectly:" + str);
+			   }
+		   }
+	   });
 	   
 	   lblSearchForAvailableInToursPanel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -494,7 +613,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					listSelectChauffeur(startDate, (int)((endDate.getTime() - startDate.getTime()) / 3600000));
 				}
 				else{
-
+					JOptionPane.showMessageDialog(null, "Some of the fields were filled incorrectly:" +str);
 				}
 			}
 		});
@@ -1025,6 +1144,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				   if (okOrCancel("Are you sure you want to delete this Chauffeur?") == 0) {
 					chauffeursTable.removeRow(index);
 					chauffeursArchive.removeChauffeur(index);
+					selectChauffeurTable = (DefaultTableModel) tableSelectChauffeur.getModel();
 					selectChauffeurTable.removeRow(index);
 					try {
 						chauffeursArchive.saveChauffeursArchive();
@@ -1418,6 +1538,12 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					javastartDate = parseDate(yearStart+"-" + (monthStart-1) + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
 					javaendDate = parseDate(yearEnd+"-" + (monthEnd-1) + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
 					bus.addNewReservationPeriod(new java.util.Date[]{javastartDate,javaendDate});
+					try {
+						busesArchive.saveBusesArchive();
+					}
+					catch (Exception e){
+						e.printStackTrace();
+					}
 					toursArchive.get(toursArchive.size()-1).setBus(bus);
 					double price = round((double)(bus.getPricePerHour()*workHoursPerDay*dayCount)/bus.getMaxNumberOfSeats(),2); //price per passenger rounded to 2 decimals
 					if (chckbxAllInclusive.isSelected()){
@@ -1441,6 +1567,12 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					String strChauffeur =(String)tableSelectChauffeur.getModel().getValueAt(tableSelectChauffeur.getSelectedRow(), 0);
 					Chauffeur chauffeur = chauffeursArchive.getChauffeurById(strChauffeur);
 					chauffeur.addNewReservationPeriod(new java.util.Date[]{javastartDate,javaendDate});
+					try {
+						chauffeursArchive.saveChauffeursArchive();
+					}
+					catch (Exception e){
+						e.printStackTrace();
+					}
 					toursArchive.get(toursArchive.size()-1).setChauffeur(chauffeur);
 					toursArchive.get(toursArchive.size()-1).setDateInterval(new DateInterval(startDate,endDate));
 					
@@ -2174,8 +2306,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				if (str.equalsIgnoreCase("")) {
 					hideAllPanels();
 					panelNewBusReservationNext.setVisible(true);
-					listNewBusSelectBus();
-					listNewBusSelectChauffeur();
+					//listNewBusSelectBus();
+					//listNewBusSelectChauffeur();
 					try {
 						reservationNumber=reservationNumberGenerator.getReservationNumber();
 					} catch (Exception e1) {
@@ -2389,6 +2521,104 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				double pricePerDay = 0;
 				double totalPrice = 0;
 				Services services = null;
+				java.util.Date javastartDate;
+				java.util.Date javaendDate;
+
+				int hourStart =0;
+				int hourEnd =0;
+				int minuteStart =0;
+				int minuteEnd = 0;
+
+				//int dayCount = -1;
+				//int workHoursPerDay = 8; //for calculating price per passenger (8 hours per day * price per hour = day price)
+				Calendar timeNow = Calendar.getInstance();
+				int currentYear = timeNow.get(Calendar.YEAR);
+				try {
+					monthStart = Integer.parseInt(textFieldNewBusStartMonth.getText());
+					if (monthStart>12||monthStart<1) str = str + "\nStart month does not seem to be a number between 1-12!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart month does not seem to be a number between 1-12!";
+				}
+				try {
+					dayStart = Integer.parseInt(textFieldNewBusStartDay.getText());
+					if (monthStart==1||monthStart==3||monthStart==5||monthStart==7||monthStart==8||monthStart==10||monthStart==12) {
+						if (!(1<=dayStart&&dayStart<=31)) {
+							str = str + "\nStart day does not seem to be a number between 1-31!";
+						}
+					} else if (monthStart==2){
+						if (!(1<=dayStart&&dayStart<=28)) {
+							str = str + "\nStart day does not seem to be a number between 1-28!";
+						}
+					} else if (monthStart==4||monthStart==6||monthStart==9||monthStart==11){
+						if (!(1<=dayStart&&dayStart<=30)) {
+							str = str + "\nStart day does not seem to be a number between 1-30!";
+						}
+					}
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart day does not seem to be a number between 1-31!";
+				}
+				try {
+					yearStart = Integer.parseInt(textFieldNewBusStartYear.getText());
+					if (yearStart<currentYear) str = str + "\nStart year does not appear to be a valid number!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart year does not appear to be a valid number!";
+				}
+				try {
+					monthEnd = Integer.parseInt(textFieldNewBusEndMonth.getText());
+					if (monthEnd>12||monthEnd<1) str = str + "\nEnd month does not seem to be a number between 1-12!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEndt month does not seem to be a number between 1-12!";
+				}
+				try {
+					dayEnd = Integer.parseInt(textFieldNewBusEndDay.getText());
+					if (monthEnd==1||monthEnd==3||monthEnd==5||monthEnd==7||monthEnd==8||monthEnd==10||monthEnd==12) {
+						if (!(1<=dayEnd&&dayEnd<=31)) {
+							str = str + "\nEnd day does not seem to be a number between 1-31!";
+						}
+					} else if (monthEnd==2){
+						if (!(1<=dayEnd&&dayEnd<=28)) {
+							str = str + "\nEnd day does not seem to be a number between 1-28!";
+						}
+					} else if (monthEnd==4||monthEnd==6||monthEnd==9||monthEnd==11){
+						if (!(1<=dayEnd&&dayEnd<=30)) {
+							str = str + "\nEnd day does not seem to be a number between 1-30!";
+						}
+					}
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd day does not seem to be a number between 1-31!";
+				}
+				try {
+					yearEnd = Integer.parseInt(textFieldNewBusEndYear.getText());
+					if (yearEnd<currentYear) str = str + "\nEnd year does not appear to be a valid number!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd year does not appear to be a valid number!";
+				}
+				try {
+					hourStart= Integer.parseInt(startHourInNewBusRes.getText());
+					if (hourStart<0 && hourStart > 23) str = str + "\nStart hour does not appear to be a number between 0-23!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart hour does not appear to be a valid number!";
+				}
+				try {
+					hourEnd= Integer.parseInt(endtHourInNewBusRes.getText());
+					if (hourEnd<0 && hourEnd > 23) str = str + "\nEnd hour does not appear to be a number between 0-23!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd hour does not appear to be a valid number!";
+				}
+				try {
+					minuteStart= Integer.parseInt(startMinuteInNewBusRes.getText());
+					if (minuteStart<0 && minuteStart > 59) str = str + "\nStart minute does not appear to be a number between 0-59!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart minute does not appear to be a valid number!";
+				}
+				try {
+					minuteEnd= Integer.parseInt(endMinuteInNewBusRes.getText());
+					if (minuteEnd<0 && minuteEnd> 59) str = str + "\nEnd minute does not appear to be a number between 0-59!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd minute does not appear to be a valid number!";
+				}
+
+
 				try {
 					services = new Services();
 				} catch (Exception e1) {
@@ -2445,6 +2675,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					busSelected = (String)newBusSelectBusTable.getValueAt(tableNewBusSelectBus.getSelectedRow(), 0);
 					pricePerDay += busesArchive.getBusById(busSelected).getPricePerHour()*8;//price/hour * 8 working hours per day = price/day
 					bus = busesArchive.getBusById(busSelected);
+
+
 				} else {
 					str+= "No bus is selected!";
 				}
@@ -2464,7 +2696,23 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				totalPrice = round(totalPrice, 2);
 				
 				if (str.equalsIgnoreCase("")){
+					javastartDate = parseDate(yearStart+"-" + (monthStart-1) + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
+					javaendDate = parseDate(yearEnd+"-" + (monthEnd-1) + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
 					int customerIndex = -1;
+					bus.addNewReservationPeriod(new java.util.Date[]{javastartDate,javaendDate});
+					try {
+						busesArchive.saveBusesArchive();
+					}
+					catch (Exception e){
+						e.printStackTrace();
+					}
+					chauffeur.addNewReservationPeriod(new java.util.Date[]{javastartDate,javaendDate});
+					try {
+						chauffeursArchive.saveChauffeursArchive();
+					}
+					catch (Exception e){
+						e.printStackTrace();
+					}
 					for (int i=0; i< customersArchive.size(); i++){
 						if (textFieldNewBusCustomerPhone.getText().equalsIgnoreCase(customersArchive.get(i).getPhonenumber())) {
 							customerIndex = i;
@@ -2752,21 +3000,26 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			chauffeursTable.addRow(rowData);			
 	}
 	
-	public void listNewBusSelectChauffeur(){
+	public void listNewBusSelectChauffeur(java.util.Date startDate, int durationInHours ){
 		newBusSelectChauffeurTable = (DefaultTableModel) tableNewBusSelectChauffeur.getModel();
+		deleteAllRows(newBusSelectChauffeurTable);
 		Object[] rowData = new Object[2];
 		for (int i=0; i<chauffeursArchive.size(); i++){
-			rowData[0] = chauffeursArchive.get(i).getEmployeeNumber();
-			rowData[1] = chauffeursArchive.get(i).getName();
-			newBusSelectChauffeurTable.addRow(rowData);			
+			if (chauffeursArchive.get(i).isAvailable(startDate, durationInHours)) {
+				rowData[0] = chauffeursArchive.get(i).getEmployeeNumber();
+				rowData[1] = chauffeursArchive.get(i).getName();
+				newBusSelectChauffeurTable.addRow(rowData);
+			}
 		}
 	}
 	
-	public void listNewBusSelectBus(){
+	public void listNewBusSelectBus(java.util.Date startDate, int durationInHours){
 		newBusSelectBusTable = (DefaultTableModel) tableNewBusSelectBus.getModel();
+		deleteAllRows(newBusSelectBusTable);
 		Object[] rowData = new Object[4];
 		for (int i=0; i<busesArchive.size(); i++){
-			if (tableNewBusPassengers.getRowCount()<=busesArchive.get(i).getMaxNumberOfSeats()) {
+			if (tableNewBusPassengers.getRowCount()<=busesArchive.get(i).getMaxNumberOfSeats()
+			 	&&(busesArchive.get(i).isAvailable(startDate, durationInHours))) {
 				rowData[0] = busesArchive.get(i).getVehicleID();
 				rowData[1] = busesArchive.get(i).getPricePerHour();
 				rowData[2] = busesArchive.get(i).getMaxNumberOfSeats();
@@ -5845,39 +6098,44 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelSelectBus, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panelServicesNewBus, GroupLayout.PREFERRED_SIZE, 184, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(scrollPaneNewBusSelectBus, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(scrollPaneNewBusSelectChauffeur, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+						.addGroup(Alignment.TRAILING, gl_panelNewBusReservationNext.createSequentialGroup()
+							.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
+								.addComponent(panelServicesNewBus, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(panelSelectBus, GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(scrollPaneNewBusSelectBus, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(scrollPaneNewBusSelectChauffeur, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(textPaneSummaryNewBus, GroupLayout.PREFERRED_SIZE, 511, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, gl_panelNewBusReservationNext.createSequentialGroup()
 							.addComponent(lblCancel)
 							.addGap(18)
-							.addComponent(lblOkNewBusResevation))
-						.addComponent(textPaneSummaryNewBus, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE))
+							.addComponent(lblOkNewBusResevation)))
 					.addGap(54))
-				.addComponent(panel_5, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+				.addComponent(panel_5, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 1369, Short.MAX_VALUE)
 		);
 		gl_panelNewBusReservationNext.setVerticalGroup(
 			gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
 					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(textPaneSummaryNewBus, GroupLayout.PREFERRED_SIZE, 321, GroupLayout.PREFERRED_SIZE)
-						.addComponent(scrollPaneNewBusSelectChauffeur, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE)
-						.addComponent(scrollPaneNewBusSelectBus, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-							.addComponent(panelSelectBus, GroupLayout.PREFERRED_SIZE, 184, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.BASELINE)
+									.addComponent(scrollPaneNewBusSelectChauffeur, GroupLayout.PREFERRED_SIZE, 388, GroupLayout.PREFERRED_SIZE)
+									.addComponent(scrollPaneNewBusSelectBus, GroupLayout.PREFERRED_SIZE, 388, GroupLayout.PREFERRED_SIZE))
+								.addComponent(textPaneSummaryNewBus, GroupLayout.PREFERRED_SIZE, 378, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
+							.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblOkNewBusResevation)
+								.addComponent(lblCancel)))
+						.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+							.addComponent(panelSelectBus, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
 							.addComponent(panelServicesNewBus, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)))
-					.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblOkNewBusResevation)
-						.addComponent(lblCancel))
-					.addGap(54))
+					.addGap(337))
 		);
 		
 		chckbxBreakfastNewBus = new JCheckBox("Breakfast");
@@ -5999,46 +6257,106 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		textFieldNewBusStartYear.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "Y", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(1, 1, 1, 1)));
 		textFieldNewBusStartYear.setBackground(new Color(95, 158, 160));
 		textFieldNewBusStartYear.setColumns(10);
+		
+		startHourInNewBusRes = new JTextField();
+		startHourInNewBusRes.setForeground(Color.WHITE);
+		startHourInNewBusRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		startHourInNewBusRes.setColumns(10);
+		startHourInNewBusRes.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "H", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(1, 1, 1, 1)));
+		startHourInNewBusRes.setBackground(new Color(95, 158, 160));
+		
+		startMinuteInNewBusRes = new JTextField();
+		startMinuteInNewBusRes.setForeground(Color.WHITE);
+		startMinuteInNewBusRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		startMinuteInNewBusRes.setColumns(10);
+		startMinuteInNewBusRes.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "Mn", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(1, 1, 1, 1)));
+		startMinuteInNewBusRes.setBackground(new Color(95, 158, 160));
+		
+		endtHourInNewBusRes = new JTextField();
+		endtHourInNewBusRes.setForeground(Color.WHITE);
+		endtHourInNewBusRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		endtHourInNewBusRes.setColumns(10);
+		endtHourInNewBusRes.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "H", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(1, 1, 1, 1)));
+		endtHourInNewBusRes.setBackground(new Color(95, 158, 160));
+		
+		endMinuteInNewBusRes = new JTextField();
+		endMinuteInNewBusRes.setForeground(Color.WHITE);
+		endMinuteInNewBusRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		endMinuteInNewBusRes.setColumns(10);
+		endMinuteInNewBusRes.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "Mn", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(1, 1, 1, 1)));
+		endMinuteInNewBusRes.setBackground(new Color(95, 158, 160));
+		
+		lblSearchForAvailableInNewBusRes = new JLabel("Search");
+		lblSearchForAvailableInNewBusRes.setForeground(Color.WHITE);
+		lblSearchForAvailableInNewBusRes.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblSearchForAvailableInNewBusRes.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
 		GroupLayout gl_panelSelectBus = new GroupLayout(panelSelectBus);
 		gl_panelSelectBus.setHorizontalGroup(
 			gl_panelSelectBus.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelSelectBus.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panelSelectBus.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelSelectBus.createSequentialGroup()
-							.addComponent(textFieldNewBusStartMonth, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textFieldNewBusStartDay, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-							.addGap(12)
-							.addComponent(textFieldNewBusStartYear, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE))
 						.addComponent(lblNewBusStartDate)
 						.addGroup(gl_panelSelectBus.createSequentialGroup()
-							.addComponent(textFieldNewBusEndMonth, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_panelSelectBus.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panelSelectBus.createParallelGroup(Alignment.TRAILING, false)
+									.addGroup(Alignment.LEADING, gl_panelSelectBus.createSequentialGroup()
+										.addComponent(textFieldNewBusEndMonth, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addComponent(textFieldNewBusEndDay, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addComponent(textFieldNewBusEndYear, 0, 0, Short.MAX_VALUE))
+									.addGroup(Alignment.LEADING, gl_panelSelectBus.createSequentialGroup()
+										.addComponent(textFieldNewBusStartMonth, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addComponent(textFieldNewBusStartDay, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addComponent(textFieldNewBusStartYear, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
+									.addComponent(lblSearchForAvailableInNewBusRes, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
+								.addComponent(lblNewBusEndDate))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textFieldNewBusEndDay, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textFieldNewBusEndYear, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE))
-						.addComponent(lblNewBusEndDate))
-					.addContainerGap())
+							.addGroup(gl_panelSelectBus.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panelSelectBus.createSequentialGroup()
+									.addComponent(startHourInNewBusRes, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(startMinuteInNewBusRes, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panelSelectBus.createSequentialGroup()
+									.addComponent(endtHourInNewBusRes, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(endMinuteInNewBusRes, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)))))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_panelSelectBus.setVerticalGroup(
 			gl_panelSelectBus.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelSelectBus.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNewBusStartDate)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panelSelectBus.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textFieldNewBusStartMonth, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textFieldNewBusStartDay, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textFieldNewBusStartYear, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_panelSelectBus.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelSelectBus.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblNewBusStartDate)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panelSelectBus.createParallelGroup(Alignment.BASELINE)
+								.addComponent(textFieldNewBusStartMonth, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textFieldNewBusStartDay, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textFieldNewBusStartYear, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(startHourInNewBusRes, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_panelSelectBus.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panelSelectBus.createSequentialGroup()
+									.addComponent(lblNewBusEndDate)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_panelSelectBus.createParallelGroup(Alignment.BASELINE)
+										.addComponent(textFieldNewBusEndMonth, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textFieldNewBusEndDay, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textFieldNewBusEndYear, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(endtHourInNewBusRes, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_panelSelectBus.createSequentialGroup()
+							.addGap(36)
+							.addComponent(startMinuteInNewBusRes, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+							.addComponent(endMinuteInNewBusRes, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblNewBusEndDate)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panelSelectBus.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textFieldNewBusEndMonth, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textFieldNewBusEndDay, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textFieldNewBusEndYear, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(144))
+					.addComponent(lblSearchForAvailableInNewBusRes, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panelSelectBus.setLayout(gl_panelSelectBus);
 		

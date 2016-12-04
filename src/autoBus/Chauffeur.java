@@ -52,7 +52,7 @@ public class Chauffeur implements Serializable{
 	public boolean isAvailable(java.util.Date startDate, int durationInHours) {
 		if(this.listOfStartEndDates.isEmpty())
 			return true;
-		try {
+		
 			if (startDate.before(listOfStartEndDates.get(0)[0])) {
 				datePointer = 0;
 				return (listOfStartEndDates.get(0)[0].getTime() - startDate.getTime()) / 3600000 > durationInHours + 24;
@@ -65,9 +65,7 @@ public class Chauffeur implements Serializable{
 			}
 			datePointer = listOfStartEndDates.size();
 			return startDate.after(listOfStartEndDates.get(listOfStartEndDates.size() -1)[1]);
-		} catch (NullPointerException e) {
-			return true;
-		}
+		
 	}
 	
 	public String toString(){
