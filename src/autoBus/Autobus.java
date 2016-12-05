@@ -33,6 +33,7 @@ import java.util.Calendar;
 public class Autobus extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	JPanel updateTourReservationPanel;
 	JMenuItem mntmAboutAutobus;
 	JMenuItem mntmExit;
 	ImageIcon icon;
@@ -252,18 +253,19 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	 JList<String> lblSelectedPassengers;
 	public static Autobus frame;
 	JMenuItem mntmExperimentalPanel;
-	private JLabel lblSearchForAvailableInToursPanel;
-	private JTextField textFieldStartHour;
-	private JTextField textFieldStartMinute;
-	private JTextField textFieldEndHour;
-	private JTextField textFieldEndMinute;
+	JLabel lblSearchForAvailableInToursPanel;
+	JTextField textFieldStartHour;
+	JTextField textFieldStartMinute;
+	JTextField textFieldEndHour;
+	JTextField textFieldEndMinute;
 	JPanel updateBusReservations;
 	JDesktopPane desktopPane;
-	private JTextField startHourInNewBusRes;
-	private JTextField startMinuteInNewBusRes;
-	private JTextField endtHourInNewBusRes;
-	private JTextField endMinuteInNewBusRes;
-	private JLabel lblSearchForAvailableInNewBusRes;
+	JTextField startHourInNewBusRes;
+	JTextField startMinuteInNewBusRes;
+	JTextField endtHourInNewBusRes;
+	JTextField endMinuteInNewBusRes;
+	JLabel lblSearchForAvailableInNewBusRes;
+	 JLabel lblUpdateTourReservation;
 
 	/**
 	 * Launch the application.
@@ -384,6 +386,207 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	// This method contains all code for creating events
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	private void createEvents() {
+
+		textFieldStartMonth.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+
+			}
+
+
+		});
+
+		textFieldStartDay.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+
+			}
+
+
+		});
+
+		textFieldStartYear.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+
+			}
+
+
+		});
+
+		textFieldStartHour.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+
+			}
+
+
+		});
+
+		textFieldStartMinute.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+
+			}
+
+
+		});
+
+		textFieldEndMonth.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+
+			}
+
+
+		});
+
+		textFieldEndDay.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+
+			}
+
+
+		});
+
+		textFieldEndYear.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+
+			}
+
+
+		});
+
+		textFieldEndHour.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+
+			}
+
+
+		});
+
+		textFieldEndMinute.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
+
+			}
+
+
+		});
+
 
 	   lblSearchForAvailableInNewBusRes.addMouseListener(new MouseAdapter() {
 		   @Override
@@ -2042,8 +2245,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					if(passengersArchive.getPassengersArchive().get(i).getPhonenumber().equals(phoneNumber)){
 						updateListPassengersInNewTourReservation(passengersArchive.getPassengersArchive().get(i));
 						DefaultListModel<String> listModel = (DefaultListModel<String>) lblSelectedPassengers.getModel();
-						listModel.addElement(passengersArchive.getPassengersArchive().get(passengersArchive.size() -1).getName() + " " +
-								passengersArchive.getPassengersArchive().get(passengersArchive.size() -1).getPhonenumber());
+						listModel.addElement(passengersArchive.getPassengersArchive().get(i).getName() + " " +
+								passengersArchive.getPassengersArchive().get(i).getPhonenumber());
 						return;
 					}
 				}
@@ -3390,31 +3593,40 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblDeleteTourReservation.setForeground(Color.WHITE);
 		lblDeleteTourReservation.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblDeleteTourReservation.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
+		
+		lblUpdateTourReservation = new JLabel("Update Tour Reservation");
+		lblUpdateTourReservation.setForeground(Color.WHITE);
+		lblUpdateTourReservation.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblUpdateTourReservation.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
 		GroupLayout gl_panelTourReservations = new GroupLayout(panelTourReservations);
 		gl_panelTourReservations.setHorizontalGroup(
-		   gl_panelTourReservations.createParallelGroup(Alignment.LEADING)
-		      .addGroup(gl_panelTourReservations.createSequentialGroup()
-		         .addGroup(gl_panelTourReservations.createParallelGroup(Alignment.TRAILING)
-		            .addGroup(gl_panelTourReservations.createSequentialGroup()
-		               .addContainerGap()
-		               .addComponent(scrollPaneTourReservations, GroupLayout.DEFAULT_SIZE, 1330, Short.MAX_VALUE)
-		               .addGap(31))
-		            .addComponent(panelTopTourReservations, GroupLayout.DEFAULT_SIZE, 1371, Short.MAX_VALUE))
-		         .addGap(0))
-		      .addGroup(gl_panelTourReservations.createSequentialGroup()
-		         .addGap(10)
-		         .addComponent(lblDeleteTourReservation)
-		         .addContainerGap())
+			gl_panelTourReservations.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelTourReservations.createSequentialGroup()
+					.addGroup(gl_panelTourReservations.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panelTourReservations.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(scrollPaneTourReservations, GroupLayout.DEFAULT_SIZE, 1326, Short.MAX_VALUE)
+							.addGap(31))
+						.addComponent(panelTopTourReservations, GroupLayout.DEFAULT_SIZE, 1369, Short.MAX_VALUE))
+					.addGap(0))
+				.addGroup(gl_panelTourReservations.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblUpdateTourReservation)
+					.addGap(18)
+					.addComponent(lblDeleteTourReservation)
+					.addContainerGap(995, Short.MAX_VALUE))
 		);
 		gl_panelTourReservations.setVerticalGroup(
-		   gl_panelTourReservations.createParallelGroup(Alignment.LEADING)
-		      .addGroup(gl_panelTourReservations.createSequentialGroup()
-		         .addComponent(panelTopTourReservations, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-		         .addGap(18)
-		         .addComponent(scrollPaneTourReservations, GroupLayout.PREFERRED_SIZE, 345, GroupLayout.PREFERRED_SIZE)
-		         .addPreferredGap(ComponentPlacement.UNRELATED)
-		         .addComponent(lblDeleteTourReservation, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-		         .addContainerGap(224, Short.MAX_VALUE))
+			gl_panelTourReservations.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelTourReservations.createSequentialGroup()
+					.addComponent(panelTopTourReservations, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(scrollPaneTourReservations, GroupLayout.PREFERRED_SIZE, 345, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panelTourReservations.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblUpdateTourReservation, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblDeleteTourReservation, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(340, Short.MAX_VALUE))
 		);
 		
 		tableTourReservations = new JTable();
@@ -6405,6 +6617,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		panelPrices.setVisible(false);
 		this.experimentalPanel.setVisible(false);
 		this.updateBusReservations.setVisible(false);
+		this.updateTourReservationPanel.setVisible(false);
 	}
 
 	public static java.util.Date parseDate(String date) {
@@ -6441,6 +6654,9 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	public void initExternalComponents() {
 	   this.updateBusReservations = new UpdateBusReservations();
       desktopPane.add(this.updateBusReservations);
+      this.updateTourReservationPanel = new UpdateTourReservationPanel();
+      desktopPane.add(updateTourReservationPanel);
+      
 	}
 }
 

@@ -94,4 +94,11 @@ public class ReservationsArchive implements Serializable{
 		}
 	}
 
+	public int getIndexOfReservation(Reservation reservation){
+		for (int i = 0; i < reservationsArchive.size(); i++) {
+			if(reservationsArchive.get(i).equals(reservation))
+				return i;
+		}
+		return -1;
+	}
 }
