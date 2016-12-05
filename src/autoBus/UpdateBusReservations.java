@@ -2,30 +2,39 @@ package autoBus;
 
 import javax.swing.JPanel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Color;
 import javax.swing.AbstractListModel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Calendar;
 
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JRadioButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class UpdateBusReservations extends JPanel {
    /**
     * 
     */
    private static final long serialVersionUID = 1L;
+   private BusReservation currentlyUpdatingBusReservation;
+   private DefaultTableModel newTable;
    private JTextField textField;
    private JTextField textField_1;
    private JTextField textField_2;
@@ -41,19 +50,365 @@ public class UpdateBusReservations extends JPanel {
    private JTextField textField_12;
    private JTextField textField_13;
    private JTextField textField_14;
+   private JLabel label_1;
+   private JLabel label_2;
+   private JLabel label_12;
+   private JLabel label_14;
+   private JLabel label_16;
+   private JLabel label_17;
+   private JLabel lblAdd;
+   private JRadioButton radioButton;
+   private JRadioButton radioButton_1;
+   private JRadioButton radioButton_2;
+   private CustomersArchive customersArchive;
+   private PassengersArchive passengersArchive;
+   private JCheckBox checkBox;
+   private JTable table;
+   private JLabel label_3;
+   private JLabel label_4;
+   private JLabel label_5;
+   private JLabel label_6;
+   private JLabel label_7;
+   private JLabel label_8;
+   private JLabel label_9;
+   private JPanel panel_2;
+   private JLabel label_10;
+   private JComponent label_11;
+   private JLabel label_13;
+   private JLabel label_18;
+   private JScrollPane scrollPane;
+   private JPanel panel_3;
+   private JLabel lblNewBus;
+   private GroupLayout gl_panel_3;
+   private GroupLayout gl_panel;
+   private GroupLayout groupLayout;
+   private GroupLayout gl_panel_1;
+   private JLabel label;
+   private JComponent panel_1;
+   private JComponent panel;
 
    /**
     * Create the panel.
     */
    
-   public void createEventsForNewBusReservationUpdatePanel(){
+   public void createEventsForNewBusReservationUpdatePanel() {
+    
+      Autobus.frame.lblUpdateBusReservation.addMouseListener(new MouseAdapter(){
+         @Override
+         public void mouseReleased(MouseEvent event){
+
+            try {
+               int reservationNumberOfCurrentlyUpdatingReservation = (int) Autobus.frame.tableBusReservations.getValueAt(Autobus.frame.tableBusReservations.getSelectedRow(), 0);
+               for (int i = 0; i < Autobus.frame.reservationsArchive.size(); i++) {
+                  if (Autobus.frame.reservationsArchive.get(i).getReservationNumber() == reservationNumberOfCurrentlyUpdatingReservation) {
+                     currentlyUpdatingBusReservation = (BusReservation) Autobus.frame.reservationsArchive.get(i);
+                  }
+               }
+               
+               // FILLING CUSTOMER INFORMATION
+               textField.setText(currentlyUpdatingBusReservation.getCustomer().getPhonenumber());
+               textField_2.setText(currentlyUpdatingBusReservation.getCustomer().getOrganisationName());
+               textField_1.setText(currentlyUpdatingBusReservation.getCustomer().getOrganisationType());
+               textField_4.setText(currentlyUpdatingBusReservation.getCustomer().getAddress());
+               textField_3.setText(currentlyUpdatingBusReservation.getCustomer().getEmail());
+               textField_5.setText(Integer.toString(currentlyUpdatingBusReservation.getCustomer().getBirthday().getMonth()));
+               textField_6.setText(Integer.toString(currentlyUpdatingBusReservation.getCustomer().getBirthday().getDay()));
+               textField_7.setText(Integer.toString(currentlyUpdatingBusReservation.getCustomer().getBirthday().getYear()));
+               
+               Autobus.frame.hideAllPanels();
+               listPassengers();
+               Autobus.frame.updateBusReservations.setVisible(true);
+            }
+            catch (ArrayIndexOutOfBoundsException e){
+               JOptionPane.showMessageDialog(null, "You should first select the reservation you want to change from the table above!");
+            }
+         }
+      });
       
-      Autobus.frame.lblUpdateBusReservation.addMouseListener(new MouseAdapter() {
+   // SEARCH FOR CUSTOMER BY PHONE NUMBER
+      label_1.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseReleased(MouseEvent arg0) {
+            if (textField.getText().equalsIgnoreCase("")) {
+               JOptionPane.showMessageDialog(null, "You need to fill in the phone number first!");
+            } else {
+               try {
+                  int phone = Integer.parseInt(textField.getText());
+                  if (!(10000000<phone&&phone<=99999999)) {
+                     JOptionPane.showMessageDialog(null, "Phonenumber does not have 8 digits!");
+                  } else {
+                     for (int i =0; i<customersArchive.size();i++){
+                        if (customersArchive.get(i).getPhonenumber().equalsIgnoreCase(textField.getText())){
+                           textField_2.setText(customersArchive.get(i).getOrganisationName());
+                           textField_1.setText(customersArchive.get(i).getName());
+                           textField_4.setText(customersArchive.get(i).getAddress());
+                           textField_3.setText(customersArchive.get(i).getEmail());
+                           textField_5.setText(Integer.toString(customersArchive.get(i).getBirthday().getMonth()));
+                           textField_6.setText(Integer.toString(customersArchive.get(i).getBirthday().getDay()));
+                           textField_7.setText(Integer.toString(customersArchive.get(i).getBirthday().getYear()));
+                           if (customersArchive.get(i).getOrganisationType().equalsIgnoreCase("PRIVATE")) {
+                              radioButton.setSelected(false);
+                              radioButton_2.setSelected(true);
+                              radioButton_1.setSelected(false);
+                           }
+                           if (customersArchive.get(i).getOrganisationType().equalsIgnoreCase("COMPANY")) {
+                              radioButton.setSelected(true);
+                              radioButton_2.setSelected(false);
+                              radioButton_1.setSelected(false);                       
+                                                      }
+                           if (customersArchive.get(i).getOrganisationType().equalsIgnoreCase("SCHOOL")) {
+                              radioButton.setSelected(false);
+                              radioButton_2.setSelected(false);
+                              radioButton_1.setSelected(true);
+                           }
+                           break;
+                        }
+                        if (i==customersArchive.size()-1||customersArchive.size()==0) {
+                           JOptionPane.showMessageDialog(null, "No customer match found!\nPlease fill in new customer.");                          
+                        }
+                        
+                     }
+                  }
+               } catch (Exception e) {
+                  JOptionPane.showMessageDialog(null, "Entered phonenumber does not appear to be digits!");
+               }
+            }
+         }
+      });
+      
+      // CLEAR CUSTOMER INFORMATION
+      label_2.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseReleased(MouseEvent arg0) {
+            textField_2.setText("");
+            textField_1.setText("");
+            textField_4.setText("");
+            textField_3.setText("");
+            textField_5.setText("");
+            textField_6.setText("");
+            textField_7.setText("");
+            textField.setText("");
+            radioButton.setSelected(false);
+            radioButton_2.setSelected(false);
+            radioButton_1.setSelected(false);
+            checkBox.setSelected(false);
+         }
+      });
+      
+      // IS A PASSENGER IN CUSTOMER
+      checkBox.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            String str = new String();
+            int month = 0;
+            int day = 0;
+            int year = 0;
+            Calendar timeNow = Calendar.getInstance();
+            int currentYear = timeNow.get(Calendar.YEAR);
+            try {
+               int phone = Integer.parseInt(textField.getText());
+               if (!(10000000<phone&&phone<=99999999)) {
+                  str+= "\nPhone number does not have 8 digits!";
+               } 
+            } catch (Exception e3) {
+               str+= "\nEntered phone number does not appear to be digits!";
+            }
+            if (textField_2.getText().equalsIgnoreCase("")) {
+               str+= "\nName/organisation cannot be empty!";
+            }
+            if (textField_1.getText().equalsIgnoreCase("")){
+               str+= "\nName/contact cannot be empty!";
+            }
+            if (textField_4.getText().equalsIgnoreCase("")) {
+               str+= "\nAddress cannot be empty!";
+            }
+            if (textField_3.getText().equalsIgnoreCase("")){
+               str+= "\nEmail address cannot be empty!";
+            }
+            if (!(textField_3.getText().contains("@")&&textField_3.getText().contains("."))){
+               str+= "\nEmail address does not appear to be in correct format!";
+            }
+         
+            try {
+               month = Integer.parseInt(textField_5.getText());
+               if (month>12||month<1) str = str + "\nMonth does not seem to be a number between 1-12!";
+            } catch (NumberFormatException e1) {
+               str = str + "\nMonth does not seem to be a number between 1-12!";
+            }
+            try {
+               day = Integer.parseInt(textField_6.getText());
+               if (month==1||month==3||month==5||month==7||month==8||month==10||month==12) {
+                  if (!(1<=day&&day<=31)) {
+                     str = str + "\nDay does not seem to be a number between 1-31!";
+                  }
+               } else if (month==2){
+                  if (!(1<=day&&day<=28)) {
+                     str = str + "\nDay does not seem to be a number between 1-28!";
+                  }
+               } else if (month==4||month==6||month==9||month==11){
+                  if (!(1<=day&&day<=30)) {
+                     str = str + "\nDay does not seem to be a number between 1-30!";
+                  }
+               }
+            } catch (NumberFormatException e1) {
+               str = str + "\nDay does not seem to be a number between 1-31!";
+            }
+            try {
+               year = Integer.parseInt(textField_7.getText());
+               if (year>currentYear||year<currentYear-120) str = str + "\nYear does not appear to be a valid number!";
+            } catch (NumberFormatException e1) {
+               str = str + "\nYear does not appear to be a valid number!";
+            }
+            
+            if (str.equalsIgnoreCase("")) {
+   
+               updatePassengerListNewBus(textField_1.getText(), textField_4.getText(), textField.getText(), textField_3.getText(), (String)(month+"/"+day+"/"+year));
+            } else {
+               JOptionPane.showMessageDialog(null, "You have to fill out the fields correct:\n"+str);
+               checkBox.setSelected(false);
+            }        
+            
+         }
+      });
+   
+      // ADDING NEW PASSENGER IN PASSENGER LIST
+      lblAdd.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseReleased(MouseEvent e) {
-            Autobus.frame.hideAllPanels();
-            Autobus.frame.updateBusReservations.setVisible(true);
+            String str = new String();
+            int month = 0;
+            int day = 0;
+            int year = 0;
+            Calendar timeNow = Calendar.getInstance();
+            int currentYear = timeNow.get(Calendar.YEAR);
+            try {
+               int phone = Integer.parseInt(textField_11.getText());
+               if (!(10000000<phone&&phone<=99999999)) {
+                  str+= "\nPhone number does not have 8 digits!";
+               } 
+            } catch (Exception e3) {
+               str+= "\nEntered phone number does not appear to be digits!";
+            }
+            if (textField_10.getText().equalsIgnoreCase("")){
+               str+= "\nName cannot be empty!";
+            }
+            if (textField_9.getText().equalsIgnoreCase("")) {
+               str+= "\nAddress cannot be empty!";
+            }
+
+            if (!(textField_8.getText().contains("@")&&textField_8.getText().contains("."))){
+               str+= "\nEmail appears to be either empty or incorrect format!";
+            }
+         
+            try {
+               month = Integer.parseInt(textField_12.getText());
+               if (month>12||month<1) str = str + "\nMonth does not seem to be a number between 1-12!";
+            } catch (NumberFormatException e1) {
+               str = str + "\nMonth does not seem to be a number between 1-12!";
+            }
+            try {
+               day = Integer.parseInt(textField_13.getText());
+               if (month==1||month==3||month==5||month==7||month==8||month==10||month==12) {
+                  if (!(1<=day&&day<=31)) {
+                     str = str + "\nDay does not seem to be a number between 1-31!";
+                  }
+               } else if (month==2){
+                  if (!(1<=day&&day<=28)) {
+                     str = str + "\nDay does not seem to be a number between 1-28!";
+                  }
+               } else if (month==4||month==6||month==9||month==11){
+                  if (!(1<=day&&day<=30)) {
+                     str = str + "\nDay does not seem to be a number between 1-30!";
+                  }
+               }
+            } catch (NumberFormatException e1) {
+               str = str + "\nDay does not seem to be a number between 1-31!";
+            }
+            try {
+               year = Integer.parseInt(textField_14.getText());
+               if (year>currentYear||year<currentYear-120) str = str + "\nYear does not appear to be a valid number!";
+            } catch (NumberFormatException e1) {
+               str = str + "\nYear does not appear to be a valid number!";
+            }
             
+            if (str.equalsIgnoreCase("")) {
+               
+               updatePassengerListNewBus(textField_10.getText(), textField_9.getText(), textField_11.getText(), textField_8.getText(), (String)(month+"/"+day+"/"+year));
+            } else {
+               JOptionPane.showMessageDialog(null, "You have to fill out the fields correct:\n"+str);
+            }        
+         }
+      });
+      
+      // CLEAR PASSENGER INFORMATION
+      label_14.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseReleased(MouseEvent e) {
+            textField_11.setText("");
+            textField_10.setText("");
+            textField_9.setText("");
+            textField_8.setText("");
+            textField_12.setText("");
+            textField_13.setText("");
+            textField_14.setText("");
+         }
+      });
+      
+      // SEARCH PASSENGER BY PHONE NUMBER
+      label_12.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseReleased(MouseEvent e) {
+            if (textField_11.getText().equalsIgnoreCase("")) {
+               JOptionPane.showMessageDialog(null, "You need to fill in the phone number first!");
+            } else {
+               try {
+                  int phone = Integer.parseInt(textField_11.getText());
+                  if (!(10000000<phone&&phone<=99999999)) {
+                     JOptionPane.showMessageDialog(null, "Phonenumber does not have 8 digits!");
+                  } else {
+                     for (int i =0; i<passengersArchive.size();i++){
+                        if (passengersArchive.get(i).getPhonenumber().equalsIgnoreCase(textField_11.getText())){
+                           textField_10.setText(passengersArchive.get(i).getName());
+                           textField_9.setText(passengersArchive.get(i).getAddress());
+                           textField_8.setText(passengersArchive.get(i).getEmail());
+                           textField_12.setText(Integer.toString(passengersArchive.get(i).getBirthday().getMonth()));
+                           textField_13.setText(Integer.toString(passengersArchive.get(i).getBirthday().getDay()));
+                           textField_14.setText(Integer.toString(passengersArchive.get(i).getBirthday().getYear()));
+                           break;
+                        } 
+                        if(i==passengersArchive.size()-1||passengersArchive.size()==0) {
+                           JOptionPane.showMessageDialog(null, "No passenger match found!\nPlease fill in new passenger.");                           
+                        }
+                     }
+                  }
+               } catch (Exception e4) {
+                  JOptionPane.showMessageDialog(null, "Entered phonenumber does not appear to be digits!");
+               }
+            }
+         }
+      });
+      
+      // REMOVE SELECTED PASSENGER
+      label_16.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseReleased(MouseEvent e) {
+            newTable = (DefaultTableModel) table.getModel(); 
+            int index = table.getSelectedRow(); 
+            if (index!=-1){
+               if (Autobus.frame.okOrCancel("Are you sure you want to remove this passenger from the list?")==0) {
+                  newTable.removeRow(index);                       
+               }
+            } else {
+               JOptionPane.showMessageDialog(null, "You need first to select the passenger you wish to remove!");
+            }
+         }
+      });
+      
+      // CLEAR ALL PASSENGERS FROM PASSENGERS TABLE
+      label_17.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseReleased(MouseEvent arg0) {
+            newTable.setRowCount(0);
+            checkBox.setSelected(false);
          }
       });
       
@@ -61,14 +416,14 @@ public class UpdateBusReservations extends JPanel {
    
    public UpdateBusReservations() {
       
-      JPanel panel = new JPanel();
+      panel = new JPanel();
       panel.setBackground(new Color(95, 158, 160));
       
-      JPanel panel_1 = new JPanel();
+      panel_1 = new JPanel();
       panel_1.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Customer", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)));
       panel_1.setBackground(new Color(95, 158, 160));
       
-      JLabel label = new JLabel("Phone");
+      label = new JLabel("Phone");
       label.setForeground(Color.WHITE);
       label.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       
@@ -77,37 +432,37 @@ public class UpdateBusReservations extends JPanel {
       textField.setColumns(10);
       textField.setBackground(new Color(95, 158, 160));
       
-      JLabel label_1 = new JLabel("Search");
+      label_1 = new JLabel("Search");
       label_1.setForeground(Color.WHITE);
       label_1.setFont(new Font("Century Gothic", Font.PLAIN, 14));
       label_1.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
       
-      JLabel label_2 = new JLabel("Clear");
+      label_2 = new JLabel("Clear");
       label_2.setForeground(Color.WHITE);
       label_2.setFont(new Font("Century Gothic", Font.PLAIN, 14));
       label_2.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
       
-      JCheckBox checkBox = new JCheckBox("is a passenger");
+      checkBox = new JCheckBox("is a passenger");
       checkBox.setForeground(Color.WHITE);
       checkBox.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       checkBox.setBackground(new Color(95, 158, 160));
       
-      JRadioButton radioButton = new JRadioButton("Company");
+      radioButton = new JRadioButton("Company");
       radioButton.setForeground(Color.WHITE);
       radioButton.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       radioButton.setBackground(new Color(95, 158, 160));
       
-      JRadioButton radioButton_1 = new JRadioButton("School");
+      radioButton_1 = new JRadioButton("School");
       radioButton_1.setForeground(Color.WHITE);
       radioButton_1.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       radioButton_1.setBackground(new Color(95, 158, 160));
       
-      JRadioButton radioButton_2 = new JRadioButton("Private");
+      radioButton_2 = new JRadioButton("Private");
       radioButton_2.setForeground(Color.WHITE);
       radioButton_2.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       radioButton_2.setBackground(new Color(95, 158, 160));
       
-      JLabel label_3 = new JLabel("Name/contact");
+      label_3 = new JLabel("Name/contact");
       label_3.setForeground(Color.WHITE);
       label_3.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       
@@ -118,7 +473,7 @@ public class UpdateBusReservations extends JPanel {
       textField_1.setColumns(10);
       textField_1.setBackground(new Color(95, 158, 160));
       
-      JLabel label_4 = new JLabel("Name/organisation");
+      label_4 = new JLabel("Name/organisation");
       label_4.setForeground(Color.WHITE);
       label_4.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       
@@ -128,7 +483,7 @@ public class UpdateBusReservations extends JPanel {
       textField_2.setColumns(10);
       textField_2.setBackground(new Color(95, 158, 160));
       
-      JLabel label_5 = new JLabel("Email");
+      label_5 = new JLabel("Email");
       label_5.setForeground(Color.WHITE);
       label_5.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       
@@ -138,7 +493,7 @@ public class UpdateBusReservations extends JPanel {
       textField_3.setColumns(10);
       textField_3.setBackground(new Color(95, 158, 160));
       
-      JLabel label_6 = new JLabel("Address");
+      label_6 = new JLabel("Address");
       label_6.setForeground(Color.WHITE);
       label_6.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       
@@ -149,7 +504,7 @@ public class UpdateBusReservations extends JPanel {
       textField_4.setColumns(10);
       textField_4.setBackground(new Color(95, 158, 160));
       
-      JLabel label_7 = new JLabel("Birthday");
+      label_7 = new JLabel("Birthday");
       label_7.setForeground(Color.WHITE);
       label_7.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       
@@ -173,7 +528,7 @@ public class UpdateBusReservations extends JPanel {
       textField_7.setColumns(10);
       textField_7.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "YYYY", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(2, 2, 2, 2)));
       textField_7.setBackground(new Color(95, 158, 160));
-      GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+      gl_panel_1 = new GroupLayout(panel_1);
       gl_panel_1.setHorizontalGroup(
          gl_panel_1.createParallelGroup(Alignment.LEADING)
             .addGroup(gl_panel_1.createSequentialGroup()
@@ -265,15 +620,15 @@ public class UpdateBusReservations extends JPanel {
       );
       panel_1.setLayout(gl_panel_1);
       
-      JPanel panel_2 = new JPanel();
+      panel_2 = new JPanel();
       panel_2.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Add passenger", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), null));
       panel_2.setBackground(new Color(95, 158, 160));
       
-      JLabel label_8 = new JLabel("Address");
+      label_8 = new JLabel("Address");
       label_8.setForeground(Color.WHITE);
       label_8.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       
-      JLabel label_9 = new JLabel("Email");
+      label_9 = new JLabel("Email");
       label_9.setForeground(Color.WHITE);
       label_9.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       
@@ -291,11 +646,11 @@ public class UpdateBusReservations extends JPanel {
       textField_9.setColumns(10);
       textField_9.setBackground(new Color(95, 158, 160));
       
-      JLabel label_10 = new JLabel("Phone");
+      label_10 = new JLabel("Phone");
       label_10.setForeground(Color.WHITE);
       label_10.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       
-      JLabel label_11 = new JLabel("Name");
+      label_11 = new JLabel("Name");
       label_11.setForeground(Color.WHITE);
       label_11.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       
@@ -313,12 +668,12 @@ public class UpdateBusReservations extends JPanel {
       textField_11.setColumns(10);
       textField_11.setBackground(new Color(95, 158, 160));
       
-      JLabel label_12 = new JLabel("Search");
+      label_12 = new JLabel("Search");
       label_12.setForeground(Color.WHITE);
       label_12.setFont(new Font("Century Gothic", Font.PLAIN, 14));
       label_12.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
       
-      JLabel label_13 = new JLabel("Birthday");
+      label_13 = new JLabel("Birthday");
       label_13.setForeground(Color.WHITE);
       label_13.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       
@@ -343,15 +698,15 @@ public class UpdateBusReservations extends JPanel {
       textField_14.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "YYYY", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(2, 2, 2, 2)));
       textField_14.setBackground(new Color(95, 158, 160));
       
-      JLabel label_14 = new JLabel("Clear");
+      label_14 = new JLabel("Clear");
       label_14.setForeground(Color.WHITE);
       label_14.setFont(new Font("Century Gothic", Font.PLAIN, 14));
       label_14.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
       
-      JLabel lblUpdate = new JLabel("Update");
-      lblUpdate.setForeground(Color.WHITE);
-      lblUpdate.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-      lblUpdate.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
+      lblAdd = new JLabel("Add");
+      lblAdd.setForeground(Color.WHITE);
+      lblAdd.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+      lblAdd.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
       GroupLayout gl_panel_2 = new GroupLayout(panel_2);
       gl_panel_2.setHorizontalGroup(
          gl_panel_2.createParallelGroup(Alignment.LEADING)
@@ -393,7 +748,7 @@ public class UpdateBusReservations extends JPanel {
                      .addGap(14)
                      .addComponent(label_14)
                      .addPreferredGap(ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
-                     .addComponent(lblUpdate)))
+                     .addComponent(lblAdd)))
                .addContainerGap())
       );
       gl_panel_2.setVerticalGroup(
@@ -426,36 +781,36 @@ public class UpdateBusReservations extends JPanel {
                .addPreferredGap(ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
                   .addComponent(label_14)
-                  .addComponent(lblUpdate))
+                  .addComponent(lblAdd))
                .addContainerGap())
       );
       panel_2.setLayout(gl_panel_2);
       
-      JLabel label_16 = new JLabel("Remove");
+      label_16 = new JLabel("Remove");
       label_16.setForeground(Color.WHITE);
       label_16.setFont(new Font("Century Gothic", Font.PLAIN, 14));
       label_16.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
       
-      JLabel label_17 = new JLabel("Clear all");
+      label_17 = new JLabel("Clear all");
       label_17.setForeground(Color.WHITE);
       label_17.setFont(new Font("Century Gothic", Font.PLAIN, 14));
       label_17.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
       
-      JLabel label_18 = new JLabel("NEXT >>");
+      label_18 = new JLabel("NEXT >>");
       label_18.setForeground(Color.WHITE);
       label_18.setFont(new Font("Century Gothic", Font.PLAIN, 18));
       
-      JScrollPane scrollPane = new JScrollPane();
+      scrollPane = new JScrollPane();
       scrollPane.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Passenger list", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(3, 3, 3, 3)));
       scrollPane.setBackground(new Color(95, 158, 160));
       
-      JPanel panel_3 = new JPanel();
+      panel_3 = new JPanel();
       panel_3.setBackground(new Color(0, 128, 128));
       
-      JLabel lblNewBus = new JLabel("New Bus & Chauffeur Reservation Update");
+      lblNewBus = new JLabel("New Bus & Chauffeur Reservation Update");
       lblNewBus.setForeground(Color.WHITE);
       lblNewBus.setFont(new Font("Century Gothic", Font.PLAIN, 20));
-      GroupLayout gl_panel_3 = new GroupLayout(panel_3);
+      gl_panel_3 = new GroupLayout(panel_3);
       gl_panel_3.setHorizontalGroup(
          gl_panel_3.createParallelGroup(Alignment.LEADING)
             .addGroup(gl_panel_3.createSequentialGroup()
@@ -470,7 +825,7 @@ public class UpdateBusReservations extends JPanel {
                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
       );
       panel_3.setLayout(gl_panel_3);
-      GroupLayout gl_panel = new GroupLayout(panel);
+      gl_panel = new GroupLayout(panel);
       gl_panel.setHorizontalGroup(
          gl_panel.createParallelGroup(Alignment.LEADING)
             .addGroup(gl_panel.createSequentialGroup()
@@ -511,8 +866,18 @@ public class UpdateBusReservations extends JPanel {
                   .addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE))
                .addContainerGap(415, Short.MAX_VALUE))
       );
+      
+      table = new JTable();
+      table.setModel(new DefaultTableModel(
+         new Object[][] {
+         },
+         new String[] {
+            "Name", "Address", "Phone", "Email", "Birthday"
+         }
+      ));
+      scrollPane.setViewportView(table);
       panel.setLayout(gl_panel);
-      GroupLayout groupLayout = new GroupLayout(this);
+      groupLayout = new GroupLayout(this);
       groupLayout.setHorizontalGroup(
          groupLayout.createParallelGroup(Alignment.LEADING)
             .addComponent(panel, GroupLayout.DEFAULT_SIZE, 1731, Short.MAX_VALUE)
@@ -525,5 +890,32 @@ public class UpdateBusReservations extends JPanel {
       );
       setLayout(groupLayout);
       createEventsForNewBusReservationUpdatePanel();
+   }
+   
+   public void listPassengers(){
+      DefaultTableModel passengersTable = (DefaultTableModel) table.getModel();
+      Autobus.frame.deleteAllRows(passengersTable);
+      Object[] rowData = new Object[5];
+      for (int i = 0; i < currentlyUpdatingBusReservation.getPassengers().size(); i++) {
+         rowData[0] = currentlyUpdatingBusReservation.getPassengers().get(i).getName();
+         rowData[1] = currentlyUpdatingBusReservation.getPassengers().get(i).getAddress();
+         rowData[2] = currentlyUpdatingBusReservation.getPassengers().get(i).getPhonenumber();
+         rowData[3] = currentlyUpdatingBusReservation.getPassengers().get(i).getEmail();
+         rowData[4] = currentlyUpdatingBusReservation.getPassengers().get(i).getBirthday().displayDate();
+         passengersTable.addRow(rowData);
+      }
+   }
+   
+   public void updatePassengerListNewBus(String name, String address, String phone, String email, String birthday){
+      Autobus.frame.newBusPassengersTable = (DefaultTableModel) Autobus.frame.tableNewBusPassengers.getModel();
+      Object[] rowData = new Object[5];      
+      rowData[0] = name;
+      rowData[1] = address;
+      rowData[2] = phone;
+      rowData[3] = email;
+      rowData[4] = birthday;
+      Autobus.frame.newBusPassengersTable.addRow(rowData);
+      Autobus.frame.newBusPassengersTable = (DefaultTableModel) Autobus.frame.tablePassengersInNewTourReservation.getModel();
+      Autobus.frame.newBusPassengersTable.addRow(rowData);
    }
 }

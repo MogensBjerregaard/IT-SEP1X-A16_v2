@@ -321,7 +321,7 @@ public class UpdateTourReservationPanel extends JPanel {
 					Autobus.frame.updateTourReservationPanel.setVisible(true);
 				}
 				catch (ArrayIndexOutOfBoundsException e){
-					JOptionPane.showMessageDialog(null, "You should first select the reservation you want to chage from the table above!");
+					JOptionPane.showMessageDialog(null, "You should first select the reservation you want to change from the table above!");
 				}
 			}
 		});

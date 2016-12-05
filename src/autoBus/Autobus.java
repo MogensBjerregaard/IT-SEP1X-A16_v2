@@ -1206,7 +1206,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		mntmAboutAutobus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane.showMessageDialog(null, "autobus\u00AE\nBus Transportation Management System version 1.0\n\nDeveloped by:\n"+
-			"Mogens Bjerregaard, Nick Onov, Eugene Maloman, and Adam Kounis\n\n\u00A9 2016. All rights reserved.", "About autobut\u00AE", JOptionPane.INFORMATION_MESSAGE, icon);
+			"Mogens Bjerregaard, Nick Onov, Eugene Maloman, and Adam Kounis\n\n\u00A9 2016. All rights reserved.", "About autobus\u00AE", JOptionPane.INFORMATION_MESSAGE, icon);
 			}
 		});
 		
@@ -3750,24 +3750,18 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		tableBusReservations = new JTable();
 		tableBusReservations.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Reservation#", "Date", "Customer", "Passengers", "Chauffeur", "Bus", "Services"
-			}
+		   new Object[][] {
+		   },
+		   new String[] {
+		      "Reservation#", "Date", "Customer", "Passengers", "Chauffeur", "Bus", "Services"
+		   }
 		) {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-			@SuppressWarnings("rawtypes")
-			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, String.class, String.class, String.class, String.class
-			};
-			@SuppressWarnings({ "rawtypes", "unchecked" })
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
+		   Class[] columnTypes = new Class[] {
+		      Integer.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class
+		   };
+		   public Class getColumnClass(int columnIndex) {
+		      return columnTypes[columnIndex];
+		   }
 		});
 		tableBusReservations.setSelectionBackground(new Color(102, 205, 170));
 		tableBusReservations.setForeground(new Color(255, 255, 255));
