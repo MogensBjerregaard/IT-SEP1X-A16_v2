@@ -1,7 +1,8 @@
 package autoBus;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.Date;
 
 public class Tour implements Serializable{
 
@@ -13,6 +14,19 @@ public class Tour implements Serializable{
 		Chauffeur chauffeur;
 		Bus bus;
 		DateInterval dateInterval;
+		java.util.Date[] newDateInterval;
+
+	public java.util.Date[] getNewDateInterval() {
+		return newDateInterval;
+	}
+
+	public Bus getBus() {
+		return bus;
+	}
+
+	public void setNewDateInterval(Date[] newDateInterval) {
+		this.newDateInterval = newDateInterval;
+	}
 
 	public Tour(String destination, ArrayList<String> pickUpPlaces, double pricePerPassenger, Services services, Chauffeur chauffeur, Bus bus, DateInterval dateInterval) {
 		this.destination = destination;

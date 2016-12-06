@@ -69,14 +69,19 @@ public class UpdateTourReservationPanel extends JPanel {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				String str = "";
-				if(tableCustomerInUpdTourRes.getRowCount() == 0)
-					str += "\nYou did not add any passengers to the list!";
 				if(tablePassengersInUpdTourRes.getRowCount() == 0)
 					str += "\nYou did not add any passengers to the list!";
-				if(tableToursInUpdTourRes.getRowCount() == 0)
-					str += "\nYou did not add any passengers to the list!";
+
 				if(str.equals("")){
-					Customer selectedCustomer = Autobus.frame.customersArchive.getListOfCustomers().get(Autobus.frame.customersTableInNewTourReservation.getSelectedRow());
+					Customer selectedCustomer = null;
+					try {
+						 selectedCustomer = Autobus.frame.customersArchive.getListOfCustomers().get(tableCustomerInUpdTourRes.getSelectedRow());
+
+					}
+					catch(ArrayIndexOutOfBoundsException ex){
+						JOptionPane.showMessageDialog(null, "You need first to select one of the Customers!");
+						return;
+					}
 					ArrayList<Passenger> listOfSelectedPassengers= new ArrayList<>();
 					/*try {
 						reservationNumber=reservationNumberGenerator.getReservationNumber();
@@ -90,13 +95,21 @@ public class UpdateTourReservationPanel extends JPanel {
 
 						for (int j = 0; j < Autobus.frame.passengersArchive.size(); j++) {
 							if(Autobus.frame.passengersArchive.getPassengersArchive().get(j).getPhonenumber().equals(passengersPhoneNumber) &&
-									Autobus.frame.passengersArchive.getPassengersArchive().get(j).getName().equals(passengersName)){
+							   Autobus.frame.passengersArchive.getPassengersArchive().get(j).getName().equals(passengersName)){
+									listOfSelectedPassengers.add(Autobus.frame.passengersArchive.getPassengersArchive().get(j));
+									break;
 
-								listOfSelectedPassengers.add(Autobus.frame.passengersArchive.getPassengersArchive().get(j));
 							}
 						}
 					}
-					Tour selectedTour = Autobus.frame.toursArchive.getToursArchive().get(tableToursInUpdTourRes.getSelectedRow());
+					Tour selectedTour = null;
+					try {
+						selectedTour = Autobus.frame.toursArchive.getToursArchive().get(tableToursInUpdTourRes.getSelectedRow());
+					}
+					catch(ArrayIndexOutOfBoundsException ex){
+						JOptionPane.showMessageDialog(null, "You need first to select one of the Tours");
+						return;
+					}
                  /*DO NOT FORGET TO IMPEMENT RESERVATION ID AND DISCOUNT */
 					TourReservation updatedTourReservation =new TourReservation(currentlyUpdatingTourReservation.getReservationNumber(),0,selectedCustomer,selectedTour);
 					updatedTourReservation.setPassengers(listOfSelectedPassengers);
@@ -107,8 +120,10 @@ public class UpdateTourReservationPanel extends JPanel {
 					catch (Exception ex){
 						ex.printStackTrace();
 					}
-					Autobus.frame.updateListTourReservations((TourReservation) Autobus.frame.reservationsArchive.getReservationsArchive().get(Autobus.frame.reservationsArchive.size() -1));
-					JOptionPane.showMessageDialog(null, "A new tour Reservation was successfully created");
+					//Autobus.frame.updateListTourReservations((TourReservation) Autobus.frame.reservationsArchive.getReservationsArchive().get(Autobus.frame.reservationsArchive.size() -1));
+					JOptionPane.showMessageDialog(null, "The changes you have made were saved");
+					Autobus.frame.deleteAllRows((DefaultTableModel) Autobus.frame.tableTourReservations.getModel());
+					Autobus.frame.listTourReservations();
 					Autobus.frame.hideAllPanels();
 					Autobus.frame.panelTourReservations.setVisible(true);
 				}
@@ -321,7 +336,7 @@ public class UpdateTourReservationPanel extends JPanel {
 					Autobus.frame.updateTourReservationPanel.setVisible(true);
 				}
 				catch (ArrayIndexOutOfBoundsException e){
-					JOptionPane.showMessageDialog(null, "You should first select the reservation you want to change from the table above!");
+					JOptionPane.showMessageDialog(null, "You should first select the reservation you want to chage from the table above!");
 				}
 			}
 		});
@@ -441,23 +456,23 @@ public class UpdateTourReservationPanel extends JPanel {
 		JPanel updateTourReservationTopPanel = new JPanel();
 		updateTourReservationTopPanel.setBackground(new Color(0, 128, 128));
 		
-		JLabel label = new JLabel("New Tour reservation");
-		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		JLabel lblUpdateTourReservation = new JLabel("Update Tour Reservation");
+		lblUpdateTourReservation.setForeground(Color.WHITE);
+		lblUpdateTourReservation.setFont(new Font("Century Gothic", Font.PLAIN, 20));
 		GroupLayout gl_updateTourReservationTopPanel = new GroupLayout(updateTourReservationTopPanel);
 		gl_updateTourReservationTopPanel.setHorizontalGroup(
 			gl_updateTourReservationTopPanel.createParallelGroup(Alignment.LEADING)
 				.addGap(0, 1369, Short.MAX_VALUE)
 				.addGroup(gl_updateTourReservationTopPanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(label, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE)
+					.addComponent(lblUpdateTourReservation, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(1117, Short.MAX_VALUE))
 		);
 		gl_updateTourReservationTopPanel.setVerticalGroup(
 			gl_updateTourReservationTopPanel.createParallelGroup(Alignment.LEADING)
 				.addGap(0, 58, Short.MAX_VALUE)
 				.addGroup(gl_updateTourReservationTopPanel.createSequentialGroup()
-					.addComponent(label, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+					.addComponent(lblUpdateTourReservation, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		updateTourReservationTopPanel.setLayout(gl_updateTourReservationTopPanel);
@@ -715,6 +730,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		);
 		
 		 listOfSelectedPassengersInUpdTourRes = new JList<String>();
+		 listOfSelectedPassengersInUpdTourRes.setModel(new DefaultListModel<String>()); 
 		listOfSelectedPassengersInUpdTourRes.setForeground(Color.WHITE);
 		listOfSelectedPassengersInUpdTourRes.setBorder(new TitledBorder(null, "Selected Passengers", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
 		listOfSelectedPassengersInUpdTourRes.setBackground(new Color(51, 153, 153));
@@ -1146,6 +1162,7 @@ public class UpdateTourReservationPanel extends JPanel {
 	public void listCustomers(){
 		DefaultTableModel customersTable = (DefaultTableModel) tableCustomerInUpdTourRes.getModel();
 		Object[] rowData = new Object[7];
+		selectedCustomerInUpdTourRes.setText(currentlyUpdatingTourReservation.getCustomer().getName() + " - " + currentlyUpdatingTourReservation.getCustomer().getPhonenumber());
 		Autobus.frame.deleteAllRows(customersTable);
 		for (int i=0; i<Autobus.frame.customersArchive.size(); i++){
 			rowData[0] = Autobus.frame.customersArchive.get(i).getOrganisationName();
@@ -1178,6 +1195,10 @@ public class UpdateTourReservationPanel extends JPanel {
 	public void listPassengers(){
 		DefaultTableModel passengersTable = (DefaultTableModel) tablePassengersInUpdTourRes.getModel();
 		Autobus.frame.deleteAllRows(passengersTable);
+		DefaultListModel<String> listModel = (DefaultListModel<String>) listOfSelectedPassengersInUpdTourRes.getModel();
+		for (int i = 0; i < currentlyUpdatingTourReservation.getPassengers().size(); i++) {
+			listModel.addElement(currentlyUpdatingTourReservation.getPassengers().get(i).getName() +" - " + currentlyUpdatingTourReservation.getPassengers().get(i).getPhonenumber());
+		}
 		Object[] rowData = new Object[5];
 		for (int i = 0; i < currentlyUpdatingTourReservation.getPassengers().size(); i++) {
 			rowData[0] = currentlyUpdatingTourReservation.getPassengers().get(i).getName();
@@ -1205,6 +1226,7 @@ public class UpdateTourReservationPanel extends JPanel {
 	public void listTours(){
 		DefaultTableModel toursTable = (DefaultTableModel) tableToursInUpdTourRes.getModel();
 		Autobus.frame.deleteAllRows(toursTable);
+		selectedTourInUpdTourRes.setText(currentlyUpdatingTourReservation.getTour().getDestination() + " - " + currentlyUpdatingTourReservation.getTour().getDateIntervalString());
 		Object[] rowData = new Object[7];
 		for (int i=0; i< Autobus.frame.toursArchive.size(); i++){
 			rowData[0] = Autobus.frame.toursArchive.get(i).getDateIntervalString();
