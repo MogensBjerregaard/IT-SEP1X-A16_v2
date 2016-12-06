@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="efc51b11-5fd0-4298-b245-e66866e4d2c7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/autoBus/Tour.java" afterPath="$PROJECT_DIR$/src/autoBus/Tour.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/autoBus/UpdateTourReservationPanel.java" afterPath="$PROJECT_DIR$/src/autoBus/UpdateTourReservationPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/autoBus/UpdateTourPanel.java" afterPath="$PROJECT_DIR$/src/autoBus/UpdateTourPanel.java" />
     </list>
     <ignored path="IT-SEP-A16_project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -166,12 +164,9 @@
       <file leaf-file-name="UpdateTourPanel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/autoBus/UpdateTourPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="48" column="80" selection-start-line="48" selection-start-column="80" selection-end-line="48" selection-end-column="80" />
-              <folding>
-                <element signature="e#1412#1669#0" expanded="true" />
-                <element signature="e#1668#1669#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="418">
+              <caret line="53" column="10" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -249,8 +244,8 @@
         <option value="$PROJECT_DIR$/src/autoBus/ReservationsArchive.java" />
         <option value="$PROJECT_DIR$/src/autoBus/Autobus.java" />
         <option value="$PROJECT_DIR$/src/autoBus/UpdateTourReservationPanel.java" />
-        <option value="$PROJECT_DIR$/src/autoBus/UpdateTourPanel.java" />
         <option value="$PROJECT_DIR$/src/autoBus/Tour.java" />
+        <option value="$PROJECT_DIR$/src/autoBus/UpdateTourPanel.java" />
       </list>
     </option>
   </component>
@@ -1603,12 +1598,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/autoBus/UpdateTourPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="48" column="80" selection-start-line="48" selection-start-column="80" selection-end-line="48" selection-end-column="80" />
-          <folding>
-            <element signature="e#1412#1669#0" expanded="true" />
-            <element signature="e#1668#1669#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="418">
+          <caret line="53" column="10" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>

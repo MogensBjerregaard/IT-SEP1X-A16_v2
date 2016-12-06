@@ -43,7 +43,7 @@ public class UpdateTourPanel extends JPanel {
 	 */
 	
 	public void createEvents(){
-		lblUpdateTourButton.addMouseListener(new MouseAdapter() {
+		/*lblUpdateTourButton.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent event){
 				Autobus.frame.hideAllPanels();
 				listBuses(currentlyUpdatingTour.getDateInterval().getStartDate());
@@ -51,7 +51,7 @@ public class UpdateTourPanel extends JPanel {
 				Autobus.frame.updateTourPanel.setVisible(true);
 			}
 		});
-		
+		*/
 	}
 	
 	public UpdateTourPanel() {
