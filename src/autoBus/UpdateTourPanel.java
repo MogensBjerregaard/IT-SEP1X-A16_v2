@@ -1,27 +1,33 @@
 package autoBus;
 
-import javax.swing.JPanel;
-import javax.swing.GroupLayout;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Color;
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JCheckBox;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTable;
-import javax.swing.JList;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 public class UpdateTourPanel extends JPanel {
+	private final JList<String> list;
+	private final JCheckBox ticketsUpdTour;
+	private final JLabel lblAddNewPickUpButtonUpdTour;
+	private final JLabel lblClearAllPickUpsButtonUpdTour;
+	private final JCheckBox breakfastUpdTour;
+	private final JCheckBox lunchUpdTour;
+	private final JLabel lblSearchButtonUpdTour;
+	private final JCheckBox allInclusiveUpdTour;
+	private final JLabel lblSaveChangesButtonUpdTour;
 	private Tour currentlyUpdatingTour;
 	private JTextField endMonthUpdTour;
 	private JTextField startmonthUpdTour;
@@ -37,21 +43,637 @@ public class UpdateTourPanel extends JPanel {
 	private JTextField startMinuteUpdTour;
 	private JTable tableBusesUpdTour;
 	private JTable tableChauffeursUpdTour;
+	private JLabel lblCancelUpdateTourButton;
 
 	/**
 	 * Create the panel.
 	 */
 	
 	public void createEvents(){
-		/*lblUpdateTourButton.addMouseListener(new MouseAdapter() {
+
+		startmonthUpdTour.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+
+			}
+
+
+		});
+
+		startdayUpdTour.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+
+			}
+
+		});
+
+		startyearUpdTour.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+
+			}
+
+		});
+
+		starthourUpdTour.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+
+			}
+
+		});
+
+		startMinuteUpdTour.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+
+			}
+
+		});
+
+		endMonthUpdTour.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+
+			}
+
+		});
+
+		endDayUpdTour.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+
+			}
+
+		});
+
+		endYearUpdTour.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+
+			}
+
+		});
+
+		endHourUpdTour.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+
+			}
+
+		});
+
+		endMinuteUpdTour.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
+
+			}
+
+		});
+		lblSearchButtonUpdTour.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				String str = new String("");
+				int monthStart = 0;
+				int monthEnd = 0;
+				int dayStart = 0;
+				int dayEnd = 0;
+				int yearStart = 0;
+				int yearEnd = 0;
+				int hourStart =0;
+				int hourEnd =0;
+				int minuteStart =0;
+				int minuteEnd = 0;
+				java.util.Date startDate = null;
+				java.util.Date endDate = null;
+				//int dayCount = -1;
+				//int workHoursPerDay = 8; //for calculating price per passenger (8 hours per day * price per hour = day price)
+				Calendar timeNow = Calendar.getInstance();
+				int currentYear = timeNow.get(Calendar.YEAR);
+				try {
+					monthStart = Integer.parseInt(startmonthUpdTour.getText());
+					if (monthStart>12||monthStart<1) str = str + "\nStart month does not seem to be a number between 1-12!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart month does not seem to be a number between 1-12!";
+				}
+				try {
+					dayStart = Integer.parseInt(startdayUpdTour.getText());
+					if (monthStart==1||monthStart==3||monthStart==5||monthStart==7||monthStart==8||monthStart==10||monthStart==12) {
+						if (!(1<=dayStart&&dayStart<=31)) {
+							str = str + "\nStart day does not seem to be a number between 1-31!";
+						}
+					} else if (monthStart==2){
+						if (!(1<=dayStart&&dayStart<=28)) {
+							str = str + "\nStart day does not seem to be a number between 1-28!";
+						}
+					} else if (monthStart==4||monthStart==6||monthStart==9||monthStart==11){
+						if (!(1<=dayStart&&dayStart<=30)) {
+							str = str + "\nStart day does not seem to be a number between 1-30!";
+						}
+					}
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart day does not seem to be a number between 1-31!";
+				}
+				try {
+					yearStart = Integer.parseInt(startyearUpdTour.getText());
+					if (yearStart<currentYear) str = str + "\nStart year does not appear to be a valid number!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart year does not appear to be a valid number!";
+				}
+
+				try {
+					monthEnd = Integer.parseInt(endMonthUpdTour.getText());
+					if (monthEnd>12||monthEnd<1) str = str + "\nEnd month does not seem to be a number between 1-12!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEndt month does not seem to be a number between 1-12!";
+				}
+				try {
+					dayEnd = Integer.parseInt(endDayUpdTour.getText());
+					if (monthEnd==1||monthEnd==3||monthEnd==5||monthEnd==7||monthEnd==8||monthEnd==10||monthEnd==12) {
+						if (!(1<=dayEnd&&dayEnd<=31)) {
+							str = str + "\nEnd day does not seem to be a number between 1-31!";
+						}
+					} else if (monthEnd==2){
+						if (!(1<=dayEnd&&dayEnd<=28)) {
+							str = str + "\nEnd day does not seem to be a number between 1-28!";
+						}
+					} else if (monthEnd==4||monthEnd==6||monthEnd==9||monthEnd==11){
+						if (!(1<=dayEnd&&dayEnd<=30)) {
+							str = str + "\nEnd day does not seem to be a number between 1-30!";
+						}
+					}
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd day does not seem to be a number between 1-31!";
+				}
+				try {
+					yearEnd = Integer.parseInt(endYearUpdTour.getText());
+					if (yearEnd<currentYear) str = str + "\nEnd year does not appear to be a valid number!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd year does not appear to be a valid number!";
+				}
+				try {
+					hourStart= Integer.parseInt(starthourUpdTour.getText());
+					if (hourStart<0 && hourStart > 23) str = str + "\nStart hour does not appear to be a number between 0-23!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart hour does not appear to be a valid number!";
+				}
+				try {
+					hourEnd= Integer.parseInt(endHourUpdTour.getText());
+					if (hourEnd<0 && hourEnd > 23) str = str + "\nEnd hour does not appear to be a number between 0-23!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd hour does not appear to be a valid number!";
+				}
+				try {
+					minuteStart= Integer.parseInt(startMinuteUpdTour.getText());
+					if (minuteStart<0 && minuteStart > 59) str = str + "\nStart minute does not appear to be a number between 0-59!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart minute does not appear to be a valid number!";
+				}
+				try {
+					minuteEnd= Integer.parseInt(endMinuteUpdTour.getText());
+					if (minuteEnd<0 && minuteEnd> 59) str = str + "\nEnd minute does not appear to be a number between 0-59!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd minute does not appear to be a valid number!";
+				}
+				if(str.equals("")){
+					startDate = Autobus.parseDate(yearStart+"-" + monthStart + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
+					endDate = Autobus.parseDate(yearEnd+"-" + monthEnd + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
+					listBuses(startDate, (int)((endDate.getTime() - startDate.getTime()) / 3600000));
+					listChauffeurs(startDate, (int)((endDate.getTime() - startDate.getTime()) / 3600000));
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Some of the fields were filled incorrectly:" +str);
+				}
+			}
+		});
+
+
+		lblAddNewPickUpButtonUpdTour.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				if (!pickUpTextFieldUpdTour.getText().equalsIgnoreCase("")) {
+					updateListPickUps(pickUpTextFieldUpdTour.getText());
+				}
+			}
+		});
+
+		lblClearAllPickUpsButtonUpdTour.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				int index = list.getSelectedIndex();
+				if (index!=-1){
+					DefaultListModel<String> listModel = (DefaultListModel<String>)list.getModel();
+					listModel.remove(index);
+				} else {
+					JOptionPane.showMessageDialog(null, "You need first to select the row you wish to delete!");
+				}
+			}
+		});
+
+		lblSaveChangesButtonUpdTour.addMouseListener(new MouseAdapter() {
+			public void mouseReleased(MouseEvent event) {
+				String str = new String("");
+				int monthStart = 0;
+				int monthEnd = 0;
+				int dayStart = 0;
+				int dayEnd = 0;
+				int yearStart = 0;
+				int yearEnd = 0;
+				int hourStart =0;
+				int hourEnd =0;
+				int minuteStart =0;
+				int minuteEnd = 0;
+				Date startDate = null;
+				Date endDate = null;
+				java.util.Date javastartDate = null;
+				java.util.Date javaendDate = null;
+				int dayCount = -1;
+				int workHoursPerDay = 8; //for calculating price per passenger (8 hours per day * price per hour = day price)
+				Calendar timeNow = Calendar.getInstance();
+				int currentYear = timeNow.get(Calendar.YEAR);
+				Services services = null;
+				try {
+					services = new Services();
+				} catch (Exception e2) {
+
+					e2.printStackTrace();
+				}
+				if (destinationUpdTour.getText().equalsIgnoreCase("")) {
+					str += "\nDestination cannot be empty!";
+				}
+
+				try {
+					monthStart = Integer.parseInt(startmonthUpdTour.getText());
+					if (monthStart>12||monthStart<1) str = str + "\nStart month does not seem to be a number between 1-12!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart month does not seem to be a number between 1-12!";
+				}
+				try {
+					dayStart = Integer.parseInt(startdayUpdTour.getText());
+					if (monthStart==1||monthStart==3||monthStart==5||monthStart==7||monthStart==8||monthStart==10||monthStart==12) {
+						if (!(1<=dayStart&&dayStart<=31)) {
+							str = str + "\nStart day does not seem to be a number between 1-31!";
+						}
+					} else if (monthStart==2){
+						if (!(1<=dayStart&&dayStart<=28)) {
+							str = str + "\nStart day does not seem to be a number between 1-28!";
+						}
+					} else if (monthStart==4||monthStart==6||monthStart==9||monthStart==11){
+						if (!(1<=dayStart&&dayStart<=30)) {
+							str = str + "\nStart day does not seem to be a number between 1-30!";
+						}
+					}
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart day does not seem to be a number between 1-31!";
+				}
+				try {
+					yearStart = Integer.parseInt(startyearUpdTour.getText());
+					if (yearStart<currentYear) str = str + "\nStart year does not appear to be a valid number!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart year does not appear to be a valid number!";
+				}
+
+				try {
+					monthEnd = Integer.parseInt(endMonthUpdTour.getText());
+					if (monthEnd>12||monthEnd<1) str = str + "\nEnd month does not seem to be a number between 1-12!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEndt month does not seem to be a number between 1-12!";
+				}
+				try {
+					dayEnd = Integer.parseInt(endDayUpdTour.getText());
+					if (monthEnd==1||monthEnd==3||monthEnd==5||monthEnd==7||monthEnd==8||monthEnd==10||monthEnd==12) {
+						if (!(1<=dayEnd&&dayEnd<=31)) {
+							str = str + "\nEnd day does not seem to be a number between 1-31!";
+						}
+					} else if (monthEnd==2){
+						if (!(1<=dayEnd&&dayEnd<=28)) {
+							str = str + "\nEnd day does not seem to be a number between 1-28!";
+						}
+					} else if (monthEnd==4||monthEnd==6||monthEnd==9||monthEnd==11){
+						if (!(1<=dayEnd&&dayEnd<=30)) {
+							str = str + "\nEnd day does not seem to be a number between 1-30!";
+						}
+					}
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd day does not seem to be a number between 1-31!";
+				}
+				try {
+					yearEnd = Integer.parseInt(endYearUpdTour.getText());
+					if (yearEnd<currentYear) str = str + "\nEnd year does not appear to be a valid number!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd year does not appear to be a valid number!";
+				}
+				Bus bus;
+				if (tableBusesUpdTour.getSelectedRow()==-1){
+					bus = currentlyUpdatingTour.getBus();
+				}
+				else{
+					String strBus = (String)tableBusesUpdTour.getModel().getValueAt(tableBusesUpdTour.getSelectedRow(), 0);
+					bus = Autobus.frame.busesArchive.getBusById(strBus);
+				}
+				Chauffeur chauffeur;
+				if (tableChauffeursUpdTour.getSelectedRow()==-1){
+					chauffeur = currentlyUpdatingTour.getChauffeursObject();
+				}
+				else{
+					String strChauffeur =(String)tableChauffeursUpdTour.getModel().getValueAt(tableChauffeursUpdTour.getSelectedRow(), 0);
+					chauffeur = Autobus.frame.chauffeursArchive.getChauffeurById(strChauffeur);
+					
+				}
+
+				if (yearEnd<yearStart){
+					str += "\nEnd year cannont be before start year!";
+				}
+				if (yearStart==yearEnd&&monthEnd<monthStart){
+					str += "\nEnd date must be after start date!";
+				}
+				if (yearStart==yearEnd&&monthStart==monthEnd&&dayStart>dayEnd){
+					str += "\nEnd date must be later than start date!";
+				}
+
+				SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
+				java.util.Date startRentDate = null, endRentDate = null, currentDate = new java.util.Date();
+
+				try {
+					startRentDate = dateformat.parse(dayStart+"/"+monthStart+"/"+yearStart);
+					endRentDate = dateformat.parse(dayEnd+"/"+monthEnd+"/"+yearEnd);
+				} catch (ParseException e) {
+
+					e.printStackTrace();
+				}
+				try {
+					hourStart= Integer.parseInt(starthourUpdTour.getText());
+					if (hourStart<0 && hourStart > 23) str = str + "\nStart hour does not appear to be a number between 0-23!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart hour does not appear to be a valid number!";
+				}
+				try {
+					hourEnd= Integer.parseInt(endHourUpdTour.getText());
+					if (hourEnd<0 && hourEnd > 23) str = str + "\nEnd hour does not appear to be a number between 0-23!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd hour does not appear to be a valid number!";
+				}
+				try {
+					minuteStart= Integer.parseInt(startMinuteUpdTour.getText());
+					if (minuteStart<0 && minuteStart > 59) str = str + "\nStart minute does not appear to be a number between 0-59!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nStart minute does not appear to be a valid number!";
+				}
+				try {
+					minuteEnd= Integer.parseInt(endMinuteUpdTour.getText());
+					if (minuteEnd<0 && minuteEnd> 59) str = str + "\nEnd minute does not appear to be a number between 0-59!";
+				} catch (NumberFormatException e1) {
+					str = str + "\nEnd minute does not appear to be a valid number!";
+				}
+
+				if (str.equals("")) {
+					if (currentDate.equals(startRentDate)&&startRentDate.before(endRentDate)||currentDate.before(startRentDate)&&startRentDate.before(endRentDate)) {
+						dayCount = Autobus.daysBetweenDates(startRentDate, endRentDate);
+
+					}
+					startDate = new Date(monthStart, dayStart, yearStart);
+					endDate = new Date(monthEnd, dayEnd, yearEnd);
+					try {
+						/*!!!!!!*///Autobus.frame.toursArchive.addTour(new Tour(destinationUpdTour.getText()));
+					} catch (Exception e1) {
+
+						e1.printStackTrace();
+					}
+					DefaultListModel<String> listModel = (DefaultListModel<String>) list.getModel();
+					if (listModel.size()==0) {
+						currentlyUpdatingTour.setPickUpPlaces("");
+					}
+					for (int i = 0; i<listModel.size();i++){
+						currentlyUpdatingTour.setPickUpPlaces((String)listModel.getElementAt(i));
+					}
+
+					javastartDate = Autobus.parseDate(yearStart+"-" + monthStart + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
+					javaendDate = Autobus.parseDate(yearEnd+"-" + monthEnd + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
+					Bus oldBus = currentlyUpdatingTour.getBus();
+					for (int i = 0; i < oldBus.getListOfStartEndDates().size(); i++) {
+						if(currentlyUpdatingTour.getNewDateInterval()[0].toString().equals(oldBus.getListOfStartEndDates().get(i)[0].toString())){
+							oldBus.getListOfStartEndDates().remove(i);
+							oldBus.setDatePointer(i);
+							break;
+						}
+					}
+					bus.addNewReservationPeriod(new java.util.Date[]{javastartDate,javaendDate});
+
+					try {
+						Autobus.frame.busesArchive.saveBusesArchive();
+					}
+					catch (Exception e){
+						e.printStackTrace();
+					}
+					currentlyUpdatingTour.setBus(bus);
+					double price = Autobus.round((double)(bus.getPricePerHour()*workHoursPerDay*dayCount)/bus.getMaxNumberOfSeats(),2); //price per passenger rounded to 2 decimals
+					if (allInclusiveUpdTour.isSelected()){
+						price += dayCount*Autobus.frame.priceList.getPriceAllInclusive();
+						services.setAllInclusive(true);
+					}
+					if (breakfastUpdTour.isSelected()){
+						price += dayCount*Autobus.frame.priceList.getPriceBreakfast();
+						services.setBreakfastIncluded(true);
+					}
+					if (lunchUpdTour.isSelected()){
+						price += dayCount*Autobus.frame.priceList.getPriceLunch();
+						services.setLunchIncluded(true);
+					}
+					if (ticketsUpdTour.isSelected()){
+						price += Autobus.frame.priceList.getPriceEntranceTickets();
+						services.setEntranceTickets(true);
+					}
+					currentlyUpdatingTour.setPricePerPassenger(price);
+					currentlyUpdatingTour.setServices(services);
+
+					Chauffeur oldChauffeur = currentlyUpdatingTour.getChauffeursObject();
+					for (int i = 0; i < oldChauffeur.getListOfStartEndDates().size(); i++) {
+						if(currentlyUpdatingTour.getNewDateInterval()[0].toString().equals(oldChauffeur.getListOfStartEndDates().get(i)[0].toString())) {
+							oldChauffeur.getListOfStartEndDates().remove(i);
+							oldChauffeur.setDatePointer(i);
+							break;
+						}
+					}
+					chauffeur.addNewReservationPeriod(new java.util.Date[]{javastartDate,javaendDate});
+
+					try {
+						Autobus.frame.chauffeursArchive.saveChauffeursArchive();
+					}
+					catch (Exception e){
+						e.printStackTrace();
+					}
+					currentlyUpdatingTour.setChauffeur(chauffeur);
+					currentlyUpdatingTour.setDateInterval(new DateInterval(startDate,endDate));
+					currentlyUpdatingTour.setNewDateInterval(new java.util.Date[]{javastartDate, javaendDate});
+					try {
+						Autobus.frame.toursArchive.saveToursArchive();
+					} catch (Exception e) {
+
+						e.printStackTrace();
+					}
+
+					/*updateListTours(startDate.displayDate()+" -\n"+endDate.displayDate(), textFieldDestination.getText(),
+							toursArchive.get(toursArchive.size()-1).getPickUpPlacesString(),
+							toursArchive.get(toursArchive.size()-1).getServicesString(), Double.toString(price),
+							"#"+bus.getVehicleID()+" "+bus.getModelString()+" "+bus.getMaxNumberOfSeats()+" seats", "#"+chauffeur.getEmployeeNumber()+" "+chauffeur.getName());*/
+					Autobus.frame.listTours();
+					Autobus.frame.hideAllPanels();
+					Autobus.frame.panelTours.setVisible(true);
+
+				/*	textFieldDestination.setText("");
+					textFieldStartMonth.setText("");
+					textFieldStartDay.setText("");
+					textFieldStartYear.setText("");
+					textFieldEndMonth.setText("");
+					textFieldEndDay.setText("");
+					textFieldEndYear.setText("");
+					chckbxBreakfast.setSelected(false);
+					chckbxLunch.setSelected(false);
+					chckbxAllInclusive.setSelected(false);
+					chckbxEntranceTickets.setSelected(false);
+					textFieldAddPickup.setText("");
+					pickupsTable = (DefaultTableModel) tablePickups.getModel();
+					pickupsTable.setRowCount(0);
+					tableSelectBus.clearSelection();
+					tableSelectChauffeur.clearSelection();*/
+
+				} else {
+					JOptionPane.showMessageDialog(null, "You have to fill out the fields correct:\n"+str);
+				}
+
+			}
+		 });
+
+		Autobus.frame.lblUpdateTourButton.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent event){
+				currentlyUpdatingTour = Autobus.frame.toursArchive.get(Autobus.frame.tableTours.getSelectedRow());
+				int durationInHours =   (int)((currentlyUpdatingTour.getNewDateInterval()[1].getTime() -
+										currentlyUpdatingTour.getNewDateInterval()[0].getTime()) / 3600000);
+				listBuses(currentlyUpdatingTour.getNewDateInterval()[0], durationInHours);
+				listChauffeurs(currentlyUpdatingTour.getNewDateInterval()[0], durationInHours);
+				listElements();
 				Autobus.frame.hideAllPanels();
-				listBuses(currentlyUpdatingTour.getDateInterval().getStartDate());
-				listChauffeurs();
 				Autobus.frame.updateTourPanel.setVisible(true);
 			}
 		});
-		*/
+
+		lblCancelUpdateTourButton.addMouseListener(new MouseAdapter() {
+			public void mouseReleased(MouseEvent event) {
+				Autobus.frame.hideAllPanels();
+				Autobus.frame.panelTours.setVisible(true);
+			}
+		});
 	}
 	
 	public UpdateTourPanel() {
@@ -160,43 +782,43 @@ public class UpdateTourPanel extends JPanel {
 		
 		JSeparator separator = new JSeparator();
 		
-		JLabel lblSearchButtonUpdTour = new JLabel("Search");
+		 lblSearchButtonUpdTour = new JLabel("Search");
 		lblSearchButtonUpdTour.setForeground(Color.WHITE);
 		lblSearchButtonUpdTour.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblSearchButtonUpdTour.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
 		
-		JLabel lblAddNewTourButtonUpdTour = new JLabel("Save Changes");
-		lblAddNewTourButtonUpdTour.setForeground(Color.WHITE);
-		lblAddNewTourButtonUpdTour.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-		lblAddNewTourButtonUpdTour.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
+		 lblSaveChangesButtonUpdTour = new JLabel("Save Changes");
+		lblSaveChangesButtonUpdTour.setForeground(Color.WHITE);
+		lblSaveChangesButtonUpdTour.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblSaveChangesButtonUpdTour.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
 		
-		JCheckBox allInclusiveUpdTour = new JCheckBox("All inclusive");
+		allInclusiveUpdTour = new JCheckBox("All inclusive");
 		allInclusiveUpdTour.setForeground(Color.WHITE);
 		allInclusiveUpdTour.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		allInclusiveUpdTour.setBackground(new Color(95, 158, 160));
 		
-		JCheckBox lunchUpdTour = new JCheckBox("Lunch");
+		 lunchUpdTour = new JCheckBox("Lunch");
 		lunchUpdTour.setForeground(Color.WHITE);
 		lunchUpdTour.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		lunchUpdTour.setBackground(new Color(95, 158, 160));
 		
-		JCheckBox breakfastUpdTour = new JCheckBox("Breakfast");
+		 breakfastUpdTour = new JCheckBox("Breakfast");
 		breakfastUpdTour.setForeground(Color.WHITE);
 		breakfastUpdTour.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		breakfastUpdTour.setBackground(new Color(95, 158, 160));
 		
-		JLabel lblAddNewPickUpButtonUpdTour = new JLabel("Add");
+		 lblAddNewPickUpButtonUpdTour = new JLabel("Add");
 		lblAddNewPickUpButtonUpdTour.setForeground(Color.WHITE);
 		lblAddNewPickUpButtonUpdTour.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		lblAddNewPickUpButtonUpdTour.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
 		lblAddNewPickUpButtonUpdTour.setBackground(new Color(95, 158, 160));
 		
-		JLabel lblClearAllPickUpsButtonUpdTour = new JLabel("Clear");
+		 lblClearAllPickUpsButtonUpdTour = new JLabel("Clear");
 		lblClearAllPickUpsButtonUpdTour.setForeground(Color.WHITE);
 		lblClearAllPickUpsButtonUpdTour.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		lblClearAllPickUpsButtonUpdTour.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
 		
-		JCheckBox ticketsUpdTour = new JCheckBox("Entrance tickets");
+		ticketsUpdTour = new JCheckBox("Entrance tickets");
 		ticketsUpdTour.setForeground(Color.WHITE);
 		ticketsUpdTour.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		ticketsUpdTour.setBackground(new Color(95, 158, 160));
@@ -250,10 +872,15 @@ public class UpdateTourPanel extends JPanel {
 		startMinuteUpdTour.setColumns(10);
 		startMinuteUpdTour.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "MIN", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)));
 		startMinuteUpdTour.setBackground(new Color(95, 158, 160));
+		
+		lblCancelUpdateTourButton = new JLabel("Cancel");
+		lblCancelUpdateTourButton.setForeground(Color.WHITE);
+		lblCancelUpdateTourButton.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblCancelUpdateTourButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
 		GroupLayout gl_updateTourMainPanel = new GroupLayout(updateTourMainPanel);
 		gl_updateTourMainPanel.setHorizontalGroup(
-			gl_updateTourMainPanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_updateTourMainPanel.createSequentialGroup()
+			gl_updateTourMainPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_updateTourMainPanel.createSequentialGroup()
 					.addGroup(gl_updateTourMainPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_updateTourMainPanel.createSequentialGroup()
 							.addGap(379)
@@ -308,9 +935,11 @@ public class UpdateTourPanel extends JPanel {
 							.addGap(54)
 							.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE)))
 					.addGap(421))
-				.addGroup(gl_updateTourMainPanel.createSequentialGroup()
-					.addContainerGap(1334, Short.MAX_VALUE)
-					.addComponent(lblAddNewTourButtonUpdTour)
+				.addGroup(Alignment.TRAILING, gl_updateTourMainPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblCancelUpdateTourButton)
+					.addPreferredGap(ComponentPlacement.RELATED, 1263, Short.MAX_VALUE)
+					.addComponent(lblSaveChangesButtonUpdTour)
 					.addContainerGap())
 				.addGroup(gl_updateTourMainPanel.createSequentialGroup()
 					.addGap(398)
@@ -357,28 +986,27 @@ public class UpdateTourPanel extends JPanel {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
 					.addGap(24)
-					.addGroup(gl_updateTourMainPanel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_updateTourMainPanel.createSequentialGroup()
-							.addComponent(lblAddNewTourButtonUpdTour)
-							.addPreferredGap(ComponentPlacement.RELATED))
-						.addGroup(gl_updateTourMainPanel.createSequentialGroup()
-							.addComponent(pickUpTextFieldUpdTour, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_updateTourMainPanel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblClearAllPickUpsButtonUpdTour, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblAddNewPickUpButtonUpdTour))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_updateTourMainPanel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(ticketsUpdTour)
-								.addComponent(allInclusiveUpdTour)
-								.addComponent(breakfastUpdTour)
-								.addComponent(lunchUpdTour))
-							.addGap(43)))
+					.addComponent(pickUpTextFieldUpdTour, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_updateTourMainPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblClearAllPickUpsButtonUpdTour, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblAddNewPickUpButtonUpdTour))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_updateTourMainPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(ticketsUpdTour)
+						.addComponent(allInclusiveUpdTour)
+						.addComponent(breakfastUpdTour)
+						.addComponent(lunchUpdTour))
+					.addGap(16)
+					.addGroup(gl_updateTourMainPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblSaveChangesButtonUpdTour)
+						.addComponent(lblCancelUpdateTourButton, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
 					.addGap(13))
 		);
 		
-		JList list = new JList();
+		 list = new JList<String>();
 		scrollPane_2.setViewportView(list);
+		list.setModel(new DefaultListModel<String>());
 		
 		tableChauffeursUpdTour = new JTable();
 		tableChauffeursUpdTour.setModel(new DefaultTableModel(
@@ -474,5 +1102,52 @@ public class UpdateTourPanel extends JPanel {
 				selectChauffeurTable.addRow(rowData);
 			}
 		}
+	}
+
+	public void updateListPickUps(String newPickUp){
+		DefaultListModel<String> listModel = (DefaultListModel<String>) list.getModel();
+		listModel.addElement(newPickUp);
+	}
+
+	public void listElements(){
+		destinationUpdTour.setText(currentlyUpdatingTour.getDestination());
+
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(currentlyUpdatingTour.getNewDateInterval()[0]);
+		int startMonth = cal.get(Calendar.MONTH) + 1;
+		int startDay = cal.get(Calendar.DAY_OF_MONTH);
+		int startYear = cal.get(Calendar.YEAR);
+		int startHour = cal.get(Calendar.HOUR_OF_DAY);
+		int startMinute = cal.get(Calendar.MINUTE);
+
+		cal.setTime(currentlyUpdatingTour.getNewDateInterval()[1]);
+		int endMonth = cal.get(Calendar.MONTH) + 1;
+		int endDay = cal.get(Calendar.DAY_OF_MONTH);
+		int endYear = cal.get(Calendar.YEAR);
+		int endHour = cal.get(Calendar.HOUR_OF_DAY);
+		int endMinute = cal.get(Calendar.MINUTE);
+
+		startmonthUpdTour.setText(String.valueOf(startMonth));
+		startdayUpdTour.setText(String.valueOf(startDay));
+		startyearUpdTour.setText(String.valueOf(startYear));
+		starthourUpdTour.setText(String.valueOf(startHour));
+		startMinuteUpdTour.setText(String.valueOf(startMinute));
+
+		endMonthUpdTour.setText(String.valueOf(endMonth));
+		endDayUpdTour.setText(String.valueOf(endDay));
+		endYearUpdTour.setText(String.valueOf(endYear));
+		endHourUpdTour.setText(String.valueOf(endHour));
+		endMinuteUpdTour.setText(String.valueOf(endMinute));
+
+		DefaultListModel<String> listModel = (DefaultListModel<String>) list.getModel();
+		listModel.removeAllElements();
+		for (int i = 0; i < currentlyUpdatingTour.getPickUpPlaces().size(); i++) {
+			listModel.addElement(currentlyUpdatingTour.getPickUpPlaces().get(i));
+		}
+
+		breakfastUpdTour.setSelected(currentlyUpdatingTour.getServices().isBreakfastIncluded());
+		allInclusiveUpdTour.setSelected(currentlyUpdatingTour.getServices().isAllInclusive());
+		lunchUpdTour.setSelected(currentlyUpdatingTour.getServices().isLunchIncluded());
+		ticketsUpdTour.setSelected(currentlyUpdatingTour.getServices().isEntranceTickets());
 	}
 }

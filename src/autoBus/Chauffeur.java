@@ -41,6 +41,9 @@ public class Chauffeur implements Serializable{
 		return datePointer;
 	}
 
+	public void setDatePointer(int datePointer) {
+		this.datePointer = datePointer;
+	}
 
 	public void addNewReservationPeriod(java.util.Date[] newStartEndDate){
 		listOfStartEndDates.add(datePointer, newStartEndDate);
@@ -50,9 +53,10 @@ public class Chauffeur implements Serializable{
 	}
 
 	public boolean isAvailable(java.util.Date startDate, int durationInHours) {
-		if(this.listOfStartEndDates.isEmpty())
-			return true;
-		
+		if(this.listOfStartEndDates.isEmpty()) {
+				datePointer = 0;
+				return true;
+		}
 			if (startDate.before(listOfStartEndDates.get(0)[0])) {
 				datePointer = 0;
 				return (listOfStartEndDates.get(0)[0].getTime() - startDate.getTime()) / 3600000 > durationInHours + 24;

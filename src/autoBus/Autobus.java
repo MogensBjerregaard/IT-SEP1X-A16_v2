@@ -33,6 +33,7 @@ import java.util.Calendar;
 public class Autobus extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	JPanel updateTourPanel;
 	JPanel updateTourReservationPanel;
 	JMenuItem mntmAboutAutobus;
 	JMenuItem mntmExit;
@@ -266,6 +267,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	JTextField endMinuteInNewBusRes;
 	JLabel lblSearchForAvailableInNewBusRes;
 	 JLabel lblUpdateTourReservation;
+	 JLabel lblUpdateTourButton;
 
 	/**
 	 * Launch the application.
@@ -325,10 +327,6 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		toursArchive = new ToursArchive();
 		if (toursArchive.isFileFound()){
 			toursArchive.loadToursArchive();
-			/*TESTING FEATURE*/ toursArchive.addTour(new Tour("Nowhere", new ArrayList<String>(), 50,new Services(),
-					new Chauffeur("", "", "",0,0,0,"","", true,true),
-					new Bus(1,"",2,""),
-					new DateInterval()));
 			listTours();
 		} else {
 			toursArchive.createFile();
@@ -810,8 +808,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					str = str + "\nEnd minute does not appear to be a valid number!";
 				}
 				if(str.equals("")){
-					startDate = parseDate(yearStart+"-" + (monthStart-1) + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
-					endDate = parseDate(yearEnd+"-" + (monthEnd-1) + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
+					startDate = parseDate(yearStart+"-" + monthStart + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
+					endDate = parseDate(yearEnd+"-" + monthEnd + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
 					listSelectBus(startDate, (int)((endDate.getTime() - startDate.getTime()) / 3600000));
 					listSelectChauffeur(startDate, (int)((endDate.getTime() - startDate.getTime()) / 3600000));
 				}
@@ -1347,8 +1345,6 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				   if (okOrCancel("Are you sure you want to delete this Chauffeur?") == 0) {
 					chauffeursTable.removeRow(index);
 					chauffeursArchive.removeChauffeur(index);
-					selectChauffeurTable = (DefaultTableModel) tableSelectChauffeur.getModel();
-					selectChauffeurTable.removeRow(index);
 					try {
 						chauffeursArchive.saveChauffeursArchive();
 					} catch (Exception e) {
@@ -1510,8 +1506,6 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				if (index!=-1){
 					if (okOrCancel("Are you sure you want to delete this bus?")==0) {
 						busesTable.removeRow(index);
-						selectBusTable = (DefaultTableModel) tableBuses.getModel();
-						selectBusTable.removeRow(index);
 						busesArchive.removeBus(index);
 						try {
 							busesArchive.saveBusesArchive();
@@ -1738,9 +1732,10 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					}
 					String strBus = (String)tableSelectBus.getModel().getValueAt(tableSelectBus.getSelectedRow(), 0);
 					Bus bus = busesArchive.getBusById(strBus);
-					javastartDate = parseDate(yearStart+"-" + (monthStart-1) + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
-					javaendDate = parseDate(yearEnd+"-" + (monthEnd-1) + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
+					javastartDate = parseDate(yearStart+"-" + monthStart + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
+					javaendDate = parseDate(yearEnd+"-" + monthEnd + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
 					bus.addNewReservationPeriod(new java.util.Date[]{javastartDate,javaendDate});
+					toursArchive.get(toursArchive.size()-1).setNewDateInterval(new java.util.Date[]{javastartDate, javaendDate});
 					try {
 						busesArchive.saveBusesArchive();
 					}
@@ -1819,6 +1814,23 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				int index = tableTours.getSelectedRow();
 				if (index!=-1){
 					if (okOrCancel("Are you sure you want to delete this tour?")==0) {
+						Bus bus = toursArchive.get(index).getBus();
+						Chauffeur chauffeur = toursArchive.get(index).getChauffeursObject();
+						for (int i = 0; i < bus.getListOfStartEndDates().size(); i++) {
+							if(toursArchive.get(index).getNewDateInterval()[0].toString().equals(bus.getListOfStartEndDates().get(i)[0].toString())) {
+								bus.getListOfStartEndDates().remove(i);
+								bus.setDatePointer(i);
+								break;
+
+							}
+						}
+						for (int i = 0; i < chauffeur.getListOfStartEndDates().size(); i++) {
+							if(toursArchive.get(index).getNewDateInterval()[0].toString().equals(chauffeur.getListOfStartEndDates().get(i)[0].toString())) {
+								chauffeur.getListOfStartEndDates().remove(i);
+								chauffeur.setDatePointer(i);
+								break;
+							}
+						}
 						toursTable.removeRow(index);
 						toursArchive.removeTour(index);
 						try {
@@ -3259,7 +3271,9 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	
 	public void listTours(){
 		toursTable = (DefaultTableModel) tableTours.getModel();
+		deleteAllRows(toursTable);
 		toursTableInNewTourReservation = (DefaultTableModel) tableToursInNewTourReservation.getModel();
+		deleteAllRows(toursTableInNewTourReservation);
 		Object[] rowData = new Object[7];
 		for (int i=0; i<toursArchive.size(); i++){
 			rowData[0] = toursArchive.get(i).getDateIntervalString();
@@ -4309,6 +4323,11 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblDeleteTourBtn.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
 		lblDeleteTourBtn.setForeground(new Color(255, 255, 255));
 		lblDeleteTourBtn.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		
+		 lblUpdateTourButton = new JLabel("Update Tour");
+		lblUpdateTourButton.setForeground(Color.WHITE);
+		lblUpdateTourButton.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblUpdateTourButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
 		GroupLayout gl_panelTours = new GroupLayout(panelTours);
 		gl_panelTours.setHorizontalGroup(
 			gl_panelTours.createParallelGroup(Alignment.LEADING)
@@ -4324,6 +4343,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							.addComponent(scrollPaneToursArchive, GroupLayout.DEFAULT_SIZE, 829, Short.MAX_VALUE)
 							.addGap(20))
 						.addGroup(gl_panelTours.createSequentialGroup()
+							.addComponent(lblUpdateTourButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+							.addGap(27)
 							.addComponent(lblDeleteTourBtn)
 							.addContainerGap())))
 		);
@@ -4336,7 +4357,9 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							.addGap(18)
 							.addComponent(scrollPaneToursArchive, GroupLayout.PREFERRED_SIZE, 351, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
-							.addComponent(lblDeleteTourBtn))
+							.addGroup(gl_panelTours.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblUpdateTourButton, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblDeleteTourBtn)))
 						.addGroup(gl_panelTours.createSequentialGroup()
 							.addGap(26)
 							.addComponent(panelAddTour, GroupLayout.PREFERRED_SIZE, 680, GroupLayout.PREFERRED_SIZE)))
@@ -6612,6 +6635,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		this.experimentalPanel.setVisible(false);
 		this.updateBusReservations.setVisible(false);
 		this.updateTourReservationPanel.setVisible(false);
+		this.updateTourPanel.setVisible(false);
 	}
 
 	public static java.util.Date parseDate(String date) {
@@ -6648,8 +6672,12 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	public void initExternalComponents() {
 	   this.updateBusReservations = new UpdateBusReservations();
       desktopPane.add(this.updateBusReservations);
+
       this.updateTourReservationPanel = new UpdateTourReservationPanel();
       desktopPane.add(updateTourReservationPanel);
+
+		this.updateTourPanel = new UpdateTourPanel();
+		desktopPane.add(updateTourPanel);
       
 	}
 }

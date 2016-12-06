@@ -35,9 +35,15 @@ public class Bus implements Serializable{
 		this.listOfStartEndDates = new ArrayList<>();
 	}
 
+	public void setDatePointer(int datePointer) {
+		this.datePointer = datePointer;
+	}
+
 	public boolean isAvailable(Date startDate, int durationInHours) {
-			if(this.listOfStartEndDates.isEmpty())
+			if(this.listOfStartEndDates.isEmpty()) {
+				datePointer = 0;
 				return true;
+			}
 			if (startDate.before(listOfStartEndDates.get(0)[0])) {
                 datePointer = 0;
                 return (listOfStartEndDates.get(0)[0].getTime() - startDate.getTime()) / 3600000 > durationInHours + 24;

@@ -36,6 +36,7 @@ public class Tour implements Serializable{
 		this.chauffeur = chauffeur;
 		this.bus = bus;
 		this.dateInterval = dateInterval;
+		this.newDateInterval = new java.util.Date[2];
 	}
 
 	public Tour(String destination) throws Exception{
@@ -58,6 +59,10 @@ public class Tour implements Serializable{
 		
 		public void setChauffeur(Chauffeur chauffeur){
 			this.chauffeur = chauffeur;
+		}
+
+		public Chauffeur getChauffeursObject(){
+			return this.chauffeur;
 		}
 		
 		public String getChauffeur(){
