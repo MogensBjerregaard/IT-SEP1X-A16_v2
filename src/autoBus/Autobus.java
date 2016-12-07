@@ -35,6 +35,7 @@ public class Autobus extends JFrame {
 	private static final long serialVersionUID = 1L;
 	JPanel updateTourPanel;
 	JPanel updateTourReservationPanel;
+	JPanel updateBusReservationsNext;
 	JMenuItem mntmAboutAutobus;
 	JMenuItem mntmExit;
 	ImageIcon icon;
@@ -6636,6 +6637,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		this.updateBusReservations.setVisible(false);
 		this.updateTourReservationPanel.setVisible(false);
 		this.updateTourPanel.setVisible(false);
+		this.updateBusReservationsNext.setVisible(false);
 	}
 
 	public static java.util.Date parseDate(String date) {
@@ -6678,6 +6680,9 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		this.updateTourPanel = new UpdateTourPanel();
 		desktopPane.add(updateTourPanel);
+		
+		this.updateBusReservationsNext = new UpdateBusReservationsNext();
+		desktopPane.add(updateBusReservationsNext);
       
 	}
 }

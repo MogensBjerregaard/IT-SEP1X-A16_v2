@@ -12,6 +12,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 
 import javax.swing.border.TitledBorder;
@@ -33,7 +38,12 @@ public class UpdateBusReservations extends JPanel {
     * 
     */
    private static final long serialVersionUID = 1L;
+   private PriceList priceList;
+   private BusesArchive busesArchive;
+   DefaultTableModel newBusSelectBusTable;
+   DefaultTableModel newBusSelectChauffeurTable;
    private BusReservation currentlyUpdatingBusReservation;
+   
    private DefaultTableModel newTable;
    private JTextField textField;
    private JTextField textField_1;
@@ -391,11 +401,13 @@ public class UpdateBusReservations extends JPanel {
       label_16.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseReleased(MouseEvent e) {
-            newTable = (DefaultTableModel) table.getModel(); 
-            int index = table.getSelectedRow(); 
+            
+            int index = table.getSelectedRow();
+            DefaultTableModel tablePassengersModelInNewBusReservation = (DefaultTableModel) table.getModel();
             if (index!=-1){
-               if (Autobus.frame.okOrCancel("Are you sure you want to remove this passenger from the list?")==0) {
-                  newTable.removeRow(index);                       
+               if (Autobus.okOrCancel("Are you sure you want to remove this passenger from the list?")==0) {
+                  tablePassengersModelInNewBusReservation.removeRow(index);
+                  
                }
             } else {
                JOptionPane.showMessageDialog(null, "You need first to select the passenger you wish to remove!");
@@ -409,6 +421,93 @@ public class UpdateBusReservations extends JPanel {
          public void mouseReleased(MouseEvent arg0) {
             newTable.setRowCount(0);
             checkBox.setSelected(false);
+         }
+      });
+      
+      // >>NEXT BUTTON
+      label_18.addMouseListener(new MouseAdapter() {
+         
+
+         @Override
+         public void mouseReleased(MouseEvent e) {
+            String str = new String();
+            int month = 0;
+            int day = 0;
+            int year = 0;
+            Calendar timeNow = Calendar.getInstance();
+            int currentYear = timeNow.get(Calendar.YEAR);
+            try {
+               int phone = Integer.parseInt(textField.getText());
+               if (!(10000000<phone&&phone<=99999999)) {
+                  str+= "\nCustomer phone number does not have 8 digits!";
+               } 
+            } catch (Exception e3) {
+               str+= "\nEntered customer phone number does not appear to be digits!";
+            }
+            if (textField_2.getText().equalsIgnoreCase("")) {
+               str+= "\nCustomer name/organisation cannot be empty!";
+            }
+            if (textField_1.getText().equalsIgnoreCase("")){
+               str+= "\nCustomer name/contact cannot be empty!";
+            }
+            if (textField_4.getText().equalsIgnoreCase("")) {
+               str+= "\nCustomer address cannot be empty!";
+            }
+            if (textField_3.getText().equalsIgnoreCase("")){
+               str+= "\nCustomer email address cannot be empty!";
+            }
+            if (!(textField_3.getText().contains("@")&&textField_3.getText().contains("."))){
+               str+= "\nCustomer email address does not appear to be in correct format!";
+            }
+         
+            try {
+               month = Integer.parseInt(textField_5.getText());
+               if (month>12||month<1) str = str + "\nCustomer birth month does not seem to be a number between 1-12!";
+            } catch (NumberFormatException e1) {
+               str = str + "\nCustomer birth month does not seem to be a number between 1-12!";
+            }
+            try {
+               day = Integer.parseInt(textField_6.getText());
+               if (month==1||month==3||month==5||month==7||month==8||month==10||month==12) {
+                  if (!(1<=day&&day<=31)) {
+                     str = str + "\nCustomer birth day does not seem to be a number between 1-31!";
+                  }
+               } else if (month==2){
+                  if (!(1<=day&&day<=28)) {
+                     str = str + "\nCustomer birth day does not seem to be a number between 1-28!";
+                  }
+               } else if (month==4||month==6||month==9||month==11){
+                  if (!(1<=day&&day<=30)) {
+                     str = str + "\nCustomer birth day does not seem to be a number between 1-30!";
+                  }
+               }
+            } catch (NumberFormatException e1) {
+               str = str + "\nCustomer birth day does not seem to be a number between 1-31!";
+            }
+            try {
+               year = Integer.parseInt(textField_7.getText());
+               if (year>currentYear-15) str = str + "\nCustomer birth year: Must be at least 15!";
+               if (year<currentYear-120) str = str + "\nCustomer birth year: Cannot be over 120 years old!";
+            } catch (NumberFormatException e1) {
+               str = str + "\nCustomer birth year does not appear to be a valid number!";
+            }
+            
+            if (table.getRowCount()==0){
+               str+= "\nYou did not add any passengers to the list!";
+            }
+            
+            if (str.equalsIgnoreCase("")) {
+               Autobus.frame.hideAllPanels();
+               Autobus.frame.updateBusReservationsNext.setVisible(true);
+               try {
+                  Autobus.frame.reservationNumber = Autobus.frame.reservationNumberGenerator.getReservationNumber();
+               } catch (Exception e1) {
+                  e1.printStackTrace();
+               }
+               updateSummaryNewBus();
+            } else {
+               JOptionPane.showMessageDialog(null, "You have to fill out the fields correct:\n"+str);
+            }                             
          }
       });
       
@@ -918,4 +1017,118 @@ public class UpdateBusReservations extends JPanel {
       Autobus.frame.newBusPassengersTable = (DefaultTableModel) Autobus.frame.tablePassengersInNewTourReservation.getModel();
       Autobus.frame.newBusPassengersTable.addRow(rowData);
    }
+   
+   public void updateSummaryNewBus(){
+      UpdateBusReservationsNext updateBusReservationsNext = new UpdateBusReservationsNext();
+      String str = new String();
+      str+= "Reservation#: "+Autobus.frame.reservationNumber;
+      str+= "\n\nCustomer: "+textField_2.getText()+"\n";
+      if (!radioButton_2.isSelected()) {
+         str+= "Contact name: "+textField_1.getText()+"\n";
+      }
+      str+= textField_4.getText()+"\nPhone: "+textField.getText()+"\n";
+      str+= "\nPassengers: "+table.getRowCount();
+      
+      str+= "\nRent date: ";
+      if (!(updateBusReservationsNext.startDayNext.getText().equalsIgnoreCase("")&&updateBusReservationsNext.startMonthNext.getText().equalsIgnoreCase("")&&updateBusReservationsNext.startYearNext.getText().equalsIgnoreCase("")
+            &&updateBusReservationsNext.endDayNext.getText().equalsIgnoreCase("")&&updateBusReservationsNext.endMonthNext.getText().equalsIgnoreCase("")&&updateBusReservationsNext.endYearNext.getText().equalsIgnoreCase(""))) {
+         str+= updateBusReservationsNext.startMonthNext.getText()+"/"+updateBusReservationsNext.startDayNext.getText()+"/"+updateBusReservationsNext.startYearNext.getText()
+         +" - "+updateBusReservationsNext.endMonthNext.getText()+"/"+updateBusReservationsNext.endDayNext.getText()+"/"+updateBusReservationsNext.endYearNext.getText();
+      }
+      
+      str+= "\nServices: ";
+      if (updateBusReservationsNext.ticketsCheckBoxNext.isSelected()){
+         str+= "Entrance tickets, ";
+      }
+      if (updateBusReservationsNext.allInclusiveCheckBoxNext.isSelected()) {
+         str+= "All inclusive";
+      }
+      if (updateBusReservationsNext.breakfastCheckBoxNext.isSelected()) {
+         str+= "Breakfast";
+      }
+      if (updateBusReservationsNext.breakfastCheckBoxNext.isSelected()&&updateBusReservationsNext.lunchCheckBoxNext.isSelected()) {
+         str+= ", Lunch";
+      } else if (updateBusReservationsNext.lunchCheckBoxNext.isSelected()) {
+         str+= "Lunch";
+      }
+      if (!(updateBusReservationsNext.breakfastCheckBoxNext.isSelected()||updateBusReservationsNext.lunchCheckBoxNext.isSelected()||updateBusReservationsNext.lunchCheckBoxNext.isSelected()||updateBusReservationsNext.ticketsCheckBoxNext.isSelected())){
+         str+= "\nNo services selected";
+      }
+      if (updateBusReservationsNext.tableSelectBusNext.getSelectedRow()!=-1){
+         str+= "\nBus selected:  #"+newBusSelectBusTable.getValueAt(updateBusReservationsNext.tableSelectBusNext.getSelectedRow(), 0)
+         +"  Price/h: "+newBusSelectBusTable.getValueAt(updateBusReservationsNext.tableSelectBusNext.getSelectedRow(), 1)
+         +"  Seats: "+newBusSelectBusTable.getValueAt(updateBusReservationsNext.tableSelectBusNext.getSelectedRow(), 2)
+         +"  Type: "+newBusSelectBusTable.getValueAt(updateBusReservationsNext.tableSelectBusNext.getSelectedRow(), 3);
+      }
+      if (updateBusReservationsNext.tableSelectChauffeurNext.getSelectedRow()!=-1){
+         str+= "\nChauffeur selected: "+newBusSelectChauffeurTable.getValueAt(updateBusReservationsNext.tableSelectChauffeurNext.getSelectedRow(), 1);
+      }
+      if (!(updateBusReservationsNext.startDayNext.getText().equalsIgnoreCase("")||updateBusReservationsNext.startMonthNext.getText().equalsIgnoreCase("")||updateBusReservationsNext.startYearNext.getText().equalsIgnoreCase("")
+            ||updateBusReservationsNext.endDayNext.getText().equalsIgnoreCase("")||updateBusReservationsNext.endMonthNext.getText().equalsIgnoreCase("")||updateBusReservationsNext.endYearNext.getText().equalsIgnoreCase("")
+            ||updateBusReservationsNext.tableSelectBusNext.getSelectedRow()==-1)) {
+         String busSelected = (String)newBusSelectBusTable.getValueAt(updateBusReservationsNext.tableSelectBusNext.getSelectedRow(), 0);
+         double pricePerDay=0;
+         pricePerDay=busesArchive.getBusById(busSelected).getPricePerHour()*8;//price/hour * 8 working hours per day = price/day
+         double totalPrice=0;
+         int numberOfPassengers=table.getRowCount();
+         int monthStart=0;
+         int dayStart =0;
+         int yearStart=0;
+         int monthEnd=0;
+         int dayEnd=0;
+         int yearEnd=0;
+         try {
+            monthStart=Integer.parseInt(updateBusReservationsNext.startMonthNext.getText());
+            dayStart=Integer.parseInt(updateBusReservationsNext.startDayNext.getText());
+            yearStart=Integer.parseInt(updateBusReservationsNext.startYearNext.getText());
+            monthEnd=Integer.parseInt(updateBusReservationsNext.endMonthNext.getText());
+            dayEnd=Integer.parseInt(updateBusReservationsNext.endDayNext.getText());
+            yearEnd=Integer.parseInt(updateBusReservationsNext.endYearNext.getText());
+         } catch (Exception e) {
+         }
+         
+         SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
+         java.util.Date startDate = null, endDate = null, currentDate = new java.util.Date();
+         
+         try {
+            startDate = dateformat.parse(dayStart+"/"+monthStart+"/"+yearStart);
+            endDate = dateformat.parse(dayEnd+"/"+monthEnd+"/"+yearEnd);
+         } catch (ParseException e) {
+
+            e.printStackTrace();
+         }
+         
+         if (currentDate.equals(startDate)&&startDate.before(endDate)||currentDate.before(startDate)&&startDate.before(endDate)) {
+            int daysCount = daysBetweenDates(startDate, endDate);
+            if (updateBusReservationsNext.allInclusiveCheckBoxNext.isSelected()) {
+               pricePerDay+=numberOfPassengers*priceList.getPriceAllInclusive();
+            }
+            if (updateBusReservationsNext.breakfastCheckBoxNext.isSelected()){
+               pricePerDay+=numberOfPassengers*priceList.getPriceBreakfast();
+            }
+            if (updateBusReservationsNext.lunchCheckBoxNext.isSelected()){
+               pricePerDay+=numberOfPassengers*priceList.getPriceLunch();
+            }
+            totalPrice=daysCount*pricePerDay;
+            if (updateBusReservationsNext.ticketsCheckBoxNext.isSelected()) {
+               totalPrice+=priceList.getPriceEntranceTickets();
+            }
+            str+= "\n\nTotal price: "+round(totalPrice, 2) +"\n Total price per passenger: "+round(totalPrice/numberOfPassengers, 2);
+         } else {
+            str+= "\n - unable to calculate total price -\n";
+         }
+         
+      }
+      updateBusReservationsNext.summaryPaneNext.setText(str);
+   }
+   public static int daysBetweenDates(java.util.Date startDate, java.util.Date endDate){
+      long days = ChronoUnit.DAYS.between(startDate.toInstant(), endDate.toInstant());
+      return (int)days;
+   }
+   public static double round(double value, int places) {
+      if (places < 0) throw new IllegalArgumentException();
+      BigDecimal bd = new BigDecimal(value);
+      bd = bd.setScale(places, RoundingMode.HALF_UP);
+      return bd.doubleValue();
+  }
 }
