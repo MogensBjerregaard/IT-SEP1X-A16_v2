@@ -9,14 +9,24 @@ public abstract class Reservation implements Serializable{
 	private int discount;
 	private ArrayList<Passenger> passengers;
 	private Customer customer;
+	private double totalPrice;
 	
 	public Reservation (int reservationNumber, int discount, Customer customer){
 		this.reservationNumber=reservationNumber;
 		this.discount=discount;
 		this.passengers = new ArrayList<>();
 		this.customer = customer;
+		this.totalPrice = 0;
 	}
-	
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
 	public int getReservationNumber() {
 		return reservationNumber;
 	}

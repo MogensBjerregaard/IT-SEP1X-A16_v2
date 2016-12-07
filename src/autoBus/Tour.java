@@ -13,11 +13,33 @@ public class Tour implements Serializable{
 		Services services;
 		Chauffeur chauffeur;
 		Bus bus;
+		private int seatsAvailable;
 		DateInterval dateInterval;
 		java.util.Date[] newDateInterval;
+		private double totalPrice;
 
 	public java.util.Date[] getNewDateInterval() {
 		return newDateInterval;
+	}
+
+	public String getDepartureDate(){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(newDateInterval[0]);
+		String month = String.valueOf(cal.get(Calendar.MONTH) + 1);
+		String day = String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
+		String year = String.valueOf(cal.get(Calendar.YEAR));
+		String hour = String.valueOf(cal.get(Calendar.HOUR_OF_DAY));
+		String minute = String.valueOf(cal.get(Calendar.MINUTE));
+		String startDate = month + "/" + day + "/" + year + "  " + hour + ":" + minute;
+
+		cal.setTime(newDateInterval[1]);
+		month = String.valueOf(cal.get(Calendar.MONTH) + 1);
+		day = String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
+		year = String.valueOf(cal.get(Calendar.YEAR));
+		hour = String.valueOf(cal.get(Calendar.HOUR_OF_DAY));
+		minute = String.valueOf(cal.get(Calendar.MINUTE));
+		String endDate= month + "/" + day + "/" + year + "  " + hour + ":" + minute;
+		return startDate + " - " + endDate;
 	}
 
 	public Bus getBus() {
@@ -26,6 +48,22 @@ public class Tour implements Serializable{
 
 	public void setNewDateInterval(Date[] newDateInterval) {
 		this.newDateInterval = newDateInterval;
+	}
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public int getSeatsAvailable() {
+		return seatsAvailable;
+	}
+
+	public void setSeatsAvailable(int seatsAvailable) {
+		this.seatsAvailable = seatsAvailable;
 	}
 
 	public Tour(String destination, ArrayList<String> pickUpPlaces, double pricePerPassenger, Services services, Chauffeur chauffeur, Bus bus, DateInterval dateInterval) {
@@ -37,6 +75,8 @@ public class Tour implements Serializable{
 		this.bus = bus;
 		this.dateInterval = dateInterval;
 		this.newDateInterval = new java.util.Date[2];
+		this.totalPrice = 0;
+		this.seatsAvailable = this.bus.getMaxNumberOfSeats();
 	}
 
 	public Tour(String destination) throws Exception{
@@ -91,6 +131,10 @@ public class Tour implements Serializable{
 			} else {
 				return null;
 			}
+		}
+
+		public void clearPickUpPlaces(){
+			this.pickUpPlaces.clear();
 		}
 
 		public void setPickUpPlaces(String pickUpPlace) {

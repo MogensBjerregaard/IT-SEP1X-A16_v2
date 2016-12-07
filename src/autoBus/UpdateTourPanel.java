@@ -489,7 +489,6 @@ public class UpdateTourPanel extends JPanel {
 				else{
 					String strChauffeur =(String)tableChauffeursUpdTour.getModel().getValueAt(tableChauffeursUpdTour.getSelectedRow(), 0);
 					chauffeur = Autobus.frame.chauffeursArchive.getChauffeurById(strChauffeur);
-					
 				}
 
 				if (yearEnd<yearStart){
@@ -552,12 +551,15 @@ public class UpdateTourPanel extends JPanel {
 					}
 					DefaultListModel<String> listModel = (DefaultListModel<String>) list.getModel();
 					if (listModel.size()==0) {
+						currentlyUpdatingTour.clearPickUpPlaces();
 						currentlyUpdatingTour.setPickUpPlaces("");
 					}
-					for (int i = 0; i<listModel.size();i++){
-						currentlyUpdatingTour.setPickUpPlaces((String)listModel.getElementAt(i));
+					else {
+						currentlyUpdatingTour.clearPickUpPlaces();
+						for (int i = 0; i < listModel.size(); i++) {
+							currentlyUpdatingTour.setPickUpPlaces((String) listModel.getElementAt(i));
+						}
 					}
-
 					javastartDate = Autobus.parseDate(yearStart+"-" + monthStart + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
 					javaendDate = Autobus.parseDate(yearEnd+"-" + monthEnd + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
 					Bus oldBus = currentlyUpdatingTour.getBus();

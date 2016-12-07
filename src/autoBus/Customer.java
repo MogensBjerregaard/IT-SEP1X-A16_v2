@@ -13,6 +13,7 @@ public class Customer implements Serializable{
 	private String phonenumber;
 	private String organisationType; //PRIVATE, COMPANY, SCHOOL
 	private int discount;
+	private double moneySpent;
 	
 	public Customer(String name, String organisationName, String email, String address, Date birthday, String phonenumber,
 			String organisationType) {
@@ -24,6 +25,15 @@ public class Customer implements Serializable{
 		this.organisationType = organisationType;
 		this.organisationName=organisationName;
 		this.discount=0;
+		this.moneySpent = 0;
+	}
+
+	public double getMoneySpent() {
+		return moneySpent;
+	}
+
+	public void setMoneySpent(double moneySpent) {
+		this.moneySpent = moneySpent;
 	}
 
 	public int getDiscount() {

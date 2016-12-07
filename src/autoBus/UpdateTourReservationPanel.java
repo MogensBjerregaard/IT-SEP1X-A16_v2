@@ -55,9 +55,12 @@ public class UpdateTourReservationPanel extends JPanel {
 	private JTextField passengerDayInUpdTourRes;
 	private JTextField passengerYearInUpdTourRes;
 	private JTextField searchForTourInUpdTourRes;
-	private JTable tableCustomerInUpdTourRes;
-	private JTable tablePassengersInUpdTourRes;
-	private JTable tableToursInUpdTourRes;
+	JTable tableCustomerInUpdTourRes;
+	public JTable tablePassengersInUpdTourRes;
+	JTable tableToursInUpdTourRes;
+	private JTextField pricePerPassengerTextFieldUpdTourRes;
+	private JLabel lblSelectCustomerButtonInUpdTourRes;
+	private JLabel lblSelectTourButtonInUpdTourRes;
 
 	/**
 	 * Create the panel.
@@ -71,17 +74,17 @@ public class UpdateTourReservationPanel extends JPanel {
 				String str = "";
 				if(tablePassengersInUpdTourRes.getRowCount() == 0)
 					str += "\nYou did not add any passengers to the list!";
-
+				if(pricePerPassengerTextFieldUpdTourRes.getText().equals(""))
+					str += "\nYou did not entered Price per passenger";
+				try{
+					Double.parseDouble(pricePerPassengerTextFieldUpdTourRes.getText());
+				}
+				catch(NumberFormatException ex){
+					str+="\nThe price per passenger you have entered does not seems to be a valid number";
+				}
 				if(str.equals("")){
-					Customer selectedCustomer = null;
-					try {
-						 selectedCustomer = Autobus.frame.customersArchive.getListOfCustomers().get(tableCustomerInUpdTourRes.getSelectedRow());
 
-					}
-					catch(ArrayIndexOutOfBoundsException ex){
-						JOptionPane.showMessageDialog(null, "You need first to select one of the Customers!");
-						return;
-					}
+
 					ArrayList<Passenger> listOfSelectedPassengers= new ArrayList<>();
 					/*try {
 						reservationNumber=reservationNumberGenerator.getReservationNumber();
@@ -111,11 +114,36 @@ public class UpdateTourReservationPanel extends JPanel {
 						return;
 					}
                  /*DO NOT FORGET TO IMPEMENT RESERVATION ID AND DISCOUNT */
-					TourReservation updatedTourReservation =new TourReservation(currentlyUpdatingTourReservation.getReservationNumber(),0,selectedCustomer,selectedTour);
+					TourReservation updatedTourReservation =new TourReservation(currentlyUpdatingTourReservation.getReservationNumber(),0,null,selectedTour);
+
 					updatedTourReservation.setPassengers(listOfSelectedPassengers);
+					int countOfNewPassengers = 0;
+					for (int i = 0; i < listOfSelectedPassengers.size(); i++) {
+						if(listOfSelectedPassengers.get(i).getName().equals(currentlyUpdatingTourReservation.getPassengers().get(i).getName()) &&
+						   listOfSelectedPassengers.get(i).getPhonenumber().equals(currentlyUpdatingTourReservation.getPassengers().get(i).getPhonenumber())){
+							 countOfNewPassengers++;
+						}
+					}
+					updatedTourReservation.getTour().setSeatsAvailable(currentlyUpdatingTourReservation.getTour().getSeatsAvailable() - countOfNewPassengers);
+					Customer selectedCustomer;
+;					try {
+						selectedCustomer = Autobus.frame.customersArchive.getListOfCustomers().get(tableCustomerInUpdTourRes.getSelectedRow());
+					}
+					catch(ArrayIndexOutOfBoundsException ex){
+						JOptionPane.showMessageDialog(null, "You need first to select one of the Customers!");
+						return;
+					}
+					selectedCustomer.setMoneySpent(selectedCustomer.getMoneySpent() + (listOfSelectedPassengers.size() - currentlyUpdatingTourReservation.getPassengers().size())
+							* Double.parseDouble(pricePerPassengerTextFieldUpdTourRes.getText()));
+					updatedTourReservation.setCustomer(selectedCustomer);
+					updatedTourReservation.setTotalPrice(listOfSelectedPassengers.size() * Double.parseDouble(pricePerPassengerTextFieldUpdTourRes.getText()));
+					updatedTourReservation.getTour().setTotalPrice(currentlyUpdatingTourReservation.getTour().getTotalPrice() + (listOfSelectedPassengers.size() - currentlyUpdatingTourReservation.getPassengers().size())
+							* Double.parseDouble(pricePerPassengerTextFieldUpdTourRes.getText()));
 					Autobus.frame.reservationsArchive.getReservationsArchive().set(Autobus.frame.reservationsArchive.getIndexOfReservation(currentlyUpdatingTourReservation),updatedTourReservation);
 					try {
 						Autobus.frame.reservationsArchive.saveReservationsArchive();
+						Autobus.frame.toursArchive.saveToursArchive();
+						Autobus.frame.customersArchive.saveCustomersArchive();
 					}
 					catch (Exception ex){
 						ex.printStackTrace();
@@ -123,6 +151,8 @@ public class UpdateTourReservationPanel extends JPanel {
 					//Autobus.frame.updateListTourReservations((TourReservation) Autobus.frame.reservationsArchive.getReservationsArchive().get(Autobus.frame.reservationsArchive.size() -1));
 					JOptionPane.showMessageDialog(null, "The changes you have made were saved");
 					Autobus.frame.deleteAllRows((DefaultTableModel) Autobus.frame.tableTourReservations.getModel());
+					Autobus.frame.listCustomers();
+					Autobus.frame.listTours();
 					Autobus.frame.listTourReservations();
 					Autobus.frame.hideAllPanels();
 					Autobus.frame.panelTourReservations.setVisible(true);
@@ -145,20 +175,20 @@ public class UpdateTourReservationPanel extends JPanel {
 
 		});
 
-		tableToursInUpdTourRes.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+		lblSelectCustomerButtonInUpdTourRes.addMouseListener(new MouseAdapter() {
 			@Override
-			public void valueChanged(ListSelectionEvent event) {
-				int index = tableToursInUpdTourRes.getSelectedRow();
-				selectedTourInUpdTourRes.setText(Autobus.frame.toursArchive.getToursArchive().get(index).getDestination()
-						+ " " + Autobus.frame.toursArchive.getToursArchive().get(index).getDateInterval().getStartDate().displayDate());
+			public void mouseReleased(MouseEvent arg0) {
+				int index = tableCustomerInUpdTourRes.getSelectedRow();
+				selectedCustomerInUpdTourRes.setText(Autobus.frame.customersArchive.getListOfCustomers().get(index).getName());
 			}
 		});
 
-		tableCustomerInUpdTourRes.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+		lblSelectTourButtonInUpdTourRes.addMouseListener(new MouseAdapter() {
 			@Override
-			public void valueChanged(ListSelectionEvent event) {
-				int index = tableCustomerInUpdTourRes.getSelectedRow();
-				selectedCustomerInUpdTourRes.setText(Autobus.frame.customersArchive.getListOfCustomers().get(index).getName());
+			public void mouseReleased(MouseEvent arg0) {
+				int index = tablePassengersInUpdTourRes.getSelectedRow();
+				selectedTourInUpdTourRes.setText(Autobus.frame.toursArchive.getToursArchive().get(index).getDestination()
+						+ " " + Autobus.frame.toursArchive.getToursArchive().get(index).getDateInterval().getStartDate().displayDate());
 			}
 		});
 
@@ -760,19 +790,23 @@ public class UpdateTourReservationPanel extends JPanel {
 							.addGap(18)
 							.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 642, Short.MAX_VALUE)
 							.addGap(18)
-							.addComponent(summaryInUpdTourResPanel, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(summaryInUpdTourResPanel, GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)))
 					.addGap(64))
 		);
 		gl_updateTourReservationInnerPanel.setVerticalGroup(
 			gl_updateTourReservationInnerPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_updateTourReservationInnerPanel.createSequentialGroup()
 					.addComponent(updateTourReservationTopPanel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_updateTourReservationInnerPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_updateTourReservationInnerPanel.createParallelGroup(Alignment.LEADING)
-							.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 439, GroupLayout.PREFERRED_SIZE)
-							.addComponent(addNewCustomerInUpdateTourResPanel, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 430, GroupLayout.PREFERRED_SIZE))
-						.addComponent(summaryInUpdTourResPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_updateTourReservationInnerPanel.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_updateTourReservationInnerPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 439, GroupLayout.PREFERRED_SIZE)
+								.addComponent(addNewCustomerInUpdateTourResPanel, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 430, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_updateTourReservationInnerPanel.createSequentialGroup()
+							.addGap(29)
+							.addComponent(summaryInUpdTourResPanel, GroupLayout.PREFERRED_SIZE, 419, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_updateTourReservationInnerPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_updateTourReservationInnerPanel.createSequentialGroup()
 							.addGap(33)
@@ -800,10 +834,14 @@ public class UpdateTourReservationPanel extends JPanel {
 		
 		searchCustomerTextFieldInUpdTourRes = new JTextField();
 		searchCustomerTextFieldInUpdTourRes.setToolTipText("enter customer's name here");
+		
+		lblSelectCustomerButtonInUpdTourRes = new JLabel("Select");
+		lblSelectCustomerButtonInUpdTourRes.setForeground(Color.WHITE);
+		lblSelectCustomerButtonInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblSelectCustomerButtonInUpdTourRes.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
 		GroupLayout gl_selectCustomerInUpdTourResPanel = new GroupLayout(selectCustomerInUpdTourResPanel);
 		gl_selectCustomerInUpdTourResPanel.setHorizontalGroup(
 			gl_selectCustomerInUpdTourResPanel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 637, Short.MAX_VALUE)
 				.addGroup(gl_selectCustomerInUpdTourResPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_selectCustomerInUpdTourResPanel.createParallelGroup(Alignment.LEADING)
@@ -811,12 +849,12 @@ public class UpdateTourReservationPanel extends JPanel {
 						.addGroup(gl_selectCustomerInUpdTourResPanel.createSequentialGroup()
 							.addComponent(label_13, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(searchCustomerTextFieldInUpdTourRes, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(searchCustomerTextFieldInUpdTourRes, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblSelectCustomerButtonInUpdTourRes, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		gl_selectCustomerInUpdTourResPanel.setVerticalGroup(
 			gl_selectCustomerInUpdTourResPanel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 409, Short.MAX_VALUE)
 				.addGroup(gl_selectCustomerInUpdTourResPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_selectCustomerInUpdTourResPanel.createParallelGroup(Alignment.BASELINE)
@@ -824,7 +862,9 @@ public class UpdateTourReservationPanel extends JPanel {
 						.addComponent(label_13, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
 					.addGap(27)
 					.addComponent(customerScrollPaneInUpdTourRes, GroupLayout.PREFERRED_SIZE, 236, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(110, Short.MAX_VALUE))
+					.addGap(18)
+					.addComponent(lblSelectCustomerButtonInUpdTourRes, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(61, Short.MAX_VALUE))
 		);
 		
 		tableCustomerInUpdTourRes = new JTable();
@@ -832,7 +872,7 @@ public class UpdateTourReservationPanel extends JPanel {
 			new Object[][] {
 			},
 			new String[] {
-				"Type", "Organisation", "Name", "Address", "Phone", "Email", "Birthday", "# of Reservations"
+				"Type", "Organisation", "Name", "Address", "Phone", "Email", "Birthday", "Money Spent"
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
@@ -1031,10 +1071,16 @@ public class UpdateTourReservationPanel extends JPanel {
 		lblClearAllPassengersButtonInUpdTourRes.setForeground(Color.WHITE);
 		lblClearAllPassengersButtonInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblClearAllPassengersButtonInUpdTourRes.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
+		
+		pricePerPassengerTextFieldUpdTourRes = new JTextField();
+		pricePerPassengerTextFieldUpdTourRes.setForeground(Color.WHITE);
+		pricePerPassengerTextFieldUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		pricePerPassengerTextFieldUpdTourRes.setColumns(10);
+		pricePerPassengerTextFieldUpdTourRes.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "Price per Passenger", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(2, 2, 2, 2)));
+		pricePerPassengerTextFieldUpdTourRes.setBackground(new Color(0, 153, 153));
 		GroupLayout gl_selectPassengersInUpdTourRes = new GroupLayout(selectPassengersInUpdTourRes);
 		gl_selectPassengersInUpdTourRes.setHorizontalGroup(
 			gl_selectPassengersInUpdTourRes.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 637, Short.MAX_VALUE)
 				.addGroup(gl_selectPassengersInUpdTourRes.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(addNewPassengerInUpdTourResPanel, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
@@ -1044,21 +1090,23 @@ public class UpdateTourReservationPanel extends JPanel {
 						.addGroup(gl_selectPassengersInUpdTourRes.createSequentialGroup()
 							.addComponent(lblRemovePassengerButtonInUpdTourRes, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
-							.addComponent(lblClearAllPassengersButtonInUpdTourRes, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(lblClearAllPassengersButtonInUpdTourRes, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(pricePerPassengerTextFieldUpdTourRes, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_selectPassengersInUpdTourRes.setVerticalGroup(
 			gl_selectPassengersInUpdTourRes.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 409, Short.MAX_VALUE)
 				.addGroup(gl_selectPassengersInUpdTourRes.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_selectPassengersInUpdTourRes.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_selectPassengersInUpdTourRes.createSequentialGroup()
 							.addComponent(selectPassengersInUpdTourResScrollPane, GroupLayout.PREFERRED_SIZE, 335, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addGroup(gl_selectPassengersInUpdTourRes.createParallelGroup(Alignment.TRAILING)
 								.addComponent(lblRemovePassengerButtonInUpdTourRes, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblClearAllPassengersButtonInUpdTourRes, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(lblClearAllPassengersButtonInUpdTourRes, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+								.addComponent(pricePerPassengerTextFieldUpdTourRes, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)))
 						.addComponent(addNewPassengerInUpdTourResPanel, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
@@ -1083,7 +1131,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		
 		JPanel selectTourInUpdTourResPanel = new JPanel();
 		selectTourInUpdTourResPanel.setBackground(new Color(0, 153, 153));
-		tabbedPane.addTab("New tab", null, selectTourInUpdTourResPanel, null);
+		tabbedPane.addTab("Select Tour", null, selectTourInUpdTourResPanel, null);
 		tabbedPane.setForegroundAt(2, new Color(0, 153, 102));
 		
 		JScrollPane selectTourInUpdTourResScrollPane = new JScrollPane();
@@ -1099,10 +1147,14 @@ public class UpdateTourReservationPanel extends JPanel {
 		searchForTourInUpdTourRes.setToolTipText("enter Tour's destination here");
 		searchForTourInUpdTourRes.setColumns(10);
 		searchForTourInUpdTourRes.setBorder(new LineBorder(new Color(171, 173, 179), 2));
+		
+		lblSelectTourButtonInUpdTourRes = new JLabel("Select");
+		lblSelectTourButtonInUpdTourRes.setForeground(Color.WHITE);
+		lblSelectTourButtonInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblSelectTourButtonInUpdTourRes.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
 		GroupLayout gl_selectTourInUpdTourResPanel = new GroupLayout(selectTourInUpdTourResPanel);
 		gl_selectTourInUpdTourResPanel.setHorizontalGroup(
 			gl_selectTourInUpdTourResPanel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 637, Short.MAX_VALUE)
 				.addGroup(gl_selectTourInUpdTourResPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_selectTourInUpdTourResPanel.createParallelGroup(Alignment.LEADING)
@@ -1110,12 +1162,12 @@ public class UpdateTourReservationPanel extends JPanel {
 						.addGroup(gl_selectTourInUpdTourResPanel.createSequentialGroup()
 							.addComponent(label_24)
 							.addGap(18)
-							.addComponent(searchForTourInUpdTourRes, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(searchForTourInUpdTourRes, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblSelectTourButtonInUpdTourRes, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		gl_selectTourInUpdTourResPanel.setVerticalGroup(
 			gl_selectTourInUpdTourResPanel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 409, Short.MAX_VALUE)
 				.addGroup(gl_selectTourInUpdTourResPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_selectTourInUpdTourResPanel.createParallelGroup(Alignment.LEADING)
@@ -1123,7 +1175,9 @@ public class UpdateTourReservationPanel extends JPanel {
 						.addComponent(searchForTourInUpdTourRes, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addComponent(selectTourInUpdTourResScrollPane, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(111, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblSelectTourButtonInUpdTourRes, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(67, Short.MAX_VALUE))
 		);
 		
 		tableToursInUpdTourRes = new JTable();
@@ -1131,7 +1185,7 @@ public class UpdateTourReservationPanel extends JPanel {
 			new Object[][] {
 			},
 			new String[] {
-				"Date", "Destination", "Pick Ups", "Services", "Price", "Bus", "Chauffeur"
+				"Date", "Destination", "Pick Ups", "Seats Available", "Price", "Bus", "Chauffeur"
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
@@ -1161,7 +1215,7 @@ public class UpdateTourReservationPanel extends JPanel {
 	
 	public void listCustomers(){
 		DefaultTableModel customersTable = (DefaultTableModel) tableCustomerInUpdTourRes.getModel();
-		Object[] rowData = new Object[7];
+		Object[] rowData = new Object[8];
 		selectedCustomerInUpdTourRes.setText(currentlyUpdatingTourReservation.getCustomer().getName() + " - " + currentlyUpdatingTourReservation.getCustomer().getPhonenumber());
 		Autobus.frame.deleteAllRows(customersTable);
 		for (int i=0; i<Autobus.frame.customersArchive.size(); i++){
@@ -1172,6 +1226,8 @@ public class UpdateTourReservationPanel extends JPanel {
 			rowData[4] = Autobus.frame.customersArchive.get(i).getAddress();
 			rowData[5] = Autobus.frame.customersArchive.get(i).getEmail();
 			rowData[6] = Autobus.frame.customersArchive.get(i).getBirthday().displayDate();
+			rowData[7] = Autobus.frame.customersArchive.get(i).getMoneySpent();
+
 			customersTable.addRow(rowData);			
 		}
 	}
@@ -1179,7 +1235,7 @@ public class UpdateTourReservationPanel extends JPanel {
 	public void updateListCustomers(){
 		DefaultTableModel customersTable = (DefaultTableModel) tableCustomerInUpdTourRes.getModel();
 		Customer lastCustomer = Autobus.frame.customersArchive.get(Autobus.frame.customersArchive.size() -1);
-		Object[] rowData = new Object[7];
+		Object[] rowData = new Object[8];
 		Autobus.frame.deleteAllRows(customersTable);
 			rowData[0] = lastCustomer.getOrganisationName();
 			rowData[1] = lastCustomer.getOrganisationType();
@@ -1188,6 +1244,7 @@ public class UpdateTourReservationPanel extends JPanel {
 			rowData[4] = lastCustomer.getAddress();
 			rowData[5] = lastCustomer.getEmail();
 			rowData[6] = lastCustomer.getBirthday().displayDate();
+			rowData[7] = lastCustomer.getMoneySpent();
 			customersTable.addRow(rowData);
 	}
 
