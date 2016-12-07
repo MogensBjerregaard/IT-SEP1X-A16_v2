@@ -1361,15 +1361,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			}
 		});
 
-			@Override
-			public void valueChanged(ListSelectionEvent event) {
-				int index = tableToursInNewTourReservation.getSelectedRow();
-					lblSelectedTour.setText(toursArchive.getToursArchive().get(index).getDestination()
-					+ " " + toursArchive.getToursArchive().get(index).getDateInterval().getStartDate().displayDate());
-				}
-			});
-
-		customersTableInNewTourReservation.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+		lblSelectCustomerButtonInNewTourRes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				int index = customersTableInNewTourReservation.getSelectedRow();
@@ -5084,6 +5076,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		customerPhone.setColumns(10);
 		customerPhone.setBackground(new Color(95, 158, 160));
 		
+		 lblClearButtonCustomer = new JLabel("Cancel");
 		lblClearButtonCustomer.setForeground(Color.WHITE);
 		lblClearButtonCustomer.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblClearButtonCustomer.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
@@ -5277,10 +5270,17 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				.addGroup(gl_panelCustomers.createSequentialGroup()
 					.addGroup(gl_panelCustomers.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panelCustomers.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(scrollPaneCustomers, GroupLayout.DEFAULT_SIZE, 958, Short.MAX_VALUE)
+							.addGap(8)
+							.addComponent(addNewCustomerPanel, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_panelCustomers.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPaneCustomers, GroupLayout.DEFAULT_SIZE, 1009, Short.MAX_VALUE)
+								.addGroup(gl_panelCustomers.createSequentialGroup()
+									.addComponent(lblUpdateCustomerButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 887, Short.MAX_VALUE)
+									.addComponent(lblDeleteCustomerPanel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)))
 							.addGap(30))
-						.addComponent(panelTopCustomers, GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE))
+						.addComponent(panelTopCustomers, GroupLayout.DEFAULT_SIZE, 1369, Short.MAX_VALUE))
 					.addGap(0))
 		);
 		gl_panelCustomers.setVerticalGroup(
@@ -5288,8 +5288,17 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				.addGroup(gl_panelCustomers.createSequentialGroup()
 					.addComponent(panelTopCustomers, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addComponent(scrollPaneCustomers, GroupLayout.PREFERRED_SIZE, 303, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(115, Short.MAX_VALUE))
+					.addGroup(gl_panelCustomers.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelCustomers.createSequentialGroup()
+							.addComponent(scrollPaneCustomers, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGroup(gl_panelCustomers.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblUpdateCustomerButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblDeleteCustomerPanel, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
+							.addContainerGap(375, Short.MAX_VALUE))
+						.addGroup(gl_panelCustomers.createSequentialGroup()
+							.addComponent(addNewCustomerPanel, GroupLayout.PREFERRED_SIZE, 422, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
 		);
 		
 		tableCustomers = new JTable();
@@ -5302,9 +5311,14 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			new Object[][] {
 			},
 			new String[] {
+				"Organisation name", "Type", "Phone", "Name", "Address", "E-mail", "Birthday", "Money Spent"
 			}
 		) {
+			boolean[] columnEditables = new boolean[] {
+				true, true, true, true, true, true, true, false
 			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
 			}
 		});
 		scrollPaneCustomers.setViewportView(tableCustomers);
@@ -5341,12 +5355,191 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		scrollPanePassengers = new JScrollPane();
 		scrollPanePassengers.setBackground(new Color(95, 158, 160));
 		scrollPanePassengers.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Passengers archive", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(3, 3, 3, 3)));
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Add New Passenger", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), null));
+		panel_1.setBackground(new Color(95, 158, 160));
+		
+		 lblClearPassengerButton = new JLabel("Cancel");
+		lblClearPassengerButton.setForeground(Color.WHITE);
+		lblClearPassengerButton.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblClearPassengerButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
+		
+		 lblAddNewPassengerButton = new JLabel("Save Changes");
+		lblAddNewPassengerButton.setForeground(Color.WHITE);
+		lblAddNewPassengerButton.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblAddNewPassengerButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
+		
+		JLabel label_10 = new JLabel("Address");
+		label_10.setForeground(Color.WHITE);
+		label_10.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		
+		JLabel label_17 = new JLabel("Email");
+		label_17.setForeground(Color.WHITE);
+		label_17.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		
+		passengerEmail = new JTextField();
+		passengerEmail.setSelectionColor(new Color(102, 205, 170));
+		passengerEmail.setForeground(Color.WHITE);
+		passengerEmail.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		passengerEmail.setColumns(10);
+		passengerEmail.setBackground(new Color(95, 158, 160));
+		
+		passengerAddress = new JTextField();
+		passengerAddress.setSelectionColor(new Color(102, 205, 170));
+		passengerAddress.setForeground(Color.WHITE);
+		passengerAddress.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		passengerAddress.setColumns(10);
+		passengerAddress.setBackground(new Color(95, 158, 160));
+		
+		JLabel label_18 = new JLabel("Phone");
+		label_18.setForeground(Color.WHITE);
+		label_18.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		
+		JLabel label_20 = new JLabel("Name");
+		label_20.setForeground(Color.WHITE);
+		label_20.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		
+		passengerPhone = new JTextField();
+		passengerPhone.setSelectionColor(new Color(102, 205, 170));
+		passengerPhone.setForeground(Color.WHITE);
+		passengerPhone.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		passengerPhone.setColumns(10);
+		passengerPhone.setBackground(new Color(95, 158, 160));
+		
+		passengerName = new JTextField();
+		passengerName.setSelectionColor(new Color(102, 205, 170));
+		passengerName.setForeground(Color.WHITE);
+		passengerName.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		passengerName.setColumns(10);
+		passengerName.setBackground(new Color(95, 158, 160));
+		
+		JLabel label_22 = new JLabel("Birthday");
+		label_22.setForeground(Color.WHITE);
+		label_22.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		
+		passengerMonth = new JTextField();
+		passengerMonth.setForeground(Color.WHITE);
+		passengerMonth.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		passengerMonth.setColumns(10);
+		passengerMonth.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "MM", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(2, 2, 2, 2)));
+		passengerMonth.setBackground(new Color(95, 158, 160));
+		
+		passengerDay = new JTextField();
+		passengerDay.setForeground(Color.WHITE);
+		passengerDay.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		passengerDay.setColumns(10);
+		passengerDay.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "DD", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(2, 2, 2, 2)));
+		passengerDay.setBackground(new Color(95, 158, 160));
+		
+		passengerYear = new JTextField();
+		passengerYear.setForeground(Color.WHITE);
+		passengerYear.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		passengerYear.setColumns(10);
+		passengerYear.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "YYYY", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(2, 2, 2, 2)));
+		passengerYear.setBackground(new Color(95, 158, 160));
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+										.addComponent(label_10)
+										.addComponent(label_17))
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+										.addComponent(passengerEmail, GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+										.addComponent(passengerAddress, GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)))
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+										.addComponent(label_18)
+										.addComponent(label_20))
+									.addGap(18)
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(passengerPhone)
+										.addComponent(passengerName, GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)))))
+						.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGap(13)
+									.addComponent(label_22)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(passengerMonth, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addContainerGap()
+									.addComponent(lblClearPassengerButton)))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(lblAddNewPassengerButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+									.addComponent(passengerDay, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(passengerYear, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)))))
+					.addGap(13))
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(22)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_18)
+						.addComponent(passengerPhone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_20)
+						.addComponent(passengerName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_10)
+						.addComponent(passengerAddress, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_17)
+						.addComponent(passengerEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(16)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_22)
+						.addComponent(passengerMonth, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(passengerDay, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(passengerYear, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblAddNewPassengerButton)
+						.addComponent(lblClearPassengerButton))
+					.addContainerGap())
+		);
+		panel_1.setLayout(gl_panel_1);
+		
+		 lblUpdatePassengerButton = new JLabel("Update");
+		lblUpdatePassengerButton.setForeground(Color.WHITE);
+		lblUpdatePassengerButton.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblUpdatePassengerButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
+		
+		 lblDeletePassengerButton = new JLabel("Delete");
+		lblDeletePassengerButton.setForeground(Color.WHITE);
+		lblDeletePassengerButton.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblDeletePassengerButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
 		GroupLayout gl_panelPassengers = new GroupLayout(panelPassengers);
 		gl_panelPassengers.setHorizontalGroup(
+			gl_panelPassengers.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelPassengers.createSequentialGroup()
 					.addGroup(gl_panelPassengers.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panelTopPassengers, GroupLayout.DEFAULT_SIZE, 1371, Short.MAX_VALUE)
 						.addGroup(gl_panelPassengers.createSequentialGroup()
 							.addContainerGap()
+							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
+							.addGap(12)
+							.addGroup(gl_panelPassengers.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panelPassengers.createSequentialGroup()
+									.addComponent(lblUpdatePassengerButton)
+									.addPreferredGap(ComponentPlacement.RELATED, 927, Short.MAX_VALUE)
+									.addComponent(lblDeletePassengerButton))
+								.addComponent(scrollPanePassengers, GroupLayout.DEFAULT_SIZE, 1051, Short.MAX_VALUE))
+							.addGap(31)))
 					.addGap(0))
 		);
 		gl_panelPassengers.setVerticalGroup(
@@ -5354,10 +5547,22 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				.addGroup(gl_panelPassengers.createSequentialGroup()
 					.addComponent(panelTopPassengers, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addComponent(scrollPanePassengers, GroupLayout.PREFERRED_SIZE, 328, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(90, Short.MAX_VALUE))
+					.addGroup(gl_panelPassengers.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_panelPassengers.createSequentialGroup()
+							.addComponent(scrollPanePassengers, GroupLayout.PREFERRED_SIZE, 295, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGroup(gl_panelPassengers.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblUpdatePassengerButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblDeletePassengerButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap(465, Short.MAX_VALUE))
 		);
 		
+		tablePassengers = new JTable(){
+			public boolean isCellEditable(int row, int column){
+				return true;
+			}
+		};
 		tablePassengers.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -5365,7 +5570,11 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				"Name", "Address", "Phone", "E-mail", "Birthday"
 			}
 		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false
 			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
 			}
 		});
 		tablePassengers.setShowVerticalLines(false);
@@ -5411,6 +5620,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
       lblCreateReservationButton.setBorder(new LineBorder(new Color(255, 255, 255), 2));
       
       JPanel addNewCustomerInNewTourReservation = new JPanel();
+      addNewCustomerInNewTourReservation.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Add New Customer", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)));
       addNewCustomerInNewTourReservation.setBackground(new Color(95, 158, 160));
       
       JLabel label = new JLabel("Phone");
@@ -5634,6 +5844,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
       					.addGap(18)
       					.addComponent(newTourReservationTabbedPanel, GroupLayout.PREFERRED_SIZE, 642, Short.MAX_VALUE)
       					.addGap(18)
+      					.addComponent(summaryPanel, GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
       				.addGroup(gl_panelNewTourReservation.createSequentialGroup()
       					.addGap(797)
       					.addComponent(lblCreateReservationButton)))
@@ -5720,15 +5931,23 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
       JScrollPane selectCustomersInNewTourReservationScrollPane = new JScrollPane();
       selectCustomersInNewTourReservationScrollPane.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Customers archive", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(3, 3, 3, 3)));
       selectCustomersInNewTourReservationScrollPane.setBackground(new Color(95, 158, 160));
+      
+       lblSelectCustomerButtonInNewTourRes = new JLabel("Select");
+      lblSelectCustomerButtonInNewTourRes.setForeground(Color.WHITE);
+      lblSelectCustomerButtonInNewTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+      lblSelectCustomerButtonInNewTourRes.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
       GroupLayout gl_selectCustomerPanel = new GroupLayout(selectCustomerPanel);
       gl_selectCustomerPanel.setHorizontalGroup(
       	gl_selectCustomerPanel.createParallelGroup(Alignment.LEADING)
       		.addGroup(gl_selectCustomerPanel.createSequentialGroup()
       			.addContainerGap()
       			.addGroup(gl_selectCustomerPanel.createParallelGroup(Alignment.LEADING)
+      				.addComponent(selectCustomersInNewTourReservationScrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
       				.addGroup(gl_selectCustomerPanel.createSequentialGroup()
       					.addComponent(lblSearchCustomerByName, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
       					.addPreferredGap(ComponentPlacement.RELATED)
+      					.addComponent(searchCustomerTextField, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE))
+      				.addComponent(lblSelectCustomerButtonInNewTourRes))
       			.addContainerGap())
       );
       gl_selectCustomerPanel.setVerticalGroup(
@@ -5740,6 +5959,9 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
       				.addComponent(lblSearchCustomerByName, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
       			.addGap(27)
       			.addComponent(selectCustomersInNewTourReservationScrollPane, GroupLayout.PREFERRED_SIZE, 236, GroupLayout.PREFERRED_SIZE)
+      			.addPreferredGap(ComponentPlacement.UNRELATED)
+      			.addComponent(lblSelectCustomerButtonInNewTourRes, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+      			.addContainerGap(66, Short.MAX_VALUE))
       );
       
       customersTableInNewTourReservation = new JTable();
@@ -5748,9 +5970,11 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
       	new Object[][] {
       	},
       	new String[] {
+      		"Organisation", "Type", "Phone", "Name", "Address", "Email", "Birthday", "Money spent"
       	}
       ) {
       	boolean[] columnEditables = new boolean[] {
+      		false, false, false, false, false, false, false, false
       	};
       	public boolean isCellEditable(int row, int column) {
       		return columnEditables[column];
@@ -5943,6 +6167,13 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
       lblClearAlButtonInNewTourReservation.setForeground(Color.WHITE);
       lblClearAlButtonInNewTourReservation.setFont(new Font("Century Gothic", Font.PLAIN, 14));
       lblClearAlButtonInNewTourReservation.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
+      
+      pricePerPassengerTextFieldNewTourRes = new JTextField();
+      pricePerPassengerTextFieldNewTourRes.setForeground(Color.WHITE);
+      pricePerPassengerTextFieldNewTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+      pricePerPassengerTextFieldNewTourRes.setColumns(10);
+      pricePerPassengerTextFieldNewTourRes.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "Price per Passenger", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(2, 2, 2, 2)));
+      pricePerPassengerTextFieldNewTourRes.setBackground(new Color(0, 153, 153));
       GroupLayout gl_selectPassengersPanel = new GroupLayout(selectPassengersPanel);
       gl_selectPassengersPanel.setHorizontalGroup(
       	gl_selectPassengersPanel.createParallelGroup(Alignment.LEADING)
@@ -5955,6 +6186,9 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
       				.addGroup(gl_selectPassengersPanel.createSequentialGroup()
       					.addComponent(lblRemoveButtonInNewTourReservation, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
       					.addGap(18)
+      					.addComponent(lblClearAlButtonInNewTourReservation, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+      					.addGap(18, 18, Short.MAX_VALUE)
+      					.addComponent(pricePerPassengerTextFieldNewTourRes, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)))
       			.addContainerGap())
       );
       gl_selectPassengersPanel.setVerticalGroup(
@@ -5964,8 +6198,11 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
       			.addGroup(gl_selectPassengersPanel.createParallelGroup(Alignment.LEADING, false)
       				.addGroup(gl_selectPassengersPanel.createSequentialGroup()
       					.addComponent(selectPassengersScrollPanelInNewTourReservation, GroupLayout.PREFERRED_SIZE, 335, GroupLayout.PREFERRED_SIZE)
+      					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
       					.addGroup(gl_selectPassengersPanel.createParallelGroup(Alignment.TRAILING)
       						.addComponent(lblRemoveButtonInNewTourReservation, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+      						.addComponent(lblClearAlButtonInNewTourReservation, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+      						.addComponent(pricePerPassengerTextFieldNewTourRes, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)))
       				.addComponent(addNewPassengerInNewTourReservationPanel, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE))
       			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
       );
@@ -6008,15 +6245,23 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
                                     selectTourInNewTourReservationScrollPanel = new JScrollPane();
                                     selectTourInNewTourReservationScrollPanel.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Tours archive", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(3, 3, 3, 3)));
                                     selectTourInNewTourReservationScrollPanel.setBackground(new Color(95, 158, 160));
+                                    
+                                     lblSelectTourButtonInNewTourRes = new JLabel("Select");
+                                    lblSelectTourButtonInNewTourRes.setForeground(Color.WHITE);
+                                    lblSelectTourButtonInNewTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+                                    lblSelectTourButtonInNewTourRes.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
                                     GroupLayout gl_selectTourPanel = new GroupLayout(selectTourPanel);
                                     gl_selectTourPanel.setHorizontalGroup(
                                     	gl_selectTourPanel.createParallelGroup(Alignment.LEADING)
                                     		.addGroup(gl_selectTourPanel.createSequentialGroup()
                                     			.addContainerGap()
                                     			.addGroup(gl_selectTourPanel.createParallelGroup(Alignment.LEADING)
+                                    				.addComponent(selectTourInNewTourReservationScrollPanel, GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
                                     				.addGroup(gl_selectTourPanel.createSequentialGroup()
                                     					.addComponent(lblSearchByDestination)
                                     					.addGap(18)
+                                    					.addComponent(searchTourTextField, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE))
+                                    				.addComponent(lblSelectTourButtonInNewTourRes, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
                                     			.addContainerGap())
                                     );
                                     gl_selectTourPanel.setVerticalGroup(
@@ -6028,6 +6273,9 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
                                     				.addComponent(searchTourTextField, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
                                     			.addGap(18)
                                     			.addComponent(selectTourInNewTourReservationScrollPanel, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE)
+                                    			.addPreferredGap(ComponentPlacement.UNRELATED)
+                                    			.addComponent(lblSelectTourButtonInNewTourRes, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+                                    			.addContainerGap(67, Short.MAX_VALUE))
                                     );
                                     
                                     tableToursInNewTourReservation = new JTable();
@@ -6036,6 +6284,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
                                     	new Object[][] {
                                     	},
                                     	new String[] {
+                                    		"Date", "Destination", "Pick up", "Seats Available", "Price", "Bus", "Chauffeur"
                                     	}
                                     ) {
                                     	boolean[] columnEditables = new boolean[] {
