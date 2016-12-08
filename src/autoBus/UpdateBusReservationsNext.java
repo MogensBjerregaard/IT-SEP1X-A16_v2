@@ -41,11 +41,13 @@ public class UpdateBusReservationsNext extends JPanel {
    JCheckBox ticketsCheckBoxNext;
    JTextPane summaryPaneNext;
    JPanel panel;
+   JLabel cancelLabelNext;
+   JLabel nextLabelNext;
+   JLabel searchLabelNext;
    public UpdateBusReservationsNext() {
       
       panel = new JPanel();
       panel.setBackground(new Color(95, 158, 160));
-      add(panel);
       
       JPanel panel_1 = new JPanel();
       panel_1.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Services", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(2, 2, 2, 2)));
@@ -148,7 +150,7 @@ public class UpdateBusReservationsNext extends JPanel {
       startYearNext.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "Y", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(1, 1, 1, 1)));
       startYearNext.setBackground(new Color(95, 158, 160));
       
-      JLabel searchLabelNext = new JLabel("Search");
+      searchLabelNext = new JLabel("Search");
       searchLabelNext.setForeground(Color.WHITE);
       searchLabelNext.setFont(new Font("Century Gothic", Font.PLAIN, 14));
       searchLabelNext.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
@@ -271,12 +273,12 @@ public class UpdateBusReservationsNext extends JPanel {
       summaryPaneNext.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "Summary", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(5, 5, 5, 5)));
       summaryPaneNext.setBackground(new Color(95, 158, 160));
       
-      JLabel cancelLabelNext = new JLabel("Cancel");
+      cancelLabelNext = new JLabel("Cancel");
       cancelLabelNext.setForeground(Color.WHITE);
       cancelLabelNext.setFont(new Font("Century Gothic", Font.PLAIN, 14));
       cancelLabelNext.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
       
-      JLabel nextLabelNext = new JLabel("Create");
+      nextLabelNext = new JLabel("Update");
       nextLabelNext.setForeground(Color.WHITE);
       nextLabelNext.setFont(new Font("Century Gothic", Font.PLAIN, 14));
       nextLabelNext.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
@@ -293,7 +295,7 @@ public class UpdateBusReservationsNext extends JPanel {
             .addGroup(gl_panel_3.createSequentialGroup()
                .addContainerGap()
                .addComponent(label_5, GroupLayout.PREFERRED_SIZE, 458, GroupLayout.PREFERRED_SIZE)
-               .addContainerGap(903, Short.MAX_VALUE))
+               .addContainerGap(1442, Short.MAX_VALUE))
       );
       gl_panel_3.setVerticalGroup(
          gl_panel_3.createParallelGroup(Alignment.LEADING)
@@ -307,25 +309,23 @@ public class UpdateBusReservationsNext extends JPanel {
          gl_panel.createParallelGroup(Alignment.TRAILING)
             .addGroup(gl_panel.createSequentialGroup()
                .addContainerGap()
-               .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+               .addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
                   .addGroup(gl_panel.createSequentialGroup()
-                     .addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-                        .addGroup(gl_panel.createSequentialGroup()
-                           .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-                              .addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
-                              .addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE))
-                           .addPreferredGap(ComponentPlacement.UNRELATED)
-                           .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
-                           .addGap(18)
-                           .addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
-                           .addGap(18)
-                           .addComponent(summaryPaneNext, GroupLayout.PREFERRED_SIZE, 511, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(gl_panel.createSequentialGroup()
-                           .addComponent(cancelLabelNext)
-                           .addGap(18)
-                           .addComponent(nextLabelNext)))
-                     .addGap(54))
-                  .addComponent(panel_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1371, Short.MAX_VALUE)))
+                     .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                        .addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                        .addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+                     .addPreferredGap(ComponentPlacement.UNRELATED)
+                     .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
+                     .addGap(18)
+                     .addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
+                     .addGap(18)
+                     .addComponent(summaryPaneNext, GroupLayout.PREFERRED_SIZE, 511, GroupLayout.PREFERRED_SIZE))
+                  .addGroup(gl_panel.createSequentialGroup()
+                     .addComponent(cancelLabelNext)
+                     .addGap(18)
+                     .addComponent(nextLabelNext)))
+               .addGap(54))
+            .addComponent(panel_3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 1901, Short.MAX_VALUE)
       );
       gl_panel.setVerticalGroup(
          gl_panel.createParallelGroup(Alignment.LEADING)
@@ -370,6 +370,20 @@ public class UpdateBusReservationsNext extends JPanel {
       ));
       scrollPane.setViewportView(tableSelectBusNext);
       panel.setLayout(gl_panel);
+      GroupLayout groupLayout = new GroupLayout(this);
+      groupLayout.setHorizontalGroup(
+         groupLayout.createParallelGroup(Alignment.LEADING)
+            .addGroup(groupLayout.createSequentialGroup()
+               .addComponent(panel, GroupLayout.DEFAULT_SIZE, 1915, Short.MAX_VALUE)
+               .addGap(1))
+      );
+      groupLayout.setVerticalGroup(
+         groupLayout.createParallelGroup(Alignment.LEADING)
+            .addGroup(groupLayout.createSequentialGroup()
+               .addComponent(panel, GroupLayout.DEFAULT_SIZE, 1093, Short.MAX_VALUE)
+               .addGap(0))
+      );
+      setLayout(groupLayout);
    
    }
 }
