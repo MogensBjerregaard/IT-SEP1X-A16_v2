@@ -8,6 +8,7 @@ public class BusReservation extends Reservation{
 	private Services services;
 	private DateInterval dateInterval;
 	private double price;
+	private Date[] newDateInterval;
 	
 
 	public BusReservation(int reservationNumber, int discount, Customer customer, Chauffeur chauffeur, Bus bus,
@@ -18,6 +19,15 @@ public class BusReservation extends Reservation{
 		this.services = services;
 		this.dateInterval = dateInterval;
 		this.price=price;
+		this.newDateInterval = new Date[2];
+	}
+
+	public Date[] getNewDateInterval() {
+		return newDateInterval;
+	}
+
+	public void setNewDateInterval(Date[] newDateInterval) {
+		this.newDateInterval = newDateInterval;
 	}
 
 	public double getPrice() {

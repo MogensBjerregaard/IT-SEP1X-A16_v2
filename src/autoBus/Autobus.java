@@ -302,6 +302,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	private JLabel lblUpdateCustomerButton;
 	JPanel updateBusPanel;
 	JPanel updateChauffeurPanel;
+	 JLabel lblShowFullDescriptionChauffeurButton;
+	 JLabel lblShowFullDescription;
 
 	/**
 	 * Launch the application.
@@ -4091,7 +4093,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblDeleteChauffeurBtn.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblDeleteChauffeurBtn.setForeground(new Color(255, 255, 255));
 		
-		JLabel lblShowFullDescriptionChauffeurButton = new JLabel("Show Full Description");
+		 lblShowFullDescriptionChauffeurButton = new JLabel("Show Full Description");
 		lblShowFullDescriptionChauffeurButton.setForeground(Color.WHITE);
 		lblShowFullDescriptionChauffeurButton.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblShowFullDescriptionChauffeurButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(2, 2, 2, 2)));
@@ -4494,7 +4496,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		scrollPaneBusesArchive.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Buses archive", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(5, 5, 5, 5)));
 		scrollPaneBusesArchive.setBackground(new Color(95, 158, 160));
 		
-		JLabel lblShowFullDescription = new JLabel("Show Full Description");
+		 lblShowFullDescription = new JLabel("Show Full Description");
 		lblShowFullDescription.setForeground(Color.WHITE);
 		lblShowFullDescription.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblShowFullDescription.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(2, 2, 2, 2)));
