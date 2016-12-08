@@ -711,8 +711,8 @@ public class UpdateBusReservations extends JPanel {
                str = str + "\nEnd minute does not appear to be a valid number!";
             }
             if(str.equals("")){
-               startDate = parseDate(yearStart+"-" + (monthStart-1) + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
-               endDate = parseDate(yearEnd+"-" + (monthEnd-1) + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
+               startDate = parseDate(yearStart+"-" + monthStart + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
+               endDate = parseDate(yearEnd+"-" + monthEnd + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
                listNewBusSelectBus(startDate, (int)((endDate.getTime() - startDate.getTime()) / 3600000));
                listNewBusSelectChauffeur(startDate, (int)((endDate.getTime() - startDate.getTime()) / 3600000));
             }

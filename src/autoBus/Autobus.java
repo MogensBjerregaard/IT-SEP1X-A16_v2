@@ -300,6 +300,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	JRadioButton radioButtonPrivate;
 	private JLabel lblDeleteCustomerPanel;
 	private JLabel lblUpdateCustomerButton;
+	JPanel updateBusPanel;
+	JPanel updateChauffeurPanel;
 
 	/**
 	 * Launch the application.
@@ -929,8 +931,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				   str = str + "\nEnd minute does not appear to be a valid number!";
 			   }
 			   if(str.equals("")){
-				   startDate = parseDate(yearStart+"-" + (monthStart-1) + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
-				   endDate = parseDate(yearEnd+"-" + (monthEnd-1) + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
+				   startDate = parseDate(yearStart+"-" + monthStart + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
+				   endDate = parseDate(yearEnd+"-" + monthEnd + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
 				   listNewBusSelectBus(startDate, (int)((endDate.getTime() - startDate.getTime()) / 3600000));
 				   listNewBusSelectChauffeur(startDate, (int)((endDate.getTime() - startDate.getTime()) / 3600000));
 			   }
@@ -2987,6 +2989,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				int monthEnd=0;
 				int dayEnd=0;
 				int yearEnd=0;
+				
 				int numberOfPassengers=tableNewBusPassengers.getRowCount();
 				double pricePerDay = 0;
 				double totalPrice = 0;
@@ -4087,11 +4090,16 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblDeleteChauffeurBtn.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(2, 2, 2, 2)));
 		lblDeleteChauffeurBtn.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblDeleteChauffeurBtn.setForeground(new Color(255, 255, 255));
+		
+		JLabel lblShowFullDescriptionChauffeurButton = new JLabel("Show Full Description");
+		lblShowFullDescriptionChauffeurButton.setForeground(Color.WHITE);
+		lblShowFullDescriptionChauffeurButton.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblShowFullDescriptionChauffeurButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(2, 2, 2, 2)));
 		GroupLayout gl_panelChauffeurs = new GroupLayout(panelChauffeurs);
 		gl_panelChauffeurs.setHorizontalGroup(
 			gl_panelChauffeurs.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelChauffeurs.createSequentialGroup()
-					.addComponent(panelTopChauffeurs, GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+					.addComponent(panelTopChauffeurs, GroupLayout.DEFAULT_SIZE, 1369, Short.MAX_VALUE)
 					.addGap(0))
 				.addGroup(gl_panelChauffeurs.createSequentialGroup()
 					.addGap(12)
@@ -4099,10 +4107,12 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					.addGap(18)
 					.addGroup(gl_panelChauffeurs.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelChauffeurs.createSequentialGroup()
+							.addComponent(lblShowFullDescriptionChauffeurButton, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
 							.addComponent(lblDeleteChauffeurBtn)
 							.addContainerGap())
 						.addGroup(gl_panelChauffeurs.createSequentialGroup()
-							.addComponent(scrollPaneChauffeursArchive, GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
+							.addComponent(scrollPaneChauffeursArchive, GroupLayout.DEFAULT_SIZE, 981, Short.MAX_VALUE)
 							.addGap(40))))
 		);
 		gl_panelChauffeurs.setVerticalGroup(
@@ -4112,10 +4122,12 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					.addGap(18)
 					.addGroup(gl_panelChauffeurs.createParallelGroup(Alignment.TRAILING, false)
 						.addComponent(scrollPaneChauffeursArchive, 0, 0, Short.MAX_VALUE)
-						.addComponent(panelAddChauffeur, GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE))
+						.addComponent(panelAddChauffeur, GroupLayout.PREFERRED_SIZE, 368, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblDeleteChauffeurBtn)
-					.addContainerGap(13, Short.MAX_VALUE))
+					.addGroup(gl_panelChauffeurs.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblShowFullDescriptionChauffeurButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblDeleteChauffeurBtn))
+					.addContainerGap(392, Short.MAX_VALUE))
 		);
 		
 		tableChauffeurs = new JTable();
@@ -4481,12 +4493,16 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		scrollPaneBusesArchive.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		scrollPaneBusesArchive.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Buses archive", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(5, 5, 5, 5)));
 		scrollPaneBusesArchive.setBackground(new Color(95, 158, 160));
+		
+		JLabel lblShowFullDescription = new JLabel("Show Full Description");
+		lblShowFullDescription.setForeground(Color.WHITE);
+		lblShowFullDescription.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		lblShowFullDescription.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(2, 2, 2, 2)));
 		GroupLayout gl_panelBuses = new GroupLayout(panelBuses);
 		gl_panelBuses.setHorizontalGroup(
 			gl_panelBuses.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 1000, Short.MAX_VALUE)
 				.addGroup(gl_panelBuses.createSequentialGroup()
-					.addComponent(panelTopBuses, GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+					.addComponent(panelTopBuses, GroupLayout.DEFAULT_SIZE, 1369, Short.MAX_VALUE)
 					.addGap(0))
 				.addGroup(gl_panelBuses.createSequentialGroup()
 					.addGap(12)
@@ -4494,15 +4510,16 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					.addGap(18)
 					.addGroup(gl_panelBuses.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelBuses.createSequentialGroup()
+							.addComponent(lblShowFullDescription)
+							.addGap(50)
 							.addComponent(labelDeleteBusBtn)
 							.addContainerGap())
 						.addGroup(gl_panelBuses.createSequentialGroup()
-							.addComponent(scrollPaneBusesArchive, GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
+							.addComponent(scrollPaneBusesArchive, GroupLayout.DEFAULT_SIZE, 981, Short.MAX_VALUE)
 							.addGap(40))))
 		);
 		gl_panelBuses.setVerticalGroup(
 			gl_panelBuses.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 494, Short.MAX_VALUE)
 				.addGroup(gl_panelBuses.createSequentialGroup()
 					.addComponent(panelTopBuses, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
@@ -4510,8 +4527,10 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 						.addComponent(scrollPaneBusesArchive, 0, 0, Short.MAX_VALUE)
 						.addComponent(panelAddBus, GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(labelDeleteBusBtn)
-					.addContainerGap(13, Short.MAX_VALUE))
+					.addGroup(gl_panelBuses.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblShowFullDescription, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(labelDeleteBusBtn))
+					.addContainerGap(392, Short.MAX_VALUE))
 		);
 		
 		tableBuses = new JTable();
@@ -7309,6 +7328,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		this.updateTourReservationPanel.setVisible(false);
 		this.updateTourPanel.setVisible(false);
 		this.updateBusReservationsNext.setVisible(false);
+		this.updateBusPanel.setVisible(false);
+		this.updateChauffeurPanel.setVisible(false);
 	}
 
 	public static java.util.Date parseDate(String date) {
@@ -7354,6 +7375,12 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		this.updateBusReservationsNext = new UpdateBusReservationsNext();
 		desktopPane.add(updateBusReservationsNext);
+		
+		this.updateChauffeurPanel = new UpdateChauffeur();
+		desktopPane.add(this.updateChauffeurPanel);
+		
+		this.updateBusPanel = new UpdateBus();
+		desktopPane.add(this.updateBusPanel);
       
 	}
 }
