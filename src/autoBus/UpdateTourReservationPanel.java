@@ -719,7 +719,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		
 		JPanel summaryInUpdTourResPanel = new JPanel();
 		summaryInUpdTourResPanel.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Summary", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)), null));
-		summaryInUpdTourResPanel.setBackground(new Color(51, 153, 153));
+		summaryInUpdTourResPanel.setBackground(new Color(95, 158, 160));
 		
 		JScrollPane selectedPassengersScrollPaneInUpdTourRes = new JScrollPane();
 		
@@ -763,7 +763,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		 listOfSelectedPassengersInUpdTourRes.setModel(new DefaultListModel<String>()); 
 		listOfSelectedPassengersInUpdTourRes.setForeground(Color.WHITE);
 		listOfSelectedPassengersInUpdTourRes.setBorder(new TitledBorder(null, "Selected Passengers", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
-		listOfSelectedPassengersInUpdTourRes.setBackground(new Color(51, 153, 153));
+		listOfSelectedPassengersInUpdTourRes.setBackground(new Color(95, 158, 160));
 		selectedPassengersScrollPaneInUpdTourRes.setViewportView(listOfSelectedPassengersInUpdTourRes);
 		summaryInUpdTourResPanel.setLayout(gl_summaryInUpdTourResPanel);
 		
@@ -819,7 +819,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		
 		JPanel selectCustomerInUpdTourResPanel = new JPanel();
 		selectCustomerInUpdTourResPanel.setForeground(new Color(0, 0, 0));
-		selectCustomerInUpdTourResPanel.setBackground(new Color(0, 153, 153));
+		selectCustomerInUpdTourResPanel.setBackground(new Color(95, 158, 160));
 		tabbedPane.addTab("Select Customer", null, selectCustomerInUpdTourResPanel, null);
 		tabbedPane.setForegroundAt(0, new Color(0, 153, 102));
 		
@@ -886,7 +886,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		selectCustomerInUpdTourResPanel.setLayout(gl_selectCustomerInUpdTourResPanel);
 		
 		JPanel selectPassengersInUpdTourRes = new JPanel();
-		selectPassengersInUpdTourRes.setBackground(new Color(0, 153, 153));
+		selectPassengersInUpdTourRes.setBackground(new Color(95, 158, 160));
 		tabbedPane.addTab("Select Passengers", null, selectPassengersInUpdTourRes, null);
 		tabbedPane.setForegroundAt(1, new Color(0, 153, 102));
 		
@@ -1077,7 +1077,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		pricePerPassengerTextFieldUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		pricePerPassengerTextFieldUpdTourRes.setColumns(10);
 		pricePerPassengerTextFieldUpdTourRes.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "Price per Passenger", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(2, 2, 2, 2)));
-		pricePerPassengerTextFieldUpdTourRes.setBackground(new Color(0, 153, 153));
+		pricePerPassengerTextFieldUpdTourRes.setBackground(new Color(95, 158, 160));
 		GroupLayout gl_selectPassengersInUpdTourRes = new GroupLayout(selectPassengersInUpdTourRes);
 		gl_selectPassengersInUpdTourRes.setHorizontalGroup(
 			gl_selectPassengersInUpdTourRes.createParallelGroup(Alignment.LEADING)
@@ -1130,7 +1130,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		selectPassengersInUpdTourRes.setLayout(gl_selectPassengersInUpdTourRes);
 		
 		JPanel selectTourInUpdTourResPanel = new JPanel();
-		selectTourInUpdTourResPanel.setBackground(new Color(0, 153, 153));
+		selectTourInUpdTourResPanel.setBackground(new Color(95, 158, 160));
 		tabbedPane.addTab("Select Tour", null, selectTourInUpdTourResPanel, null);
 		tabbedPane.setForegroundAt(2, new Color(0, 153, 102));
 		

@@ -662,6 +662,11 @@ public class UpdateTourPanel extends JPanel {
 				currentlyUpdatingTour = Autobus.frame.toursArchive.get(Autobus.frame.tableTours.getSelectedRow());
 				int durationInHours =   (int)((currentlyUpdatingTour.getNewDateInterval()[1].getTime() -
 										currentlyUpdatingTour.getNewDateInterval()[0].getTime()) / 3600000);
+				Autobus.frame.deleteAllRows((DefaultTableModel) Autobus.frame.tableSelectChauffeur.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) Autobus.frame.tableSelectBus.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) Autobus.frame.tableNewBusSelectChauffeur.getModel());
+				Autobus.frame.deleteAllRows((DefaultTableModel) Autobus.frame.tableNewBusSelectBus.getModel());
+
 				listBuses(currentlyUpdatingTour.getNewDateInterval()[0], durationInHours);
 				listChauffeurs(currentlyUpdatingTour.getNewDateInterval()[0], durationInHours);
 				listElements();

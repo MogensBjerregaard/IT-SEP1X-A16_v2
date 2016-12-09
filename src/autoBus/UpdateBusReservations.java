@@ -690,6 +690,10 @@ public class UpdateBusReservations extends JPanel {
                privateRadioButtonReservationUpdate.setSelected(currentlyUpdatingBusReservation.getCustomer().getOrganisationName().equals("PRIVATE"));
                schoolRadioButtonReservationUpdate.setSelected(currentlyUpdatingBusReservation.getCustomer().getOrganisationName().equals("SCHOOL"));
 
+               Autobus.frame.deleteAllRows((DefaultTableModel) Autobus.frame.tableSelectChauffeur.getModel());
+               Autobus.frame.deleteAllRows((DefaultTableModel) Autobus.frame.tableSelectBus.getModel());
+               Autobus.frame.deleteAllRows((DefaultTableModel) Autobus.frame.tableNewBusSelectChauffeur.getModel());
+               Autobus.frame.deleteAllRows((DefaultTableModel) Autobus.frame.tableNewBusSelectBus.getModel());
                Autobus.frame.hideAllPanels();
                listPassengers();
                Autobus.frame.updateBusReservations.setVisible(true);

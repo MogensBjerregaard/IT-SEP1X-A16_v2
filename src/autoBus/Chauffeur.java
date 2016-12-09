@@ -2,6 +2,7 @@ package autoBus;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class Chauffeur implements Serializable{
@@ -43,6 +44,29 @@ public class Chauffeur implements Serializable{
 
 	public void setDatePointer(int datePointer) {
 		this.datePointer = datePointer;
+	}
+
+	public String getEarliestDepartureString(){
+		java.util.Date now = new java.util.Date();
+		Calendar cal = Calendar.getInstance();
+		if(this.listOfStartEndDates.isEmpty() || now.after(listOfStartEndDates.get(listOfStartEndDates.size() -1)[1])) {
+			return "no tours";
+		}
+		if (now.before(listOfStartEndDates.get(0)[0])) {
+			cal.setTime(listOfStartEndDates.get(0)[0]);
+		}
+		for (int j = 0; j < listOfStartEndDates.size() - 1; j++) {
+			if (now.after(listOfStartEndDates.get(j)[1]) && now.before(listOfStartEndDates.get(j + 1)[0])) {
+				cal.setTime(listOfStartEndDates.get(j + 1)[0]);
+				break;
+			}
+		}
+		String startMonth = String.valueOf(cal.get(Calendar.MONTH) + 1);
+		String startDay = String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
+		String startYear = String.valueOf(cal.get(Calendar.YEAR));
+		String startHour = String.valueOf(cal.get(Calendar.HOUR_OF_DAY));
+		String startMinute = String.valueOf(cal.get(Calendar.MINUTE));
+		return startMonth + "/" + startDay + "/" + startYear + "  " + startHour + ":" + startMinute;
 	}
 
 	public void addNewReservationPeriod(java.util.Date[] newStartEndDate){
