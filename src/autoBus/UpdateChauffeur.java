@@ -54,6 +54,7 @@ public class UpdateChauffeur extends JPanel
    private JCheckBox externalCheckBoxUpdateChauffeur;
    private JCheckBox oneDayCheckBoxUpdateChauffeur;
    private JLabel updateChauffeurLabelUpdateChauffeur;
+   private JLabel lblCancel;
 
    public void createEvents()
    {
@@ -146,6 +147,15 @@ public class UpdateChauffeur extends JPanel
                Autobus.frame.chauffeursTable.setRowCount(0);
                Autobus.frame.listChauffeurs();
             }
+            
+         }
+      });
+      
+      lblCancel.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseReleased(MouseEvent event){
+            Autobus.frame.hideAllPanels();
+            Autobus.frame.panelChauffeurs.setVisible(true);
             
          }
       });
@@ -295,123 +305,96 @@ public class UpdateChauffeur extends JPanel
       updateChauffeurLabelUpdateChauffeur.setBorder(new CompoundBorder(
             new LineBorder(new Color(255, 255, 255), 1, true),
             new EmptyBorder(2, 2, 2, 2)));
+      
+      lblCancel = new JLabel("Cancel");
+      lblCancel.setForeground(Color.WHITE);
+      lblCancel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+      lblCancel.setBorder(new CompoundBorder(
+                  new LineBorder(new Color(255, 255, 255), 1, true),
+                  new EmptyBorder(2, 2, 2, 2)));
       GroupLayout gl_panel_2 = new GroupLayout(panel_2);
-      gl_panel_2.setHorizontalGroup(gl_panel_2
-            .createParallelGroup(Alignment.TRAILING)
-            .addGap(0, 318, Short.MAX_VALUE)
-            .addGroup(gl_panel_2.createSequentialGroup().addContainerGap()
-                  .addComponent(label_1)
-                  .addPreferredGap(ComponentPlacement.RELATED)
-                  .addComponent(employeeIDUpdateChauffeur,
-                        GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                  .addGap(7))
-            .addGroup(gl_panel_2.createSequentialGroup().addGap(13).addGroup(
-                  gl_panel_2.createParallelGroup(Alignment.LEADING).addGroup(
-                        gl_panel_2.createSequentialGroup().addGroup(gl_panel_2
-                              .createParallelGroup(Alignment.LEADING)
-                              .addComponent(oneDayCheckBoxUpdateChauffeur)
-                              .addComponent(externalCheckBoxUpdateChauffeur))
-                              .addContainerGap())
-                        .addGroup(gl_panel_2.createSequentialGroup()
-                              .addGroup(gl_panel_2
-                                    .createParallelGroup(Alignment.LEADING)
-                                    .addComponent(label_2).addComponent(label_3)
-                                    .addComponent(label_4).addComponent(label_5)
-                                    .addComponent(label_6))
-                              .addGap(29)
-                              .addGroup(gl_panel_2
-                                    .createParallelGroup(Alignment.LEADING)
-                                    .addComponent(addressUpdateChauffeur,
-                                          Alignment.TRAILING,
-                                          GroupLayout.DEFAULT_SIZE, 209,
-                                          Short.MAX_VALUE)
-                                    .addComponent(nameUpdateChauffeur,
-                                          Alignment.TRAILING,
-                                          GroupLayout.DEFAULT_SIZE, 209,
-                                          Short.MAX_VALUE)
-                                    .addComponent(emailUpdateChauffeur,
-                                          GroupLayout.DEFAULT_SIZE, 209,
-                                          Short.MAX_VALUE)
-                                    .addComponent(phoneUpdateChauffeur,
-                                          Alignment.TRAILING,
-                                          GroupLayout.DEFAULT_SIZE, 209,
-                                          Short.MAX_VALUE)
-                                    .addGroup(gl_panel_2.createSequentialGroup()
-                                          .addComponent(mmUpdateChauffeur,
-                                                GroupLayout.PREFERRED_SIZE, 49,
-                                                GroupLayout.PREFERRED_SIZE)
-                                          .addPreferredGap(
-                                                ComponentPlacement.RELATED)
-                                          .addComponent(ddUpdateChauffeur,
-                                                GroupLayout.PREFERRED_SIZE, 48,
-                                                GroupLayout.PREFERRED_SIZE)
-                                          .addPreferredGap(
-                                                ComponentPlacement.RELATED)
-                                          .addComponent(yyyyUpdateChauffeur,
-                                                GroupLayout.DEFAULT_SIZE, 100,
-                                                Short.MAX_VALUE)))
-                              .addGap(7))))
+      gl_panel_2.setHorizontalGroup(
+         gl_panel_2.createParallelGroup(Alignment.TRAILING)
             .addGroup(gl_panel_2.createSequentialGroup()
-                  .addContainerGap(190, Short.MAX_VALUE)
-                  .addComponent(updateChauffeurLabelUpdateChauffeur)
-                  .addContainerGap()));
-      gl_panel_2.setVerticalGroup(gl_panel_2
-            .createParallelGroup(Alignment.TRAILING)
-            .addGap(0, 368, Short.MAX_VALUE)
-            .addGroup(gl_panel_2.createSequentialGroup().addContainerGap()
-                  .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(label_1)
-                        .addComponent(employeeIDUpdateChauffeur,
-                              GroupLayout.PREFERRED_SIZE,
-                              GroupLayout.DEFAULT_SIZE,
-                              GroupLayout.PREFERRED_SIZE))
-                  .addPreferredGap(ComponentPlacement.RELATED, 29,
-                        Short.MAX_VALUE)
-                  .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(nameUpdateChauffeur,
-                              GroupLayout.PREFERRED_SIZE,
-                              GroupLayout.DEFAULT_SIZE,
-                              GroupLayout.PREFERRED_SIZE)
-                        .addComponent(label_3))
-                  .addPreferredGap(ComponentPlacement.UNRELATED)
-                  .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(label_4).addComponent(
-                              addressUpdateChauffeur,
-                              GroupLayout.PREFERRED_SIZE,
-                              GroupLayout.DEFAULT_SIZE,
-                              GroupLayout.PREFERRED_SIZE))
-                  .addPreferredGap(ComponentPlacement.UNRELATED)
-                  .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(label_5).addComponent(
-                              emailUpdateChauffeur, GroupLayout.PREFERRED_SIZE,
-                              GroupLayout.DEFAULT_SIZE,
-                              GroupLayout.PREFERRED_SIZE))
-                  .addGap(12)
-                  .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(label_6).addComponent(
-                              phoneUpdateChauffeur, GroupLayout.PREFERRED_SIZE,
-                              GroupLayout.DEFAULT_SIZE,
-                              GroupLayout.PREFERRED_SIZE))
-                  .addPreferredGap(ComponentPlacement.UNRELATED)
-                  .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+               .addContainerGap()
+               .addComponent(label_1)
+               .addPreferredGap(ComponentPlacement.RELATED)
+               .addComponent(employeeIDUpdateChauffeur, GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+               .addGap(7))
+            .addGroup(gl_panel_2.createSequentialGroup()
+               .addGap(13)
+               .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+                  .addGroup(gl_panel_2.createSequentialGroup()
+                     .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+                        .addComponent(oneDayCheckBoxUpdateChauffeur)
+                        .addComponent(externalCheckBoxUpdateChauffeur))
+                     .addContainerGap())
+                  .addGroup(gl_panel_2.createSequentialGroup()
+                     .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
                         .addComponent(label_2)
-                        .addComponent(mmUpdateChauffeur,
-                              GroupLayout.PREFERRED_SIZE,
-                              GroupLayout.DEFAULT_SIZE,
-                              GroupLayout.PREFERRED_SIZE)
-                        .addComponent(yyyyUpdateChauffeur,
-                              GroupLayout.PREFERRED_SIZE,
-                              GroupLayout.DEFAULT_SIZE,
-                              GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ddUpdateChauffeur,
-                              GroupLayout.PREFERRED_SIZE,
-                              GroupLayout.DEFAULT_SIZE,
-                              GroupLayout.PREFERRED_SIZE))
-                  .addPreferredGap(ComponentPlacement.UNRELATED)
-                  .addComponent(externalCheckBoxUpdateChauffeur).addGap(4)
-                  .addComponent(oneDayCheckBoxUpdateChauffeur).addGap(45)
+                        .addComponent(label_3)
+                        .addComponent(label_4)
+                        .addComponent(label_5)
+                        .addComponent(label_6))
+                     .addGap(29)
+                     .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+                        .addComponent(addressUpdateChauffeur, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                        .addComponent(nameUpdateChauffeur, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                        .addComponent(emailUpdateChauffeur, GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                        .addComponent(phoneUpdateChauffeur, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                        .addGroup(gl_panel_2.createSequentialGroup()
+                           .addComponent(mmUpdateChauffeur, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+                           .addPreferredGap(ComponentPlacement.RELATED)
+                           .addComponent(ddUpdateChauffeur, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+                           .addPreferredGap(ComponentPlacement.RELATED)
+                           .addComponent(yyyyUpdateChauffeur, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
+                     .addGap(7))))
+            .addGroup(gl_panel_2.createSequentialGroup()
+               .addContainerGap()
+               .addComponent(lblCancel)
+               .addPreferredGap(ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+               .addComponent(updateChauffeurLabelUpdateChauffeur)
+               .addContainerGap())
+      );
+      gl_panel_2.setVerticalGroup(
+         gl_panel_2.createParallelGroup(Alignment.TRAILING)
+            .addGroup(gl_panel_2.createSequentialGroup()
+               .addContainerGap()
+               .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+                  .addComponent(label_1)
+                  .addComponent(employeeIDUpdateChauffeur, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+               .addPreferredGap(ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+               .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+                  .addComponent(nameUpdateChauffeur, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                  .addComponent(label_3))
+               .addPreferredGap(ComponentPlacement.UNRELATED)
+               .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+                  .addComponent(label_4)
+                  .addComponent(addressUpdateChauffeur, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+               .addPreferredGap(ComponentPlacement.UNRELATED)
+               .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+                  .addComponent(label_5)
+                  .addComponent(emailUpdateChauffeur, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+               .addGap(12)
+               .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+                  .addComponent(label_6)
+                  .addComponent(phoneUpdateChauffeur, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+               .addPreferredGap(ComponentPlacement.UNRELATED)
+               .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+                  .addComponent(label_2)
+                  .addComponent(mmUpdateChauffeur, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                  .addComponent(yyyyUpdateChauffeur, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                  .addComponent(ddUpdateChauffeur, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+               .addPreferredGap(ComponentPlacement.UNRELATED)
+               .addComponent(externalCheckBoxUpdateChauffeur)
+               .addGap(4)
+               .addComponent(oneDayCheckBoxUpdateChauffeur)
+               .addGap(45)
+               .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
                   .addComponent(updateChauffeurLabelUpdateChauffeur)
-                  .addContainerGap()));
+                  .addComponent(lblCancel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+               .addContainerGap())
+      );
       panel_2.setLayout(gl_panel_2);
       GroupLayout gl_panel = new GroupLayout(panel);
       gl_panel
