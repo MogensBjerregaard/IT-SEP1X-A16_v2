@@ -4541,19 +4541,19 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		tableBuses.setSelectionForeground(new Color(255, 255, 255));
 		tableBuses.setSelectionBackground(new Color(102, 205, 170));
 		tableBuses.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"Vehicle ID", "Price/hour", "Max # seats", "Earliest Departure", "Model type", "Available for Tours"
-			}
+		   new Object[][] {
+		      {null, null, null, null, null, null},
+		   },
+		   new String[] {
+		      "Vehicle ID", "Price/hour", "Max # seats", "Earliest Departure", "Model type", "Available for Tours"
+		   }
 		) {
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
+		   boolean[] columnEditables = new boolean[] {
+		      false, false, false, false, false, false
+		   };
+		   public boolean isCellEditable(int row, int column) {
+		      return columnEditables[column];
+		   }
 		});
 		tableBuses.setForeground(new Color(255, 255, 255));
 		tableBuses.setFont(new Font("Century Gothic", Font.PLAIN, 12));
