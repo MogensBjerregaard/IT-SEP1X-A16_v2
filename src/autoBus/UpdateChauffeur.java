@@ -55,6 +55,7 @@ public class UpdateChauffeur extends JPanel
    private JCheckBox oneDayCheckBoxUpdateChauffeur;
    private JLabel updateChauffeurLabelUpdateChauffeur;
    private JLabel lblCancel;
+   private JTable tableUpdateChauffeur;
 
    public void createEvents()
    {
@@ -83,6 +84,31 @@ public class UpdateChauffeur extends JPanel
                      }
 
                      // FILLING CHAUFFEURS INFORMATION
+
+                     DefaultTableModel updateChauffeurTable = (DefaultTableModel) tableUpdateChauffeur.getModel();
+                     Object[] rowData = new Object[3];
+                     for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
+                        if(Autobus.frame.toursArchive.get(i).getChauffeursObject().getName().equals(currentlyUpdatingChauffeur.getName())
+                                && Autobus.frame.toursArchive.get(i).getChauffeursObject().getPhonenumber().equals(currentlyUpdatingChauffeur.getPhonenumber())){
+                           rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
+                           rowData[1] = Autobus.frame.toursArchive.get(i).getDestination();
+                           rowData[2] = Autobus.frame.toursArchive.get(i).getBus().getVehicleID();
+                           updateChauffeurTable.addRow(rowData);
+                        }
+                     }
+                     for (int i = 0; i < Autobus.frame.reservationsArchive.size(); i++) {
+                        if (Autobus.frame.reservationsArchive.get(i) instanceof BusReservation) {
+                           BusReservation busReservation = (BusReservation) Autobus.frame.reservationsArchive.get(i);
+                           if(busReservation.getChauffeur().getName().equals(currentlyUpdatingChauffeur.getName())
+                                   &&busReservation.getChauffeur().getPhonenumber().equals(currentlyUpdatingChauffeur.getPhonenumber())){
+                              rowData[0] = busReservation.getDepartureDate();
+                              rowData[1] = "Bus & Chauffeur reservation";
+                              rowData[2] = busReservation.getBus().getVehicleID();
+                              updateChauffeurTable.addRow(rowData);
+                           }
+                        }
+                     }
+
                      employeeIDUpdateChauffeur.setText(
                            currentlyUpdatingChauffeur.getEmployeeNumber());
                      nameUpdateChauffeur
@@ -154,8 +180,10 @@ public class UpdateChauffeur extends JPanel
       lblCancel.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseReleased(MouseEvent event){
-            Autobus.frame.hideAllPanels();
-            Autobus.frame.panelChauffeurs.setVisible(true);
+            if(Autobus.okOrCancel("Are you sure you want to cancel changing this chauffeur?") == 0) {
+               Autobus.frame.hideAllPanels();
+               Autobus.frame.panelChauffeurs.setVisible(true);
+            }
             
          }
       });
@@ -309,8 +337,10 @@ public class UpdateChauffeur extends JPanel
       lblCancel = new JLabel("Cancel");
       lblCancel.setForeground(Color.WHITE);
       lblCancel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-      lblCancel.setBorder(new CompoundBorder(
-                  new LineBorder(new Color(255, 255, 255), 1, true),
+      lblCancel.setBorder(new CompoundBorder(
+
+                  new LineBorder(new Color(255, 255, 255), 1, true),
+
                   new EmptyBorder(2, 2, 2, 2)));
       GroupLayout gl_panel_2 = new GroupLayout(panel_2);
       gl_panel_2.setHorizontalGroup(
@@ -396,39 +426,66 @@ public class UpdateChauffeur extends JPanel
                .addContainerGap())
       );
       panel_2.setLayout(gl_panel_2);
+      
+      JScrollPane scrollPane = new JScrollPane();
+      scrollPane.setOpaque(false);
+      scrollPane.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+      scrollPane.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Chauffeur's Schedule", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(5, 5, 5, 5)));
+      scrollPane.setBackground(new Color(95, 158, 160));
       GroupLayout gl_panel = new GroupLayout(panel);
-      gl_panel
-            .setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-                  .addGroup(gl_panel.createSequentialGroup()
-                        .addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 1371,
-                              Short.MAX_VALUE)
-                        .addGap(0))
-                  .addGroup(gl_panel.createSequentialGroup().addGap(12)
-                        .addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 318,
-                              GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(1041, Short.MAX_VALUE)));
-      gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-            .addGroup(gl_panel.createSequentialGroup()
-                  .addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 58,
-                        GroupLayout.PREFERRED_SIZE)
-                  .addGap(18)
-                  .addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 368,
-                        GroupLayout.PREFERRED_SIZE)
-                  .addContainerGap(444, Short.MAX_VALUE)));
+      gl_panel.setHorizontalGroup(
+      	gl_panel.createParallelGroup(Alignment.LEADING)
+      		.addGroup(gl_panel.createSequentialGroup()
+      			.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 1371, Short.MAX_VALUE)
+      			.addGap(0))
+      		.addGroup(gl_panel.createSequentialGroup()
+      			.addGap(12)
+      			.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
+      			.addPreferredGap(ComponentPlacement.UNRELATED)
+      			.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 507, GroupLayout.PREFERRED_SIZE)
+      			.addContainerGap(522, Short.MAX_VALUE))
+      );
+      gl_panel.setVerticalGroup(
+      	gl_panel.createParallelGroup(Alignment.LEADING)
+      		.addGroup(gl_panel.createSequentialGroup()
+      			.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+      			.addGap(18)
+      			.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+      				.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 368, GroupLayout.PREFERRED_SIZE)
+      				.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 368, GroupLayout.PREFERRED_SIZE))
+      			.addContainerGap(444, Short.MAX_VALUE))
+      );
+      
+      tableUpdateChauffeur = new JTable();
+      tableUpdateChauffeur.setModel(new DefaultTableModel(
+      	new Object[][] {
+      	},
+      	new String[] {
+      		"Date Interval", "Destination", "Bus"
+      	}
+      ) {
+      	boolean[] columnEditables = new boolean[] {
+      		false, false, false
+      	};
+      	public boolean isCellEditable(int row, int column) {
+      		return columnEditables[column];
+      	}
+      });
+      scrollPane.setViewportView(tableUpdateChauffeur);
       panel.setLayout(gl_panel);
       GroupLayout groupLayout = new GroupLayout(this);
-      groupLayout.setHorizontalGroup(groupLayout
-            .createParallelGroup(Alignment.LEADING)
-            .addGroup(groupLayout.createSequentialGroup()
-                  .addComponent(panel, GroupLayout.PREFERRED_SIZE, 1371,
-                        GroupLayout.PREFERRED_SIZE)
-                  .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-      groupLayout.setVerticalGroup(groupLayout
-            .createParallelGroup(Alignment.LEADING)
-            .addGroup(groupLayout.createSequentialGroup()
-                  .addComponent(panel, GroupLayout.PREFERRED_SIZE, 888,
-                        GroupLayout.PREFERRED_SIZE)
-                  .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+      groupLayout.setHorizontalGroup(
+      	groupLayout.createParallelGroup(Alignment.LEADING)
+      		.addGroup(groupLayout.createSequentialGroup()
+      			.addComponent(panel, GroupLayout.DEFAULT_SIZE, 1652, Short.MAX_VALUE)
+      			.addGap(0))
+      );
+      groupLayout.setVerticalGroup(
+      	groupLayout.createParallelGroup(Alignment.LEADING)
+      		.addGroup(groupLayout.createSequentialGroup()
+      			.addComponent(panel, GroupLayout.DEFAULT_SIZE, 901, Short.MAX_VALUE)
+      			.addGap(0))
+      );
       setLayout(groupLayout);
       createEvents();
 

@@ -41,7 +41,8 @@ public class UpdateBus extends JPanel {
     * 
     */
    private static final long serialVersionUID = 1L;
-   private Bus currentlyUpdatingBus;
+    private final JLabel lblCancelUpdateBusButton;
+    private Bus currentlyUpdatingBus;
    private JTextField pricePerHourTextFieldUpdateBus;
    private JTextField numberOfSeatsTextFieldUpdateBus;
    private JTextField vehicleIdTextFieldUpdateBus;
@@ -51,9 +52,19 @@ public class UpdateBus extends JPanel {
    private JRadioButton luxuryUpdateRadioButton;
    private DefaultTableModel updateBusTable;
    private JLabel lblUpdateBus;
-   private Tour tour;
 
    public void createEvents() {
+
+       lblCancelUpdateBusButton.addMouseListener(new MouseAdapter() {
+             @Override
+             public void mouseReleased(MouseEvent event) {
+                 if(Autobus.okOrCancel("Are you sure you want to cancel changing this bus?") == 0) {
+                     Autobus.frame.hideAllPanels();
+                     Autobus.frame.panelBuses.setVisible(true);
+                 }
+             }
+         });
+
       Autobus.frame.lblShowFullDescription.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseReleased(MouseEvent event){
@@ -62,12 +73,35 @@ public class UpdateBus extends JPanel {
                
                String vehicleIdOfCurrentlyUpdatingBus = (String) Autobus.frame.tableBuses.getValueAt(Autobus.frame.tableBuses.getSelectedRow(), 0);
                for (int i = 0; i < Autobus.frame.busesArchive.size(); i++) {
-                  if (Autobus.frame.busesArchive.get(i).getVehicleID() == vehicleIdOfCurrentlyUpdatingBus) {
-                     currentlyUpdatingBus = (Bus) Autobus.frame.busesArchive.get(i);
+                  if (Autobus.frame.busesArchive.get(i).getVehicleID().equals(vehicleIdOfCurrentlyUpdatingBus)) {
+                     currentlyUpdatingBus = Autobus.frame.busesArchive.get(i);
                   }
                }
                
                // FILLING BUS INFORMATION
+                updateBusTable = (DefaultTableModel) tableUpdateBus.getModel();
+                Object[] rowData = new Object[3];
+                for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
+                    if(Autobus.frame.toursArchive.get(i).getBus().getModelString().equals(currentlyUpdatingBus.getModelString())
+                            && Autobus.frame.toursArchive.get(i).getBus().getVehicleID().equals(currentlyUpdatingBus.getVehicleID())){
+                        rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
+                        rowData[1] = Autobus.frame.toursArchive.get(i).getDestination();
+                        rowData[2] = Autobus.frame.toursArchive.get(i).getChauffeur();
+                        updateBusTable.addRow(rowData);
+                    }
+                }
+                for (int i = 0; i < Autobus.frame.reservationsArchive.size(); i++) {
+                    if (Autobus.frame.reservationsArchive.get(i) instanceof BusReservation) {
+                        BusReservation busReservation = (BusReservation) Autobus.frame.reservationsArchive.get(i);
+                        if(busReservation.getBus().getModelString().equals(currentlyUpdatingBus.getModelString())
+                                && busReservation.getBus().getVehicleID().equals(currentlyUpdatingBus.getVehicleID())){
+                            rowData[0] = busReservation.getDepartureDate();
+                            rowData[1] = "Bus & Chauffeur reservation";
+                            rowData[2] = busReservation.getChauffeur();
+                            updateBusTable.addRow(rowData);
+                        }
+                    }
+                }
                vehicleIdTextFieldUpdateBus.setText(currentlyUpdatingBus.getVehicleID());
                pricePerHourTextFieldUpdateBus.setText(Double.toString(currentlyUpdatingBus.getPricePerHour()));
                numberOfSeatsTextFieldUpdateBus.setText(Integer.toString(currentlyUpdatingBus.getMaxNumberOfSeats()));
@@ -92,17 +126,6 @@ public class UpdateBus extends JPanel {
                   partyUpdateRadioButton.setSelected(false);
                   luxuryUpdateRadioButton.setSelected(true);
                }
-               
-               // TABLE
-               updateBusTable = (DefaultTableModel) tableUpdateBus.getModel();
-               Object[] rowData = new Object[3];
-               rowData[0] = currentlyUpdatingBus.getListOfStartEndDates();
-//                     if (currentlyUpdatingBus.equals(tour.getBus()))
-//                     {
-//                        rowData[1] = tour.getDestination();
-//                        rowData[2] = tour.getChauffeur();
-//                     }
-                  updateBusTable.addRow(rowData);
                
                Autobus.frame.hideAllPanels();
                Autobus.frame.updateBusPanel.setVisible(true);
@@ -253,72 +276,79 @@ public class UpdateBus extends JPanel {
       lblUpdateBus.setForeground(Color.WHITE);
       lblUpdateBus.setFont(new Font("Century Gothic", Font.PLAIN, 14));
       lblUpdateBus.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(2, 2, 2, 2)));
+      
+       lblCancelUpdateBusButton = new JLabel("Cancel");
+      lblCancelUpdateBusButton.setForeground(Color.WHITE);
+      lblCancelUpdateBusButton.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+      lblCancelUpdateBusButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(2, 2, 2, 2)));
       GroupLayout gl_panel_2 = new GroupLayout(panel_2);
       gl_panel_2.setHorizontalGroup(
-         gl_panel_2.createParallelGroup(Alignment.TRAILING)
-            .addGap(0, 318, Short.MAX_VALUE)
-            .addGroup(gl_panel_2.createSequentialGroup()
-               .addContainerGap()
-               .addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
-                  .addGroup(gl_panel_2.createSequentialGroup()
-                     .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_panel_2.createSequentialGroup()
-                           .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-                              .addComponent(label_1)
-                              .addComponent(label_2)
-                              .addComponent(label_3))
-                           .addGap(29)
-                           .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-                              .addGroup(gl_panel_2.createSequentialGroup()
-                                 .addComponent(luxuryUpdateRadioButton)
-                                 .addPreferredGap(ComponentPlacement.RELATED, 78, GroupLayout.PREFERRED_SIZE))
-                              .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-                                 .addGroup(gl_panel_2.createSequentialGroup()
-                                    .addComponent(partyUpdateRadioButton)
-                                    .addPreferredGap(ComponentPlacement.RELATED, 84, GroupLayout.PREFERRED_SIZE))
-                                 .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-                                    .addGroup(gl_panel_2.createSequentialGroup()
-                                       .addComponent(standardUpdateRadioButton)
-                                       .addPreferredGap(ComponentPlacement.RELATED, 60, GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(pricePerHourTextFieldUpdateBus, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                                    .addComponent(numberOfSeatsTextFieldUpdateBus, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)))))
-                        .addGroup(gl_panel_2.createSequentialGroup()
-                           .addComponent(label_4)
-                           .addGap(53)
-                           .addComponent(vehicleIdTextFieldUpdateBus, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                           .addPreferredGap(ComponentPlacement.RELATED)))
-                     .addGap(7))
-                  .addGroup(gl_panel_2.createSequentialGroup()
-                     .addComponent(lblUpdateBus)
-                     .addContainerGap())))
+      	gl_panel_2.createParallelGroup(Alignment.TRAILING)
+      		.addGroup(gl_panel_2.createSequentialGroup()
+      			.addContainerGap()
+      			.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
+      				.addGroup(gl_panel_2.createSequentialGroup()
+      					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+      						.addGroup(gl_panel_2.createSequentialGroup()
+      							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+      								.addComponent(label_1)
+      								.addComponent(label_2)
+      								.addComponent(label_3))
+      							.addGap(29)
+      							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+      								.addGroup(gl_panel_2.createSequentialGroup()
+      									.addComponent(luxuryUpdateRadioButton)
+      									.addPreferredGap(ComponentPlacement.RELATED, 74, GroupLayout.PREFERRED_SIZE))
+      								.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+      									.addGroup(gl_panel_2.createSequentialGroup()
+      										.addComponent(partyUpdateRadioButton)
+      										.addPreferredGap(ComponentPlacement.RELATED, 80, GroupLayout.PREFERRED_SIZE))
+      									.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+      										.addGroup(gl_panel_2.createSequentialGroup()
+      											.addComponent(standardUpdateRadioButton)
+      											.addPreferredGap(ComponentPlacement.RELATED, 54, GroupLayout.PREFERRED_SIZE))
+      										.addComponent(pricePerHourTextFieldUpdateBus, GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+      										.addComponent(numberOfSeatsTextFieldUpdateBus, GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)))))
+      						.addGroup(gl_panel_2.createSequentialGroup()
+      							.addComponent(label_4)
+      							.addGap(53)
+      							.addComponent(vehicleIdTextFieldUpdateBus, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+      							.addPreferredGap(ComponentPlacement.RELATED)))
+      					.addGap(7))
+      				.addGroup(gl_panel_2.createSequentialGroup()
+      					.addComponent(lblCancelUpdateBusButton)
+      					.addPreferredGap(ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+      					.addComponent(lblUpdateBus)
+      					.addContainerGap())))
       );
       gl_panel_2.setVerticalGroup(
-         gl_panel_2.createParallelGroup(Alignment.LEADING)
-            .addGap(0, 368, Short.MAX_VALUE)
-            .addGroup(gl_panel_2.createSequentialGroup()
-               .addContainerGap()
-               .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-                  .addComponent(label_4)
-                  .addComponent(vehicleIdTextFieldUpdateBus, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-               .addPreferredGap(ComponentPlacement.UNRELATED)
-               .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-                  .addComponent(pricePerHourTextFieldUpdateBus, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                  .addComponent(label_1))
-               .addPreferredGap(ComponentPlacement.UNRELATED)
-               .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-                  .addComponent(label_2)
-                  .addComponent(numberOfSeatsTextFieldUpdateBus, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-               .addPreferredGap(ComponentPlacement.UNRELATED)
-               .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-                  .addComponent(label_3)
-                  .addComponent(standardUpdateRadioButton))
-               .addPreferredGap(ComponentPlacement.UNRELATED)
-               .addComponent(partyUpdateRadioButton)
-               .addPreferredGap(ComponentPlacement.UNRELATED)
-               .addComponent(luxuryUpdateRadioButton)
-               .addPreferredGap(ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
-               .addComponent(lblUpdateBus)
-               .addContainerGap())
+      	gl_panel_2.createParallelGroup(Alignment.LEADING)
+      		.addGroup(gl_panel_2.createSequentialGroup()
+      			.addContainerGap()
+      			.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+      				.addComponent(label_4)
+      				.addComponent(vehicleIdTextFieldUpdateBus, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+      			.addPreferredGap(ComponentPlacement.UNRELATED)
+      			.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+      				.addComponent(pricePerHourTextFieldUpdateBus, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+      				.addComponent(label_1))
+      			.addPreferredGap(ComponentPlacement.UNRELATED)
+      			.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+      				.addComponent(label_2)
+      				.addComponent(numberOfSeatsTextFieldUpdateBus, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+      			.addPreferredGap(ComponentPlacement.UNRELATED)
+      			.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+      				.addComponent(label_3)
+      				.addComponent(standardUpdateRadioButton))
+      			.addPreferredGap(ComponentPlacement.UNRELATED)
+      			.addComponent(partyUpdateRadioButton)
+      			.addPreferredGap(ComponentPlacement.UNRELATED)
+      			.addComponent(luxuryUpdateRadioButton)
+      			.addPreferredGap(ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+      			.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+      				.addComponent(lblUpdateBus)
+      				.addComponent(lblCancelUpdateBusButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+      			.addContainerGap())
       );
       panel_2.setLayout(gl_panel_2);
       
@@ -329,36 +359,43 @@ public class UpdateBus extends JPanel {
       scrollPane.setBackground(new Color(95, 158, 160));
       GroupLayout gl_panel = new GroupLayout(panel);
       gl_panel.setHorizontalGroup(
-         gl_panel.createParallelGroup(Alignment.LEADING)
-            .addGroup(gl_panel.createSequentialGroup()
-               .addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 1371, Short.MAX_VALUE)
-               .addGap(0))
-            .addGroup(gl_panel.createSequentialGroup()
-               .addGap(12)
-               .addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
-               .addGap(18)
-               .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 983, Short.MAX_VALUE)
-               .addGap(40))
+      	gl_panel.createParallelGroup(Alignment.LEADING)
+      		.addGroup(gl_panel.createSequentialGroup()
+      			.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+      			.addGap(0))
+      		.addGroup(gl_panel.createSequentialGroup()
+      			.addGap(12)
+      			.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
+      			.addGap(18)
+      			.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 507, GroupLayout.PREFERRED_SIZE)
+      			.addContainerGap(191, Short.MAX_VALUE))
       );
       gl_panel.setVerticalGroup(
-         gl_panel.createParallelGroup(Alignment.LEADING)
-            .addGroup(gl_panel.createSequentialGroup()
-               .addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-               .addGap(18)
-               .addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-                  .addComponent(scrollPane, 0, 0, Short.MAX_VALUE)
-                  .addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE))
-               .addContainerGap(354, Short.MAX_VALUE))
+      	gl_panel.createParallelGroup(Alignment.LEADING)
+      		.addGroup(gl_panel.createSequentialGroup()
+      			.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+      			.addGap(18)
+      			.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+      				.addComponent(scrollPane, 0, 0, Short.MAX_VALUE)
+      				.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 368, GroupLayout.PREFERRED_SIZE))
+      			.addContainerGap(412, Short.MAX_VALUE))
       );
       
       tableUpdateBus = new JTable();
       tableUpdateBus.setModel(new DefaultTableModel(
-         new Object[][] {
-         },
-         new String[] {
-            "Date", "Destination", "Chauffeur"
-         }
-      ));
+      	new Object[][] {
+      	},
+      	new String[] {
+      		"Date", "Destination", "Chauffeur"
+      	}
+      ) {
+      	boolean[] columnEditables = new boolean[] {
+      		false, false, false
+      	};
+      	public boolean isCellEditable(int row, int column) {
+      		return columnEditables[column];
+      	}
+      });
       scrollPane.setViewportView(tableUpdateBus);
       panel.setLayout(gl_panel);
       GroupLayout groupLayout_1 = new GroupLayout(this);
