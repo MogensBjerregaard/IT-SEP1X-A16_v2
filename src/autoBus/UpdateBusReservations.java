@@ -1,12 +1,8 @@
 package autoBus;
 
-import javax.swing.JPanel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.GroupLayout;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Color;
-import javax.swing.AbstractListModel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,29 +17,22 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.border.TitledBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.border.LineBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
-import javax.swing.JRadioButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 public class UpdateBusReservations extends JPanel {
    /**
     * 
     */
-   private UpdateBusReservationsNext updateBusReservationsNext = new UpdateBusReservationsNext();
+   private UpdateBusReservationsNext updateBusReservationsNext = (UpdateBusReservationsNext) Autobus.frame.updateBusReservationsNext;
    private static final long serialVersionUID = 1L;
-   private PriceList priceList;
-   private BusesArchive busesArchive;
    DefaultTableModel newBusSelectBusTable;
    DefaultTableModel newBusSelectChauffeurTable;
    private BusReservation currentlyUpdatingBusReservation;
@@ -75,8 +64,6 @@ public class UpdateBusReservations extends JPanel {
    private JRadioButton companyRadioButtonReservationUpdate;
    private JRadioButton schoolRadioButtonReservationUpdate;
    private JRadioButton privateRadioButtonReservationUpdate;
-   private CustomersArchive customersArchive;
-   private PassengersArchive passengersArchive;
    private JCheckBox isPassengerCheckBox;
    private JTable tablePassengerReservationUpdate;
    private JLabel label_3;
@@ -107,6 +94,576 @@ public class UpdateBusReservations extends JPanel {
     */
    
    public void createEventsForNewBusReservationUpdatePanel() {
+      updateBusReservationsNext.startMonthNext.getDocument().addDocumentListener(new DocumentListener() {
+         public void changedUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void insertUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void removeUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+
+         }
+
+
+      });
+
+      updateBusReservationsNext.startDayNext.getDocument().addDocumentListener(new DocumentListener() {
+         public void changedUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void insertUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void removeUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+
+         }
+
+
+
+
+      });
+
+      updateBusReservationsNext.startYearNext.getDocument().addDocumentListener(new DocumentListener() {
+         public void changedUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void insertUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void removeUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+
+         }
+
+
+
+
+      });
+
+      updateBusReservationsNext.startHourNext.getDocument().addDocumentListener(new DocumentListener() {
+         public void changedUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void insertUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void removeUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+
+         }
+
+
+
+
+
+      });
+
+      updateBusReservationsNext.startMinuteNext.getDocument().addDocumentListener(new DocumentListener() {
+         public void changedUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void insertUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void removeUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+
+         }
+
+
+
+
+
+      });
+
+      updateBusReservationsNext.endMonthNext.getDocument().addDocumentListener(new DocumentListener() {
+         public void changedUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void insertUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void removeUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+
+         }
+
+
+
+
+
+      });
+
+      updateBusReservationsNext.endDayNext.getDocument().addDocumentListener(new DocumentListener() {
+         public void changedUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void insertUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void removeUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+
+         }
+
+
+
+
+
+      });
+
+      updateBusReservationsNext.endYearNext.getDocument().addDocumentListener(new DocumentListener() {
+         public void changedUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void insertUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void removeUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+
+         }
+
+
+
+
+
+
+      });
+
+      updateBusReservationsNext.endHourNext.getDocument().addDocumentListener(new DocumentListener() {
+         public void changedUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void insertUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void removeUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+
+         }
+
+
+
+
+
+      });
+
+      updateBusReservationsNext.endMinuteNext.getDocument().addDocumentListener(new DocumentListener() {
+         public void changedUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void insertUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+         }
+
+         public void removeUpdate(DocumentEvent e) {
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
+            deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
+
+         }
+      });
+
+      updateBusReservationsNext.nextLabelNext.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseReleased(MouseEvent arg0) {
+            String str = new String();
+            int monthStart=0;
+            int dayStart =0;
+            int yearStart=0;
+            int monthEnd=0;
+            int dayEnd=0;
+            int yearEnd=0;
+
+            int numberOfPassengers=tablePassengerReservationUpdate.getRowCount();
+            double pricePerDay = 0;
+            double totalPrice = 0;
+            Services services = null;
+            java.util.Date javastartDate;
+            java.util.Date javaendDate;
+
+            int hourStart =0;
+            int hourEnd =0;
+            int minuteStart =0;
+            int minuteEnd = 0;
+
+            //int dayCount = -1;
+            //int workHoursPerDay = 8; //for calculating price per passenger (8 hours per day * price per hour = day price)
+            Calendar timeNow = Calendar.getInstance();
+            int currentYear = timeNow.get(Calendar.YEAR);
+            try {
+               monthStart = Integer.parseInt(updateBusReservationsNext.startMonthNext.getText());
+               if (monthStart>12||monthStart<1) str = str + "\nStart month does not seem to be a number between 1-12!";
+            } catch (NumberFormatException e1) {
+               str = str + "\nStart month does not seem to be a number between 1-12!";
+            }
+            try {
+               dayStart = Integer.parseInt(updateBusReservationsNext.startDayNext.getText());
+               if (monthStart==1||monthStart==3||monthStart==5||monthStart==7||monthStart==8||monthStart==10||monthStart==12) {
+                  if (!(1<=dayStart&&dayStart<=31)) {
+                     str = str + "\nStart day does not seem to be a number between 1-31!";
+                  }
+               } else if (monthStart==2){
+                  if (!(1<=dayStart&&dayStart<=28)) {
+                     str = str + "\nStart day does not seem to be a number between 1-28!";
+                  }
+               } else if (monthStart==4||monthStart==6||monthStart==9||monthStart==11){
+                  if (!(1<=dayStart&&dayStart<=30)) {
+                     str = str + "\nStart day does not seem to be a number between 1-30!";
+                  }
+               }
+            } catch (NumberFormatException e1) {
+               str = str + "\nStart day does not seem to be a number between 1-31!";
+            }
+            try {
+               yearStart = Integer.parseInt(updateBusReservationsNext.startYearNext.getText());
+               if (yearStart<currentYear) str = str + "\nStart year does not appear to be a valid number!";
+            } catch (NumberFormatException e1) {
+               str = str + "\nStart year does not appear to be a valid number!";
+            }
+            try {
+               monthEnd = Integer.parseInt(updateBusReservationsNext.endMonthNext.getText());
+               if (monthEnd>12||monthEnd<1) str = str + "\nEnd month does not seem to be a number between 1-12!";
+            } catch (NumberFormatException e1) {
+               str = str + "\nEndt month does not seem to be a number between 1-12!";
+            }
+            try {
+               dayEnd = Integer.parseInt(updateBusReservationsNext.endDayNext.getText());
+               if (monthEnd==1||monthEnd==3||monthEnd==5||monthEnd==7||monthEnd==8||monthEnd==10||monthEnd==12) {
+                  if (!(1<=dayEnd&&dayEnd<=31)) {
+                     str = str + "\nEnd day does not seem to be a number between 1-31!";
+                  }
+               } else if (monthEnd==2){
+                  if (!(1<=dayEnd&&dayEnd<=28)) {
+                     str = str + "\nEnd day does not seem to be a number between 1-28!";
+                  }
+               } else if (monthEnd==4||monthEnd==6||monthEnd==9||monthEnd==11){
+                  if (!(1<=dayEnd&&dayEnd<=30)) {
+                     str = str + "\nEnd day does not seem to be a number between 1-30!";
+                  }
+               }
+            } catch (NumberFormatException e1) {
+               str = str + "\nEnd day does not seem to be a number between 1-31!";
+            }
+            try {
+               yearEnd = Integer.parseInt(updateBusReservationsNext.endYearNext.getText());
+               if (yearEnd<currentYear) str = str + "\nEnd year does not appear to be a valid number!";
+            } catch (NumberFormatException e1) {
+               str = str + "\nEnd year does not appear to be a valid number!";
+            }
+            try {
+               hourStart= Integer.parseInt(updateBusReservationsNext.startHourNext.getText());
+               if (hourStart<0 && hourStart > 23) str = str + "\nStart hour does not appear to be a number between 0-23!";
+            } catch (NumberFormatException e1) {
+               str = str + "\nStart hour does not appear to be a valid number!";
+            }
+            try {
+               hourEnd= Integer.parseInt(updateBusReservationsNext.endHourNext.getText());
+               if (hourEnd<0 && hourEnd > 23) str = str + "\nEnd hour does not appear to be a number between 0-23!";
+            } catch (NumberFormatException e1) {
+               str = str + "\nEnd hour does not appear to be a valid number!";
+            }
+            try {
+               minuteStart= Integer.parseInt(updateBusReservationsNext.startMinuteNext.getText());
+               if (minuteStart<0 && minuteStart > 59) str = str + "\nStart minute does not appear to be a number between 0-59!";
+            } catch (NumberFormatException e1) {
+               str = str + "\nStart minute does not appear to be a valid number!";
+            }
+            try {
+               minuteEnd= Integer.parseInt(updateBusReservationsNext.endMinuteNext.getText());
+               if (minuteEnd<0 && minuteEnd> 59) str = str + "\nEnd minute does not appear to be a number between 0-59!";
+            } catch (NumberFormatException e1) {
+               str = str + "\nEnd minute does not appear to be a valid number!";
+            }
+
+
+            try {
+               services = new Services();
+            } catch (Exception e1) {
+
+               e1.printStackTrace();
+            }
+            int daysCount = 0;
+            int discount = 0;
+            SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
+            java.util.Date startDate = null, endDate = null, currentDate = new java.util.Date();
+            DateInterval dateInterval = new DateInterval();
+            String busSelected = new String("");
+            Chauffeur chauffeur = null;
+            Bus bus = null;
+            if (updateBusReservationsNext.allInclusiveCheckBoxNext.isSelected()){
+               services.setAllInclusive(true);
+               pricePerDay+=numberOfPassengers*Autobus.frame.priceList.getPriceAllInclusive();
+            }
+            if (updateBusReservationsNext.breakfastCheckBoxNext.isSelected()){
+               services.setBreakfastIncluded(true);
+               pricePerDay+=numberOfPassengers*Autobus.frame.priceList.getPriceBreakfast();
+            }
+            if (updateBusReservationsNext.lunchCheckBoxNext.isSelected()){
+               services.setLunchIncluded(true);
+               pricePerDay+=numberOfPassengers*Autobus.frame.priceList.getPriceLunch();
+            }
+            if (updateBusReservationsNext.ticketsCheckBoxNext.isSelected()){
+               services.setEntranceTickets(true);
+               totalPrice += numberOfPassengers*Autobus.frame.priceList.getPriceEntranceTickets();
+            }
+            if (!(updateBusReservationsNext.startDayNext.getText().equalsIgnoreCase("")||updateBusReservationsNext.startMonthNext.getText().equalsIgnoreCase("")||updateBusReservationsNext.startYearNext.getText().equalsIgnoreCase("")
+                    ||updateBusReservationsNext.endDayNext.getText().equalsIgnoreCase("")||updateBusReservationsNext.endMonthNext.getText().equalsIgnoreCase("")||updateBusReservationsNext.endYearNext.getText().equalsIgnoreCase(""))) {
+               try {
+                  monthStart=Integer.parseInt(updateBusReservationsNext.startMonthNext.getText());
+                  dayStart=Integer.parseInt(updateBusReservationsNext.startDayNext.getText());
+                  yearStart=Integer.parseInt(updateBusReservationsNext.startYearNext.getText());
+                  monthEnd=Integer.parseInt(updateBusReservationsNext.endMonthNext.getText());
+                  dayEnd=Integer.parseInt(updateBusReservationsNext.endDayNext.getText());
+                  yearEnd=Integer.parseInt(updateBusReservationsNext.endYearNext.getText());
+                  dateInterval = new DateInterval(new Date(monthStart, dayStart, yearStart), new Date(monthEnd, dayEnd, yearEnd));
+                  startDate = dateformat.parse(dayStart+"/"+monthStart+"/"+yearStart);
+                  endDate = dateformat.parse(dayEnd+"/"+monthEnd+"/"+yearEnd);
+                  if (currentDate.equals(startDate)&&startDate.before(endDate)||currentDate.before(startDate)&&startDate.before(endDate)) {
+                     daysCount = daysBetweenDates(startDate, endDate);
+                  } else {
+                     str += "Dates must be future dates, and start date must be before end date!";
+                  }
+
+               } catch (Exception e) {
+                  str+= "Please check if start and end dates are correct!";
+               }
+            }
+            if (!(updateBusReservationsNext.tableSelectBusNext.getSelectedRow()==-1)) {
+               busSelected = (String)newBusSelectBusTable.getValueAt(updateBusReservationsNext.tableSelectBusNext.getSelectedRow(), 0);
+               pricePerDay += Autobus.frame.busesArchive.getBusById(busSelected).getPricePerHour()*8;//price/hour * 8 working hours per day = price/day
+               bus = Autobus.frame.busesArchive.getBusById(busSelected);
+
+
+            } else {
+               pricePerDay += currentlyUpdatingBusReservation.getBus().getPricePerHour()*8;//price/hour * 8 working hours per day = price/day
+               bus = currentlyUpdatingBusReservation.getBus();
+            }
+            if (!(updateBusReservationsNext.tableSelectChauffeurNext.getSelectedRow()==-1)) {
+               String chauffeurSelected = (String)newBusSelectChauffeurTable.getValueAt(updateBusReservationsNext.tableSelectChauffeurNext.getSelectedRow(), 0);
+               chauffeur = Autobus.frame.chauffeursArchive.getChauffeurById(chauffeurSelected);
+            } else {
+               chauffeur = currentlyUpdatingBusReservation.getChauffeur();
+            }
+            for (int i=0; i<Autobus.frame.customersArchive.size(); i++){
+               if (phoneCustomerReservationUpdate.getText().equalsIgnoreCase(Autobus.frame.customersArchive.get(i).getPhonenumber())) {
+                  discount = Autobus.frame.customersArchive.get(i).getDiscount();
+               }
+            }
+            totalPrice += pricePerDay*daysCount;
+            totalPrice = totalPrice*(100-discount/100);
+            totalPrice = round(totalPrice, 2);
+
+            if(updateBusReservationsNext.totalPriceUpdBusResNext.getText().equals("")){
+               str+="\nYou need to enter total price for reservation!";
+            }
+            try{
+               Double.parseDouble(updateBusReservationsNext.totalPriceUpdBusResNext.getText());
+            }
+            catch(NumberFormatException ex){
+               str+="\nYour total price for reservation seems no to be a valid number!";
+            }
+            if (str.equalsIgnoreCase("")){
+               javastartDate = parseDate(yearStart+"-" + monthStart + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
+               javaendDate = parseDate(yearEnd+"-" + monthEnd + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
+               int customerIndex = -1;
+               Bus oldBus = currentlyUpdatingBusReservation.getBus();
+               for (int i = 0; i < oldBus.getListOfStartEndDates().size(); i++) {
+                  if(currentlyUpdatingBusReservation.getNewDateInterval()[0].toString().equals(oldBus.getListOfStartEndDates().get(i)[0].toString())){
+                     oldBus.getListOfStartEndDates().remove(i);
+                     oldBus.setDatePointer(i);
+                     break;
+                  }
+               }
+               bus.addNewReservationPeriod(new java.util.Date[]{javastartDate,javaendDate});
+               try {
+                  Autobus.frame.busesArchive.saveBusesArchive();
+               }
+               catch (Exception e){
+                  e.printStackTrace();
+               }
+               Chauffeur oldChauffeur = currentlyUpdatingBusReservation.getChauffeur();
+               for (int i = 0; i < oldChauffeur.getListOfStartEndDates().size(); i++) {
+                  if(currentlyUpdatingBusReservation.getNewDateInterval()[0].toString().equals(oldChauffeur.getListOfStartEndDates().get(i)[0].toString())) {
+                     oldChauffeur.getListOfStartEndDates().remove(i);
+                     oldChauffeur.setDatePointer(i);
+                     break;
+                  }
+               }
+               chauffeur.addNewReservationPeriod(new java.util.Date[]{javastartDate,javaendDate});
+               try {
+                  Autobus.frame.chauffeursArchive.saveChauffeursArchive();
+               }
+               catch (Exception e){
+                  e.printStackTrace();
+               }
+               for (int i=0; i< Autobus.frame.customersArchive.size(); i++){
+                  if (phoneCustomerReservationUpdate.getText().equalsIgnoreCase(Autobus.frame.customersArchive.get(i).getPhonenumber())) {
+                     customerIndex = i;
+                  }
+               }
+               if (customerIndex==-1) {
+                  Date birthday = null;
+                  String organisationType = "PRIVATE";
+                  if (companyRadioButtonReservationUpdate.isSelected()) {
+                     organisationType = "COMPANY";
+                  }
+                  if (schoolRadioButtonReservationUpdate.isSelected()){
+                     organisationType = "SCHOOL";
+                  }
+                  if (mmCustomerReservationUpdate.getText().equalsIgnoreCase("")||ddCustomerReservationUpdate.getText().equalsIgnoreCase("")||yyyyCustomerReservationUpdate.getText().equalsIgnoreCase("")){
+                     birthday = new Date(0, 0, 0);
+                  } else {
+                     int bMonth = 0;
+                     int bDay = 0;
+                     int bYear = 0;
+                     bMonth = Integer.parseInt(mmCustomerReservationUpdate.getText());
+                     bDay = Integer.parseInt(ddCustomerReservationUpdate.getText());
+                     bYear = Integer.parseInt(yyyyCustomerReservationUpdate.getText());
+                     birthday = new Date(bMonth, bDay, bYear);
+                  }
+                  Customer customer = new Customer(nameCustomerReservationUpdate.getText(), organisationNameReservationUpdate.getText(), emailCustomerReservationUpdate.getText(),
+                          addressCustomerReservationUpdate.getText(), birthday, phoneCustomerReservationUpdate.getText(), organisationType);
+                  customer.setMoneySpent(customer.getMoneySpent() + Double.parseDouble(updateBusReservationsNext.totalPriceUpdBusResNext.getText()));
+                  Autobus.frame.customersArchive.addCustomer(customer);
+                  try {
+                     Autobus.frame.customersArchive.saveCustomersArchive();
+                  } catch (Exception e) {
+
+                     e.printStackTrace();
+                  }
+                  customerIndex= Autobus.frame.customersArchive.size()-1;
+               }
+
+               currentlyUpdatingBusReservation.setCustomer(Autobus.frame.customersArchive.get(customerIndex));
+               currentlyUpdatingBusReservation.setChauffeur(chauffeur);
+               currentlyUpdatingBusReservation.setBus(bus);
+               currentlyUpdatingBusReservation.setTotalPrice(Double.parseDouble(updateBusReservationsNext.totalPriceUpdBusResNext.getText()));
+               currentlyUpdatingBusReservation.setNewDateInterval(new java.util.Date[]{javastartDate,javaendDate});
+               ArrayList<Passenger> listOfSelectedPassengers = new ArrayList<>();
+               currentlyUpdatingBusReservation.getPassengers().clear();
+               int passengersTableRowCount= tablePassengerReservationUpdate.getRowCount();
+               for (int i = 0; i < passengersTableRowCount; i++) {
+                  String passengersPhoneNumber = (String) tablePassengerReservationUpdate.getModel().getValueAt(i,2);
+                  String passengersName = (String) tablePassengerReservationUpdate.getModel().getValueAt(i,0);
+
+                  for (int j = 0; j < Autobus.frame.passengersArchive.size(); j++) {
+                     if(Autobus.frame.passengersArchive.getPassengersArchive().get(j).getPhonenumber().equals(passengersPhoneNumber) &&
+                             Autobus.frame.passengersArchive.getPassengersArchive().get(j).getName().equals(passengersName)){
+
+                        listOfSelectedPassengers.add(Autobus.frame.passengersArchive.getPassengersArchive().get(j));
+                     }
+                  }
+               }
+               currentlyUpdatingBusReservation.setPassengers(listOfSelectedPassengers);
+               try {
+                  Autobus.frame.reservationsArchive.saveReservationsArchive();
+               } catch (Exception e1) {
+                  e1.printStackTrace();
+               }
+               try {
+                  Autobus.frame.reservationsArchive.saveReservationsArchive();
+                  JOptionPane.showMessageDialog(null, "The updated reservation is now saved to the archive.");
+                  addressCustomerReservationUpdate.setText("");
+                  ddCustomerReservationUpdate.setText("");
+                  mmCustomerReservationUpdate.setText("");
+                  yyyyCustomerReservationUpdate.setText("");
+                  emailCustomerReservationUpdate.setText("");
+                  nameCustomerReservationUpdate.setText("");
+                  phoneCustomerReservationUpdate.setText("");
+                  addressCustomerReservationUpdate.setText("");
+                  ddPassengerReservationUpdate.setText("");
+                  mmPassengerReservationUpdate.setText("");
+                  yyyyPassengerReservationUpdate.setText("");
+                  emailPassengerReservationUpdate.setText("");
+                  namePassengerReservationUpdate.setText("");
+                  phonePassengerReservationUpdate.setText("");
+                  newTablePassengerReservationUpdate = (DefaultTableModel) tablePassengerReservationUpdate.getModel();
+                  newTablePassengerReservationUpdate.setRowCount(0);
+                  isPassengerCheckBox.setSelected(false);
+                  companyRadioButtonReservationUpdate.setSelected(false);
+                  privateRadioButtonReservationUpdate.setSelected(false);
+                  schoolRadioButtonReservationUpdate.setSelected(false);
+                  organisationNameReservationUpdate.setText("");
+                  updateBusReservationsNext.endDayNext.setText("");
+                  updateBusReservationsNext.endMonthNext.setText("");
+                  updateBusReservationsNext.endYearNext.setText("");
+                  updateBusReservationsNext.endHourNext.setText("");
+                  updateBusReservationsNext.endMinuteNext.setText("");
+                  updateBusReservationsNext.startDayNext.setText("");
+                  updateBusReservationsNext.startMonthNext.setText("");
+                  updateBusReservationsNext.startYearNext.setText("");
+                  updateBusReservationsNext.startHourNext.setText("");
+                  updateBusReservationsNext.startMinuteNext.setText("");
+                  Autobus.frame.hideAllPanels();
+                  Autobus.frame.listBusReservations();
+                  Autobus.frame.listPassengers();
+                  Autobus.frame.listCustomers();
+                  Autobus.frame.listBuses();
+                  Autobus.frame.listChauffeurs();
+                  Autobus.frame.panelBusReservations.setVisible(true);
+               } catch (Exception e) {
+
+                  e.printStackTrace();
+               }
+            } else {
+               JOptionPane.showMessageDialog(null, "You have to fill out the fields correctly:\n"+str);
+            }
+
+         }
+
+      });
     
       Autobus.frame.lblUpdateBusReservation.addMouseListener(new MouseAdapter(){
          @Override
@@ -123,13 +680,16 @@ public class UpdateBusReservations extends JPanel {
                // FILLING CUSTOMER INFORMATION
                phoneCustomerReservationUpdate.setText(currentlyUpdatingBusReservation.getCustomer().getPhonenumber());
                organisationNameReservationUpdate.setText(currentlyUpdatingBusReservation.getCustomer().getOrganisationName());
-               nameCustomerReservationUpdate.setText(currentlyUpdatingBusReservation.getCustomer().getOrganisationType());
+               nameCustomerReservationUpdate.setText(currentlyUpdatingBusReservation.getCustomer().getName());
                addressCustomerReservationUpdate.setText(currentlyUpdatingBusReservation.getCustomer().getAddress());
                emailCustomerReservationUpdate.setText(currentlyUpdatingBusReservation.getCustomer().getEmail());
                mmCustomerReservationUpdate.setText(Integer.toString(currentlyUpdatingBusReservation.getCustomer().getBirthday().getMonth()));
                ddCustomerReservationUpdate.setText(Integer.toString(currentlyUpdatingBusReservation.getCustomer().getBirthday().getDay()));
                yyyyCustomerReservationUpdate.setText(Integer.toString(currentlyUpdatingBusReservation.getCustomer().getBirthday().getYear()));
-               
+               companyRadioButtonReservationUpdate.setSelected(currentlyUpdatingBusReservation.getCustomer().getOrganisationName().equals("COMPANY"));
+               privateRadioButtonReservationUpdate.setSelected(currentlyUpdatingBusReservation.getCustomer().getOrganisationName().equals("PRIVATE"));
+               schoolRadioButtonReservationUpdate.setSelected(currentlyUpdatingBusReservation.getCustomer().getOrganisationName().equals("SCHOOL"));
+
                Autobus.frame.hideAllPanels();
                listPassengers();
                Autobus.frame.updateBusReservations.setVisible(true);
@@ -152,33 +712,33 @@ public class UpdateBusReservations extends JPanel {
                   if (!(10000000<phone&&phone<=99999999)) {
                      JOptionPane.showMessageDialog(null, "Phonenumber does not have 8 digits!");
                   } else {
-                     for (int i =0; i<customersArchive.size();i++){
-                        if (customersArchive.get(i).getPhonenumber().equalsIgnoreCase(phoneCustomerReservationUpdate.getText())){
-                           organisationNameReservationUpdate.setText(customersArchive.get(i).getOrganisationName());
-                           nameCustomerReservationUpdate.setText(customersArchive.get(i).getName());
-                           addressCustomerReservationUpdate.setText(customersArchive.get(i).getAddress());
-                           emailCustomerReservationUpdate.setText(customersArchive.get(i).getEmail());
-                           mmCustomerReservationUpdate.setText(Integer.toString(customersArchive.get(i).getBirthday().getMonth()));
-                           ddCustomerReservationUpdate.setText(Integer.toString(customersArchive.get(i).getBirthday().getDay()));
-                           yyyyCustomerReservationUpdate.setText(Integer.toString(customersArchive.get(i).getBirthday().getYear()));
-                           if (customersArchive.get(i).getOrganisationType().equalsIgnoreCase("PRIVATE")) {
+                     for (int i =0; i<Autobus.frame.customersArchive.size();i++){
+                        if (Autobus.frame.customersArchive.get(i).getPhonenumber().equalsIgnoreCase(phoneCustomerReservationUpdate.getText())){
+                           organisationNameReservationUpdate.setText(Autobus.frame.customersArchive.get(i).getOrganisationName());
+                           nameCustomerReservationUpdate.setText(Autobus.frame.customersArchive.get(i).getName());
+                           addressCustomerReservationUpdate.setText(Autobus.frame.customersArchive.get(i).getAddress());
+                           emailCustomerReservationUpdate.setText(Autobus.frame.customersArchive.get(i).getEmail());
+                           mmCustomerReservationUpdate.setText(Integer.toString(Autobus.frame.customersArchive.get(i).getBirthday().getMonth()));
+                           ddCustomerReservationUpdate.setText(Integer.toString(Autobus.frame.customersArchive.get(i).getBirthday().getDay()));
+                           yyyyCustomerReservationUpdate.setText(Integer.toString(Autobus.frame.customersArchive.get(i).getBirthday().getYear()));
+                           if (Autobus.frame.customersArchive.get(i).getOrganisationType().equalsIgnoreCase("PRIVATE")) {
                               companyRadioButtonReservationUpdate.setSelected(false);
                               privateRadioButtonReservationUpdate.setSelected(true);
                               schoolRadioButtonReservationUpdate.setSelected(false);
                            }
-                           if (customersArchive.get(i).getOrganisationType().equalsIgnoreCase("COMPANY")) {
+                           if (Autobus.frame.customersArchive.get(i).getOrganisationType().equalsIgnoreCase("COMPANY")) {
                               companyRadioButtonReservationUpdate.setSelected(true);
                               privateRadioButtonReservationUpdate.setSelected(false);
                               schoolRadioButtonReservationUpdate.setSelected(false);                       
                                                       }
-                           if (customersArchive.get(i).getOrganisationType().equalsIgnoreCase("SCHOOL")) {
+                           if (Autobus.frame.customersArchive.get(i).getOrganisationType().equalsIgnoreCase("SCHOOL")) {
                               companyRadioButtonReservationUpdate.setSelected(false);
                               privateRadioButtonReservationUpdate.setSelected(false);
                               schoolRadioButtonReservationUpdate.setSelected(true);
                            }
                            break;
                         }
-                        if (i==customersArchive.size()-1||customersArchive.size()==0) {
+                        if (i==Autobus.frame.customersArchive.size()-1||Autobus.frame.customersArchive.size()==0) {
                            JOptionPane.showMessageDialog(null, "No customer match found!\nPlease fill in new customer.");                          
                         }
                         
@@ -213,75 +773,98 @@ public class UpdateBusReservations extends JPanel {
       // IS A PASSENGER IN CUSTOMER
       isPassengerCheckBox.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
-            String str = new String();
-            int month = 0;
-            int day = 0;
-            int year = 0;
-            Calendar timeNow = Calendar.getInstance();
-            int currentYear = timeNow.get(Calendar.YEAR);
-            try {
-               int phone = Integer.parseInt(phoneCustomerReservationUpdate.getText());
-               if (!(10000000<phone&&phone<=99999999)) {
-                  str+= "\nPhone number does not have 8 digits!";
-               } 
-            } catch (Exception e3) {
-               str+= "\nEntered phone number does not appear to be digits!";
-            }
-            if (organisationNameReservationUpdate.getText().equalsIgnoreCase("")) {
-               str+= "\nName/organisation cannot be empty!";
-            }
-            if (nameCustomerReservationUpdate.getText().equalsIgnoreCase("")){
-               str+= "\nName/contact cannot be empty!";
-            }
-            if (addressCustomerReservationUpdate.getText().equalsIgnoreCase("")) {
-               str+= "\nAddress cannot be empty!";
-            }
-            if (emailCustomerReservationUpdate.getText().equalsIgnoreCase("")){
-               str+= "\nEmail address cannot be empty!";
-            }
-            if (!(emailCustomerReservationUpdate.getText().contains("@")&&emailCustomerReservationUpdate.getText().contains("."))){
-               str+= "\nEmail address does not appear to be in correct format!";
-            }
-         
-            try {
-               month = Integer.parseInt(mmCustomerReservationUpdate.getText());
-               if (month>12||month<1) str = str + "\nMonth does not seem to be a number between 1-12!";
-            } catch (NumberFormatException e1) {
-               str = str + "\nMonth does not seem to be a number between 1-12!";
-            }
-            try {
-               day = Integer.parseInt(ddCustomerReservationUpdate.getText());
-               if (month==1||month==3||month==5||month==7||month==8||month==10||month==12) {
-                  if (!(1<=day&&day<=31)) {
-                     str = str + "\nDay does not seem to be a number between 1-31!";
+            if (isPassengerCheckBox.isSelected()) {
+               String str = new String();
+               int month = 0;
+               int day = 0;
+               int year = 0;
+               Calendar timeNow = Calendar.getInstance();
+               int currentYear = timeNow.get(Calendar.YEAR);
+               try {
+                  int phone = Integer.parseInt(phoneCustomerReservationUpdate.getText());
+                  if (!(10000000<phone&&phone<=99999999)) {
+                     str+= "\nPhone number does not have 8 digits!";
                   }
-               } else if (month==2){
-                  if (!(1<=day&&day<=28)) {
-                     str = str + "\nDay does not seem to be a number between 1-28!";
+               } catch (Exception e3) {
+                  str+= "\nEntered phone number does not appear to be digits!";
+               }
+               if (organisationNameReservationUpdate.getText().equalsIgnoreCase("")) {
+                  str+= "\nName/organisation cannot be empty!";
+               }
+               if (nameCustomerReservationUpdate.getText().equalsIgnoreCase("")){
+                  str+= "\nName/contact cannot be empty!";
+               }
+               if (addressCustomerReservationUpdate.getText().equalsIgnoreCase("")) {
+                  str+= "\nAddress cannot be empty!";
+               }
+               if (emailCustomerReservationUpdate.getText().equalsIgnoreCase("")){
+                  str+= "\nEmail address cannot be empty!";
+               }
+               if (!(emailCustomerReservationUpdate.getText().contains("@")&&emailCustomerReservationUpdate.getText().contains("."))){
+                  str+= "\nEmail address does not appear to be in correct format!";
+               }
+
+               try {
+                  month = Integer.parseInt(mmCustomerReservationUpdate.getText());
+                  if (month>12||month<1) str = str + "\nMonth does not seem to be a number between 1-12!";
+               } catch (NumberFormatException e1) {
+                  str = str + "\nMonth does not seem to be a number between 1-12!";
+               }
+               try {
+                  day = Integer.parseInt(ddCustomerReservationUpdate.getText());
+                  if (month==1||month==3||month==5||month==7||month==8||month==10||month==12) {
+                     if (!(1<=day&&day<=31)) {
+                        str = str + "\nDay does not seem to be a number between 1-31!";
+                     }
+                  } else if (month==2){
+                     if (!(1<=day&&day<=28)) {
+                        str = str + "\nDay does not seem to be a number between 1-28!";
+                     }
+                  } else if (month==4||month==6||month==9||month==11){
+                     if (!(1<=day&&day<=30)) {
+                        str = str + "\nDay does not seem to be a number between 1-30!";
+                     }
                   }
-               } else if (month==4||month==6||month==9||month==11){
-                  if (!(1<=day&&day<=30)) {
-                     str = str + "\nDay does not seem to be a number between 1-30!";
+               } catch (NumberFormatException e1) {
+                  str = str + "\nDay does not seem to be a number between 1-31!";
+               }
+               try {
+                  year = Integer.parseInt(yyyyCustomerReservationUpdate.getText());
+                  if (year>currentYear||year<currentYear-120) str = str + "\nYear does not appear to be a valid number!";
+               } catch (NumberFormatException e1) {
+                  str = str + "\nYear does not appear to be a valid number!";
+               }
+
+               if (str.equalsIgnoreCase("")) {
+                  Autobus.frame.passengersArchive.addPassenger(new Passenger(nameCustomerReservationUpdate.getText(),emailCustomerReservationUpdate.getText(), addressCustomerReservationUpdate.getText(), new Date(month,day,year),phoneCustomerReservationUpdate.getText()));
+                  updatePassengerListNewBus(Autobus.frame.passengersArchive.get(Autobus.frame.passengersArchive.size() - 1));
+               } else {
+                  JOptionPane.showMessageDialog(null, "You have to fill out the fields correct:\n"+str);
+                  isPassengerCheckBox.setSelected(false);
+               }
+            }
+            else{
+               for (int i = 0; i < Autobus.frame.passengersArchive.size(); i++) {
+                  if(Autobus.frame.passengersArchive.get(i).getName().equals(nameCustomerReservationUpdate.getText()) && Autobus.frame.passengersArchive.get(i).getName().equals(nameCustomerReservationUpdate.getText())) {
+                     Autobus.frame.passengersArchive.removePassenger(i);
+                     break;
                   }
                }
-            } catch (NumberFormatException e1) {
-               str = str + "\nDay does not seem to be a number between 1-31!";
+               DefaultTableModel tableModel = (DefaultTableModel) tablePassengerReservationUpdate.getModel();
+               for (int i = 0; i < tablePassengerReservationUpdate.getRowCount(); i++) {
+                  if(tablePassengerReservationUpdate.getValueAt(i,0).equals(nameCustomerReservationUpdate.getText()) && tablePassengerReservationUpdate.getValueAt(i,2).equals(phoneCustomerReservationUpdate.getText())){
+                     tableModel.removeRow(i);
+                     break;
+                  }
+               }
             }
-            try {
-               year = Integer.parseInt(yyyyCustomerReservationUpdate.getText());
-               if (year>currentYear||year<currentYear-120) str = str + "\nYear does not appear to be a valid number!";
-            } catch (NumberFormatException e1) {
-               str = str + "\nYear does not appear to be a valid number!";
+            try{
+               Autobus.frame.passengersArchive.savePassengersArchive();
             }
-            
-            if (str.equalsIgnoreCase("")) {
-   
-               updatePassengerListNewBus(nameCustomerReservationUpdate.getText(), addressCustomerReservationUpdate.getText(), phoneCustomerReservationUpdate.getText(), emailCustomerReservationUpdate.getText(), (String)(month+"/"+day+"/"+year));
-            } else {
-               JOptionPane.showMessageDialog(null, "You have to fill out the fields correct:\n"+str);
-               isPassengerCheckBox.setSelected(false);
-            }        
-            
+            catch(Exception ex){
+               ex.printStackTrace();
+            }
+
          }
       });
    
@@ -346,8 +929,14 @@ public class UpdateBusReservations extends JPanel {
             }
             
             if (str.equalsIgnoreCase("")) {
-               
-               updatePassengerListNewBus(namePassengerReservationUpdate.getText(), addressPassengerReservationUpdate.getText(), phonePassengerReservationUpdate.getText(), emailPassengerReservationUpdate.getText(), (String)(month+"/"+day+"/"+year));
+               Autobus.frame.passengersArchive.addPassenger(new Passenger(namePassengerReservationUpdate.getText(),emailPassengerReservationUpdate.getText(), addressPassengerReservationUpdate.getText(), new Date(month,day,year),phonePassengerReservationUpdate.getText()));
+               updatePassengerListNewBus(Autobus.frame.passengersArchive.get(Autobus.frame.passengersArchive.size() - 1));
+               try{
+                  Autobus.frame.passengersArchive.savePassengersArchive();
+               }
+               catch(Exception ex){
+                  ex.printStackTrace();
+               }
             } else {
                JOptionPane.showMessageDialog(null, "You have to fill out the fields correct:\n"+str);
             }        
@@ -380,17 +969,12 @@ public class UpdateBusReservations extends JPanel {
                   if (!(10000000<phone&&phone<=99999999)) {
                      JOptionPane.showMessageDialog(null, "Phonenumber does not have 8 digits!");
                   } else {
-                     for (int i =0; i<passengersArchive.size();i++){
-                        if (passengersArchive.get(i).getPhonenumber().equalsIgnoreCase(phonePassengerReservationUpdate.getText())){
-                           namePassengerReservationUpdate.setText(passengersArchive.get(i).getName());
-                           addressPassengerReservationUpdate.setText(passengersArchive.get(i).getAddress());
-                           emailPassengerReservationUpdate.setText(passengersArchive.get(i).getEmail());
-                           mmPassengerReservationUpdate.setText(Integer.toString(passengersArchive.get(i).getBirthday().getMonth()));
-                           ddPassengerReservationUpdate.setText(Integer.toString(passengersArchive.get(i).getBirthday().getDay()));
-                           yyyyPassengerReservationUpdate.setText(Integer.toString(passengersArchive.get(i).getBirthday().getYear()));
+                     for (int i =0; i<Autobus.frame.passengersArchive.size();i++){
+                        if (Autobus.frame.passengersArchive.get(i).getPhonenumber().equalsIgnoreCase(phonePassengerReservationUpdate.getText())){
+                           updatePassengerListNewBus(Autobus.frame.passengersArchive.get(i));
                            break;
                         } 
-                        if(i==passengersArchive.size()-1||passengersArchive.size()==0) {
+                        if(i==Autobus.frame.passengersArchive.size()-1||Autobus.frame.passengersArchive.size()==0) {
                            JOptionPane.showMessageDialog(null, "No passenger match found!\nPlease fill in new passenger.");                           
                         }
                      }
@@ -503,6 +1087,11 @@ public class UpdateBusReservations extends JPanel {
             }
             
             if (str.equalsIgnoreCase("")) {
+               listElements();
+               int durationInHours =   (int)((currentlyUpdatingBusReservation.getNewDateInterval()[1].getTime() -
+                       currentlyUpdatingBusReservation.getNewDateInterval()[0].getTime()) / 3600000);
+               listNewBusSelectChauffeur(currentlyUpdatingBusReservation.getNewDateInterval()[0], durationInHours);
+               listNewBusSelectBus(currentlyUpdatingBusReservation.getNewDateInterval()[0], durationInHours);
                Autobus.frame.hideAllPanels();
                Autobus.frame.updateBusReservationsNext.setVisible(true);
                try {
@@ -548,20 +1137,20 @@ public class UpdateBusReservations extends JPanel {
       });
       
       // UPDATE SELECT BUS TABLE FROM NEXT
-      updateBusReservationsNext.tableSelectBusNext.getSelectionModel().addListSelectionListener(new ListSelectionListener() {    
+      updateBusReservationsNext.lblSelectBusUpdBusResButton.addMouseListener(new MouseAdapter() {
          @Override
-         public void valueChanged(ListSelectionEvent e) {
+         public void mouseReleased(MouseEvent e) {
             updateSummaryNewBus();
          }
       });
       
       // UPDATE SELECT CHAUFFEUR TABLE FROM NEXT
-      updateBusReservationsNext.tableSelectChauffeurNext.getSelectionModel().addListSelectionListener(new ListSelectionListener() {    
+     /* updateBusReservationsNext.lblSelectChauffeurUpdBusResButton.addMouseListener(new MouseAdapter() {
          @Override
-         public void valueChanged(ListSelectionEvent e) {
+         public void mouseReleased(MouseEvent e) {
             updateSummaryNewBus();
          }
-      });
+      });*/
       
       // CANCEL IN NEXT
       updateBusReservationsNext.cancelLabelNext.addMouseListener(new MouseAdapter() {
@@ -1213,17 +1802,15 @@ public class UpdateBusReservations extends JPanel {
       }
    }
    
-   public void updatePassengerListNewBus(String name, String address, String phone, String email, String birthday){
-      Autobus.frame.newBusPassengersTable = (DefaultTableModel) Autobus.frame.tableNewBusPassengers.getModel();
+   public void updatePassengerListNewBus(Passenger newPassenger){
+      newTablePassengerReservationUpdate = (DefaultTableModel) tablePassengerReservationUpdate.getModel();
       Object[] rowData = new Object[5];      
-      rowData[0] = name;
-      rowData[1] = address;
-      rowData[2] = phone;
-      rowData[3] = email;
-      rowData[4] = birthday;
-      Autobus.frame.newBusPassengersTable.addRow(rowData);
-      Autobus.frame.newBusPassengersTable = (DefaultTableModel) Autobus.frame.tablePassengersInNewTourReservation.getModel();
-      Autobus.frame.newBusPassengersTable.addRow(rowData);
+      rowData[0] = newPassenger.getName();
+      rowData[1] = newPassenger.getAddress();
+      rowData[2] = newPassenger.getPhonenumber();
+      rowData[3] = newPassenger.getEmail();
+      rowData[4] = newPassenger.getBirthday().displayDate();
+      newTablePassengerReservationUpdate.addRow(rowData);
    }
    
    public void updateSummaryNewBus(){
@@ -1275,7 +1862,7 @@ public class UpdateBusReservations extends JPanel {
             ||updateBusReservationsNext.tableSelectBusNext.getSelectedRow()==-1)) {
          String busSelected = (String)newBusSelectBusTable.getValueAt(updateBusReservationsNext.tableSelectBusNext.getSelectedRow(), 0);
          double pricePerDay=0;
-         pricePerDay=busesArchive.getBusById(busSelected).getPricePerHour()*8;//price/hour * 8 working hours per day = price/day
+         pricePerDay=Autobus.frame.busesArchive.getBusById(busSelected).getPricePerHour()*8;//price/hour * 8 working hours per day = price/day
          double totalPrice=0;
          int numberOfPassengers=tablePassengerReservationUpdate.getRowCount();
          int monthStart=0;
@@ -1308,17 +1895,17 @@ public class UpdateBusReservations extends JPanel {
          if (currentDate.equals(startDate)&&startDate.before(endDate)||currentDate.before(startDate)&&startDate.before(endDate)) {
             int daysCount = daysBetweenDates(startDate, endDate);
             if (updateBusReservationsNext.allInclusiveCheckBoxNext.isSelected()) {
-               pricePerDay+=numberOfPassengers*priceList.getPriceAllInclusive();
+               pricePerDay+=numberOfPassengers*Autobus.frame.priceList.getPriceAllInclusive();
             }
             if (updateBusReservationsNext.breakfastCheckBoxNext.isSelected()){
-               pricePerDay+=numberOfPassengers*priceList.getPriceBreakfast();
+               pricePerDay+=numberOfPassengers*Autobus.frame.priceList.getPriceBreakfast();
             }
             if (updateBusReservationsNext.lunchCheckBoxNext.isSelected()){
-               pricePerDay+=numberOfPassengers*priceList.getPriceLunch();
+               pricePerDay+=numberOfPassengers*Autobus.frame.priceList.getPriceLunch();
             }
             totalPrice=daysCount*pricePerDay;
             if (updateBusReservationsNext.ticketsCheckBoxNext.isSelected()) {
-               totalPrice+=priceList.getPriceEntranceTickets();
+               totalPrice+=Autobus.frame.priceList.getPriceEntranceTickets();
             }
             str+= "\n\nTotal price: "+round(totalPrice, 2) +"\n Total price per passenger: "+round(totalPrice/numberOfPassengers, 2);
          } else {
@@ -1349,13 +1936,13 @@ public class UpdateBusReservations extends JPanel {
       newBusSelectBusTable = (DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel();
       deleteAllRows(newBusSelectBusTable);
       Object[] rowData = new Object[4];
-      for (int i=0; i<busesArchive.size(); i++){
-         if (updateBusReservationsNext.tableSelectBusNext.getRowCount()<=busesArchive.get(i).getMaxNumberOfSeats()
-            &&(busesArchive.get(i).isAvailable(startDate, durationInHours))) {
-            rowData[0] = busesArchive.get(i).getVehicleID();
-            rowData[1] = busesArchive.get(i).getPricePerHour();
-            rowData[2] = busesArchive.get(i).getMaxNumberOfSeats();
-            rowData[3] = busesArchive.get(i).getModelString();
+      for (int i=0; i<Autobus.frame.busesArchive.size(); i++){
+         if (updateBusReservationsNext.tableSelectBusNext.getRowCount()<= Autobus.frame.busesArchive.get(i).getMaxNumberOfSeats()
+            &&(Autobus.frame.busesArchive.get(i).isAvailable(startDate, durationInHours))) {
+            rowData[0] = Autobus.frame.busesArchive.get(i).getVehicleID();
+            rowData[1] = Autobus.frame.busesArchive.get(i).getPricePerHour();
+            rowData[2] = Autobus.frame.busesArchive.get(i).getMaxNumberOfSeats();
+            rowData[3] = Autobus.frame.busesArchive.get(i).getModelString();
             newBusSelectBusTable.addRow(rowData);        
          }
       }
@@ -1377,5 +1964,42 @@ public class UpdateBusReservations extends JPanel {
       for (int i = model.getRowCount() - 1; i >= 0; i--) {
          model.removeRow(i);
       }
+   }
+
+   public void listElements(){
+
+      Calendar cal = Calendar.getInstance();
+      cal.setTime(currentlyUpdatingBusReservation.getNewDateInterval()[0]);
+      int startMonth = cal.get(Calendar.MONTH) + 1;
+      int startDay = cal.get(Calendar.DAY_OF_MONTH);
+      int startYear = cal.get(Calendar.YEAR);
+      int startHour = cal.get(Calendar.HOUR_OF_DAY);
+      int startMinute = cal.get(Calendar.MINUTE);
+
+      cal.setTime(currentlyUpdatingBusReservation.getNewDateInterval()[1]);
+      int endMonth = cal.get(Calendar.MONTH) + 1;
+      int endDay = cal.get(Calendar.DAY_OF_MONTH);
+      int endYear = cal.get(Calendar.YEAR);
+      int endHour = cal.get(Calendar.HOUR_OF_DAY);
+      int endMinute = cal.get(Calendar.MINUTE);
+
+      updateBusReservationsNext.startMonthNext.setText(String.valueOf(startMonth));
+      updateBusReservationsNext.startDayNext.setText(String.valueOf(startDay));
+      updateBusReservationsNext.startYearNext.setText(String.valueOf(startYear));
+      updateBusReservationsNext.startHourNext.setText(String.valueOf(startHour));
+      updateBusReservationsNext.startMinuteNext.setText(String.valueOf(startMinute));
+
+      updateBusReservationsNext.endMonthNext.setText(String.valueOf(endMonth));
+      updateBusReservationsNext.endDayNext.setText(String.valueOf(endDay));
+      updateBusReservationsNext.endYearNext.setText(String.valueOf(endYear));
+      updateBusReservationsNext.endHourNext.setText(String.valueOf(endHour));
+      updateBusReservationsNext.endMinuteNext.setText(String.valueOf(endMinute));
+
+
+
+      updateBusReservationsNext.breakfastCheckBoxNext.setSelected(currentlyUpdatingBusReservation.getServices().isBreakfastIncluded());
+      updateBusReservationsNext.allInclusiveCheckBoxNext.setSelected(currentlyUpdatingBusReservation.getServices().isAllInclusive());
+      updateBusReservationsNext.lunchCheckBoxNext.setSelected(currentlyUpdatingBusReservation.getServices().isLunchIncluded());
+      updateBusReservationsNext.ticketsCheckBoxNext.setSelected(currentlyUpdatingBusReservation.getServices().isEntranceTickets());
    }
 }
