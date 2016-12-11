@@ -94,7 +94,7 @@ public class Tour implements Serializable{
 		}
 		
 		public String getBusAndType(){
-			return (String)"#"+bus.getVehicleID()+" "+bus.getModel()+" "+bus.getMaxNumberOfSeats()+" seats";
+			return "#"+bus.getVehicleID()+" "+bus.getModel()+" "+bus.getMaxNumberOfSeats()+" seats";
 		}
 		
 		public void setChauffeur(Chauffeur chauffeur){

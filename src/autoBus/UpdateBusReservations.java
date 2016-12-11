@@ -435,7 +435,7 @@ public class UpdateBusReservations extends JPanel {
                e1.printStackTrace();
             }
             int daysCount = 0;
-            int discount = 0;
+            double discount = 0;
             SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
             java.util.Date startDate = null, endDate = null, currentDate = new java.util.Date();
             DateInterval dateInterval = new DateInterval();
@@ -502,18 +502,10 @@ public class UpdateBusReservations extends JPanel {
                }
             }
             totalPrice += pricePerDay*daysCount;
-            totalPrice = totalPrice*(100-discount/100);
+            totalPrice = totalPrice - (totalPrice * discount);
             totalPrice = round(totalPrice, 2);
 
-            if(updateBusReservationsNext.totalPriceUpdBusResNext.getText().equals("")){
-               str+="\nYou need to enter total price for reservation!";
-            }
-            try{
-               Double.parseDouble(updateBusReservationsNext.totalPriceUpdBusResNext.getText());
-            }
-            catch(NumberFormatException ex){
-               str+="\nYour total price for reservation seems no to be a valid number!";
-            }
+
             if (str.equalsIgnoreCase("")){
                javastartDate = parseDate(yearStart+"-" + monthStart + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
                javaendDate = parseDate(yearEnd+"-" + monthEnd + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
@@ -575,7 +567,6 @@ public class UpdateBusReservations extends JPanel {
                   }
                   Customer customer = new Customer(nameCustomerReservationUpdate.getText(), organisationNameReservationUpdate.getText(), emailCustomerReservationUpdate.getText(),
                           addressCustomerReservationUpdate.getText(), birthday, phoneCustomerReservationUpdate.getText(), organisationType);
-                  customer.setMoneySpent(customer.getMoneySpent() + Double.parseDouble(updateBusReservationsNext.totalPriceUpdBusResNext.getText()));
                   Autobus.frame.customersArchive.addCustomer(customer);
                   try {
                      Autobus.frame.customersArchive.saveCustomersArchive();
@@ -586,10 +577,11 @@ public class UpdateBusReservations extends JPanel {
                   customerIndex= Autobus.frame.customersArchive.size()-1;
                }
 
+               Autobus.frame.customersArchive.get(customerIndex).setMoneySpent(Autobus.frame.customersArchive.get(customerIndex).getMoneySpent() + (totalPrice - currentlyUpdatingBusReservation.getTotalPrice()));
                currentlyUpdatingBusReservation.setCustomer(Autobus.frame.customersArchive.get(customerIndex));
                currentlyUpdatingBusReservation.setChauffeur(chauffeur);
                currentlyUpdatingBusReservation.setBus(bus);
-               currentlyUpdatingBusReservation.setTotalPrice(Double.parseDouble(updateBusReservationsNext.totalPriceUpdBusResNext.getText()));
+               currentlyUpdatingBusReservation.setTotalPrice(totalPrice);
                currentlyUpdatingBusReservation.setNewDateInterval(new java.util.Date[]{javastartDate,javaendDate});
                ArrayList<Passenger> listOfSelectedPassengers = new ArrayList<>();
                currentlyUpdatingBusReservation.getPassengers().clear();
@@ -603,6 +595,7 @@ public class UpdateBusReservations extends JPanel {
                              Autobus.frame.passengersArchive.getPassengersArchive().get(j).getName().equals(passengersName)){
 
                         listOfSelectedPassengers.add(Autobus.frame.passengersArchive.getPassengersArchive().get(j));
+                        break;
                      }
                   }
                }
@@ -840,8 +833,18 @@ public class UpdateBusReservations extends JPanel {
                }
 
                if (str.equalsIgnoreCase("")) {
-                  Autobus.frame.passengersArchive.addPassenger(new Passenger(nameCustomerReservationUpdate.getText(),emailCustomerReservationUpdate.getText(), addressCustomerReservationUpdate.getText(), new Date(month,day,year),phoneCustomerReservationUpdate.getText()));
-                  updatePassengerListNewBus(Autobus.frame.passengersArchive.get(Autobus.frame.passengersArchive.size() - 1));
+                  Passenger newPassenger = null;
+                  for (int i = 0; i < Autobus.frame.passengersArchive.size(); i++) {
+                     if(Autobus.frame.passengersArchive.get(i).getPhonenumber().equals(phoneCustomerReservationUpdate.getText())
+                             && Autobus.frame.passengersArchive.get(i).getName().equals(nameCustomerReservationUpdate.getText())) {
+                        newPassenger = Autobus.frame.passengersArchive.get(i);
+                        break;
+                     }
+                  }
+                  if(newPassenger == null) {
+                     Autobus.frame.passengersArchive.addPassenger(new Passenger(nameCustomerReservationUpdate.getText(), emailCustomerReservationUpdate.getText(), addressCustomerReservationUpdate.getText(), new Date(month, day, year), phoneCustomerReservationUpdate.getText()));
+                  }
+                  updatePassengerListNewBus(newPassenger);
                } else {
                   JOptionPane.showMessageDialog(null, "You have to fill out the fields correct:\n"+str);
                   isPassengerCheckBox.setSelected(false);
@@ -864,6 +867,7 @@ public class UpdateBusReservations extends JPanel {
             }
             try{
                Autobus.frame.passengersArchive.savePassengersArchive();
+               Autobus.frame.listPassengers();
             }
             catch(Exception ex){
                ex.printStackTrace();
@@ -984,7 +988,7 @@ public class UpdateBusReservations extends JPanel {
                      }
                   }
                } catch (Exception e4) {
-                  JOptionPane.showMessageDialog(null, "Entered phonenumber does not appear to be digits!");
+                  JOptionPane.showMessageDialog(null, "Entered phone number does not appear to be digits!");
                }
             }
          }
@@ -1002,8 +1006,9 @@ public class UpdateBusReservations extends JPanel {
                   tablePassengersModelInNewBusReservation.removeRow(index);
                   
                }
-            } else {
-               JOptionPane.showMessageDialog(null, "You need first to select the passenger you wish to remove!");
+            }
+            else {
+               JOptionPane.showMessageDialog(null, "You need to select the passenger you wish to remove!");
             }
          }
       });
@@ -1012,9 +1017,11 @@ public class UpdateBusReservations extends JPanel {
       clearAllPassengersReservationUpdate.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseReleased(MouseEvent arg0) {
-            newTablePassengerReservationUpdate = (DefaultTableModel) tablePassengerReservationUpdate.getModel(); 
-            newTablePassengerReservationUpdate.setRowCount(0);
-            isPassengerCheckBox.setSelected(false);
+            if (Autobus.okOrCancel("Are you sure you want to clear the list of the selected passengers?")==0) {
+               newTablePassengerReservationUpdate = (DefaultTableModel) tablePassengerReservationUpdate.getModel();
+               newTablePassengerReservationUpdate.setRowCount(0);
+               isPassengerCheckBox.setSelected(false);
+            }
          }
       });
       

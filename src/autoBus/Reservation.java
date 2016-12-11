@@ -6,12 +6,12 @@ import java.util.ArrayList;
 public abstract class Reservation implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int reservationNumber;
-	private int discount;
+	private double discount;
 	private ArrayList<Passenger> passengers;
 	private Customer customer;
 	private double totalPrice;
 	
-	public Reservation (int reservationNumber, int discount, Customer customer){
+	public Reservation (int reservationNumber, double discount, Customer customer){
 		this.reservationNumber=reservationNumber;
 		this.discount=discount;
 		this.passengers = new ArrayList<>();
@@ -33,10 +33,10 @@ public abstract class Reservation implements Serializable{
 	public void setReservationNumber(int reservationNumber) {
 		this.reservationNumber = reservationNumber;
 	}
-	public int getDiscount() {
+	public double getDiscount() {
 		return discount;
 	}
-	public void setDiscount(int discount) {
+	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
 

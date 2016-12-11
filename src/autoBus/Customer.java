@@ -12,7 +12,7 @@ public class Customer implements Serializable{
 	private Date birthday;
 	private String phonenumber;
 	private String organisationType; //PRIVATE, COMPANY, SCHOOL
-	private int discount;
+	private double discount;
 	private double moneySpent;
 	
 	public Customer(String name, String organisationName, String email, String address, Date birthday, String phonenumber,
@@ -36,11 +36,11 @@ public class Customer implements Serializable{
 		this.moneySpent = moneySpent;
 	}
 
-	public int getDiscount() {
+	public double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(int discount) {
+	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
 

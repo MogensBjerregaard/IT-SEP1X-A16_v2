@@ -86,6 +86,7 @@ public class UpdateChauffeur extends JPanel
                      // FILLING CHAUFFEURS INFORMATION
 
                      DefaultTableModel updateChauffeurTable = (DefaultTableModel) tableUpdateChauffeur.getModel();
+                     Autobus.frame.deleteAllRows(updateChauffeurTable);
                      Object[] rowData = new Object[3];
                      for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
                         if(Autobus.frame.toursArchive.get(i).getChauffeursObject().getName().equals(currentlyUpdatingChauffeur.getName())

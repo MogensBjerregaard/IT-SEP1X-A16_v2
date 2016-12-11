@@ -46,7 +46,6 @@ public class UpdateBusReservationsNext extends JPanel {
    JLabel nextLabelNext;
    JLabel searchLabelNext;
     JLabel lblSelectBusUpdBusResButton;
-    JTextField totalPriceUpdBusResNext;
 
 
    public UpdateBusReservationsNext() {
@@ -314,44 +313,34 @@ public class UpdateBusReservationsNext extends JPanel {
       lblSelectBusUpdBusResButton.setForeground(Color.WHITE);
       lblSelectBusUpdBusResButton.setFont(new Font("Century Gothic", Font.PLAIN, 14));
       lblSelectBusUpdBusResButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
-      
-      totalPriceUpdBusResNext = new JTextField();
-      totalPriceUpdBusResNext.setForeground(Color.WHITE);
-      totalPriceUpdBusResNext.setColumns(10);
-      totalPriceUpdBusResNext.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Total Price", TitledBorder.LEADING, TitledBorder.TOP, null, Color.WHITE));
-      totalPriceUpdBusResNext.setBackground(new Color(51, 153, 153));
       GroupLayout gl_panel = new GroupLayout(panel);
       gl_panel.setHorizontalGroup(
       	gl_panel.createParallelGroup(Alignment.LEADING)
-      		.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 1370, Short.MAX_VALUE)
+      		.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 1323, Short.MAX_VALUE)
       		.addGroup(gl_panel.createSequentialGroup()
-      			.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+      			.addContainerGap()
+      			.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
       				.addGroup(gl_panel.createSequentialGroup()
-      					.addContainerGap()
       					.addComponent(cancelLabelNext)
       					.addGap(56)
       					.addComponent(nextLabelNext))
-      				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-      					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+      				.addGroup(gl_panel.createSequentialGroup()
+      					.addGap(12)
+      					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
       						.addGroup(gl_panel.createSequentialGroup()
-      							.addContainerGap()
       							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
       								.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)
       								.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE))
       							.addPreferredGap(ComponentPlacement.UNRELATED)
       							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
       							.addGap(18)
-      							.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
-      							.addPreferredGap(ComponentPlacement.UNRELATED))
-      						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-      							.addContainerGap()
-      							.addComponent(totalPriceUpdBusResNext, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
-      							.addGap(359)
+      							.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE))
+      						.addGroup(gl_panel.createSequentialGroup()
       							.addComponent(lblSelectBusUpdBusResButton)
       							.addGap(218)))
       					.addPreferredGap(ComponentPlacement.UNRELATED)
       					.addComponent(summaryPaneNext, GroupLayout.PREFERRED_SIZE, 511, GroupLayout.PREFERRED_SIZE)))
-      			.addContainerGap(171, Short.MAX_VALUE))
+      			.addContainerGap(20, Short.MAX_VALUE))
       );
       gl_panel.setVerticalGroup(
       	gl_panel.createParallelGroup(Alignment.LEADING)
@@ -369,16 +358,14 @@ public class UpdateBusReservationsNext extends JPanel {
       								.addGap(18)
       								.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))))
       					.addPreferredGap(ComponentPlacement.RELATED)
-      					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-      						.addComponent(totalPriceUpdBusResNext, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-      						.addComponent(lblSelectBusUpdBusResButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
+      					.addComponent(lblSelectBusUpdBusResButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
       				.addGroup(gl_panel.createSequentialGroup()
       					.addComponent(summaryPaneNext, GroupLayout.PREFERRED_SIZE, 434, GroupLayout.PREFERRED_SIZE)
       					.addGap(18)
       					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
       						.addComponent(nextLabelNext)
-      						.addComponent(cancelLabelNext))
-      					.addGap(452))))
+      						.addComponent(cancelLabelNext))))
+      			.addGap(452))
       );
       
       tableSelectChauffeurNext = new JTable();

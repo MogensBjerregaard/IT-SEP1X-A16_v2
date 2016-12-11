@@ -14,7 +14,7 @@ public class BusReservation extends Reservation{
 	private double totalPrice;
 	
 
-	public BusReservation(int reservationNumber, int discount, Customer customer, Chauffeur chauffeur, Bus bus,
+	public BusReservation(int reservationNumber, double discount, Customer customer, Chauffeur chauffeur, Bus bus,
 			Services services, DateInterval dateInterval, double price) {
 		super(reservationNumber, discount, customer);
 		this.chauffeur = chauffeur;

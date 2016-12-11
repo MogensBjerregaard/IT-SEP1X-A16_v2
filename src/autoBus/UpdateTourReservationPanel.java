@@ -16,6 +16,8 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.border.BevelBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -65,8 +67,275 @@ public class UpdateTourReservationPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	
+
 	public void createEventsForUpdateTouReservationPanel(){
+
+		searchForTourInUpdTourRes.getDocument().addDocumentListener(new DocumentListener() {
+			public void deleteAllRows(final DefaultTableModel model) {
+				for (int i = model.getRowCount() - 1; i >= 0; i--) {
+					model.removeRow(i);
+				}
+			}
+
+			public void changedUpdate(DocumentEvent e) {
+				DefaultTableModel toursTableModelInUpdTourRes;
+				deleteAllRows(
+						toursTableModelInUpdTourRes = (DefaultTableModel) tableToursInUpdTourRes.getModel());
+				String searchText;
+				if (!(searchText = searchForTourInUpdTourRes.getText()).equals("")) {
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
+						String destination = Autobus.frame.toursArchive.get(i).getDestination();
+						String substringOfDestination = destination.substring(0,
+								searchText.length() <= destination.length() ? searchText.length()
+										: destination.length());
+						if (substringOfDestination.equals(searchText)) {
+							rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
+							rowData[1] = Autobus.frame.toursArchive.get(i).getDestination();
+							rowData[2] = Autobus.frame.toursArchive.get(i).getPickUpPlacesString();
+							rowData[3] = Autobus.frame.toursArchive.get(i).getSeatsAvailable();
+							rowData[4] = Autobus.frame.toursArchive.get(i).getTotalPrice();
+							rowData[5] = Autobus.frame.toursArchive.get(i).getPricePerPassenger();
+							rowData[6] = Autobus.frame.toursArchive.get(i).getBusAndType();
+							rowData[7] = Autobus.frame.toursArchive.get(i).getChauffeur();
+							rowData[8] = Autobus.frame.toursArchive.get(i).getServicesString();
+							toursTableModelInUpdTourRes.addRow(rowData);
+						}
+					}
+				} else {
+					deleteAllRows(toursTableModelInUpdTourRes = (DefaultTableModel) tableToursInUpdTourRes.getModel());
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
+						rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
+						rowData[1] = Autobus.frame.toursArchive.get(i).getDestination();
+						rowData[2] = Autobus.frame.toursArchive.get(i).getPickUpPlacesString();
+						rowData[3] = Autobus.frame.toursArchive.get(i).getSeatsAvailable();
+						rowData[4] = Autobus.frame.toursArchive.get(i).getTotalPrice();
+						rowData[5] = Autobus.frame.toursArchive.get(i).getPricePerPassenger();
+						rowData[6] = Autobus.frame.toursArchive.get(i).getBusAndType();
+						rowData[7] = Autobus.frame.toursArchive.get(i).getChauffeur();
+						rowData[8] = Autobus.frame.toursArchive.get(i).getServicesString();
+						toursTableModelInUpdTourRes.addRow(rowData);
+					}
+				}
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				DefaultTableModel toursTableModelInUpdTourRes;
+				deleteAllRows(
+						toursTableModelInUpdTourRes = (DefaultTableModel) tableToursInUpdTourRes.getModel());
+				String searchText;
+				if (!(searchText = searchForTourInUpdTourRes.getText()).equals("")) {
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
+						String destination = Autobus.frame.toursArchive.get(i).getDestination();
+						String substringOfDestination = destination.substring(0,
+								searchText.length() <= destination.length() ? searchText.length()
+										: destination.length());
+						if (substringOfDestination.equals(searchText)) {
+							rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
+							rowData[1] = Autobus.frame.toursArchive.get(i).getDestination();
+							rowData[2] = Autobus.frame.toursArchive.get(i).getPickUpPlacesString();
+							rowData[3] = Autobus.frame.toursArchive.get(i).getSeatsAvailable();
+							rowData[4] = Autobus.frame.toursArchive.get(i).getTotalPrice();
+							rowData[5] = Autobus.frame.toursArchive.get(i).getPricePerPassenger();
+							rowData[6] = Autobus.frame.toursArchive.get(i).getBusAndType();
+							rowData[7] = Autobus.frame.toursArchive.get(i).getChauffeur();
+							rowData[8] = Autobus.frame.toursArchive.get(i).getServicesString();
+							toursTableModelInUpdTourRes.addRow(rowData);
+						}
+					}
+				} else {
+					deleteAllRows(toursTableModelInUpdTourRes = (DefaultTableModel) tableToursInUpdTourRes.getModel());
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
+						rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
+						rowData[1] = Autobus.frame.toursArchive.get(i).getDestination();
+						rowData[2] = Autobus.frame.toursArchive.get(i).getPickUpPlacesString();
+						rowData[3] = Autobus.frame.toursArchive.get(i).getSeatsAvailable();
+						rowData[4] = Autobus.frame.toursArchive.get(i).getTotalPrice();
+						rowData[5] = Autobus.frame.toursArchive.get(i).getPricePerPassenger();
+						rowData[6] = Autobus.frame.toursArchive.get(i).getBusAndType();
+						rowData[7] = Autobus.frame.toursArchive.get(i).getChauffeur();
+						rowData[8] = Autobus.frame.toursArchive.get(i).getServicesString();
+						toursTableModelInUpdTourRes.addRow(rowData);
+					}
+				}
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				DefaultTableModel toursTableModelInUpdTourRes;
+				deleteAllRows(
+						toursTableModelInUpdTourRes = (DefaultTableModel) tableToursInUpdTourRes.getModel());
+				String searchText;
+				if (!(searchText = searchForTourInUpdTourRes.getText()).equals("")) {
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
+						String destination = Autobus.frame.toursArchive.get(i).getDestination();
+						String substringOfDestination = destination.substring(0,
+								searchText.length() <= destination.length() ? searchText.length()
+										: destination.length());
+						if (substringOfDestination.equals(searchText)) {
+							rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
+							rowData[1] = Autobus.frame.toursArchive.get(i).getDestination();
+							rowData[2] = Autobus.frame.toursArchive.get(i).getPickUpPlacesString();
+							rowData[3] = Autobus.frame.toursArchive.get(i).getSeatsAvailable();
+							rowData[4] = Autobus.frame.toursArchive.get(i).getTotalPrice();
+							rowData[5] = Autobus.frame.toursArchive.get(i).getPricePerPassenger();
+							rowData[6] = Autobus.frame.toursArchive.get(i).getBusAndType();
+							rowData[7] = Autobus.frame.toursArchive.get(i).getChauffeur();
+							rowData[8] = Autobus.frame.toursArchive.get(i).getServicesString();
+							toursTableModelInUpdTourRes.addRow(rowData);
+						}
+					}
+				} else {
+					deleteAllRows(toursTableModelInUpdTourRes = (DefaultTableModel) tableToursInUpdTourRes.getModel());
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
+						rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
+						rowData[1] = Autobus.frame.toursArchive.get(i).getDestination();
+						rowData[2] = Autobus.frame.toursArchive.get(i).getPickUpPlacesString();
+						rowData[3] = Autobus.frame.toursArchive.get(i).getSeatsAvailable();
+						rowData[4] = Autobus.frame.toursArchive.get(i).getTotalPrice();
+						rowData[5] = Autobus.frame.toursArchive.get(i).getPricePerPassenger();
+						rowData[6] = Autobus.frame.toursArchive.get(i).getBusAndType();
+						rowData[7] = Autobus.frame.toursArchive.get(i).getChauffeur();
+						rowData[8] = Autobus.frame.toursArchive.get(i).getServicesString();
+						toursTableModelInUpdTourRes.addRow(rowData);
+					}
+				}
+			}
+		});
+		searchCustomerTextFieldInUpdTourRes.getDocument().addDocumentListener(new DocumentListener() {
+			public void deleteAllRows(final DefaultTableModel model) {
+				for (int i = model.getRowCount() - 1; i >= 0; i--) {
+					model.removeRow(i);
+				}
+			}
+
+			public void changedUpdate(DocumentEvent e) {
+				DefaultTableModel customersTableModelInUpdTourRes;
+				deleteAllRows(
+						customersTableModelInUpdTourRes = (DefaultTableModel) tableCustomerInUpdTourRes.getModel());
+				String searchText;
+				if (!(searchText = searchCustomerTextFieldInUpdTourRes.getText()).equals("")) {
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < Autobus.frame.customersArchive.getListOfCustomers().size(); i++) {
+						String customersName = Autobus.frame.customersArchive.getListOfCustomers().get(i).getName();
+						String substringOfName = customersName.substring(0,searchText.length() <= customersName.length() ? searchText.length(): customersName.length());
+						if (substringOfName.equals(searchText)) {
+							rowData[0] = Autobus.frame.customersArchive.get(i).getOrganisationName();
+							rowData[1] = Autobus.frame.customersArchive.get(i).getOrganisationType();
+							rowData[2] = Autobus.frame.customersArchive.get(i).getPhonenumber();
+							rowData[3] = Autobus.frame.customersArchive.get(i).getName();
+							rowData[4] = Autobus.frame.customersArchive.get(i).getAddress();
+							rowData[5] = Autobus.frame.customersArchive.get(i).getEmail();
+							rowData[6] = Autobus.frame.customersArchive.get(i).getBirthday().displayDate();
+							rowData[7] = Autobus.frame.customersArchive.get(i).getMoneySpent();
+							rowData[8] = Autobus.frame.customersArchive.get(i).getDiscount();
+							customersTableModelInUpdTourRes.addRow(rowData);
+						}
+					}
+				} else {
+					deleteAllRows(customersTableModelInUpdTourRes = (DefaultTableModel) tableCustomerInUpdTourRes.getModel());
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < Autobus.frame.customersArchive.getListOfCustomers().size(); i++) {
+						rowData[0] = Autobus.frame.customersArchive.get(i).getOrganisationName();
+						rowData[1] = Autobus.frame.customersArchive.get(i).getOrganisationType();
+						rowData[2] = Autobus.frame.customersArchive.get(i).getPhonenumber();
+						rowData[3] = Autobus.frame.customersArchive.get(i).getName();
+						rowData[4] = Autobus.frame.customersArchive.get(i).getAddress();
+						rowData[5] = Autobus.frame.customersArchive.get(i).getEmail();
+						rowData[6] = Autobus.frame.customersArchive.get(i).getBirthday().displayDate();
+						rowData[7] = Autobus.frame.customersArchive.get(i).getMoneySpent();
+						rowData[8] = Autobus.frame.customersArchive.get(i).getDiscount();
+						customersTableModelInUpdTourRes.addRow(rowData);
+					}
+				}
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				DefaultTableModel customersTableModelInUpdTourRes;
+				deleteAllRows(
+						customersTableModelInUpdTourRes = (DefaultTableModel) tableCustomerInUpdTourRes.getModel());
+				String searchText;
+				if (!(searchText = searchCustomerTextFieldInUpdTourRes.getText()).equals("")) {
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < Autobus.frame.customersArchive.getListOfCustomers().size(); i++) {
+						String customersName = Autobus.frame.customersArchive.getListOfCustomers().get(i).getName();
+						String substringOfName = customersName.substring(0,searchText.length() <= customersName.length() ? searchText.length(): customersName.length());
+						if (substringOfName.equals(searchText)) {
+							rowData[0] = Autobus.frame.customersArchive.get(i).getOrganisationName();
+							rowData[1] = Autobus.frame.customersArchive.get(i).getOrganisationType();
+							rowData[2] = Autobus.frame.customersArchive.get(i).getPhonenumber();
+							rowData[3] = Autobus.frame.customersArchive.get(i).getName();
+							rowData[4] = Autobus.frame.customersArchive.get(i).getAddress();
+							rowData[5] = Autobus.frame.customersArchive.get(i).getEmail();
+							rowData[6] = Autobus.frame.customersArchive.get(i).getBirthday().displayDate();
+							rowData[7] = Autobus.frame.customersArchive.get(i).getMoneySpent();
+							rowData[8] = Autobus.frame.customersArchive.get(i).getDiscount();
+							customersTableModelInUpdTourRes.addRow(rowData);
+						}
+					}
+				} else {
+					deleteAllRows(customersTableModelInUpdTourRes = (DefaultTableModel) tableCustomerInUpdTourRes.getModel());
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < Autobus.frame.customersArchive.getListOfCustomers().size(); i++) {
+						rowData[0] = Autobus.frame.customersArchive.get(i).getOrganisationName();
+						rowData[1] = Autobus.frame.customersArchive.get(i).getOrganisationType();
+						rowData[2] = Autobus.frame.customersArchive.get(i).getPhonenumber();
+						rowData[3] = Autobus.frame.customersArchive.get(i).getName();
+						rowData[4] = Autobus.frame.customersArchive.get(i).getAddress();
+						rowData[5] = Autobus.frame.customersArchive.get(i).getEmail();
+						rowData[6] = Autobus.frame.customersArchive.get(i).getBirthday().displayDate();
+						rowData[7] = Autobus.frame.customersArchive.get(i).getMoneySpent();
+						rowData[8] = Autobus.frame.customersArchive.get(i).getDiscount();
+						customersTableModelInUpdTourRes.addRow(rowData);
+					}
+				}
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				DefaultTableModel customersTableModelInUpdTourRes;
+				deleteAllRows(
+						customersTableModelInUpdTourRes = (DefaultTableModel) tableCustomerInUpdTourRes.getModel());
+				String searchText;
+				if (!(searchText = searchCustomerTextFieldInUpdTourRes.getText()).equals("")) {
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < Autobus.frame.customersArchive.getListOfCustomers().size(); i++) {
+						String customersName = Autobus.frame.customersArchive.getListOfCustomers().get(i).getName();
+						String substringOfName = customersName.substring(0,searchText.length() <= customersName.length() ? searchText.length(): customersName.length());
+						if (substringOfName.equals(searchText)) {
+							rowData[0] = Autobus.frame.customersArchive.get(i).getOrganisationName();
+							rowData[1] = Autobus.frame.customersArchive.get(i).getOrganisationType();
+							rowData[2] = Autobus.frame.customersArchive.get(i).getPhonenumber();
+							rowData[3] = Autobus.frame.customersArchive.get(i).getName();
+							rowData[4] = Autobus.frame.customersArchive.get(i).getAddress();
+							rowData[5] = Autobus.frame.customersArchive.get(i).getEmail();
+							rowData[6] = Autobus.frame.customersArchive.get(i).getBirthday().displayDate();
+							rowData[7] = Autobus.frame.customersArchive.get(i).getMoneySpent();
+							rowData[8] = Autobus.frame.customersArchive.get(i).getDiscount();
+							customersTableModelInUpdTourRes.addRow(rowData);
+						}
+					}
+				} else {
+					deleteAllRows(customersTableModelInUpdTourRes = (DefaultTableModel) tableCustomerInUpdTourRes.getModel());
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < Autobus.frame.customersArchive.getListOfCustomers().size(); i++) {
+						rowData[0] = Autobus.frame.customersArchive.get(i).getOrganisationName();
+						rowData[1] = Autobus.frame.customersArchive.get(i).getOrganisationType();
+						rowData[2] = Autobus.frame.customersArchive.get(i).getPhonenumber();
+						rowData[3] = Autobus.frame.customersArchive.get(i).getName();
+						rowData[4] = Autobus.frame.customersArchive.get(i).getAddress();
+						rowData[5] = Autobus.frame.customersArchive.get(i).getEmail();
+						rowData[6] = Autobus.frame.customersArchive.get(i).getBirthday().displayDate();
+						rowData[7] = Autobus.frame.customersArchive.get(i).getMoneySpent();
+						rowData[8] = Autobus.frame.customersArchive.get(i).getDiscount();
+						customersTableModelInUpdTourRes.addRow(rowData);
+					}
+				}
+			}
+		});
 
 		lblSaveUpdatedTourResButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -74,14 +343,10 @@ public class UpdateTourReservationPanel extends JPanel {
 				String str = "";
 				if(tablePassengersInUpdTourRes.getRowCount() == 0)
 					str += "\nYou did not add any passengers to the list!";
-				if(pricePerPassengerTextFieldUpdTourRes.getText().equals(""))
-					str += "\nYou did not entered Price per passenger";
-				try{
-					Double.parseDouble(pricePerPassengerTextFieldUpdTourRes.getText());
-				}
-				catch(NumberFormatException ex){
-					str+="\nThe price per passenger you have entered does not seems to be a valid number";
-				}
+				if(tableToursInUpdTourRes.getSelectedRow() == -1)
+					str += "\nYou did not select a tour!";
+				if(tableCustomerInUpdTourRes.getSelectedRow() == -1)
+					str += "\nYou did not select a customer!";
 				if(str.equals("")){
 
 
@@ -106,17 +371,23 @@ public class UpdateTourReservationPanel extends JPanel {
 						}
 					}
 					Tour selectedTour = null;
-					try {
-						selectedTour = Autobus.frame.toursArchive.getToursArchive().get(tableToursInUpdTourRes.getSelectedRow());
-					}
-					catch(ArrayIndexOutOfBoundsException ex){
-						JOptionPane.showMessageDialog(null, "You need first to select one of the Tours");
-						return;
+
+						int indexOfselectedTour = (tableToursInUpdTourRes.getSelectedRow());
+
+
+					String departureDate = String.valueOf(tableToursInUpdTourRes.getValueAt(indexOfselectedTour,0));
+					String busAndType = String.valueOf(tableToursInUpdTourRes.getValueAt(indexOfselectedTour,6));
+					for (int j = 0; j < Autobus.frame.toursArchive.size(); j++) {
+						Tour tourToCompare = Autobus.frame.toursArchive.get(j);
+						if(tourToCompare.getDepartureDate().equals(departureDate)
+								&& tourToCompare.getBusAndType().equals(busAndType)){
+							selectedTour = tourToCompare;
+							break;
+						}
 					}
                  /*DO NOT FORGET TO IMPEMENT RESERVATION ID AND DISCOUNT */
-					TourReservation updatedTourReservation =new TourReservation(currentlyUpdatingTourReservation.getReservationNumber(),0,null,selectedTour);
-
-					updatedTourReservation.setPassengers(listOfSelectedPassengers);
+					//TourReservation updatedTourReservation =new TourReservation(currentlyUpdatingTourReservation.getReservationNumber(),0,null,selectedTour);
+					currentlyUpdatingTourReservation.setTour(selectedTour);
 					int countOfNewPassengers = 0;
 					for (int i = 0; i < listOfSelectedPassengers.size(); i++) {
 						if(listOfSelectedPassengers.get(i).getName().equals(currentlyUpdatingTourReservation.getPassengers().get(i).getName()) &&
@@ -124,7 +395,7 @@ public class UpdateTourReservationPanel extends JPanel {
 							 countOfNewPassengers++;
 						}
 					}
-					updatedTourReservation.getTour().setSeatsAvailable(currentlyUpdatingTourReservation.getTour().getSeatsAvailable() - countOfNewPassengers);
+					currentlyUpdatingTourReservation.getTour().setSeatsAvailable(currentlyUpdatingTourReservation.getTour().getSeatsAvailable() - countOfNewPassengers);
 					Customer selectedCustomer;
 ;					try {
 						selectedCustomer = Autobus.frame.customersArchive.getListOfCustomers().get(tableCustomerInUpdTourRes.getSelectedRow());
@@ -133,13 +404,17 @@ public class UpdateTourReservationPanel extends JPanel {
 						JOptionPane.showMessageDialog(null, "You need first to select one of the Customers!");
 						return;
 					}
-					selectedCustomer.setMoneySpent(selectedCustomer.getMoneySpent() + (listOfSelectedPassengers.size() - currentlyUpdatingTourReservation.getPassengers().size())
-							* Double.parseDouble(pricePerPassengerTextFieldUpdTourRes.getText()));
-					updatedTourReservation.setCustomer(selectedCustomer);
-					updatedTourReservation.setTotalPrice(listOfSelectedPassengers.size() * Double.parseDouble(pricePerPassengerTextFieldUpdTourRes.getText()));
-					updatedTourReservation.getTour().setTotalPrice(currentlyUpdatingTourReservation.getTour().getTotalPrice() + (listOfSelectedPassengers.size() - currentlyUpdatingTourReservation.getPassengers().size())
-							* Double.parseDouble(pricePerPassengerTextFieldUpdTourRes.getText()));
-					Autobus.frame.reservationsArchive.getReservationsArchive().set(Autobus.frame.reservationsArchive.getIndexOfReservation(currentlyUpdatingTourReservation),updatedTourReservation);
+					selectedCustomer.setMoneySpent(selectedCustomer.getMoneySpent() + ((listOfSelectedPassengers.size() - currentlyUpdatingTourReservation.getPassengers().size())
+							* (currentlyUpdatingTourReservation.getTour().getPricePerPassenger() - (currentlyUpdatingTourReservation.getTour().getPricePerPassenger() * currentlyUpdatingTourReservation.getCustomer().getDiscount()))));
+
+					currentlyUpdatingTourReservation.setCustomer(selectedCustomer);
+					currentlyUpdatingTourReservation.setTotalPrice(listOfSelectedPassengers.size() * (currentlyUpdatingTourReservation.getTour().getPricePerPassenger() - (currentlyUpdatingTourReservation.getTour().getPricePerPassenger() * currentlyUpdatingTourReservation.getCustomer().getDiscount())));
+					currentlyUpdatingTourReservation.getTour().setTotalPrice(currentlyUpdatingTourReservation.getTour().getTotalPrice() +
+							((listOfSelectedPassengers.size() - currentlyUpdatingTourReservation.getPassengers().size())
+							* (currentlyUpdatingTourReservation.getTour().getPricePerPassenger() - (currentlyUpdatingTourReservation.getTour().getPricePerPassenger() * currentlyUpdatingTourReservation.getCustomer().getDiscount()))));
+					currentlyUpdatingTourReservation.setPassengers(listOfSelectedPassengers);
+
+					//Autobus.frame.reservationsArchive.getReservationsArchive().set(Autobus.frame.reservationsArchive.getIndexOfReservation(currentlyUpdatingTourReservation),updatedTourReservation);
 					try {
 						Autobus.frame.reservationsArchive.saveReservationsArchive();
 						Autobus.frame.toursArchive.saveToursArchive();
@@ -474,18 +749,18 @@ public class UpdateTourReservationPanel extends JPanel {
 			}
 		});
 	}
-	
+
 	public UpdateTourReservationPanel() {
 
 		setAlignmentX(Component.LEFT_ALIGNMENT);
 		setAlignmentY(Component.TOP_ALIGNMENT);
-		
+
 		JPanel updateTourReservationInnerPanel = new JPanel();
 		updateTourReservationInnerPanel.setBackground(new Color(95, 158, 160));
-		
+
 		JPanel updateTourReservationTopPanel = new JPanel();
 		updateTourReservationTopPanel.setBackground(new Color(0, 128, 128));
-		
+
 		JLabel lblUpdateTourReservation = new JLabel("Update Tour Reservation");
 		lblUpdateTourReservation.setForeground(Color.WHITE);
 		lblUpdateTourReservation.setFont(new Font("Century Gothic", Font.PLAIN, 20));
@@ -506,115 +781,115 @@ public class UpdateTourReservationPanel extends JPanel {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		updateTourReservationTopPanel.setLayout(gl_updateTourReservationTopPanel);
-		
+
 		 lblCancelButtonInUpdateTourRes = new JLabel("Cancel");
 		lblCancelButtonInUpdateTourRes.setForeground(Color.WHITE);
 		lblCancelButtonInUpdateTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblCancelButtonInUpdateTourRes.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
-		
+
 		JPanel addNewCustomerInUpdateTourResPanel = new JPanel();
 		addNewCustomerInUpdateTourResPanel.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Add New Customer", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)));
 		addNewCustomerInUpdateTourResPanel.setBackground(new Color(95, 158, 160));
-		
+
 		JLabel label_2 = new JLabel("Phone");
 		label_2.setForeground(Color.WHITE);
 		label_2.setFont(new Font("Century Gothic", Font.PLAIN, 12));
-		
+
 		customersPhoneInUpdTourRes = new JTextField();
 		customersPhoneInUpdTourRes.setForeground(Color.WHITE);
 		customersPhoneInUpdTourRes.setColumns(10);
 		customersPhoneInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
+
 		 lblClearCustomerButtonInUpdTourRes = new JLabel("Clear");
 		lblClearCustomerButtonInUpdTourRes.setForeground(Color.WHITE);
 		lblClearCustomerButtonInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblClearCustomerButtonInUpdTourRes.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
-		
+
 		 boxIsAPassengerInUpdTourRes = new JCheckBox("is a passenger");
 		boxIsAPassengerInUpdTourRes.setForeground(Color.WHITE);
 		boxIsAPassengerInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		boxIsAPassengerInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
+
 		 lblAddNewCustomerButtonInUpdTourRes = new JLabel("Add");
 		lblAddNewCustomerButtonInUpdTourRes.setForeground(Color.WHITE);
 		lblAddNewCustomerButtonInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 19));
 		lblAddNewCustomerButtonInUpdTourRes.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
-		
+
 		 radioButtonCompanyInUpdTourRes = new JRadioButton("Company");
 		radioButtonCompanyInUpdTourRes.setForeground(Color.WHITE);
 		radioButtonCompanyInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		radioButtonCompanyInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
+
 		radioButtonSchoolInUpdTourRes = new JRadioButton("School");
 		radioButtonSchoolInUpdTourRes.setForeground(Color.WHITE);
 		radioButtonSchoolInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		radioButtonSchoolInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
+
 		radioButtonPriateInUpdTourRes = new JRadioButton("Private");
 		radioButtonPriateInUpdTourRes.setForeground(Color.WHITE);
 		radioButtonPriateInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		radioButtonPriateInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
+
 		JLabel label_5 = new JLabel("Name/contact");
 		label_5.setForeground(Color.WHITE);
 		label_5.setFont(new Font("Century Gothic", Font.PLAIN, 12));
-		
+
 		customerNameInUpdTourRes = new JTextField();
 		customerNameInUpdTourRes.setSelectionColor(new Color(102, 205, 170));
 		customerNameInUpdTourRes.setForeground(Color.WHITE);
 		customerNameInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		customerNameInUpdTourRes.setColumns(10);
 		customerNameInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
+
 		JLabel lbl_28 = new JLabel("Name/organisation");
 		lbl_28.setForeground(Color.WHITE);
 		lbl_28.setFont(new Font("Century Gothic", Font.PLAIN, 12));
-		
+
 		customerOrganisationInUpdTourRes = new JTextField();
 		customerOrganisationInUpdTourRes.setSelectionColor(new Color(102, 205, 170));
 		customerOrganisationInUpdTourRes.setForeground(Color.WHITE);
 		customerOrganisationInUpdTourRes.setColumns(10);
 		customerOrganisationInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
+
 		JLabel label_7 = new JLabel("Email");
 		label_7.setForeground(Color.WHITE);
 		label_7.setFont(new Font("Century Gothic", Font.PLAIN, 12));
-		
+
 		customerEmailInUpdTourRes = new JTextField();
 		customerEmailInUpdTourRes.setForeground(Color.WHITE);
 		customerEmailInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		customerEmailInUpdTourRes.setColumns(10);
 		customerEmailInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
+
 		JLabel label_8 = new JLabel("Address");
 		label_8.setForeground(Color.WHITE);
 		label_8.setFont(new Font("Century Gothic", Font.PLAIN, 12));
-		
+
 		customerAddressInUpdTourRes = new JTextField();
 		customerAddressInUpdTourRes.setSelectionColor(new Color(102, 205, 170));
 		customerAddressInUpdTourRes.setForeground(Color.WHITE);
 		customerAddressInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		customerAddressInUpdTourRes.setColumns(10);
 		customerAddressInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
+
 		JLabel label_9 = new JLabel("Birthday");
 		label_9.setForeground(Color.WHITE);
 		label_9.setFont(new Font("Century Gothic", Font.PLAIN, 12));
-		
+
 		customerMonthInUpdTourRes = new JTextField();
 		customerMonthInUpdTourRes.setForeground(Color.WHITE);
 		customerMonthInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		customerMonthInUpdTourRes.setColumns(10);
 		customerMonthInUpdTourRes.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "MM", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(2, 2, 2, 2)));
 		customerMonthInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
+
 		customerDayInUpdTourRes = new JTextField();
 		customerDayInUpdTourRes.setForeground(Color.WHITE);
 		customerDayInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		customerDayInUpdTourRes.setColumns(10);
 		customerDayInUpdTourRes.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "DD", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(2, 2, 2, 2)));
 		customerDayInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
+
 		customerYearInUpdTourRes = new JTextField();
 		customerYearInUpdTourRes.setForeground(Color.WHITE);
 		customerYearInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
@@ -714,21 +989,21 @@ public class UpdateTourReservationPanel extends JPanel {
 					.addContainerGap(59, Short.MAX_VALUE))
 		);
 		addNewCustomerInUpdateTourResPanel.setLayout(gl_addNewCustomerInUpdateTourResPanel);
-		
+
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		
+
 		JPanel summaryInUpdTourResPanel = new JPanel();
 		summaryInUpdTourResPanel.setBorder(new CompoundBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Summary", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)), null));
 		summaryInUpdTourResPanel.setBackground(new Color(95, 158, 160));
-		
+
 		JScrollPane selectedPassengersScrollPaneInUpdTourRes = new JScrollPane();
-		
+
 		selectedTourInUpdTourRes = new JLabel("");
 		selectedTourInUpdTourRes.setVerticalAlignment(SwingConstants.TOP);
 		selectedTourInUpdTourRes.setForeground(Color.WHITE);
 		selectedTourInUpdTourRes.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		selectedTourInUpdTourRes.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Selected Tour", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
-		
+
 		 selectedCustomerInUpdTourRes = new JLabel("");
 		selectedCustomerInUpdTourRes.setVerticalAlignment(SwingConstants.TOP);
 		selectedCustomerInUpdTourRes.setForeground(Color.WHITE);
@@ -758,15 +1033,15 @@ public class UpdateTourReservationPanel extends JPanel {
 					.addComponent(selectedPassengersScrollPaneInUpdTourRes, GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
 					.addContainerGap())
 		);
-		
+
 		 listOfSelectedPassengersInUpdTourRes = new JList<String>();
-		 listOfSelectedPassengersInUpdTourRes.setModel(new DefaultListModel<String>()); 
+		 listOfSelectedPassengersInUpdTourRes.setModel(new DefaultListModel<String>());
 		listOfSelectedPassengersInUpdTourRes.setForeground(Color.WHITE);
 		listOfSelectedPassengersInUpdTourRes.setBorder(new TitledBorder(null, "Selected Passengers", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
 		listOfSelectedPassengersInUpdTourRes.setBackground(new Color(95, 158, 160));
 		selectedPassengersScrollPaneInUpdTourRes.setViewportView(listOfSelectedPassengersInUpdTourRes);
 		summaryInUpdTourResPanel.setLayout(gl_summaryInUpdTourResPanel);
-		
+
 		 lblSaveUpdatedTourResButton = new JLabel("Save Changes");
 		lblSaveUpdatedTourResButton.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSaveUpdatedTourResButton.setForeground(Color.WHITE);
@@ -816,25 +1091,27 @@ public class UpdateTourReservationPanel extends JPanel {
 							.addComponent(lblCancelButtonInUpdateTourRes, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
 					.addGap(294))
 		);
-		
+
 		JPanel selectCustomerInUpdTourResPanel = new JPanel();
 		selectCustomerInUpdTourResPanel.setForeground(new Color(0, 0, 0));
 		selectCustomerInUpdTourResPanel.setBackground(new Color(95, 158, 160));
 		tabbedPane.addTab("Select Customer", null, selectCustomerInUpdTourResPanel, null);
 		tabbedPane.setForegroundAt(0, new Color(0, 153, 102));
-		
+
 		JScrollPane customerScrollPaneInUpdTourRes = new JScrollPane();
 		customerScrollPaneInUpdTourRes.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Customers archive", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(3, 3, 3, 3)));
 		customerScrollPaneInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
-		JLabel label_13 = new JLabel("Search by name");
-		label_13.setForeground(Color.WHITE);
-		label_13.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_13.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		
+
+		JLabel lblSearchByName = new JLabel("Search by name:");
+		lblSearchByName.setBackground(new Color(240, 240, 240));
+		lblSearchByName.setForeground(Color.WHITE);
+		lblSearchByName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+
 		searchCustomerTextFieldInUpdTourRes = new JTextField();
+		searchCustomerTextFieldInUpdTourRes.setBorder(new LineBorder(new Color(255, 255, 255)));
+		searchCustomerTextFieldInUpdTourRes.setBackground(new Color(95, 158, 160));
 		searchCustomerTextFieldInUpdTourRes.setToolTipText("enter customer's name here");
-		
+
 		lblSelectCustomerButtonInUpdTourRes = new JLabel("Select");
 		lblSelectCustomerButtonInUpdTourRes.setForeground(Color.WHITE);
 		lblSelectCustomerButtonInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 14));
@@ -847,7 +1124,7 @@ public class UpdateTourReservationPanel extends JPanel {
 					.addGroup(gl_selectCustomerInUpdTourResPanel.createParallelGroup(Alignment.LEADING)
 						.addComponent(customerScrollPaneInUpdTourRes, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
 						.addGroup(gl_selectCustomerInUpdTourResPanel.createSequentialGroup()
-							.addComponent(label_13, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblSearchByName, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(searchCustomerTextFieldInUpdTourRes, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblSelectCustomerButtonInUpdTourRes, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
@@ -858,25 +1135,25 @@ public class UpdateTourReservationPanel extends JPanel {
 				.addGroup(gl_selectCustomerInUpdTourResPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_selectCustomerInUpdTourResPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(searchCustomerTextFieldInUpdTourRes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(label_13, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblSearchByName, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+						.addComponent(searchCustomerTextFieldInUpdTourRes, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
 					.addGap(27)
 					.addComponent(customerScrollPaneInUpdTourRes, GroupLayout.PREFERRED_SIZE, 236, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(lblSelectCustomerButtonInUpdTourRes, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(61, Short.MAX_VALUE))
 		);
-		
+
 		tableCustomerInUpdTourRes = new JTable();
 		tableCustomerInUpdTourRes.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"Type", "Organisation", "Name", "Address", "Phone", "Email", "Birthday", "Money Spent"
+				"Type", "Organisation", "Name", "Address", "Phone", "Email", "Birthday", "Money Spent", "Discount"
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false, false, false
+				false, false, false, false, false, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
@@ -884,93 +1161,93 @@ public class UpdateTourReservationPanel extends JPanel {
 		});
 		customerScrollPaneInUpdTourRes.setViewportView(tableCustomerInUpdTourRes);
 		selectCustomerInUpdTourResPanel.setLayout(gl_selectCustomerInUpdTourResPanel);
-		
+
 		JPanel selectPassengersInUpdTourRes = new JPanel();
 		selectPassengersInUpdTourRes.setBackground(new Color(95, 158, 160));
 		tabbedPane.addTab("Select Passengers", null, selectPassengersInUpdTourRes, null);
 		tabbedPane.setForegroundAt(1, new Color(0, 153, 102));
-		
+
 		JPanel addNewPassengerInUpdTourResPanel = new JPanel();
 		addNewPassengerInUpdTourResPanel.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Add passenger", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), null));
 		addNewPassengerInUpdTourResPanel.setBackground(new Color(95, 158, 160));
-		
+
 		 lblClearButtonInUpdTourRes = new JLabel("Clear");
 		lblClearButtonInUpdTourRes.setForeground(Color.WHITE);
 		lblClearButtonInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblClearButtonInUpdTourRes.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
-		
+
 		 lblAddNewPassengerButtonInUpdTourRes = new JLabel("Add");
 		lblAddNewPassengerButtonInUpdTourRes.setForeground(Color.WHITE);
 		lblAddNewPassengerButtonInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblAddNewPassengerButtonInUpdTourRes.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
-		
+
 		JLabel label_16 = new JLabel("Address");
 		label_16.setForeground(Color.WHITE);
 		label_16.setFont(new Font("Century Gothic", Font.PLAIN, 12));
-		
+
 		JLabel label_17 = new JLabel("Email");
 		label_17.setForeground(Color.WHITE);
 		label_17.setFont(new Font("Century Gothic", Font.PLAIN, 12));
-		
+
 		passengerEmailInUpdTourRes = new JTextField();
 		passengerEmailInUpdTourRes.setSelectionColor(new Color(102, 205, 170));
 		passengerEmailInUpdTourRes.setForeground(Color.WHITE);
 		passengerEmailInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		passengerEmailInUpdTourRes.setColumns(10);
 		passengerEmailInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
+
 		passengerAddressInUpdTourRes = new JTextField();
 		passengerAddressInUpdTourRes.setSelectionColor(new Color(102, 205, 170));
 		passengerAddressInUpdTourRes.setForeground(Color.WHITE);
 		passengerAddressInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		passengerAddressInUpdTourRes.setColumns(10);
 		passengerAddressInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
+
 		JLabel label_18 = new JLabel("Phone");
 		label_18.setForeground(Color.WHITE);
 		label_18.setFont(new Font("Century Gothic", Font.PLAIN, 12));
-		
+
 		JLabel label_19 = new JLabel("Name");
 		label_19.setForeground(Color.WHITE);
 		label_19.setFont(new Font("Century Gothic", Font.PLAIN, 12));
-		
+
 		passengerPhoneInUpdTourRes = new JTextField();
 		passengerPhoneInUpdTourRes.setSelectionColor(new Color(102, 205, 170));
 		passengerPhoneInUpdTourRes.setForeground(Color.WHITE);
 		passengerPhoneInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		passengerPhoneInUpdTourRes.setColumns(10);
 		passengerPhoneInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
+
 		lblSearchForPassengerInUpdTourRes = new JLabel("Search");
 		lblSearchForPassengerInUpdTourRes.setForeground(Color.WHITE);
 		lblSearchForPassengerInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblSearchForPassengerInUpdTourRes.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
-		
+
 		passengerNameInUpdTourRes = new JTextField();
 		passengerNameInUpdTourRes.setSelectionColor(new Color(102, 205, 170));
 		passengerNameInUpdTourRes.setForeground(Color.WHITE);
 		passengerNameInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		passengerNameInUpdTourRes.setColumns(10);
 		passengerNameInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
+
 		JLabel label_21 = new JLabel("Birthday");
 		label_21.setForeground(Color.WHITE);
 		label_21.setFont(new Font("Century Gothic", Font.PLAIN, 12));
-		
+
 		passengerMonthInUpdTourRes = new JTextField();
 		passengerMonthInUpdTourRes.setForeground(Color.WHITE);
 		passengerMonthInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		passengerMonthInUpdTourRes.setColumns(10);
 		passengerMonthInUpdTourRes.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "MM", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(2, 2, 2, 2)));
 		passengerMonthInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
+
 		passengerDayInUpdTourRes = new JTextField();
 		passengerDayInUpdTourRes.setForeground(Color.WHITE);
 		passengerDayInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
 		passengerDayInUpdTourRes.setColumns(10);
 		passengerDayInUpdTourRes.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "DD", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(2, 2, 2, 2)));
 		passengerDayInUpdTourRes.setBackground(new Color(95, 158, 160));
-		
+
 		passengerYearInUpdTourRes = new JTextField();
 		passengerYearInUpdTourRes.setForeground(Color.WHITE);
 		passengerYearInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
@@ -1057,21 +1334,21 @@ public class UpdateTourReservationPanel extends JPanel {
 					.addContainerGap())
 		);
 		addNewPassengerInUpdTourResPanel.setLayout(gl_addNewPassengerInUpdTourResPanel);
-		
+
 		JScrollPane selectPassengersInUpdTourResScrollPane = new JScrollPane();
 		selectPassengersInUpdTourResScrollPane.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "List of Selected Passengers", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(3, 3, 3, 3)));
 		selectPassengersInUpdTourResScrollPane.setBackground(new Color(95, 158, 160));
-		
+
 		 lblRemovePassengerButtonInUpdTourRes = new JLabel("Remove");
 		lblRemovePassengerButtonInUpdTourRes.setForeground(Color.WHITE);
 		lblRemovePassengerButtonInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblRemovePassengerButtonInUpdTourRes.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
-		
+
 		 lblClearAllPassengersButtonInUpdTourRes = new JLabel("Clear all");
 		lblClearAllPassengersButtonInUpdTourRes.setForeground(Color.WHITE);
 		lblClearAllPassengersButtonInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblClearAllPassengersButtonInUpdTourRes.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
-		
+
 		pricePerPassengerTextFieldUpdTourRes = new JTextField();
 		pricePerPassengerTextFieldUpdTourRes.setForeground(Color.WHITE);
 		pricePerPassengerTextFieldUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
@@ -1110,7 +1387,7 @@ public class UpdateTourReservationPanel extends JPanel {
 						.addComponent(addNewPassengerInUpdTourResPanel, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
-		
+
 		tablePassengersInUpdTourRes = new JTable();
 		tablePassengersInUpdTourRes.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -1128,26 +1405,26 @@ public class UpdateTourReservationPanel extends JPanel {
 		});
 		selectPassengersInUpdTourResScrollPane.setViewportView(tablePassengersInUpdTourRes);
 		selectPassengersInUpdTourRes.setLayout(gl_selectPassengersInUpdTourRes);
-		
+
 		JPanel selectTourInUpdTourResPanel = new JPanel();
 		selectTourInUpdTourResPanel.setBackground(new Color(95, 158, 160));
 		tabbedPane.addTab("Select Tour", null, selectTourInUpdTourResPanel, null);
 		tabbedPane.setForegroundAt(2, new Color(0, 153, 102));
-		
+
 		JScrollPane selectTourInUpdTourResScrollPane = new JScrollPane();
 		selectTourInUpdTourResScrollPane.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Tours archive", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(3, 3, 3, 3)));
 		selectTourInUpdTourResScrollPane.setBackground(new Color(95, 158, 160));
-		
-		JLabel label_24 = new JLabel("Search by destination");
-		label_24.setForeground(Color.WHITE);
-		label_24.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_24.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		
+
+		JLabel lblSearchByDestination = new JLabel("Search by destination:");
+		lblSearchByDestination.setForeground(Color.WHITE);
+		lblSearchByDestination.setFont(new Font("Tahoma", Font.PLAIN, 15));
+
 		searchForTourInUpdTourRes = new JTextField();
+		searchForTourInUpdTourRes.setBackground(new Color(95, 158, 160));
 		searchForTourInUpdTourRes.setToolTipText("enter Tour's destination here");
 		searchForTourInUpdTourRes.setColumns(10);
-		searchForTourInUpdTourRes.setBorder(new LineBorder(new Color(171, 173, 179), 2));
-		
+		searchForTourInUpdTourRes.setBorder(new LineBorder(new Color(255, 255, 255)));
+
 		lblSelectTourButtonInUpdTourRes = new JLabel("Select");
 		lblSelectTourButtonInUpdTourRes.setForeground(Color.WHITE);
 		lblSelectTourButtonInUpdTourRes.setFont(new Font("Century Gothic", Font.PLAIN, 14));
@@ -1160,8 +1437,8 @@ public class UpdateTourReservationPanel extends JPanel {
 					.addGroup(gl_selectTourInUpdTourResPanel.createParallelGroup(Alignment.LEADING)
 						.addComponent(selectTourInUpdTourResScrollPane, GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
 						.addGroup(gl_selectTourInUpdTourResPanel.createSequentialGroup()
-							.addComponent(label_24)
-							.addGap(18)
+							.addComponent(lblSearchByDestination)
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(searchForTourInUpdTourRes, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblSelectTourButtonInUpdTourRes, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
@@ -1170,26 +1447,26 @@ public class UpdateTourReservationPanel extends JPanel {
 			gl_selectTourInUpdTourResPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_selectTourInUpdTourResPanel.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_selectTourInUpdTourResPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(label_24)
+					.addGroup(gl_selectTourInUpdTourResPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblSearchByDestination)
 						.addComponent(searchForTourInUpdTourRes, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
+					.addGap(23)
 					.addComponent(selectTourInUpdTourResScrollPane, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(lblSelectTourButtonInUpdTourRes, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(67, Short.MAX_VALUE))
 		);
-		
+
 		tableToursInUpdTourRes = new JTable();
 		tableToursInUpdTourRes.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"Date", "Destination", "Pick Ups", "Seats Available", "Price", "Bus", "Chauffeur"
+				"Date", "Destination", "Pick Ups", "Seats Available", "Current Total Price", "Price Per Passenger", "Bus", "Chauffeur"
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false, false
+				false, false, false, false, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
@@ -1212,7 +1489,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		setLayout(groupLayout);
 		this.createEventsForUpdateTouReservationPanel();
 	}
-	
+
 	public void listCustomers(){
 		DefaultTableModel customersTable = (DefaultTableModel) tableCustomerInUpdTourRes.getModel();
 		Object[] rowData = new Object[8];
@@ -1228,7 +1505,7 @@ public class UpdateTourReservationPanel extends JPanel {
 			rowData[6] = Autobus.frame.customersArchive.get(i).getBirthday().displayDate();
 			rowData[7] = Autobus.frame.customersArchive.get(i).getMoneySpent();
 
-			customersTable.addRow(rowData);			
+			customersTable.addRow(rowData);
 		}
 	}
 
@@ -1279,7 +1556,7 @@ public class UpdateTourReservationPanel extends JPanel {
 
 
 	}
-	
+
 	public void listTours(){
 		DefaultTableModel toursTable = (DefaultTableModel) tableToursInUpdTourRes.getModel();
 		Autobus.frame.deleteAllRows(toursTable);
