@@ -2520,11 +2520,30 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				if (!(searchText = searchTourTextField.getText()).equals("")) {
 					Object[] rowData = new Object[9];
 					for (int i = 0; i < toursArchive.size(); i++) {
-						String destination = toursArchive.get(i).getDestination();
-						String substringOfDestination = destination.substring(0,
-								searchText.length() <= destination.length() ? searchText.length()
-										: destination.length());
-						if (substringOfDestination.equals(searchText)) {
+						if(toursArchive.get(i).getSeatsAvailable() > 0) {
+							String destination = toursArchive.get(i).getDestination();
+							String substringOfDestination = destination.substring(0,
+									searchText.length() <= destination.length() ? searchText.length()
+											: destination.length());
+							if (substringOfDestination.equals(searchText)) {
+								rowData[0] = toursArchive.get(i).getDepartureDate();
+								rowData[1] = toursArchive.get(i).getDestination();
+								rowData[2] = toursArchive.get(i).getPickUpPlacesString();
+								rowData[3] = toursArchive.get(i).getSeatsAvailable();
+								rowData[4] = toursArchive.get(i).getTotalPrice();
+								rowData[5] = toursArchive.get(i).getPricePerPassenger();
+								rowData[6] = toursArchive.get(i).getBusAndType();
+								rowData[7] = toursArchive.get(i).getChauffeur();
+								rowData[8] = toursArchive.get(i).getServicesString();
+								toursTableModelForNewReservation.addRow(rowData);
+							}
+						}
+					}
+				} else {
+					deleteAllRows(toursTableModelForNewReservation = (DefaultTableModel) tableToursInNewTourReservation.getModel());
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < toursArchive.size(); i++) {
+						if(toursArchive.get(i).getSeatsAvailable() > 0) {
 							rowData[0] = toursArchive.get(i).getDepartureDate();
 							rowData[1] = toursArchive.get(i).getDestination();
 							rowData[2] = toursArchive.get(i).getPickUpPlacesString();
@@ -2536,21 +2555,6 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							rowData[8] = toursArchive.get(i).getServicesString();
 							toursTableModelForNewReservation.addRow(rowData);
 						}
-					}
-				} else {
-					deleteAllRows(toursTableModelForNewReservation = (DefaultTableModel) tableToursInNewTourReservation.getModel());
-					Object[] rowData = new Object[9];
-					for (int i = 0; i < toursArchive.size(); i++) {
-						rowData[0] = toursArchive.get(i).getDepartureDate();
-						rowData[1] = toursArchive.get(i).getDestination();
-						rowData[2] = toursArchive.get(i).getPickUpPlacesString();
-						rowData[3] = toursArchive.get(i).getSeatsAvailable();
-						rowData[4] = toursArchive.get(i).getTotalPrice();
-						rowData[5] = toursArchive.get(i).getPricePerPassenger();
-						rowData[6] = toursArchive.get(i).getBusAndType();
-						rowData[7] = toursArchive.get(i).getChauffeur();
-						rowData[8] = toursArchive.get(i).getServicesString();
-						toursTableModelForNewReservation.addRow(rowData);
 					}
 				}
 			}
@@ -2563,11 +2567,30 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				if (!(searchText = searchTourTextField.getText()).equals("")) {
 					Object[] rowData = new Object[9];
 					for (int i = 0; i < toursArchive.size(); i++) {
-						String destination = toursArchive.get(i).getDestination();
-						String substringOfDestination = destination.substring(0,
-								searchText.length() <= destination.length() ? searchText.length()
-										: destination.length());
-						if (substringOfDestination.equals(searchText)) {
+						if(toursArchive.get(i).getSeatsAvailable() > 0) {
+							String destination = toursArchive.get(i).getDestination();
+							String substringOfDestination = destination.substring(0,
+									searchText.length() <= destination.length() ? searchText.length()
+											: destination.length());
+							if (substringOfDestination.equals(searchText)) {
+								rowData[0] = toursArchive.get(i).getDepartureDate();
+								rowData[1] = toursArchive.get(i).getDestination();
+								rowData[2] = toursArchive.get(i).getPickUpPlacesString();
+								rowData[3] = toursArchive.get(i).getSeatsAvailable();
+								rowData[4] = toursArchive.get(i).getTotalPrice();
+								rowData[5] = toursArchive.get(i).getPricePerPassenger();
+								rowData[6] = toursArchive.get(i).getBusAndType();
+								rowData[7] = toursArchive.get(i).getChauffeur();
+								rowData[8] = toursArchive.get(i).getServicesString();
+								toursTableModelForNewReservation.addRow(rowData);
+							}
+						}
+					}
+				} else {
+					deleteAllRows(toursTableModelForNewReservation = (DefaultTableModel) tableToursInNewTourReservation.getModel());
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < toursArchive.size(); i++) {
+						if(toursArchive.get(i).getSeatsAvailable() > 0) {
 							rowData[0] = toursArchive.get(i).getDepartureDate();
 							rowData[1] = toursArchive.get(i).getDestination();
 							rowData[2] = toursArchive.get(i).getPickUpPlacesString();
@@ -2579,21 +2602,6 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							rowData[8] = toursArchive.get(i).getServicesString();
 							toursTableModelForNewReservation.addRow(rowData);
 						}
-					}
-				} else {
-					deleteAllRows(toursTableModelForNewReservation = (DefaultTableModel) tableToursInNewTourReservation.getModel());
-					Object[] rowData = new Object[9];
-					for (int i = 0; i < toursArchive.size(); i++) {
-						rowData[0] = toursArchive.get(i).getDepartureDate();
-						rowData[1] = toursArchive.get(i).getDestination();
-						rowData[2] = toursArchive.get(i).getPickUpPlacesString();
-						rowData[3] = toursArchive.get(i).getSeatsAvailable();
-						rowData[4] = toursArchive.get(i).getTotalPrice();
-						rowData[5] = toursArchive.get(i).getPricePerPassenger();
-						rowData[6] = toursArchive.get(i).getBusAndType();
-						rowData[7] = toursArchive.get(i).getChauffeur();
-						rowData[8] = toursArchive.get(i).getServicesString();
-						toursTableModelForNewReservation.addRow(rowData);
 					}
 				}
 			}
@@ -2606,11 +2614,30 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				if (!(searchText = searchTourTextField.getText()).equals("")) {
 					Object[] rowData = new Object[9];
 					for (int i = 0; i < toursArchive.size(); i++) {
-						String destination = toursArchive.get(i).getDestination();
-						String substringOfDestination = destination.substring(0,
-								searchText.length() <= destination.length() ? searchText.length()
-										: destination.length());
-						if (substringOfDestination.equals(searchText)) {
+						if(toursArchive.get(i).getSeatsAvailable() > 0) {
+							String destination = toursArchive.get(i).getDestination();
+							String substringOfDestination = destination.substring(0,
+									searchText.length() <= destination.length() ? searchText.length()
+											: destination.length());
+							if (substringOfDestination.equals(searchText)) {
+								rowData[0] = toursArchive.get(i).getDepartureDate();
+								rowData[1] = toursArchive.get(i).getDestination();
+								rowData[2] = toursArchive.get(i).getPickUpPlacesString();
+								rowData[3] = toursArchive.get(i).getSeatsAvailable();
+								rowData[4] = toursArchive.get(i).getTotalPrice();
+								rowData[5] = toursArchive.get(i).getPricePerPassenger();
+								rowData[6] = toursArchive.get(i).getBusAndType();
+								rowData[7] = toursArchive.get(i).getChauffeur();
+								rowData[8] = toursArchive.get(i).getServicesString();
+								toursTableModelForNewReservation.addRow(rowData);
+							}
+						}
+					}
+				} else {
+					deleteAllRows(toursTableModelForNewReservation = (DefaultTableModel) tableToursInNewTourReservation.getModel());
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < toursArchive.size(); i++) {
+						if(toursArchive.get(i).getSeatsAvailable() > 0) {
 							rowData[0] = toursArchive.get(i).getDepartureDate();
 							rowData[1] = toursArchive.get(i).getDestination();
 							rowData[2] = toursArchive.get(i).getPickUpPlacesString();
@@ -2622,21 +2649,6 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							rowData[8] = toursArchive.get(i).getServicesString();
 							toursTableModelForNewReservation.addRow(rowData);
 						}
-					}
-				} else {
-					deleteAllRows(toursTableModelForNewReservation = (DefaultTableModel) tableToursInNewTourReservation.getModel());
-					Object[] rowData = new Object[9];
-					for (int i = 0; i < toursArchive.size(); i++) {
-						rowData[0] = toursArchive.get(i).getDepartureDate();
-						rowData[1] = toursArchive.get(i).getDestination();
-						rowData[2] = toursArchive.get(i).getPickUpPlacesString();
-						rowData[3] = toursArchive.get(i).getSeatsAvailable();
-						rowData[4] = toursArchive.get(i).getTotalPrice();
-						rowData[5] = toursArchive.get(i).getPricePerPassenger();
-						rowData[6] = toursArchive.get(i).getBusAndType();
-						rowData[7] = toursArchive.get(i).getChauffeur();
-						rowData[8] = toursArchive.get(i).getServicesString();
-						toursTableModelForNewReservation.addRow(rowData);
 					}
 				}
 			}

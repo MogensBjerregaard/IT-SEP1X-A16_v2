@@ -85,11 +85,30 @@ public class UpdateTourReservationPanel extends JPanel {
 				if (!(searchText = searchForTourInUpdTourRes.getText()).equals("")) {
 					Object[] rowData = new Object[9];
 					for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
-						String destination = Autobus.frame.toursArchive.get(i).getDestination();
-						String substringOfDestination = destination.substring(0,
-								searchText.length() <= destination.length() ? searchText.length()
-										: destination.length());
-						if (substringOfDestination.equals(searchText)) {
+						if(Autobus.frame.toursArchive.get(i).getSeatsAvailable() > 0) {
+							String destination = Autobus.frame.toursArchive.get(i).getDestination();
+							String substringOfDestination = destination.substring(0,
+									searchText.length() <= destination.length() ? searchText.length()
+											: destination.length());
+							if (substringOfDestination.equals(searchText)) {
+								rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
+								rowData[1] = Autobus.frame.toursArchive.get(i).getDestination();
+								rowData[2] = Autobus.frame.toursArchive.get(i).getPickUpPlacesString();
+								rowData[3] = Autobus.frame.toursArchive.get(i).getSeatsAvailable();
+								rowData[4] = Autobus.frame.toursArchive.get(i).getTotalPrice();
+								rowData[5] = Autobus.frame.toursArchive.get(i).getPricePerPassenger();
+								rowData[6] = Autobus.frame.toursArchive.get(i).getBusAndType();
+								rowData[7] = Autobus.frame.toursArchive.get(i).getChauffeur();
+								rowData[8] = Autobus.frame.toursArchive.get(i).getServicesString();
+								toursTableModelInUpdTourRes.addRow(rowData);
+							}
+						}
+					}
+				} else {
+					deleteAllRows(toursTableModelInUpdTourRes = (DefaultTableModel) tableToursInUpdTourRes.getModel());
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
+						if(Autobus.frame.toursArchive.get(i).getSeatsAvailable() > 0) {
 							rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
 							rowData[1] = Autobus.frame.toursArchive.get(i).getDestination();
 							rowData[2] = Autobus.frame.toursArchive.get(i).getPickUpPlacesString();
@@ -101,21 +120,6 @@ public class UpdateTourReservationPanel extends JPanel {
 							rowData[8] = Autobus.frame.toursArchive.get(i).getServicesString();
 							toursTableModelInUpdTourRes.addRow(rowData);
 						}
-					}
-				} else {
-					deleteAllRows(toursTableModelInUpdTourRes = (DefaultTableModel) tableToursInUpdTourRes.getModel());
-					Object[] rowData = new Object[9];
-					for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
-						rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
-						rowData[1] = Autobus.frame.toursArchive.get(i).getDestination();
-						rowData[2] = Autobus.frame.toursArchive.get(i).getPickUpPlacesString();
-						rowData[3] = Autobus.frame.toursArchive.get(i).getSeatsAvailable();
-						rowData[4] = Autobus.frame.toursArchive.get(i).getTotalPrice();
-						rowData[5] = Autobus.frame.toursArchive.get(i).getPricePerPassenger();
-						rowData[6] = Autobus.frame.toursArchive.get(i).getBusAndType();
-						rowData[7] = Autobus.frame.toursArchive.get(i).getChauffeur();
-						rowData[8] = Autobus.frame.toursArchive.get(i).getServicesString();
-						toursTableModelInUpdTourRes.addRow(rowData);
 					}
 				}
 			}
@@ -128,11 +132,30 @@ public class UpdateTourReservationPanel extends JPanel {
 				if (!(searchText = searchForTourInUpdTourRes.getText()).equals("")) {
 					Object[] rowData = new Object[9];
 					for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
-						String destination = Autobus.frame.toursArchive.get(i).getDestination();
-						String substringOfDestination = destination.substring(0,
-								searchText.length() <= destination.length() ? searchText.length()
-										: destination.length());
-						if (substringOfDestination.equals(searchText)) {
+						if(Autobus.frame.toursArchive.get(i).getSeatsAvailable() > 0) {
+							String destination = Autobus.frame.toursArchive.get(i).getDestination();
+							String substringOfDestination = destination.substring(0,
+									searchText.length() <= destination.length() ? searchText.length()
+											: destination.length());
+							if (substringOfDestination.equals(searchText)) {
+								rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
+								rowData[1] = Autobus.frame.toursArchive.get(i).getDestination();
+								rowData[2] = Autobus.frame.toursArchive.get(i).getPickUpPlacesString();
+								rowData[3] = Autobus.frame.toursArchive.get(i).getSeatsAvailable();
+								rowData[4] = Autobus.frame.toursArchive.get(i).getTotalPrice();
+								rowData[5] = Autobus.frame.toursArchive.get(i).getPricePerPassenger();
+								rowData[6] = Autobus.frame.toursArchive.get(i).getBusAndType();
+								rowData[7] = Autobus.frame.toursArchive.get(i).getChauffeur();
+								rowData[8] = Autobus.frame.toursArchive.get(i).getServicesString();
+								toursTableModelInUpdTourRes.addRow(rowData);
+							}
+						}
+					}
+				} else {
+					deleteAllRows(toursTableModelInUpdTourRes = (DefaultTableModel) tableToursInUpdTourRes.getModel());
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
+						if(Autobus.frame.toursArchive.get(i).getSeatsAvailable() > 0) {
 							rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
 							rowData[1] = Autobus.frame.toursArchive.get(i).getDestination();
 							rowData[2] = Autobus.frame.toursArchive.get(i).getPickUpPlacesString();
@@ -144,21 +167,6 @@ public class UpdateTourReservationPanel extends JPanel {
 							rowData[8] = Autobus.frame.toursArchive.get(i).getServicesString();
 							toursTableModelInUpdTourRes.addRow(rowData);
 						}
-					}
-				} else {
-					deleteAllRows(toursTableModelInUpdTourRes = (DefaultTableModel) tableToursInUpdTourRes.getModel());
-					Object[] rowData = new Object[9];
-					for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
-						rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
-						rowData[1] = Autobus.frame.toursArchive.get(i).getDestination();
-						rowData[2] = Autobus.frame.toursArchive.get(i).getPickUpPlacesString();
-						rowData[3] = Autobus.frame.toursArchive.get(i).getSeatsAvailable();
-						rowData[4] = Autobus.frame.toursArchive.get(i).getTotalPrice();
-						rowData[5] = Autobus.frame.toursArchive.get(i).getPricePerPassenger();
-						rowData[6] = Autobus.frame.toursArchive.get(i).getBusAndType();
-						rowData[7] = Autobus.frame.toursArchive.get(i).getChauffeur();
-						rowData[8] = Autobus.frame.toursArchive.get(i).getServicesString();
-						toursTableModelInUpdTourRes.addRow(rowData);
 					}
 				}
 			}
@@ -171,11 +179,30 @@ public class UpdateTourReservationPanel extends JPanel {
 				if (!(searchText = searchForTourInUpdTourRes.getText()).equals("")) {
 					Object[] rowData = new Object[9];
 					for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
-						String destination = Autobus.frame.toursArchive.get(i).getDestination();
-						String substringOfDestination = destination.substring(0,
-								searchText.length() <= destination.length() ? searchText.length()
-										: destination.length());
-						if (substringOfDestination.equals(searchText)) {
+						if(Autobus.frame.toursArchive.get(i).getSeatsAvailable() > 0) {
+							String destination = Autobus.frame.toursArchive.get(i).getDestination();
+							String substringOfDestination = destination.substring(0,
+									searchText.length() <= destination.length() ? searchText.length()
+											: destination.length());
+							if (substringOfDestination.equals(searchText)) {
+								rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
+								rowData[1] = Autobus.frame.toursArchive.get(i).getDestination();
+								rowData[2] = Autobus.frame.toursArchive.get(i).getPickUpPlacesString();
+								rowData[3] = Autobus.frame.toursArchive.get(i).getSeatsAvailable();
+								rowData[4] = Autobus.frame.toursArchive.get(i).getTotalPrice();
+								rowData[5] = Autobus.frame.toursArchive.get(i).getPricePerPassenger();
+								rowData[6] = Autobus.frame.toursArchive.get(i).getBusAndType();
+								rowData[7] = Autobus.frame.toursArchive.get(i).getChauffeur();
+								rowData[8] = Autobus.frame.toursArchive.get(i).getServicesString();
+								toursTableModelInUpdTourRes.addRow(rowData);
+							}
+						}
+					}
+				} else {
+					deleteAllRows(toursTableModelInUpdTourRes = (DefaultTableModel) tableToursInUpdTourRes.getModel());
+					Object[] rowData = new Object[9];
+					for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
+						if(Autobus.frame.toursArchive.get(i).getSeatsAvailable() > 0) {
 							rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
 							rowData[1] = Autobus.frame.toursArchive.get(i).getDestination();
 							rowData[2] = Autobus.frame.toursArchive.get(i).getPickUpPlacesString();
@@ -187,21 +214,6 @@ public class UpdateTourReservationPanel extends JPanel {
 							rowData[8] = Autobus.frame.toursArchive.get(i).getServicesString();
 							toursTableModelInUpdTourRes.addRow(rowData);
 						}
-					}
-				} else {
-					deleteAllRows(toursTableModelInUpdTourRes = (DefaultTableModel) tableToursInUpdTourRes.getModel());
-					Object[] rowData = new Object[9];
-					for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
-						rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
-						rowData[1] = Autobus.frame.toursArchive.get(i).getDestination();
-						rowData[2] = Autobus.frame.toursArchive.get(i).getPickUpPlacesString();
-						rowData[3] = Autobus.frame.toursArchive.get(i).getSeatsAvailable();
-						rowData[4] = Autobus.frame.toursArchive.get(i).getTotalPrice();
-						rowData[5] = Autobus.frame.toursArchive.get(i).getPricePerPassenger();
-						rowData[6] = Autobus.frame.toursArchive.get(i).getBusAndType();
-						rowData[7] = Autobus.frame.toursArchive.get(i).getChauffeur();
-						rowData[8] = Autobus.frame.toursArchive.get(i).getServicesString();
-						toursTableModelInUpdTourRes.addRow(rowData);
 					}
 				}
 			}
