@@ -1078,7 +1078,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 						String customersName = customersArchive.getListOfCustomers().get(i).getName();
 						String substringOfName = customersName.substring(0,searchText.length() <= customersName.length() ? searchText.length(): customersName.length());
 						if (substringOfName.equals(searchText)) {
-							rowData[0] = customersArchive.get(i).getOrganisationName();
+							rowData[0] = customersArchive.get(i).getName();
 							rowData[1] = customersArchive.get(i).getOrganisationType();
 							rowData[2] = customersArchive.get(i).getPhonenumber();
 							rowData[3] = customersArchive.get(i).getName();
@@ -1094,7 +1094,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					deleteAllRows(customersTableModel = (DefaultTableModel) tableCustomers.getModel());
 					Object[] rowData = new Object[9];
 					for (int i = 0; i < customersArchive.getListOfCustomers().size(); i++) {
-						rowData[0] = customersArchive.get(i).getOrganisationName();
+						rowData[0] = customersArchive.get(i).getName();
 						rowData[1] = customersArchive.get(i).getOrganisationType();
 						rowData[2] = customersArchive.get(i).getPhonenumber();
 						rowData[3] = customersArchive.get(i).getName();
@@ -1119,7 +1119,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 						String customersName = customersArchive.getListOfCustomers().get(i).getName();
 						String substringOfName = customersName.substring(0,searchText.length() <= customersName.length() ? searchText.length(): customersName.length());
 						if (substringOfName.equals(searchText)) {
-							rowData[0] = customersArchive.get(i).getOrganisationName();
+							rowData[0] = customersArchive.get(i).getName();
 							rowData[1] = customersArchive.get(i).getOrganisationType();
 							rowData[2] = customersArchive.get(i).getPhonenumber();
 							rowData[3] = customersArchive.get(i).getName();
@@ -1135,7 +1135,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					deleteAllRows(customersTableModel = (DefaultTableModel) tableCustomers.getModel());
 					Object[] rowData = new Object[9];
 					for (int i = 0; i < customersArchive.getListOfCustomers().size(); i++) {
-						rowData[0] = customersArchive.get(i).getOrganisationName();
+						rowData[0] = customersArchive.get(i).getName();
 						rowData[1] = customersArchive.get(i).getOrganisationType();
 						rowData[2] = customersArchive.get(i).getPhonenumber();
 						rowData[3] = customersArchive.get(i).getName();
@@ -1160,7 +1160,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 						String customersName = customersArchive.getListOfCustomers().get(i).getName();
 						String substringOfName = customersName.substring(0,searchText.length() <= customersName.length() ? searchText.length(): customersName.length());
 						if (substringOfName.equals(searchText)) {
-							rowData[0] = customersArchive.get(i).getOrganisationName();
+							rowData[0] = customersArchive.get(i).getName();
 							rowData[1] = customersArchive.get(i).getOrganisationType();
 							rowData[2] = customersArchive.get(i).getPhonenumber();
 							rowData[3] = customersArchive.get(i).getName();
@@ -1176,7 +1176,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					deleteAllRows(customersTableModel = (DefaultTableModel) tableCustomers.getModel());
 					Object[] rowData = new Object[9];
 					for (int i = 0; i < customersArchive.getListOfCustomers().size(); i++) {
-						rowData[0] = customersArchive.get(i).getOrganisationName();
+						rowData[0] = customersArchive.get(i).getName();
 						rowData[1] = customersArchive.get(i).getOrganisationType();
 						rowData[2] = customersArchive.get(i).getPhonenumber();
 						rowData[3] = customersArchive.get(i).getName();
@@ -2391,7 +2391,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 						String customersName = customersArchive.getListOfCustomers().get(i).getName();
 						String substringOfName = customersName.substring(0,searchText.length() <= customersName.length() ? searchText.length(): customersName.length());
 						if (substringOfName.equals(searchText)) {
-							rowData[0] = customersArchive.get(i).getOrganisationName();
+							rowData[0] = customersArchive.get(i).getName();
 							rowData[1] = customersArchive.get(i).getOrganisationType();
 							rowData[2] = customersArchive.get(i).getPhonenumber();
 							rowData[3] = customersArchive.get(i).getName();
@@ -2407,7 +2407,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					deleteAllRows(customersTableModelForNewReservation = (DefaultTableModel) customersTableInNewTourReservation.getModel());
 					Object[] rowData = new Object[9];
 					for (int i = 0; i < customersArchive.getListOfCustomers().size(); i++) {
-						rowData[0] = customersArchive.get(i).getOrganisationName();
+						rowData[0] = customersArchive.get(i).getName();
 						rowData[1] = customersArchive.get(i).getOrganisationType();
 						rowData[2] = customersArchive.get(i).getPhonenumber();
 						rowData[3] = customersArchive.get(i).getName();
@@ -2432,7 +2432,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 						String customersName = customersArchive.getListOfCustomers().get(i).getName();
 						String substringOfName = customersName.substring(0,searchText.length() <= customersName.length() ? searchText.length(): customersName.length());
 						if (substringOfName.equals(searchText)) {
-							rowData[0] = customersArchive.get(i).getOrganisationName();
+							rowData[0] = customersArchive.get(i).getName();
 							rowData[1] = customersArchive.get(i).getOrganisationType();
 							rowData[2] = customersArchive.get(i).getPhonenumber();
 							rowData[3] = customersArchive.get(i).getName();
@@ -2448,7 +2448,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					deleteAllRows(customersTableModelForNewReservation = (DefaultTableModel) customersTableInNewTourReservation.getModel());
 					Object[] rowData = new Object[9];
 					for (int i = 0; i < customersArchive.getListOfCustomers().size(); i++) {
-						rowData[0] = customersArchive.get(i).getOrganisationName();
+						rowData[0] = customersArchive.get(i).getName();
 						rowData[1] = customersArchive.get(i).getOrganisationType();
 						rowData[2] = customersArchive.get(i).getPhonenumber();
 						rowData[3] = customersArchive.get(i).getName();
@@ -2473,7 +2473,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 						String customersName = customersArchive.getListOfCustomers().get(i).getName();
 						String substringOfName = customersName.substring(0,searchText.length() <= customersName.length() ? searchText.length(): customersName.length());
 						if (substringOfName.equals(searchText)) {
-							rowData[0] = customersArchive.get(i).getOrganisationName();
+							rowData[0] = customersArchive.get(i).getName();
 							rowData[1] = customersArchive.get(i).getOrganisationType();
 							rowData[2] = customersArchive.get(i).getPhonenumber();
 							rowData[3] = customersArchive.get(i).getName();
@@ -2489,7 +2489,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					deleteAllRows(customersTableModelForNewReservation = (DefaultTableModel) customersTableInNewTourReservation.getModel());
 					Object[] rowData = new Object[9];
 					for (int i = 0; i < customersArchive.getListOfCustomers().size(); i++) {
-						rowData[0] = customersArchive.get(i).getOrganisationName();
+						rowData[0] = customersArchive.get(i).getName();
 						rowData[1] = customersArchive.get(i).getOrganisationType();
 						rowData[2] = customersArchive.get(i).getPhonenumber();
 						rowData[3] = customersArchive.get(i).getName();
@@ -2658,7 +2658,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				int index = customersTableInNewTourReservation.getSelectedRow();
-				lblSelectedCustomer.setText(customersArchive.getListOfCustomers().get(index).getName());
+				if(index != -1)
+				   lblSelectedCustomer.setText(customersArchive.getListOfCustomers().get(index).getName() + " - " + customersArchive.getListOfCustomers().get(index).getPhonenumber());
 			}
 		});
 
@@ -2666,8 +2667,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				int index = tableToursInNewTourReservation.getSelectedRow();
-				lblSelectedTour.setText(toursArchive.getToursArchive().get(index).getDestination()
-						+ " " + toursArchive.getToursArchive().get(index).getDateInterval().getStartDate().displayDate());
+				if(index != -1)
+				   lblSelectedTour.setText(toursArchive.getToursArchive().get(index).getDestination() + " " + toursArchive.getToursArchive().get(index).getDepartureDate());
 			}
 		});
 
@@ -3490,7 +3491,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				   		for (int i = 0; i < reservationsArchive.size(); i++) {
 					   		if (reservationsArchive.get(i).getReservationNumber() == reservationNumberOfBusResToDelete) {
 						   		reservationToDelete = (BusReservation) reservationsArchive.get(i);
-								indexOfBusResToDelete = i;
+						   		indexOfBusResToDelete = i;
 						   		break;
 					   		}
 				   		}
@@ -3519,17 +3520,17 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
                   {
                   	customersArchive.saveCustomersArchive();
                   	chauffeursArchive.saveChauffeursArchive();
-				  	busesArchive.saveBusesArchive();
-				 	reservationsArchive.saveReservationsArchive();
+                  	busesArchive.saveBusesArchive();
+                  	reservationsArchive.saveReservationsArchive();
                   }
                   catch (Exception e)
                   {
                      e.printStackTrace();
                   }
                   listBusReservations();
-				   listBuses();
-				   listChauffeurs();
-				   listCustomers();
+                  listBuses();
+                  listChauffeurs();
+                  listCustomers();
                }
             }
 		      else {
@@ -3733,13 +3734,25 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
                     }
 
 					if (str.equalsIgnoreCase("")) {
-                        passengersArchive.addPassenger(new Passenger(textFieldNewBusCustomerName.getText(),textFieldNewBusCustomerEmail.getText(),
-                                        textFieldNewBusCustomerAddress.getText(), new Date(Integer.parseInt(textFieldNewBusCustomerBmonth.getText()),
-                                                                                            Integer.parseInt(textFieldNewBusCustomerBday.getText()),
-                                                                                           Integer.parseInt(textFieldNewBusCustomerByear.getText())),
-                                        textFieldNewBusCustomerPhone.getText()));
-                        updatePassengerListNewBus(passengersArchive.get(passengersArchive.size() - 1));
-                    } else {
+					   Passenger newPassenger = null;
+                  for (int i = 0; i < passengersArchive.size(); i++) {
+                     if(passengersArchive.get(i).getPhonenumber().equals(textFieldNewBusCustomerPhone.getText())
+                             && passengersArchive.get(i).getName().equals(textFieldNewBusCustomerName.getText())) {
+                        newPassenger = passengersArchive.get(i);
+                        break;
+                     }
+                  }
+                  if(newPassenger == null) {
+                     passengersArchive.addPassenger(new Passenger(textFieldNewBusCustomerName.getText(),textFieldNewBusCustomerEmail.getText(),
+                                     textFieldNewBusCustomerAddress.getText(), new Date(Integer.parseInt(textFieldNewBusCustomerBmonth.getText()),
+                                                                                         Integer.parseInt(textFieldNewBusCustomerBday.getText()),
+                                                                                        Integer.parseInt(textFieldNewBusCustomerByear.getText())),
+                                     textFieldNewBusCustomerPhone.getText()));
+                     newPassenger = passengersArchive.get(Autobus.frame.passengersArchive.size() -1);
+                  }
+                  updatePassengerListNewBus(newPassenger);
+                  
+                 } else {
                         JOptionPane.showMessageDialog(null, "You have to fill out the fields correct:\n"+str);
                         chckbxNewBusIsPassenger.setSelected(false);
                     }
@@ -4656,6 +4669,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 									passengersArchive.getPassengersArchive().get(j).getName().equals(passengersName)){
 
 								listOfSelectedPassengers.add(passengersArchive.getPassengersArchive().get(j));
+								break;
 							}
 						}
 					}
@@ -4964,7 +4978,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		deleteAllRows(customersTable);
 		Object[] rowData = new Object[9];
 		for (int i=0; i<customersArchive.size(); i++){
-			rowData[0] = customersArchive.get(i).getOrganisationName();
+			rowData[0] = customersArchive.get(i).getName();
 			rowData[1] = customersArchive.get(i).getOrganisationType();
 			rowData[2] = customersArchive.get(i).getPhonenumber();
 			rowData[3] = customersArchive.get(i).getName();
@@ -4978,7 +4992,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		customersTable = (DefaultTableModel) customersTableInNewTourReservation.getModel();
 		deleteAllRows(customersTable);
 		for (int i=0; i<customersArchive.size(); i++){
-			rowData[0] = customersArchive.get(i).getOrganisationName();
+			rowData[0] = customersArchive.get(i).getName();
 			rowData[1] = customersArchive.get(i).getOrganisationType();
 			rowData[2] = customersArchive.get(i).getPhonenumber();
 			rowData[3] = customersArchive.get(i).getName();
@@ -4994,7 +5008,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	public void updateListCustomers(Customer newCustomer){
 		customersTable = (DefaultTableModel) tableCustomers.getModel();
 		Object[] rowData = new Object[9];
-			rowData[0] = newCustomer.getOrganisationName();
+			rowData[0] = newCustomer.getName();
 			rowData[1] = newCustomer.getOrganisationType();
 			rowData[2] = newCustomer.getPhonenumber();
 			rowData[3] = newCustomer.getName();
@@ -6020,18 +6034,24 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		tableBuses.setSelectionForeground(new Color(255, 255, 255));
 		tableBuses.setSelectionBackground(new Color(102, 205, 170));
 		tableBuses.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Vehicle ID", "Price/hour", "Max # seats", "Earliest Departure", "Model type", "Available for Tours"
-			}
+		   new Object[][] {
+		   },
+		   new String[] {
+		      "Vehicle ID", "Price/hour", "Max # seats", "Earliest Departure", "Model type", "Available for Tours"
+		   }
 		) {
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
+		   Class[] columnTypes = new Class[] {
+		      Object.class, Object.class, Object.class, Object.class, Object.class, Boolean.class
+		   };
+		   public Class getColumnClass(int columnIndex) {
+		      return columnTypes[columnIndex];
+		   }
+		   boolean[] columnEditables = new boolean[] {
+		      false, false, false, false, false, false
+		   };
+		   public boolean isCellEditable(int row, int column) {
+		      return columnEditables[column];
+		   }
 		});
 		tableBuses.setForeground(new Color(255, 255, 255));
 		tableBuses.setFont(new Font("Century Gothic", Font.PLAIN, 12));
@@ -7111,49 +7131,49 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		searchPassengerTextField.setColumns(10);
 		GroupLayout gl_panelPassengers = new GroupLayout(panelPassengers);
 		gl_panelPassengers.setHorizontalGroup(
-			gl_panelPassengers.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelPassengers.createSequentialGroup()
-					.addGroup(gl_panelPassengers.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panelTopPassengers, GroupLayout.DEFAULT_SIZE, 1369, Short.MAX_VALUE)
-						.addGroup(gl_panelPassengers.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
-							.addGap(12)
-							.addGroup(gl_panelPassengers.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panelPassengers.createSequentialGroup()
-									.addGroup(gl_panelPassengers.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_panelPassengers.createSequentialGroup()
-											.addComponent(lblUpdatePassengerButton)
-											.addPreferredGap(ComponentPlacement.RELATED, 927, Short.MAX_VALUE)
-											.addComponent(lblDeletePassengerButton))
-										.addComponent(scrollPanePassengers, GroupLayout.DEFAULT_SIZE, 1049, Short.MAX_VALUE))
-									.addGap(31))
-								.addGroup(gl_panelPassengers.createSequentialGroup()
-									.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(searchPassengerTextField, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)))))
-					.addGap(0))
+		   gl_panelPassengers.createParallelGroup(Alignment.LEADING)
+		      .addGroup(gl_panelPassengers.createSequentialGroup()
+		         .addGroup(gl_panelPassengers.createParallelGroup(Alignment.TRAILING)
+		            .addComponent(panelTopPassengers, GroupLayout.DEFAULT_SIZE, 1371, Short.MAX_VALUE)
+		            .addGroup(gl_panelPassengers.createSequentialGroup()
+		               .addContainerGap()
+		               .addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
+		               .addPreferredGap(ComponentPlacement.RELATED)
+		               .addGroup(gl_panelPassengers.createParallelGroup(Alignment.LEADING)
+		                  .addGroup(gl_panelPassengers.createSequentialGroup()
+		                     .addGroup(gl_panelPassengers.createParallelGroup(Alignment.LEADING)
+		                        .addGroup(gl_panelPassengers.createSequentialGroup()
+		                           .addComponent(lblUpdatePassengerButton)
+		                           .addPreferredGap(ComponentPlacement.RELATED, 931, Short.MAX_VALUE)
+		                           .addComponent(lblDeletePassengerButton))
+		                        .addComponent(scrollPanePassengers, GroupLayout.DEFAULT_SIZE, 1053, Short.MAX_VALUE))
+		                     .addGap(31))
+		                  .addGroup(gl_panelPassengers.createSequentialGroup()
+		                     .addComponent(label_2, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
+		                     .addPreferredGap(ComponentPlacement.RELATED)
+		                     .addComponent(searchPassengerTextField, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)))))
+		         .addGap(0))
 		);
 		gl_panelPassengers.setVerticalGroup(
-			gl_panelPassengers.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelPassengers.createSequentialGroup()
-					.addComponent(panelTopPassengers, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(gl_panelPassengers.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panelPassengers.createSequentialGroup()
-							.addGap(8)
-							.addGroup(gl_panelPassengers.createParallelGroup(Alignment.BASELINE)
-								.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-								.addComponent(searchPassengerTextField, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(scrollPanePassengers, GroupLayout.PREFERRED_SIZE, 255, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panelPassengers.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblUpdatePassengerButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblDeletePassengerButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
-							.addGap(0, 0, Short.MAX_VALUE))
-						.addComponent(panel_1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(465, Short.MAX_VALUE))
+		   gl_panelPassengers.createParallelGroup(Alignment.LEADING)
+		      .addGroup(gl_panelPassengers.createSequentialGroup()
+		         .addComponent(panelTopPassengers, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+		         .addGroup(gl_panelPassengers.createParallelGroup(Alignment.LEADING)
+		            .addGroup(gl_panelPassengers.createSequentialGroup()
+		               .addGap(26)
+		               .addGroup(gl_panelPassengers.createParallelGroup(Alignment.BASELINE)
+		                  .addComponent(label_2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+		                  .addComponent(searchPassengerTextField, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+		               .addPreferredGap(ComponentPlacement.RELATED)
+		               .addComponent(scrollPanePassengers, GroupLayout.PREFERRED_SIZE, 255, GroupLayout.PREFERRED_SIZE)
+		               .addPreferredGap(ComponentPlacement.RELATED)
+		               .addGroup(gl_panelPassengers.createParallelGroup(Alignment.BASELINE)
+		                  .addComponent(lblUpdatePassengerButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+		                  .addComponent(lblDeletePassengerButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
+		            .addGroup(gl_panelPassengers.createSequentialGroup()
+		               .addGap(18)
+		               .addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE)))
+		         .addContainerGap(479, Short.MAX_VALUE))
 		);
 		
 		tablePassengers = new JTable(){
@@ -8589,55 +8609,59 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblSelectBusNewBusResButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
 		GroupLayout gl_panelNewBusReservationNext = new GroupLayout(panelNewBusReservationNext);
 		gl_panelNewBusReservationNext.setHorizontalGroup(
-			gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-					.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-									.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(panelServicesNewBus, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE)
-										.addComponent(panelSelectBus, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE))
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(scrollPaneNewBusSelectBus, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(scrollPaneNewBusSelectChauffeur, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
-									.addGap(18))
-								.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-									.addComponent(lblSelectBusNewBusResButton, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-									.addGap(220)))
-							.addComponent(textPaneSummaryNewBus, GroupLayout.PREFERRED_SIZE, 511, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-							.addComponent(lblCancel)
-							.addGap(18)
-							.addComponent(lblOkNewBusResevation)))
-					.addGap(54))
-				.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 1369, Short.MAX_VALUE)
+		   gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
+		      .addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 1371, Short.MAX_VALUE)
+		      .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+		         .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.TRAILING, false)
+		            .addGroup(Alignment.LEADING, gl_panelNewBusReservationNext.createSequentialGroup()
+		               .addComponent(lblCancel)
+		               .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+		               .addComponent(lblOkNewBusResevation))
+		            .addGroup(Alignment.LEADING, gl_panelNewBusReservationNext.createSequentialGroup()
+		               .addContainerGap()
+		               .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.TRAILING)
+		                  .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+		                     .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING, false)
+		                        .addComponent(panelServicesNewBus, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE)
+		                        .addComponent(panelSelectBus, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE))
+		                     .addPreferredGap(ComponentPlacement.UNRELATED)
+		                     .addComponent(scrollPaneNewBusSelectBus, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
+		                     .addGap(18)
+		                     .addComponent(scrollPaneNewBusSelectChauffeur, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
+		                     .addGap(18))
+		                  .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+		                     .addComponent(lblSelectBusNewBusResButton, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+		                     .addGap(220)))
+		               .addComponent(textPaneSummaryNewBus, GroupLayout.PREFERRED_SIZE, 511, GroupLayout.PREFERRED_SIZE)))
+		         .addGap(54))
 		);
 		gl_panelNewBusReservationNext.setVerticalGroup(
-			gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
-						.addComponent(textPaneSummaryNewBus, GroupLayout.PREFERRED_SIZE, 426, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-							.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
-								.addComponent(scrollPaneNewBusSelectChauffeur, GroupLayout.PREFERRED_SIZE, 386, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING, false)
-									.addComponent(scrollPaneNewBusSelectBus, 0, 0, Short.MAX_VALUE)
-									.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-										.addComponent(panelSelectBus, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE)
-										.addGap(18)
-										.addComponent(panelServicesNewBus, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblSelectBusNewBusResButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-					.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblOkNewBusResevation)
-						.addComponent(lblCancel))
-					.addGap(361))
+		   gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
+		      .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+		         .addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+		         .addGap(18)
+		         .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
+		            .addComponent(textPaneSummaryNewBus, GroupLayout.PREFERRED_SIZE, 426, GroupLayout.PREFERRED_SIZE)
+		            .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+		               .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
+		                  .addComponent(scrollPaneNewBusSelectChauffeur, GroupLayout.PREFERRED_SIZE, 386, GroupLayout.PREFERRED_SIZE)
+		                  .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING, false)
+		                     .addComponent(scrollPaneNewBusSelectBus, 0, 0, Short.MAX_VALUE)
+		                     .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+		                        .addComponent(panelSelectBus, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE)
+		                        .addGap(18)
+		                        .addComponent(panelServicesNewBus, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))))
+		               .addPreferredGap(ComponentPlacement.RELATED)
+		               .addComponent(lblSelectBusNewBusResButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
+		         .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
+		            .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+		               .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+		               .addComponent(lblCancel)
+		               .addGap(361))
+		            .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+		               .addPreferredGap(ComponentPlacement.UNRELATED)
+		               .addComponent(lblOkNewBusResevation)
+		               .addContainerGap())))
 		);
 		
 		chckbxBreakfastNewBus = new JCheckBox("Breakfast");

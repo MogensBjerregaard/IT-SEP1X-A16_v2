@@ -83,7 +83,7 @@ public class UpdateBus extends JPanel {
                 updateBusTable = (DefaultTableModel) tableUpdateBus.getModel();
                 Autobus.frame.deleteAllRows(updateBusTable);
                 Object[] rowData = new Object[3];
-                /*for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
+                for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
                     if(Autobus.frame.toursArchive.get(i).getBus().getModelString().equals(currentlyUpdatingBus.getModelString())
                             && Autobus.frame.toursArchive.get(i).getBus().getVehicleID().equals(currentlyUpdatingBus.getVehicleID())){
                         rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
@@ -91,13 +91,8 @@ public class UpdateBus extends JPanel {
                         rowData[2] = Autobus.frame.toursArchive.get(i).getChauffeur();
                         updateBusTable.addRow(rowData);
                     }
-                }*/
-                for (int i = 0; i < currentlyUpdatingBus.getListOfStartEndDates().size(); i++) {
-                    rowData[0] = currentlyUpdatingBus.getListOfStartEndDates().get(i)[0].toString();
-                    rowData[1] = currentlyUpdatingBus.getListOfStartEndDates().get(i)[1].toString();
-                    rowData[2] = "";
-                    updateBusTable.addRow(rowData);
                 }
+                
                 for (int i = 0; i < Autobus.frame.reservationsArchive.size(); i++) {
                     if (Autobus.frame.reservationsArchive.get(i) instanceof BusReservation) {
                         BusReservation busReservation = (BusReservation) Autobus.frame.reservationsArchive.get(i);

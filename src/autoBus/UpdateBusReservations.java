@@ -843,6 +843,7 @@ public class UpdateBusReservations extends JPanel {
                   }
                   if(newPassenger == null) {
                      Autobus.frame.passengersArchive.addPassenger(new Passenger(nameCustomerReservationUpdate.getText(), emailCustomerReservationUpdate.getText(), addressCustomerReservationUpdate.getText(), new Date(month, day, year), phoneCustomerReservationUpdate.getText()));
+                     newPassenger = Autobus.frame.passengersArchive.get(Autobus.frame.passengersArchive.size() -1);
                   }
                   updatePassengerListNewBus(newPassenger);
                } else {
@@ -1155,13 +1156,7 @@ public class UpdateBusReservations extends JPanel {
          }
       });
       
-      // UPDATE SELECT CHAUFFEUR TABLE FROM NEXT
-     /* updateBusReservationsNext.lblSelectChauffeurUpdBusResButton.addMouseListener(new MouseAdapter() {
-         @Override
-         public void mouseReleased(MouseEvent e) {
-            updateSummaryNewBus();
-         }
-      });*/
+     
       
       // CANCEL IN NEXT
       updateBusReservationsNext.cancelLabelNext.addMouseListener(new MouseAdapter() {
