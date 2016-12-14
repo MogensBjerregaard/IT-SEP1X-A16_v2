@@ -170,7 +170,7 @@ public class ToursArchive implements Serializable{
 		FileInputStream fileInputStream = new FileInputStream("C:\\Autobus\\ToursArchive.dat");
 		ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 		try {
-			ArrayList<Tour> otherToursArchive = (ArrayList<Tour>)objectInputStream.readObject();//how to check if instance of ArrayList<Tour>??
+			ArrayList<Tour> otherToursArchive = (ArrayList<Tour>)objectInputStream.readObject();
 			this.toursArchive=otherToursArchive;
 		} finally {
 			objectInputStream.close();

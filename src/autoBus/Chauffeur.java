@@ -116,21 +116,23 @@ public class Chauffeur implements Serializable{
     */
 	public boolean isAvailable(java.util.Date startDate, int durationInHours) {
 		if(this.listOfStartEndDates.isEmpty()) {
-				datePointer = 0;
-				return true;
+			datePointer = 0;
+			return true;
 		}
-			if (startDate.before(listOfStartEndDates.get(0)[0])) {
-				datePointer = 0;
-				return (listOfStartEndDates.get(0)[0].getTime() - startDate.getTime()) / 3600000 > durationInHours + 24;
+		if (startDate.before(listOfStartEndDates.get(0)[0])) {
+			datePointer = 0;
+			return (listOfStartEndDates.get(0)[0].getTime() - startDate.getTime()) / 3600000 > durationInHours + 24;
+		}
+		for (int j = 0; j < listOfStartEndDates.size() - 1; j++) {
+			if (startDate.after(listOfStartEndDates.get(j)[1]) && startDate.before(listOfStartEndDates.get(j + 1)[0])) {
+				datePointer = j+1;
+				return ((listOfStartEndDates.get(j + 1)[0].getTime() - startDate.getTime()) / 3600000 > durationInHours + 24
+						&&
+						(startDate.getTime() - listOfStartEndDates.get(j)[1].getTime()) / 3600000 > 24);
 			}
-			for (int j = 0; j < listOfStartEndDates.size() - 1; j++) {
-				if (startDate.after(listOfStartEndDates.get(j)[1]) && startDate.before(listOfStartEndDates.get(j + 1)[0])) {
-					datePointer = j+1;
-					return (listOfStartEndDates.get(j + 1)[0].getTime() - startDate.getTime()) / 3600000 > durationInHours + 48;
-				}
-			}
-			datePointer = listOfStartEndDates.size();
-			return startDate.after(listOfStartEndDates.get(listOfStartEndDates.size() -1)[1]);
+		}
+		datePointer = listOfStartEndDates.size();
+		return startDate.after(listOfStartEndDates.get(listOfStartEndDates.size() -1)[1]);
 		
 	}
 	

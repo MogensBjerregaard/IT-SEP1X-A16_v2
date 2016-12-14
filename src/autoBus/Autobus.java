@@ -370,14 +370,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			//listSelectBus();
 		}
 		
-		toursArchive = new ToursArchive();
-		if (toursArchive.isFileFound()){
-			toursArchive.loadToursArchive();
-			listTours();
-		} else {
-			toursArchive.createFile();
-			listTours();
-		}
+
 		
 		priceList = new PriceList();
 		if (priceList.isFileFound()){
@@ -405,7 +398,23 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			passengersArchive.createFile();
 			listPassengers();
 		}
+
+		reservationNumberGenerator = new ReservationNumber();
+		if (reservationNumberGenerator.isFileFound()){
+			reservationNumberGenerator.loadReservationNumber();;
+		} else {
+			reservationNumberGenerator.createFile();
+		}
 		
+		toursArchive = new ToursArchive();
+		if (toursArchive.isFileFound()){
+			toursArchive.loadToursArchive();
+			listTours();
+		} else {
+			toursArchive.createFile();
+			listTours();
+		}
+
 		reservationsArchive = new ReservationsArchive();
 		if (reservationsArchive.isFileFound()){
 			reservationsArchive.loadReservationsArchive();
@@ -415,13 +424,6 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			reservationsArchive.createFile();
 			listBusReservations();
 			listTourReservations();
-		}
-		
-		reservationNumberGenerator = new ReservationNumber();
-		if (reservationNumberGenerator.isFileFound()){
-			reservationNumberGenerator.loadReservationNumber();;
-		} else {
-			reservationNumberGenerator.createFile();
 		}
 	}
 
@@ -4567,8 +4569,6 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				if (str.equalsIgnoreCase("")) {
 					hideAllPanels();
 					panelNewBusReservationNext.setVisible(true);
-					//listNewBusSelectBus();
-					//listNewBusSelectChauffeur();
 					try {
 						reservationNumber=reservationNumberGenerator.getReservationNumber();
 					} catch (Exception e1) {
@@ -4818,8 +4818,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				int minuteStart =0;
 				int minuteEnd = 0;
 
-				//int dayCount = -1;
-				//int workHoursPerDay = 8; //for calculating price per passenger (8 hours per day * price per hour = day price)
+
 				Calendar timeNow = Calendar.getInstance();
 				int currentYear = timeNow.get(Calendar.YEAR);
 				try {
@@ -5067,6 +5066,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					}
 
 					try {
+						Autobus.frame.deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+						Autobus.frame.deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 						reservationsArchive.saveReservationsArchive();
 						JOptionPane.showMessageDialog(null, "The reservation is now saved to the archive.");
 						textFieldNewBusCustomerAddress.setText("");
@@ -6622,12 +6623,12 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		gl_panelTours.setHorizontalGroup(
 			gl_panelTours.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelTours.createSequentialGroup()
-					.addComponent(panelTopTours, GroupLayout.DEFAULT_SIZE, 2706, Short.MAX_VALUE)
+					.addComponent(panelTopTours, GroupLayout.DEFAULT_SIZE, 1369, Short.MAX_VALUE)
 					.addGap(0))
 				.addGroup(gl_panelTours.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panelAddTour, GroupLayout.PREFERRED_SIZE, 607, GroupLayout.PREFERRED_SIZE)
-					.addGap(12)
+					.addComponent(panelAddTour, GroupLayout.PREFERRED_SIZE, 612, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panelTours.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelTours.createSequentialGroup()
 							.addGap(6)
@@ -6873,8 +6874,9 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 									.addComponent(chckbxAllInclusive)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(chckbxEntranceTickets)
-									.addPreferredGap(ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
-									.addComponent(lblAddTourBtn))
+									.addGap(133)
+									.addComponent(lblAddTourBtn)
+									.addGap(0, 0, Short.MAX_VALUE))
 								.addGroup(gl_panelAddTour.createSequentialGroup()
 									.addGap(12)
 									.addGroup(gl_panelAddTour.createParallelGroup(Alignment.TRAILING)
@@ -6910,20 +6912,20 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 									.addGap(23)
 									.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 5, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
-										.addComponent(scrollPanePickUps, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textFieldAddPickup, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(scrollPanePickUps, GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
 										.addGroup(gl_panelAddTour.createSequentialGroup()
 											.addComponent(lblAddPickUpBtn)
 											.addGap(18)
-											.addComponent(lblClearPickUpBtn, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))))
+											.addComponent(lblClearPickUpBtn, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+										.addComponent(textFieldAddPickup)))
 								.addGroup(gl_panelAddTour.createSequentialGroup()
 									.addComponent(scrollPaneSelectBus, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(scrollPaneSelectChauffeur, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(gl_panelAddTour.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(separator, GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)))
+							.addComponent(separator, GroupLayout.PREFERRED_SIZE, 575, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_panelAddTour.setVerticalGroup(
@@ -6932,7 +6934,6 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelAddTour.createParallelGroup(Alignment.TRAILING)
 							.addGroup(gl_panelAddTour.createSequentialGroup()
-								.addContainerGap()
 								.addGroup(gl_panelAddTour.createParallelGroup(Alignment.BASELINE)
 									.addComponent(lblDestination)
 									.addComponent(textFieldDestination, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -9133,59 +9134,58 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblSelectBusNewBusResButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
 		GroupLayout gl_panelNewBusReservationNext = new GroupLayout(panelNewBusReservationNext);
 		gl_panelNewBusReservationNext.setHorizontalGroup(
-		   gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
-		      .addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 1371, Short.MAX_VALUE)
-		      .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-		         .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.TRAILING, false)
-		            .addGroup(Alignment.LEADING, gl_panelNewBusReservationNext.createSequentialGroup()
-		               .addComponent(lblCancel)
-		               .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-		               .addComponent(lblOkNewBusResevation))
-		            .addGroup(Alignment.LEADING, gl_panelNewBusReservationNext.createSequentialGroup()
-		               .addContainerGap()
-		               .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.TRAILING)
-		                  .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-		                     .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING, false)
-		                        .addComponent(panelServicesNewBus, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE)
-		                        .addComponent(panelSelectBus, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE))
-		                     .addPreferredGap(ComponentPlacement.UNRELATED)
-		                     .addComponent(scrollPaneNewBusSelectBus, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
-		                     .addGap(18)
-		                     .addComponent(scrollPaneNewBusSelectChauffeur, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
-		                     .addGap(18))
-		                  .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-		                     .addComponent(lblSelectBusNewBusResButton, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-		                     .addGap(220)))
-		               .addComponent(textPaneSummaryNewBus, GroupLayout.PREFERRED_SIZE, 511, GroupLayout.PREFERRED_SIZE)))
-		         .addGap(54))
+			gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
+				.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 1369, Short.MAX_VALUE)
+				.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(Alignment.TRAILING, gl_panelNewBusReservationNext.createSequentialGroup()
+							.addComponent(lblCancel)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(lblOkNewBusResevation))
+						.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+							.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+									.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(panelServicesNewBus, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE)
+										.addComponent(panelSelectBus, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE))
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(scrollPaneNewBusSelectBus, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(scrollPaneNewBusSelectChauffeur, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
+									.addGap(18))
+								.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+									.addComponent(lblSelectBusNewBusResButton, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+									.addGap(220)))
+							.addComponent(textPaneSummaryNewBus, GroupLayout.PREFERRED_SIZE, 511, GroupLayout.PREFERRED_SIZE)))
+					.addGap(54))
 		);
 		gl_panelNewBusReservationNext.setVerticalGroup(
-		   gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
-		      .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-		         .addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-		         .addGap(18)
-		         .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
-		            .addComponent(textPaneSummaryNewBus, GroupLayout.PREFERRED_SIZE, 426, GroupLayout.PREFERRED_SIZE)
-		            .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-		               .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
-		                  .addComponent(scrollPaneNewBusSelectChauffeur, GroupLayout.PREFERRED_SIZE, 386, GroupLayout.PREFERRED_SIZE)
-		                  .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING, false)
-		                     .addComponent(scrollPaneNewBusSelectBus, 0, 0, Short.MAX_VALUE)
-		                     .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-		                        .addComponent(panelSelectBus, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE)
-		                        .addGap(18)
-		                        .addComponent(panelServicesNewBus, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))))
-		               .addPreferredGap(ComponentPlacement.RELATED)
-		               .addComponent(lblSelectBusNewBusResButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
-		         .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
-		            .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-		               .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-		               .addComponent(lblCancel)
-		               .addGap(361))
-		            .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-		               .addPreferredGap(ComponentPlacement.UNRELATED)
-		               .addComponent(lblOkNewBusResevation)
-		               .addContainerGap())))
+			gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
+						.addComponent(textPaneSummaryNewBus, GroupLayout.PREFERRED_SIZE, 426, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+							.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPaneNewBusSelectChauffeur, GroupLayout.PREFERRED_SIZE, 386, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING, false)
+									.addComponent(scrollPaneNewBusSelectBus, 0, 0, Short.MAX_VALUE)
+									.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+										.addComponent(panelSelectBus, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE)
+										.addGap(18)
+										.addComponent(panelServicesNewBus, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblSelectBusNewBusResButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
+					.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lblOkNewBusResevation))
+						.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+							.addGap(5)
+							.addComponent(lblCancel)))
+					.addGap(355))
 		);
 		
 		chckbxBreakfastNewBus = new JCheckBox("Breakfast");
