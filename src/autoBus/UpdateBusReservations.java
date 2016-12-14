@@ -386,8 +386,8 @@ public class UpdateBusReservations extends JPanel {
       updateBusReservationsNext.nextLabelNext.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseReleased(MouseEvent arg0) {
-            if (Autobus.frame.okOrCancel("Are you sure you want to save these changes?") == 0) {
-               String str = new String();
+            if (Autobus.okOrCancel("Are you sure you want to save these changes?") == 0) {
+               String str = "";
                int monthStart=0;
                int dayStart =0;
                int yearStart=0;
@@ -1132,10 +1132,10 @@ public class UpdateBusReservations extends JPanel {
           * This checks if all the fields where filled correctly and update summary new Bus
           */
          public void mouseReleased(MouseEvent e) {
-            String str = new String();
+            String str = "";
             int month = 0;
-            int day = 0;
-            int year = 0;
+            int day;
+            int year;
             Calendar timeNow = Calendar.getInstance();
             int currentYear = timeNow.get(Calendar.YEAR);
             try {
@@ -1206,11 +1206,6 @@ public class UpdateBusReservations extends JPanel {
                listNewBusSelectBus(currentlyUpdatingBusReservation.getNewDateInterval()[0], durationInHours);
                Autobus.frame.hideAllPanels();
                Autobus.frame.updateBusReservationsNext.setVisible(true);
-               try {
-                  Autobus.frame.reservationNumber = Autobus.frame.reservationNumberGenerator.getReservationNumber();
-               } catch (Exception e1) {
-                  e1.printStackTrace();
-               }
                updateSummaryNewBus();
             } else {
                JOptionPane.showMessageDialog(null, "You have to fill out the fields correct:\n"+str);
@@ -1274,40 +1269,42 @@ public class UpdateBusReservations extends JPanel {
           * This clears all fields and shows panel
           */
          public void mouseReleased(MouseEvent e) {
-            try {
-               Autobus.frame.reservationNumberGenerator.cancelReservationNumber();
-               addressCustomerReservationUpdate.setText("");
-               ddCustomerReservationUpdate.setText("");
-               mmCustomerReservationUpdate.setText("");
-               yyyyCustomerReservationUpdate.setText("");
-               emailCustomerReservationUpdate.setText("");
-               nameCustomerReservationUpdate.setText("");
-               phoneCustomerReservationUpdate.setText("");
-               addressPassengerReservationUpdate.setText("");
-               ddPassengerReservationUpdate.setText("");
-               mmPassengerReservationUpdate.setText("");
-               yyyyPassengerReservationUpdate.setText("");
-               emailPassengerReservationUpdate.setText("");
-               namePassengerReservationUpdate.setText("");
-               phonePassengerReservationUpdate.setText("");
-               newTablePassengerReservationUpdate = (DefaultTableModel) tablePassengerReservationUpdate.getModel(); 
-               newTablePassengerReservationUpdate.setRowCount(0);
-               isPassengerCheckBox.setSelected(false);
-               companyRadioButtonReservationUpdate.setSelected(false);
-               privateRadioButtonReservationUpdate.setSelected(false);
-               schoolRadioButtonReservationUpdate.setSelected(false);
-               organisationNameReservationUpdate.setText("");
-               updateBusReservationsNext.endDayNext.setText("");
-               updateBusReservationsNext.endMonthNext.setText("");
-               updateBusReservationsNext.endYearNext.setText("");
-               updateBusReservationsNext.startDayNext.setText("");
-               updateBusReservationsNext.startMonthNext.setText("");
-               updateBusReservationsNext.startYearNext.setText("");
-               Autobus.frame.hideAllPanels();
-               panel.setVisible(true);
-            } catch (Exception e1) {
-   
-               e1.printStackTrace();
+            if (Autobus.okOrCancel("Are you sure you want to cancel updating this reservation?") == 0) {
+               try {
+                  Autobus.frame.reservationNumberGenerator.cancelReservationNumber();
+                  addressCustomerReservationUpdate.setText("");
+                  ddCustomerReservationUpdate.setText("");
+                  mmCustomerReservationUpdate.setText("");
+                  yyyyCustomerReservationUpdate.setText("");
+                  emailCustomerReservationUpdate.setText("");
+                  nameCustomerReservationUpdate.setText("");
+                  phoneCustomerReservationUpdate.setText("");
+                  addressPassengerReservationUpdate.setText("");
+                  ddPassengerReservationUpdate.setText("");
+                  mmPassengerReservationUpdate.setText("");
+                  yyyyPassengerReservationUpdate.setText("");
+                  emailPassengerReservationUpdate.setText("");
+                  namePassengerReservationUpdate.setText("");
+                  phonePassengerReservationUpdate.setText("");
+                  newTablePassengerReservationUpdate = (DefaultTableModel) tablePassengerReservationUpdate.getModel();
+                  newTablePassengerReservationUpdate.setRowCount(0);
+                  isPassengerCheckBox.setSelected(false);
+                  companyRadioButtonReservationUpdate.setSelected(false);
+                  privateRadioButtonReservationUpdate.setSelected(false);
+                  schoolRadioButtonReservationUpdate.setSelected(false);
+                  organisationNameReservationUpdate.setText("");
+                  updateBusReservationsNext.endDayNext.setText("");
+                  updateBusReservationsNext.endMonthNext.setText("");
+                  updateBusReservationsNext.endYearNext.setText("");
+                  updateBusReservationsNext.startDayNext.setText("");
+                  updateBusReservationsNext.startMonthNext.setText("");
+                  updateBusReservationsNext.startYearNext.setText("");
+                  Autobus.frame.hideAllPanels();
+                  panel.setVisible(true);
+               } catch (Exception e1) {
+
+                  e1.printStackTrace();
+               }
             }
          }
       });

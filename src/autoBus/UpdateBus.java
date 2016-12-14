@@ -28,6 +28,7 @@ public class UpdateBus extends JPanel {
     */
    private static final long serialVersionUID = 1L;
     private final JLabel lblCancelUpdateBusButton;
+    private final JLabel lblBackUpdateBusButton;
     private Bus currentlyUpdatingBus;
    private JTextField pricePerHourTextFieldUpdateBus;
    private JTextField numberOfSeatsTextFieldUpdateBus;
@@ -44,6 +45,14 @@ public class UpdateBus extends JPanel {
     * All methods for this UpdateBus
     */
    public void createEvents() {
+
+       lblBackUpdateBusButton.addMouseListener(new MouseAdapter() {
+           @Override
+           public void mouseReleased(MouseEvent event) {
+               Autobus.frame.hideAllPanels();
+               Autobus.frame.panelBuses.setVisible(true);
+           }
+       });
        
       /**
         * Cancel Button
@@ -85,7 +94,7 @@ public class UpdateBus extends JPanel {
                 updateBusTable = (DefaultTableModel) tableUpdateBus.getModel();
                 Autobus.frame.deleteAllRows(updateBusTable);
                 Object[] rowData = new Object[3];
-                /*for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
+                for (int i = 0; i < Autobus.frame.toursArchive.size(); i++) {
                     if(Autobus.frame.toursArchive.get(i).getBus().getModelString().equals(currentlyUpdatingBus.getModelString())
                             && Autobus.frame.toursArchive.get(i).getBus().getVehicleID().equals(currentlyUpdatingBus.getVehicleID())){
                         rowData[0] = Autobus.frame.toursArchive.get(i).getDepartureDate();
@@ -106,14 +115,6 @@ public class UpdateBus extends JPanel {
                             updateBusTable.addRow(rowData);
                         }
                     }
-                }*/
-                for (int i = 0; i < currentlyUpdatingBus.getListOfStartEndDates().size(); i++) {
-
-                        rowData[0] = currentlyUpdatingBus.getListOfStartEndDates().get(i)[0].toString();
-                        rowData[1] = currentlyUpdatingBus.getListOfStartEndDates().get(i)[1].toString();
-                        rowData[2] = "";
-                        updateBusTable.addRow(rowData);
-
                 }
                vehicleIdTextFieldUpdateBus.setText(currentlyUpdatingBus.getVehicleID());
                pricePerHourTextFieldUpdateBus.setText(Double.toString(currentlyUpdatingBus.getPricePerHour()));
@@ -148,7 +149,7 @@ public class UpdateBus extends JPanel {
             }
          }
       });
-      
+
       /**
        * Update Bus button
        */
@@ -397,11 +398,16 @@ public class UpdateBus extends JPanel {
       scrollPane.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       scrollPane.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Buses archive", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(5, 5, 5, 5)));
       scrollPane.setBackground(new Color(95, 158, 160));
+
+       lblBackUpdateBusButton = new JLabel("Back");
+      lblBackUpdateBusButton.setForeground(Color.WHITE);
+      lblBackUpdateBusButton.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+      lblBackUpdateBusButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(2, 2, 2, 2)));
       GroupLayout gl_panel = new GroupLayout(panel);
       gl_panel.setHorizontalGroup(
       	gl_panel.createParallelGroup(Alignment.LEADING)
       		.addGroup(gl_panel.createSequentialGroup()
-      			.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+      			.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 1046, Short.MAX_VALUE)
       			.addGap(0))
       		.addGroup(gl_panel.createSequentialGroup()
       			.addGap(12)
@@ -409,6 +415,10 @@ public class UpdateBus extends JPanel {
       			.addGap(18)
       			.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 507, GroupLayout.PREFERRED_SIZE)
       			.addContainerGap(191, Short.MAX_VALUE))
+      		.addGroup(gl_panel.createSequentialGroup()
+      			.addContainerGap()
+      			.addComponent(lblBackUpdateBusButton)
+      			.addContainerGap(994, Short.MAX_VALUE))
       );
       gl_panel.setVerticalGroup(
       	gl_panel.createParallelGroup(Alignment.LEADING)
@@ -418,7 +428,9 @@ public class UpdateBus extends JPanel {
       			.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
       				.addComponent(scrollPane, 0, 0, Short.MAX_VALUE)
       				.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 368, GroupLayout.PREFERRED_SIZE))
-      			.addContainerGap(412, Short.MAX_VALUE))
+      			.addPreferredGap(ComponentPlacement.UNRELATED)
+      			.addComponent(lblBackUpdateBusButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+      			.addGap(374))
       );
       
       tableUpdateBus = new JTable();

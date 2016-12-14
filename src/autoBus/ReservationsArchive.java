@@ -132,8 +132,61 @@ public class ReservationsArchive implements Serializable{
 		FileInputStream fileInputStream = new FileInputStream("C:\\Autobus\\ReservationsArchive.dat");
 		ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 		try {
-			ArrayList<Reservation> otherReservationsArchive = (ArrayList<Reservation>)objectInputStream.readObject();//how to check if instance of ArrayList<Reservation>??
-			this.reservationsArchive=otherReservationsArchive;
+			this.reservationsArchive= (ArrayList<Reservation>)objectInputStream.readObject();;
+			for (int i = 0; i < reservationsArchive.size(); i++) {
+				Reservation thisReservation = reservationsArchive.get(i);
+				Customer oldCustomer = thisReservation.getCustomer();
+				ArrayList<Passenger> oldListOfPassengers = thisReservation.getPassengers();
+
+				if(reservationsArchive.get(i) instanceof TourReservation) {
+					TourReservation thisTourReservation = (TourReservation) reservationsArchive.get(i);
+					Tour oldTour = thisTourReservation.getTour();
+					for (int j = 0; j < Autobus.frame.toursArchive.size(); j++) {
+						if (oldTour.getDepartureDate().equals(Autobus.frame.toursArchive.get(j).getDepartureDate())
+								&& oldTour.getBus().getVehicleID().equals(Autobus.frame.toursArchive.get(j).getBus().getVehicleID())) {
+							thisTourReservation.setTour(Autobus.frame.toursArchive.get(j));
+							break;
+						}
+					}
+				}
+				else{
+					BusReservation thisBusReservation = (BusReservation) reservationsArchive.get(i);
+					Bus oldBus = thisBusReservation.getBus();
+					Chauffeur oldChauffeur = thisBusReservation.getChauffeur();
+					for (int j = 0; j < Autobus.frame.busesArchive.size(); j++) {
+						if(oldBus.getVehicleID().equals(Autobus.frame.busesArchive.get(j).getVehicleID())
+								&& oldBus.getModelString().equals(Autobus.frame.busesArchive.get(j).getModelString())) {
+							thisBusReservation.setBus(Autobus.frame.busesArchive.get(j));
+							break;
+						}
+					}
+					for (int j = 0; j < Autobus.frame.chauffeursArchive.size(); j++) {
+						if(oldChauffeur.getName().equals(Autobus.frame.chauffeursArchive.get(j).getName())
+								&& oldChauffeur.getPhonenumber().equals(Autobus.frame.chauffeursArchive.get(j).getPhonenumber())){
+							thisBusReservation.setChauffeur(Autobus.frame.chauffeursArchive.get(j));
+							break;
+						}
+					}
+				}
+				for (int j = 0; j < Autobus.frame.customersArchive.size(); j++) {
+					if(oldCustomer.getName().equals(Autobus.frame.customersArchive.get(j).getName())
+							&& oldCustomer.getPhonenumber().equals(Autobus.frame.customersArchive.get(j).getPhonenumber())){
+						thisReservation.setCustomer(Autobus.frame.customersArchive.get(j));
+						break;
+					}
+				}
+				for (int j = 0; j < oldListOfPassengers.size(); j++) {
+					Passenger oldPassenger = oldListOfPassengers.get(j);
+					for (int k = 0; k < Autobus.frame.passengersArchive.size(); k++) {
+						if(oldPassenger.getName().equals(Autobus.frame.passengersArchive.get(k).getName())
+								&& oldPassenger.getPhonenumber().equals(Autobus.frame.passengersArchive.get(k).getPhonenumber())){
+							oldListOfPassengers.set(j, Autobus.frame.passengersArchive.get(k));
+							break;
+						}
+					}
+				}
+
+			}
 		} finally {
 			objectInputStream.close();
 		}

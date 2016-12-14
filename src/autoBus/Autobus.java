@@ -39,7 +39,7 @@ public class Autobus extends JFrame {
 	BusesArchive busesArchive;
 	ToursArchive toursArchive;
 	CustomersArchive customersArchive;
-	PassengersArchive passengersArchive;
+	 PassengersArchive passengersArchive;
 	ReservationsArchive reservationsArchive;
 	PriceList priceList;
 	ReservationNumber reservationNumberGenerator;
@@ -316,6 +316,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			try {
 				frame = new Autobus();
 				frame.initExternalComponents();
+				frame.loadArchives();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -338,7 +339,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			
 		initComponents();
 		createEvents();
-		loadArchives();
+		//loadArchives();
 
 	}
 
@@ -405,7 +406,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		} else {
 			reservationNumberGenerator.createFile();
 		}
-		
+
 		toursArchive = new ToursArchive();
 		if (toursArchive.isFileFound()){
 			toursArchive.loadToursArchive();
@@ -459,7 +460,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							BusReservation otherBusReservation = (BusReservation)reservationsArchive.get(i);
 							rowData[0] = otherBusReservation.getReservationNumber();
 							rowData[1] = otherBusReservation.getDepartureDate();
-							rowData[2] = otherBusReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherBusReservation.getCustomer().getName();
 							rowData[3] = otherBusReservation.getPassengersString();
 							rowData[4] = otherBusReservation.getChauffeur().getName();
 							rowData[5] = "#"+otherBusReservation.getBus().getVehicleID()+" "+otherBusReservation.getBus().getModel();
@@ -476,7 +477,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							BusReservation otherBusReservation = (BusReservation)reservationsArchive.get(i);
 							rowData[0] = otherBusReservation.getReservationNumber();
 							rowData[1] = otherBusReservation.getDepartureDate();
-							rowData[2] = otherBusReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherBusReservation.getCustomer().getName();
 							rowData[3] = otherBusReservation.getPassengersString();
 							rowData[4] = otherBusReservation.getChauffeur().getName();
 							rowData[5] = "#"+otherBusReservation.getBus().getVehicleID()+" "+otherBusReservation.getBus().getModel();
@@ -502,7 +503,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							BusReservation otherBusReservation = (BusReservation)reservationsArchive.get(i);
 							rowData[0] = otherBusReservation.getReservationNumber();
 							rowData[1] = otherBusReservation.getDepartureDate();
-							rowData[2] = otherBusReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherBusReservation.getCustomer().getName();
 							rowData[3] = otherBusReservation.getPassengersString();
 							rowData[4] = otherBusReservation.getChauffeur().getName();
 							rowData[5] = "#"+otherBusReservation.getBus().getVehicleID()+" "+otherBusReservation.getBus().getModel();
@@ -519,7 +520,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							BusReservation otherBusReservation = (BusReservation)reservationsArchive.get(i);
 							rowData[0] = otherBusReservation.getReservationNumber();
 							rowData[1] = otherBusReservation.getDepartureDate();
-							rowData[2] = otherBusReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherBusReservation.getCustomer().getName();
 							rowData[3] = otherBusReservation.getPassengersString();
 							rowData[4] = otherBusReservation.getChauffeur().getName();
 							rowData[5] = "#"+otherBusReservation.getBus().getVehicleID()+" "+otherBusReservation.getBus().getModel();
@@ -545,7 +546,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							BusReservation otherBusReservation = (BusReservation)reservationsArchive.get(i);
 							rowData[0] = otherBusReservation.getReservationNumber();
 							rowData[1] = otherBusReservation.getDepartureDate();
-							rowData[2] = otherBusReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherBusReservation.getCustomer().getName();
 							rowData[3] = otherBusReservation.getPassengersString();
 							rowData[4] = otherBusReservation.getChauffeur().getName();
 							rowData[5] = "#"+otherBusReservation.getBus().getVehicleID()+" "+otherBusReservation.getBus().getModel();
@@ -562,7 +563,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							BusReservation otherBusReservation = (BusReservation)reservationsArchive.get(i);
 							rowData[0] = otherBusReservation.getReservationNumber();
 							rowData[1] = otherBusReservation.getDepartureDate();
-							rowData[2] = otherBusReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherBusReservation.getCustomer().getName();
 							rowData[3] = otherBusReservation.getPassengersString();
 							rowData[4] = otherBusReservation.getChauffeur().getName();
 							rowData[5] = "#"+otherBusReservation.getBus().getVehicleID()+" "+otherBusReservation.getBus().getModel();
@@ -600,7 +601,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							TourReservation otherTourReservation = (TourReservation)reservationsArchive.get(i);
 							rowData[0] = otherTourReservation.getReservationNumber();
 							rowData[1] = otherTourReservation.getTour().getDestination()+" "+otherTourReservation.getTour().getDateIntervalString();
-							rowData[2] = otherTourReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherTourReservation.getCustomer().getName();
 							rowData[3] = otherTourReservation.getPassengersString();
 							rowData[4] = otherTourReservation.getTotalPrice();
 							tourResTableModel.addRow(rowData);
@@ -614,7 +615,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							TourReservation otherTourReservation = (TourReservation)reservationsArchive.get(i);
 							rowData[0] = otherTourReservation.getReservationNumber();
 							rowData[1] = otherTourReservation.getTour().getDestination()+" "+otherTourReservation.getTour().getDateIntervalString();
-							rowData[2] = otherTourReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherTourReservation.getCustomer().getName();
 							rowData[3] = otherTourReservation.getPassengersString();
 							rowData[4] = otherTourReservation.getTotalPrice();
 							tourResTableModel.addRow(rowData);
@@ -637,7 +638,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							TourReservation otherTourReservation = (TourReservation)reservationsArchive.get(i);
 							rowData[0] = otherTourReservation.getReservationNumber();
 							rowData[1] = otherTourReservation.getTour().getDestination()+" "+otherTourReservation.getTour().getDateIntervalString();
-							rowData[2] = otherTourReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherTourReservation.getCustomer().getName();
 							rowData[3] = otherTourReservation.getPassengersString();
 							rowData[4] = otherTourReservation.getTotalPrice();
 							tourResTableModel.addRow(rowData);
@@ -651,7 +652,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							TourReservation otherTourReservation = (TourReservation)reservationsArchive.get(i);
 							rowData[0] = otherTourReservation.getReservationNumber();
 							rowData[1] = otherTourReservation.getTour().getDestination()+" "+otherTourReservation.getTour().getDateIntervalString();
-							rowData[2] = otherTourReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherTourReservation.getCustomer().getName();
 							rowData[3] = otherTourReservation.getPassengersString();
 							rowData[4] = otherTourReservation.getTotalPrice();
 							tourResTableModel.addRow(rowData);
@@ -674,7 +675,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							TourReservation otherTourReservation = (TourReservation)reservationsArchive.get(i);
 							rowData[0] = otherTourReservation.getReservationNumber();
 							rowData[1] = otherTourReservation.getTour().getDestination()+" "+otherTourReservation.getTour().getDateIntervalString();
-							rowData[2] = otherTourReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherTourReservation.getCustomer().getName();
 							rowData[3] = otherTourReservation.getPassengersString();
 							rowData[4] = otherTourReservation.getTotalPrice();
 							tourResTableModel.addRow(rowData);
@@ -688,7 +689,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							TourReservation otherTourReservation = (TourReservation)reservationsArchive.get(i);
 							rowData[0] = otherTourReservation.getReservationNumber();
 							rowData[1] = otherTourReservation.getTour().getDestination()+" "+otherTourReservation.getTour().getDateIntervalString();
-							rowData[2] = otherTourReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherTourReservation.getCustomer().getName();
 							rowData[3] = otherTourReservation.getPassengersString();
 							rowData[4] = otherTourReservation.getTotalPrice();
 							tourResTableModel.addRow(rowData);
@@ -2980,8 +2981,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					deleteAllRows((DefaultTableModel) tablePassengersInNewTourReservation.getModel());
 					lblSelectedCustomer.setText("");
 					lblSelectedTour.setText("");
-					lblSelectedPassengers.removeAll();
-
+					DefaultListModel<String> listModel = (DefaultListModel<String>) lblSelectedPassengers.getModel();
+					listModel.removeAllElements();
 				}
 				else{
 					JOptionPane.showMessageDialog(null,
@@ -4180,105 +4181,6 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			}
 		});
 
-//IS A PASSENGER CHECKBOX IN NEW TOUR RESERVATION. THIS METHOD WILL CREATE BOTH CUSTOMER AND PASSENGER AND UPDATE ALL TABLES
-		/*this.boxIsAPassengerNewTourReservation.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String str = new String();
-				int month = 0;
-				int day = 0;
-				int year = 0;
-				Calendar timeNow = Calendar.getInstance();
-				int currentYear = timeNow.get(Calendar.YEAR);
-				try {
-					int phone = Integer.parseInt(lblPhoneInNewTourReservationtextField.getText());
-					if (!(10000000<phone&&phone<=99999999)) {
-						str+= "\nPhone number does not have 8 digits!";
-					}
-				} catch (Exception e3) {
-					str+= "\nEntered phone number does not appear to be digits!";
-				}
-				if (customerOrganisationtextField.getText().equalsIgnoreCase("")) {
-					str+= "\nName/organisation cannot be empty!";
-				}
-				if (customerNameNewTourReservationTextField.getText().equalsIgnoreCase("")){
-					str+= "\nName/contact cannot be empty!";
-				}
-				if (customerAddressIncustomerEmailNewTourReservationTextField.getText().equalsIgnoreCase("")) {
-					str+= "\nAddress cannot be empty!";
-				}
-				if (customerEmailNewTourReservationtextField.getText().equalsIgnoreCase("")){
-					str+= "\nEmail address cannot be empty!";
-				}
-				if (!(customerEmailNewTourReservationtextField.getText().contains("@")&&customerEmailNewTourReservationtextField.getText().contains("."))){
-					str+= "\nEmail address does not appear to be in correct format!";
-				}
-				String organisationType = "PRIVATE";
-				if (radioButtonIsCompanyNewTourReservation.isSelected()) {
-					organisationType = "COMPANY";
-				}
-				if (radioButtonIsSchoolNewTourReservation.isSelected()){
-					organisationType = "SCHOOL";
-				}
-
-				try {
-					month = Integer.parseInt(customerMonthInNewTourReservationTextField.getText());
-					if (month>12||month<1) str = str + "\nMonth does not seem to be a number between 1-12!";
-				} catch (NumberFormatException e1) {
-					str = str + "\nMonth does not seem to be a number between 1-12!";
-				}
-				try {
-					day = Integer.parseInt(customerDayInNewTourReservationTextField.getText());
-					if (month==1||month==3||month==5||month==7||month==8||month==10||month==12) {
-						if (!(1<=day&&day<=31)) {
-							str = str + "\nDay does not seem to be a number between 1-31!";
-						}
-					} else if (month==2){
-						if (!(1<=day&&day<=28)) {
-							str = str + "\nDay does not seem to be a number between 1-28!";
-						}
-					} else if (month==4||month==6||month==9||month==11){
-						if (!(1<=day&&day<=30)) {
-							str = str + "\nDay does not seem to be a number between 1-30!";
-						}
-					}
-				} catch (NumberFormatException e1) {
-					str = str + "\nDay does not seem to be a number between 1-31!";
-				}
-				try {
-					year = Integer.parseInt(customerYearInNewTourReservationTextField.getText());
-					if (year>currentYear||year<currentYear-120) str = str + "\nYear does not appear to be a valid number!";
-				} catch (NumberFormatException e1) {
-					str = str + "\nYear does not appear to be a valid number!";
-				}
-
-				if (str.equalsIgnoreCase("")) {
-					customersArchive.addCustomer( new Customer(customerNameNewTourReservationTextField.getText(), customerOrganisationtextField.getText(), customerEmailNewTourReservationtextField.getText(),
-									customerAddressIncustomerEmailNewTourReservationTextField.getText(), new Date(month,day,year), lblPhoneInNewTourReservationtextField.getText(), organisationType));
-					passengersArchive.addPassenger(new Passenger(customerNameNewTourReservationTextField.getText(),customerEmailNewTourReservationtextField.getText(), customerAddressIncustomerEmailNewTourReservationTextField.getText(),new Date(month,day,year), lblPhoneInNewTourReservationtextField.getText()));
-					updateListPassengersInNewTourReservation(passengersArchive.getPassengersArchive().get(passengersArchive.getPassengersArchive().size() -1));
-					updateListPassengers(passengersArchive.getPassengersArchive().get(passengersArchive.getPassengersArchive().size() -1));
-					updateListCustomers(customersArchive.getListOfCustomers().get(customersArchive.getListOfCustomers().size() -1));
-					DefaultListModel<String> listModel = (DefaultListModel<String>) lblSelectedPassengers.getModel();
-					listModel.addElement(passengersArchive.getPassengersArchive().get(passengersArchive.size() -1).getName() + " " +
-							passengersArchive.getPassengersArchive().get(passengersArchive.size() -1).getPhonenumber());
-
-					try {
-						customersArchive.saveCustomersArchive();
-						passengersArchive.savePassengersArchive();
-					} catch (Exception ex) {
-
-						ex.printStackTrace();
-					}
-
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "You have to fill out the fields correct:\n"+str);
-					chckbxNewBusIsPassenger.setSelected(false);
-				}
-
-			}
-		});*/
-
 		lblSearchForPassengerInNewTourReservationButton.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
@@ -5402,22 +5304,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	 * @param chauffeur - chauffeur for this Tour
 	 * @param services - services for this Tour
 	 */
-	public void updateListTours(String dateInterval, String destination, String pickUps, String seatsAvailable, String price, String pricePerPassenger, String busAndType, String chauffeur, String services){
-		Object[] rowData = new Object[9];
-			rowData[0] = dateInterval;
-			rowData[1] = destination;
-			rowData[2] = pickUps;
-			rowData[3] = seatsAvailable;
-			rowData[4] = price;
-			rowData[5] = pricePerPassenger;
-			rowData[6] = busAndType;
-			rowData[7] = chauffeur;
-			rowData[8] = services;
-			toursTable.addRow(rowData);
-			toursTable = (DefaultTableModel) tableToursInNewTourReservation.getModel();
-			toursTable.addRow(rowData);
-	}
-	
+
 	/**
 	 * This lists Customer from customersArchive
 	 */
@@ -5571,23 +5458,6 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		 
 	}
 	
-	/*public void updateListSelectChauffeur(Chauffeur newChauffeur) {
-	   selectChauffeurTable = (DefaultTableModel) tableSelectChauffeur.getModel();
-	   Object[] rowData = new Object[2];
-	   rowData[0] = newChauffeur.getEmployeeNumber();
-	   rowData[1] = newChauffeur.getName();
-	   selectChauffeurTable.addRow(rowData);
-	}*/
-	
-	/*public void updateListSelectBus(Bus newBus) {
-	   selectBusTable = (DefaultTableModel) tableSelectBus.getModel();
-	   Object[] rowData = new Object[3];
-	   rowData[0] = newBus.getVehicleID();
-	   rowData[1] = newBus.getModelString();
-	   rowData[2] = newBus.getMaxNumberOfSeats();
-	   selectBusTable.addRow(rowData);
-	}*/
-	
 	/**
 	 * This updates prices for breakfast, lunch, all inclusive and tickets
 	 */
@@ -5610,7 +5480,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				BusReservation otherBusReservation = (BusReservation)reservationsArchive.get(i);
 				rowData[0] = otherBusReservation.getReservationNumber();
 				rowData[1] = otherBusReservation.getDepartureDate();
-				rowData[2] = otherBusReservation.getCustomer().getOrganisationName();
+				rowData[2] = otherBusReservation.getCustomer().getName();
 				rowData[3] = otherBusReservation.getPassengersString();
 				rowData[4] = otherBusReservation.getChauffeur().getName();
 				rowData[5] = "#"+otherBusReservation.getBus().getVehicleID()+" "+otherBusReservation.getBus().getModel();
@@ -5633,7 +5503,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				TourReservation otherTourReservation = (TourReservation)reservationsArchive.get(i);
 				rowData[0] = otherTourReservation.getReservationNumber();
 				rowData[1] = otherTourReservation.getTour().getDestination()+" "+otherTourReservation.getTour().getDateIntervalString();
-				rowData[2] = otherTourReservation.getCustomer().getOrganisationName();
+				rowData[2] = otherTourReservation.getCustomer().getName();
 				rowData[3] = otherTourReservation.getPassengersString();
 				rowData[4] = otherTourReservation.getTotalPrice();
 				tourReservationsTable.addRow(rowData);
@@ -5649,7 +5519,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		Object[] rowData = new Object[5];
 		rowData[0] = newTourReservation.getReservationNumber();
 		rowData[1] = newTourReservation.getTour().getDestination() + " " + newTourReservation.getTour().getDateIntervalString();
-		rowData[2] = newTourReservation.getCustomer().getOrganisationName();
+		rowData[2] = newTourReservation.getCustomer().getName();
 		rowData[3] = newTourReservation.getPassengersString();
 		rowData[4] = newTourReservation.getTotalPrice();
 		tourReservationsTable.addRow(rowData);
@@ -5659,6 +5529,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// This method contains all code for creating and initializing components
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	@SuppressWarnings("serial")
 	private void initComponents() {
 		icon = new ImageIcon(Autobus.class.getResource("/ressources/icon_bus.png"));
 		
@@ -6107,11 +5978,15 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				"#", "Earliest Departure", "Name", "Address", "Email", "Phone", "Birthday", "1 d only"
 			}
 		) {
-			/**
-          * 
-          */
-         private static final long serialVersionUID = 1L;
-         boolean[] columnEditables = new boolean[] {
+			@SuppressWarnings("rawtypes")
+			Class[] columnTypes = new Class[] {
+				Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Boolean.class
+			};
+			@SuppressWarnings({ "unchecked", "rawtypes" })
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
 				false, false, false, false, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
@@ -6623,24 +6498,26 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		gl_panelTours.setHorizontalGroup(
 			gl_panelTours.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelTours.createSequentialGroup()
-					.addComponent(panelTopTours, GroupLayout.DEFAULT_SIZE, 1369, Short.MAX_VALUE)
+					.addComponent(panelTopTours, GroupLayout.DEFAULT_SIZE, 1520, Short.MAX_VALUE)
 					.addGap(0))
 				.addGroup(gl_panelTours.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panelAddTour, GroupLayout.PREFERRED_SIZE, 612, GroupLayout.PREFERRED_SIZE)
+					.addComponent(panelAddTour, GroupLayout.PREFERRED_SIZE, 623, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panelTours.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelTours.createSequentialGroup()
-							.addGap(6)
 							.addComponent(lblUpdateTourButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(lblDeleteTourBtn))
+							.addGap(26)
+							.addComponent(lblDeleteTourBtn)
+							.addContainerGap())
+						.addGroup(gl_panelTours.createSequentialGroup()
+							.addComponent(scrollPaneToursArchive, GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+							.addGap(130))
 						.addGroup(gl_panelTours.createSequentialGroup()
 							.addComponent(lblSearchByDestination_1, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(searchTourTExtField, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE))
-						.addComponent(scrollPaneToursArchive, GroupLayout.PREFERRED_SIZE, 686, GroupLayout.PREFERRED_SIZE))
-					.addGap(52))
+							.addComponent(searchTourTExtField, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(525, Short.MAX_VALUE))))
 		);
 		gl_panelTours.setVerticalGroup(
 			gl_panelTours.createParallelGroup(Alignment.LEADING)
@@ -6654,7 +6531,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 								.addComponent(searchTourTExtField, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(scrollPaneToursArchive, GroupLayout.PREFERRED_SIZE, 301, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGap(13)
 							.addGroup(gl_panelTours.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblUpdateTourButton, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblDeleteTourBtn)))
@@ -6865,67 +6742,67 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							.addComponent(lblSearchForAvailableInToursPanel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panelAddTour.createSequentialGroup()
 							.addContainerGap()
-							.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panelAddTour.createSequentialGroup()
-									.addComponent(chckbxBreakfast)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(chckbxLunch)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(chckbxAllInclusive)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(chckbxEntranceTickets)
-									.addGap(133)
-									.addComponent(lblAddTourBtn)
-									.addGap(0, 0, Short.MAX_VALUE))
-								.addGroup(gl_panelAddTour.createSequentialGroup()
-									.addGap(12)
-									.addGroup(gl_panelAddTour.createParallelGroup(Alignment.TRAILING)
-										.addGroup(gl_panelAddTour.createSequentialGroup()
-											.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
-												.addComponent(lblEndDate)
-												.addComponent(lblStartDate))
-											.addGap(13)
-											.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
-												.addComponent(textFieldEndMonth, 0, 0, Short.MAX_VALUE)
-												.addComponent(textFieldStartMonth, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
-												.addComponent(textFieldEndDay, 0, 0, Short.MAX_VALUE)
-												.addComponent(textFieldStartDay, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
-												.addComponent(textFieldStartYear, 0, 0, Short.MAX_VALUE)
-												.addComponent(textFieldEndYear, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)))
-										.addGroup(gl_panelAddTour.createSequentialGroup()
-											.addComponent(lblDestination)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(textFieldDestination, 193, 193, 193)
-											.addGap(6)))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
-										.addComponent(textFieldStartHour, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textFieldEndHour, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
-										.addComponent(textFieldStartMinute, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textFieldEndMinute, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
-									.addGap(23)
-									.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 5, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(scrollPanePickUps, GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-										.addGroup(gl_panelAddTour.createSequentialGroup()
-											.addComponent(lblAddPickUpBtn)
-											.addGap(18)
-											.addComponent(lblClearPickUpBtn, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
-										.addComponent(textFieldAddPickup)))
+							.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
 								.addGroup(gl_panelAddTour.createSequentialGroup()
 									.addComponent(scrollPaneSelectBus, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(scrollPaneSelectChauffeur, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE))))
-						.addGroup(gl_panelAddTour.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(separator, GroupLayout.PREFERRED_SIZE, 575, GroupLayout.PREFERRED_SIZE)))
+									.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+									.addComponent(scrollPaneSelectChauffeur, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panelAddTour.createSequentialGroup()
+									.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panelAddTour.createSequentialGroup()
+											.addComponent(chckbxBreakfast)
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addComponent(chckbxLunch)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(chckbxAllInclusive)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(chckbxEntranceTickets)
+											.addGap(133)
+											.addComponent(lblAddTourBtn))
+										.addGroup(gl_panelAddTour.createSequentialGroup()
+											.addGap(12)
+											.addGroup(gl_panelAddTour.createParallelGroup(Alignment.TRAILING)
+												.addGroup(gl_panelAddTour.createSequentialGroup()
+													.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+														.addComponent(lblEndDate)
+														.addComponent(lblStartDate))
+													.addGap(13)
+													.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
+														.addComponent(textFieldEndMonth, 0, 0, Short.MAX_VALUE)
+														.addComponent(textFieldStartMonth, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
+														.addComponent(textFieldEndDay, 0, 0, Short.MAX_VALUE)
+														.addComponent(textFieldStartDay, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
+														.addComponent(textFieldStartYear, 0, 0, Short.MAX_VALUE)
+														.addComponent(textFieldEndYear, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)))
+												.addGroup(gl_panelAddTour.createSequentialGroup()
+													.addComponent(lblDestination)
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addComponent(textFieldDestination, 193, 193, 193)
+													.addGap(6)))
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+												.addComponent(textFieldStartHour, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+												.addComponent(textFieldEndHour, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+												.addComponent(textFieldStartMinute, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+												.addComponent(textFieldEndMinute, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
+											.addGap(23)
+											.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 5, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(scrollPanePickUps, GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+												.addGroup(gl_panelAddTour.createSequentialGroup()
+													.addComponent(lblAddPickUpBtn)
+													.addGap(18)
+													.addComponent(lblClearPickUpBtn, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+												.addComponent(textFieldAddPickup))))
+									.addPreferredGap(ComponentPlacement.RELATED, 0, Short.MAX_VALUE))
+								.addComponent(separator, GroupLayout.PREFERRED_SIZE, 575, GroupLayout.PREFERRED_SIZE))))
 					.addContainerGap())
 		);
 		gl_panelAddTour.setVerticalGroup(
@@ -6968,7 +6845,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(separator, GroupLayout.PREFERRED_SIZE, 2, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panelAddTour.createParallelGroup(Alignment.BASELINE)
 						.addComponent(scrollPaneSelectBus, GroupLayout.PREFERRED_SIZE, 191, GroupLayout.PREFERRED_SIZE)
 						.addComponent(scrollPaneSelectChauffeur, GroupLayout.PREFERRED_SIZE, 191, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)

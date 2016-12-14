@@ -405,16 +405,7 @@ public class UpdateTourReservationPanel extends JPanel {
 							break;
 						}
 					}
-                 /*DO NOT FORGET TO IMPEMENT RESERVATION ID AND DISCOUNT */
-					//TourReservation updatedTourReservation =new TourReservation(currentlyUpdatingTourReservation.getReservationNumber(),0,null,selectedTour);
-					/*currentlyUpdatingTourReservation.setTour(selectedTour);
-					int countOfNewPassengers = 0;
-					for (int i = 0; i < listOfSelectedPassengers.size(); i++) {
-						if(listOfSelectedPassengers.get(i).getName().equals(currentlyUpdatingTourReservation.getPassengers().get(i).getName()) &&
-						   listOfSelectedPassengers.get(i).getPhonenumber().equals(currentlyUpdatingTourReservation.getPassengers().get(i).getPhonenumber())){
-							 countOfNewPassengers++;
-						}
-					}*/
+
 					currentlyUpdatingTourReservation.getTour().setSeatsAvailable(currentlyUpdatingTourReservation.getTour().getSeatsAvailable() + (currentlyUpdatingTourReservation.getPassengers().size() - listOfSelectedPassengers.size()));
 					Customer selectedCustomer;
 ;					try {
@@ -467,8 +458,10 @@ public class UpdateTourReservationPanel extends JPanel {
 			 * Hides all the panels and shows panelTourReservations
 			 */
 			public void mouseReleased(MouseEvent arg0) {
+				if (Autobus.okOrCancel("Are you sure you want to cancel updating this reservation?") == 0) {
 					Autobus.frame.hideAllPanels();
 					Autobus.frame.panelTourReservations.setVisible(true);
+				}
 			}
 
 

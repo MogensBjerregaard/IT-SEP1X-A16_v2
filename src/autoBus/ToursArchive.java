@@ -170,8 +170,25 @@ public class ToursArchive implements Serializable{
 		FileInputStream fileInputStream = new FileInputStream("C:\\Autobus\\ToursArchive.dat");
 		ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 		try {
-			ArrayList<Tour> otherToursArchive = (ArrayList<Tour>)objectInputStream.readObject();
-			this.toursArchive=otherToursArchive;
+			this.toursArchive= (ArrayList<Tour>)objectInputStream.readObject();
+			for (int i = 0; i < this.toursArchive.size(); i++) {
+				Bus oldBus = this.toursArchive.get(i).getBus();
+				Chauffeur oldChauffeur = this.toursArchive.get(i).getChauffeursObject();
+				for (int j = 0; j < Autobus.frame.busesArchive.size(); j++) {
+					if(oldBus.getVehicleID().equals(Autobus.frame.busesArchive.get(j).getVehicleID())
+							&& oldBus.getModelString().equals(Autobus.frame.busesArchive.get(j).getModelString())) {
+						toursArchive.get(i).setBus(Autobus.frame.busesArchive.get(j));
+						break;
+					}
+				}
+				for (int j = 0; j < Autobus.frame.chauffeursArchive.size(); j++) {
+					if(oldChauffeur.getName().equals(Autobus.frame.chauffeursArchive.get(j).getName())
+							&& oldChauffeur.getPhonenumber().equals(Autobus.frame.chauffeursArchive.get(j).getPhonenumber())){
+						toursArchive.get(i).setChauffeur(Autobus.frame.chauffeursArchive.get(j));
+						break;
+					}
+				}
+			}
 		} finally {
 			objectInputStream.close();
 		}

@@ -482,7 +482,7 @@ public class UpdateTourPanel extends JPanel {
 			 * Saves this Tour with updated information
 			 */
 		   public void mouseReleased(MouseEvent event) {
-			   if (Autobus.frame.okOrCancel("Are you sure you want to save these changes?") == 0) {
+			   if (Autobus.okOrCancel("Are you sure you want to save these changes?") == 0) {
 				   String str = new String("");
 				   int monthStart = 0;
 				   int monthEnd = 0;
