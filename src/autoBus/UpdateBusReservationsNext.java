@@ -17,7 +17,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.UIManager;
 
 public class UpdateBusReservationsNext extends JPanel {
    /**
@@ -48,7 +47,8 @@ public class UpdateBusReservationsNext extends JPanel {
     JLabel lblSelectBusUpdBusResButton;
 
 
-   public UpdateBusReservationsNext() {
+   // GUI STUFF
+    public UpdateBusReservationsNext() {
       
       panel = new JPanel();
       panel.setBackground(new Color(95, 158, 160));
@@ -290,21 +290,21 @@ public class UpdateBusReservationsNext extends JPanel {
       JPanel panel_3 = new JPanel();
       panel_3.setBackground(new Color(0, 128, 128));
       
-      JLabel label_5 = new JLabel("New Bus & Chauffeur reservation");
-      label_5.setForeground(Color.WHITE);
-      label_5.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+      JLabel lblNewBus = new JLabel("New Bus & Chauffeur Reservation Update");
+      lblNewBus.setForeground(Color.WHITE);
+      lblNewBus.setFont(new Font("Century Gothic", Font.PLAIN, 20));
       GroupLayout gl_panel_3 = new GroupLayout(panel_3);
       gl_panel_3.setHorizontalGroup(
          gl_panel_3.createParallelGroup(Alignment.LEADING)
             .addGroup(gl_panel_3.createSequentialGroup()
                .addContainerGap()
-               .addComponent(label_5, GroupLayout.PREFERRED_SIZE, 458, GroupLayout.PREFERRED_SIZE)
+               .addComponent(lblNewBus, GroupLayout.PREFERRED_SIZE, 458, GroupLayout.PREFERRED_SIZE)
                .addContainerGap(1442, Short.MAX_VALUE))
       );
       gl_panel_3.setVerticalGroup(
          gl_panel_3.createParallelGroup(Alignment.LEADING)
             .addGroup(gl_panel_3.createSequentialGroup()
-               .addComponent(label_5, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+               .addComponent(lblNewBus, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
       );
       panel_3.setLayout(gl_panel_3);

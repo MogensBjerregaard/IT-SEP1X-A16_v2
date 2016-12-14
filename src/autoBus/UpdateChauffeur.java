@@ -1,28 +1,14 @@
 package autoBus;
 
 import javax.swing.JPanel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Color;
-import javax.swing.AbstractListModel;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Calendar;
-
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
@@ -30,8 +16,6 @@ import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JCheckBox;
-import javax.swing.JComponent;
-import javax.swing.JRadioButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -57,12 +41,18 @@ public class UpdateChauffeur extends JPanel
    private JLabel lblCancel;
    private JTable tableUpdateChauffeur;
 
+   /**
+    * All methods for Update Chauffeur
+    */
    public void createEvents()
    {
       Autobus.frame.lblShowFullDescriptionChauffeurButton 
             .addMouseListener(new MouseAdapter()
             {
                @Override
+               /**
+                * This update additional information in fields for specified Chauffeur
+                */
                public void mouseReleased(MouseEvent event)
                {
 
@@ -148,8 +138,12 @@ public class UpdateChauffeur extends JPanel
                }
             });
       
+      // UPDATE CHAUFFEUR BUTTON
       updateChauffeurLabelUpdateChauffeur.addMouseListener(new MouseAdapter() {
          @Override
+         /**
+          * This updates Chauffeurs: enployeeNumber, name, address, birthday, externalEmployee, onlyOneDayTrips
+          */
          public void mouseReleased(MouseEvent event){
             if(Autobus.okOrCancel("Are you sure you want to save these changes") == 0){
                currentlyUpdatingChauffeur.setEmployeeNumber(employeeIDUpdateChauffeur.getText());
@@ -178,8 +172,12 @@ public class UpdateChauffeur extends JPanel
          }
       });
       
+      // CANCEL BUTTON
       lblCancel.addMouseListener(new MouseAdapter() {
          @Override
+         /**
+          * This shows okOrCancel message after the button has been clicked
+          */
          public void mouseReleased(MouseEvent event){
             if(Autobus.okOrCancel("Are you sure you want to cancel changing this chauffeur?") == 0) {
                Autobus.frame.hideAllPanels();
@@ -190,6 +188,7 @@ public class UpdateChauffeur extends JPanel
       });
    }
 
+   // GUI STUFF
    public UpdateChauffeur()
    {
 
@@ -199,24 +198,23 @@ public class UpdateChauffeur extends JPanel
       JPanel panel_1 = new JPanel();
       panel_1.setBackground(new Color(0, 128, 128));
 
-      JLabel label = new JLabel("Chauffeurs archive");
-      label.setForeground(Color.WHITE);
-      label.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+      JLabel lblUpdateChauffeursArchive = new JLabel("Update Chauffeurs Archive");
+      lblUpdateChauffeursArchive.setForeground(Color.WHITE);
+      lblUpdateChauffeursArchive.setFont(new Font("Century Gothic", Font.PLAIN, 20));
       GroupLayout gl_panel_1 = new GroupLayout(panel_1);
       gl_panel_1.setHorizontalGroup(
-            gl_panel_1.createParallelGroup(Alignment.LEADING)
-                  .addGap(0, 1371, Short.MAX_VALUE)
-                  .addGroup(gl_panel_1.createSequentialGroup().addContainerGap()
-                        .addComponent(label, GroupLayout.PREFERRED_SIZE, 240,
-                              GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(1121, Short.MAX_VALUE)));
-      gl_panel_1.setVerticalGroup(gl_panel_1
-            .createParallelGroup(Alignment.LEADING)
-            .addGap(0, 58, Short.MAX_VALUE)
+         gl_panel_1.createParallelGroup(Alignment.LEADING)
             .addGroup(gl_panel_1.createSequentialGroup()
-                  .addComponent(label, GroupLayout.PREFERRED_SIZE, 51,
-                        GroupLayout.PREFERRED_SIZE)
-                  .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+               .addContainerGap()
+               .addComponent(lblUpdateChauffeursArchive, GroupLayout.PREFERRED_SIZE, 282, GroupLayout.PREFERRED_SIZE)
+               .addContainerGap(775, Short.MAX_VALUE))
+      );
+      gl_panel_1.setVerticalGroup(
+         gl_panel_1.createParallelGroup(Alignment.LEADING)
+            .addGroup(gl_panel_1.createSequentialGroup()
+               .addComponent(lblUpdateChauffeursArchive, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+               .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+      );
       panel_1.setLayout(gl_panel_1);
 
       JPanel panel_2 = new JPanel();
@@ -465,7 +463,11 @@ public class UpdateChauffeur extends JPanel
       		"Date Interval", "Destination", "Bus"
       	}
       ) {
-      	boolean[] columnEditables = new boolean[] {
+      	/**
+          * 
+          */
+         private static final long serialVersionUID = 1L;
+         boolean[] columnEditables = new boolean[] {
       		false, false, false
       	};
       	public boolean isCellEditable(int row, int column) {

@@ -17,35 +17,67 @@ public class PassengersArchive implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Passenger> passengersArchive;
 
+	/**
+	 * This returns this passengersArchive
+	 * @return this passengersArchive
+	 */
 	public ArrayList<Passenger> getPassengersArchive() {
 		return passengersArchive;
 	}
 
+	/**
+	 * This is a constructor for passengersArchive
+	 */
 	public PassengersArchive(){
 		passengersArchive = new ArrayList<>();
 	}
 	
+	/**
+	 * This returns size of this passengersArchive
+	 * @return size of this passengersArchive
+	 */
 	public int size(){
 		return passengersArchive.size();
 	}
 	
+	/**
+	 * This returns a specified Passenger from passengersArchive
+	 * @param index - index of this Passenger
+	 * @return Specified Passenger from passengers archive
+	 */
 	public Passenger get(int index){
 		return passengersArchive.get(index);
 	}
 	
+	/**
+	 * This adds a new Passenger into passengersArchive
+	 * @param passenger - Passenger that is being added
+	 */
 	public void addPassenger(Passenger passenger){
 		passengersArchive.add(passenger);
 	}
 	
+	/**
+	 * This removes specified Passenger from passengersArchive
+	 * @param index - index of Passenger
+	 */
 	public void removePassenger(int index){
 		passengersArchive.remove(index);
 	}
 	
+	/**
+    * This returns a boolean if the file exists
+    * @return path of this file
+    */
 	public boolean isFileFound(){
 		Path path = Paths.get("C:\\Autobus\\PassengersArchive.dat");
 		return (Files.exists(path));
 	}
 	
+	/**
+    * This creates a new file
+    * @throws Exception
+    */
 	public void createFile() throws Exception{
 		passengersArchive.add(new Passenger("", "", "", new Date(0, 0, 0), ""));
 		savePassengersArchive();
@@ -53,6 +85,10 @@ public class PassengersArchive implements Serializable{
 		savePassengersArchive();
 	}
 	
+	/**
+    * This saves passengersArchive after changes
+    * @throws Exception
+    */
 	public void savePassengersArchive() throws Exception{
 		Path path = Paths.get("C:\\Autobus");
 		if (!Files.exists(path)){
@@ -71,6 +107,10 @@ public class PassengersArchive implements Serializable{
 		}
 	}
 	
+	/**
+    * This loads passengersArchive 
+    * @throws Exception
+    */
 	@SuppressWarnings("unchecked")
 	public void loadPassengersArchive() throws Exception{
 		FileInputStream fileInputStream = new FileInputStream("C:\\Autobus\\PassengersArchive.dat");

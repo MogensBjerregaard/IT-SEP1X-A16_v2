@@ -15,15 +15,16 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Calendar;
-import javax.swing.border.BevelBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 public class UpdateTourReservationPanel extends JPanel {
-	private final JLabel lblCancelButtonInUpdateTourRes;
+	/**
+    * 
+    */
+   private static final long serialVersionUID = 1L;
+   private final JLabel lblCancelButtonInUpdateTourRes;
 	private final JLabel lblSaveUpdatedTourResButton;
 	private JLabel selectedCustomerInUpdTourRes;
 	private final JLabel lblSearchForPassengerInUpdTourRes;
@@ -64,13 +65,16 @@ public class UpdateTourReservationPanel extends JPanel {
 	private JLabel lblSelectTourButtonInUpdTourRes;
 
 	/**
-	 * Create the panel.
+	 * All methods for UpdateTourReservationPanel
 	 */
-
 	public void createEventsForUpdateTouReservationPanel(){
 
-		searchForTourInUpdTourRes.getDocument().addDocumentListener(new DocumentListener() {
-			public void deleteAllRows(final DefaultTableModel model) {
+		// SEARCH FOR TOUR FIELD
+	   /**
+       * This searches for Tours by destination according to the symbols in Text Field
+       */
+	   searchForTourInUpdTourRes.getDocument().addDocumentListener(new DocumentListener() {
+	      public void deleteAllRows(final DefaultTableModel model) {
 				for (int i = model.getRowCount() - 1; i >= 0; i--) {
 					model.removeRow(i);
 				}
@@ -217,6 +221,10 @@ public class UpdateTourReservationPanel extends JPanel {
 				}
 			}
 		});
+		// SEARCH CUSTOMER FIELD
+	   /**
+       * This searches for Customers by name according to the symbols in Text Field
+       */
 		searchCustomerTextFieldInUpdTourRes.getDocument().addDocumentListener(new DocumentListener() {
 			public void deleteAllRows(final DefaultTableModel model) {
 				for (int i = model.getRowCount() - 1; i >= 0; i--) {
@@ -348,6 +356,10 @@ public class UpdateTourReservationPanel extends JPanel {
 			}
 		});
 
+		// SAVE UPDATED TOUR BUTTON
+		/**
+		 * Save all updates for this TourReservation
+		 */
 		lblSaveUpdatedTourResButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -377,7 +389,8 @@ public class UpdateTourReservationPanel extends JPanel {
 							}
 						}
 					}
-					Tour selectedTour = null;
+					@SuppressWarnings("unused")
+               Tour selectedTour = null;
 
 						int indexOfselectedTour = (tableToursInUpdTourRes.getSelectedRow());
 
@@ -447,8 +460,12 @@ public class UpdateTourReservationPanel extends JPanel {
 			}
 		});
 
+		// CANCEL BUTTON
 		lblCancelButtonInUpdateTourRes.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * Hides all the panels and shows panelTourReservations
+			 */
 			public void mouseReleased(MouseEvent arg0) {
 					Autobus.frame.hideAllPanels();
 					Autobus.frame.panelTourReservations.setVisible(true);
@@ -457,8 +474,12 @@ public class UpdateTourReservationPanel extends JPanel {
 
 		});
 
+		// SELECT CUSTOMER BUTTON
 		lblSelectCustomerButtonInUpdTourRes.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * This selects customer from customers list
+			 */
 			public void mouseReleased(MouseEvent arg0) {
 				int index = tableCustomerInUpdTourRes.getSelectedRow();
 				if(index != -1)
@@ -467,8 +488,12 @@ public class UpdateTourReservationPanel extends JPanel {
 			}
 		});
 
+		// SELECT TOUR BUTTON
 		lblSelectTourButtonInUpdTourRes.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+          * This selects tour from customers list
+          */
 			public void mouseReleased(MouseEvent arg0) {
 				int index = tablePassengersInUpdTourRes.getSelectedRow();
 				if(index != -1)
@@ -476,8 +501,12 @@ public class UpdateTourReservationPanel extends JPanel {
 			}
 		});
 
+		// REMOVE PASSENGER BUTTON
 		lblRemovePassengerButtonInUpdTourRes.addMouseListener(new MouseAdapter(){
-			public void mouseReleased(MouseEvent event){
+		   /**
+          * This removes passenger from the list
+          */
+		   public void mouseReleased(MouseEvent event){
 				int index = tablePassengersInUpdTourRes.getSelectedRow();
 				DefaultTableModel tablePassengersModelInNewTourReservation = (DefaultTableModel)tablePassengersInUpdTourRes.getModel();
 				if (index!=-1){
@@ -492,8 +521,12 @@ public class UpdateTourReservationPanel extends JPanel {
 			}
 		});
 
+		// CLEAR ALL PASSENGERS BUTTON
 		lblClearAllPassengersButtonInUpdTourRes.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * This clears all the passengers from the list
+			 */
 			public void mouseReleased(MouseEvent arg0) {
 				DefaultTableModel tablePassengersModelInNewTourReservation = (DefaultTableModel)tablePassengersInUpdTourRes.getModel();
 				tablePassengersModelInNewTourReservation.setRowCount(0);
@@ -503,8 +536,12 @@ public class UpdateTourReservationPanel extends JPanel {
 			}
 		});
 
+		// SEARCH FOR PASSENGER BUTTON
 		lblSearchForPassengerInUpdTourRes.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * This searxhes for the passenger by phone number
+			 */
 			public void mouseReleased(MouseEvent e) {
 				String phoneNumber = passengerPhoneInUpdTourRes.getText();
 				for (int i = 0; i < Autobus.frame.passengersArchive.size(); i++) {
@@ -520,8 +557,12 @@ public class UpdateTourReservationPanel extends JPanel {
 			}
 		});
 
+		// CLEAR BUTTON
 		lblClearButtonInUpdTourRes.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * This clears all fields when the button has been clicked
+			 */
 			public void mouseReleased(MouseEvent e) {
 				passengerPhoneInUpdTourRes.setText("");
 				passengerNameInUpdTourRes.setText("");
@@ -533,8 +574,12 @@ public class UpdateTourReservationPanel extends JPanel {
 			}
 		});
 
+		// ADD PASSENGER BUTTON
 		lblAddNewPassengerButtonInUpdTourRes.addMouseListener(new MouseAdapter(){
 			@Override
+			/**
+			 * This adds passenger to this Tour and checks if the information was filled correctly
+			 */
 			public void mouseReleased(MouseEvent e) {
 				String str="";
 				int month = 0;
@@ -614,8 +659,12 @@ public class UpdateTourReservationPanel extends JPanel {
 			}
 		});
 
+		// CLEAR CUSTOMERS BUTTON
 		lblClearCustomerButtonInUpdTourRes.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * This clears all the fields in Customer
+			 */
 			public void mouseReleased(MouseEvent arg0) {
 				customerNameInUpdTourRes.setText("");
 				customerOrganisationInUpdTourRes.setText("");
@@ -632,8 +681,12 @@ public class UpdateTourReservationPanel extends JPanel {
 			}
 		});
 
+		// UPDATE TOUR RESERVATION BUTTON
 		Autobus.frame.lblUpdateTourReservation.addMouseListener(new MouseAdapter(){
 			@Override
+			/**
+			 * This fills the fields with the necessary information
+			 */
 			public void mouseReleased(MouseEvent event){
 
 				try {
@@ -655,8 +708,12 @@ public class UpdateTourReservationPanel extends JPanel {
 			}
 		});
 
+		// ADD NEW CUSTOMER BUTTON
 		lblAddNewCustomerButtonInUpdTourRes.addMouseListener(new MouseAdapter(){
 			@Override
+			/**
+			 * This adds new Customer when the button has been clicked
+			 */
 			public void mouseReleased(MouseEvent arg0) {
 				String str = new String();
 				int month = 0;
@@ -758,6 +815,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		});
 	}
 
+	// GUI STUFF
 	public UpdateTourReservationPanel() {
 
 		setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -1160,7 +1218,11 @@ public class UpdateTourReservationPanel extends JPanel {
 				"Type", "Organisation", "Name", "Address", "Phone", "Email", "Birthday", "Money Spent", "Discount"
 			}
 		) {
-			boolean[] columnEditables = new boolean[] {
+			/**
+          * 
+          */
+         private static final long serialVersionUID = 1L;
+         boolean[] columnEditables = new boolean[] {
 				false, false, false, false, false, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
@@ -1394,7 +1456,11 @@ public class UpdateTourReservationPanel extends JPanel {
 				"Name", "Address", "Phone", "Email", "Birthday"
 			}
 		) {
-			boolean[] columnEditables = new boolean[] {
+			/**
+          * 
+          */
+         private static final long serialVersionUID = 1L;
+         boolean[] columnEditables = new boolean[] {
 				false, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
@@ -1463,7 +1529,11 @@ public class UpdateTourReservationPanel extends JPanel {
 				"Date", "Destination", "Pick Ups", "Seats Available", "Current Total Price", "Price Per Passenger", "Bus", "Chauffeur"
 			}
 		) {
-			boolean[] columnEditables = new boolean[] {
+			/**
+          * 
+          */
+         private static final long serialVersionUID = 1L;
+         boolean[] columnEditables = new boolean[] {
 				false, false, false, false, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
@@ -1488,6 +1558,9 @@ public class UpdateTourReservationPanel extends JPanel {
 		this.createEventsForUpdateTouReservationPanel();
 	}
 
+	/**
+    * This list all Customers in table
+    */
 	public void listCustomers(){
 		DefaultTableModel customersTable = (DefaultTableModel) tableCustomerInUpdTourRes.getModel();
 		Object[] rowData = new Object[8];
@@ -1507,6 +1580,9 @@ public class UpdateTourReservationPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * This updates Customer List after update has been made
+	 */
 	public void updateListCustomers(){
 		DefaultTableModel customersTable = (DefaultTableModel) tableCustomerInUpdTourRes.getModel();
 		Customer lastCustomer = Autobus.frame.customersArchive.get(Autobus.frame.customersArchive.size() -1);
@@ -1524,6 +1600,9 @@ public class UpdateTourReservationPanel extends JPanel {
 	}
 
 
+	/**
+	 * This list all Passengers in table
+	 */
 	public void listPassengers(){
 		DefaultTableModel passengersTable = (DefaultTableModel) tablePassengersInUpdTourRes.getModel();
 		Autobus.frame.deleteAllRows(passengersTable);
@@ -1543,6 +1622,10 @@ public class UpdateTourReservationPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * This updates Passengers List after update has been made
+	 * @param newPassengerInTheList
+	 */
 	public void updateListPassengers(Passenger newPassengerInTheList){
 		DefaultTableModel passengersTable = (DefaultTableModel) tablePassengersInUpdTourRes.getModel();
 		Object[] rowData = new Object[5];
@@ -1556,6 +1639,9 @@ public class UpdateTourReservationPanel extends JPanel {
 
 	}
 
+	/**
+	 * This lists all Tours in table
+	 */
 	public void listTours(){
 		DefaultTableModel toursTable = (DefaultTableModel) tableToursInUpdTourRes.getModel();
 		Autobus.frame.deleteAllRows(toursTable);

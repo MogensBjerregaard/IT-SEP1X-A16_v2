@@ -15,12 +15,9 @@ import java.text.SimpleDateFormat;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
-
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.CompoundBorder;
@@ -38,7 +35,6 @@ public class UpdateBusReservations extends JPanel {
    private BusReservation currentlyUpdatingBusReservation;
    
    private DefaultTableModel newTablePassengerReservationUpdate;
-   private DefaultTableModel newTable;
    private JTextField phoneCustomerReservationUpdate;
    private JTextField nameCustomerReservationUpdate;
    private JTextField organisationNameReservationUpdate;
@@ -90,21 +86,27 @@ public class UpdateBusReservations extends JPanel {
    private JComponent panel;
 
    /**
-    * Create the panel.
+    * All methods for this UpdateBusReservations
     */
-   
    public void createEventsForNewBusReservationUpdatePanel() {
       updateBusReservationsNext.startMonthNext.getDocument().addDocumentListener(new DocumentListener() {
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.startMonthNext
+          */
          public void changedUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.startMonthNext
+          */
          public void insertUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.startMonthNext
+          */
          public void removeUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
@@ -115,16 +117,23 @@ public class UpdateBusReservations extends JPanel {
       });
 
       updateBusReservationsNext.startDayNext.getDocument().addDocumentListener(new DocumentListener() {
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.startDayNext
+          */
          public void changedUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.startDayNext
+          */
          public void insertUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.startDayNext
+          */
          public void removeUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
@@ -137,16 +146,23 @@ public class UpdateBusReservations extends JPanel {
       });
 
       updateBusReservationsNext.startYearNext.getDocument().addDocumentListener(new DocumentListener() {
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.startYearNext
+          */
          public void changedUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.startYearNext
+          */
          public void insertUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.startYearNext
+          */
          public void removeUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
@@ -159,16 +175,23 @@ public class UpdateBusReservations extends JPanel {
       });
 
       updateBusReservationsNext.startHourNext.getDocument().addDocumentListener(new DocumentListener() {
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.startHourNext
+          */
          public void changedUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.startHourNext
+          */
          public void insertUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.startHourNext
+          */
          public void removeUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
@@ -182,16 +205,23 @@ public class UpdateBusReservations extends JPanel {
       });
 
       updateBusReservationsNext.startMinuteNext.getDocument().addDocumentListener(new DocumentListener() {
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.startMinuteNext
+          */
          public void changedUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.startMinuteNext
+          */
          public void insertUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.startMinuteNext
+          */
          public void removeUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
@@ -205,16 +235,23 @@ public class UpdateBusReservations extends JPanel {
       });
 
       updateBusReservationsNext.endMonthNext.getDocument().addDocumentListener(new DocumentListener() {
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.endMonthNext
+          */
          public void changedUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.endMonthNext
+          */
          public void insertUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.endMonthNext
+          */
          public void removeUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
@@ -228,16 +265,23 @@ public class UpdateBusReservations extends JPanel {
       });
 
       updateBusReservationsNext.endDayNext.getDocument().addDocumentListener(new DocumentListener() {
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.endDayNext
+          */
          public void changedUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.endDayNext
+          */
          public void insertUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.endDayNext
+          */
          public void removeUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
@@ -251,16 +295,23 @@ public class UpdateBusReservations extends JPanel {
       });
 
       updateBusReservationsNext.endYearNext.getDocument().addDocumentListener(new DocumentListener() {
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.endYearNext
+          */
          public void changedUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.endYearNext
+          */
          public void insertUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.endYearNext
+          */
          public void removeUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
@@ -275,16 +326,23 @@ public class UpdateBusReservations extends JPanel {
       });
 
       updateBusReservationsNext.endHourNext.getDocument().addDocumentListener(new DocumentListener() {
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.endHourNext
+          */
          public void changedUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.endHourNext
+          */
          public void insertUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.endHourNext
+          */
          public void removeUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
@@ -298,16 +356,23 @@ public class UpdateBusReservations extends JPanel {
       });
 
       updateBusReservationsNext.endMinuteNext.getDocument().addDocumentListener(new DocumentListener() {
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.endMinuteNext
+          */
          public void changedUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.endMinuteNext
+          */
          public void insertUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
          }
-
+         /**
+          * Deletes all rows in tableSelectBusNext and tableSelectChauffeurNext after a symbols was added in updateBusReservationsNext.endMinuteNext
+          */
          public void removeUpdate(DocumentEvent e) {
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel());
             deleteAllRows((DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel());
@@ -315,6 +380,9 @@ public class UpdateBusReservations extends JPanel {
          }
       });
 
+      /**
+       * This checks in all the fields are field correctly
+       */
       updateBusReservationsNext.nextLabelNext.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseReleased(MouseEvent arg0) {
@@ -438,6 +506,7 @@ public class UpdateBusReservations extends JPanel {
             double discount = 0;
             SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
             java.util.Date startDate = null, endDate = null, currentDate = new java.util.Date();
+            @SuppressWarnings("unused")
             DateInterval dateInterval = new DateInterval();
             String busSelected = new String("");
             Chauffeur chauffeur = null;
@@ -660,6 +729,9 @@ public class UpdateBusReservations extends JPanel {
     
       Autobus.frame.lblUpdateBusReservation.addMouseListener(new MouseAdapter(){
          @Override
+         /**
+          * This fills every element with necessary information after the button has been clicked 
+          */
          public void mouseReleased(MouseEvent event){
 
             try {
@@ -700,6 +772,9 @@ public class UpdateBusReservations extends JPanel {
    // SEARCH FOR CUSTOMER BY PHONE NUMBER
       searchCustomerLabelReservationUpdate.addMouseListener(new MouseAdapter() {
          @Override
+         /**
+          * This searches for customer by phone number and fills fields with the information if it was found
+          */
          public void mouseReleased(MouseEvent arg0) {
             if (phoneCustomerReservationUpdate.getText().equalsIgnoreCase("")) {
                JOptionPane.showMessageDialog(null, "You need to fill in the phone number first!");
@@ -751,6 +826,9 @@ public class UpdateBusReservations extends JPanel {
       // CLEAR CUSTOMER INFORMATION
       customerClearLabelReservationUpdate.addMouseListener(new MouseAdapter() {
          @Override
+         /**
+          * This clears all the fields in Customer
+          */
          public void mouseReleased(MouseEvent arg0) {
             organisationNameReservationUpdate.setText("");
             nameCustomerReservationUpdate.setText("");
@@ -769,6 +847,9 @@ public class UpdateBusReservations extends JPanel {
       
       // IS A PASSENGER IN CUSTOMER
       isPassengerCheckBox.addActionListener(new ActionListener() {
+         /**
+          * This adds the customer as a passenger in the table
+          */
          public void actionPerformed(ActionEvent e) {
             if (isPassengerCheckBox.isSelected()) {
                String str = new String();
@@ -880,6 +961,9 @@ public class UpdateBusReservations extends JPanel {
       // ADDING NEW PASSENGER IN PASSENGER LIST
       addPassengerReservationUpdate.addMouseListener(new MouseAdapter() {
          @Override
+         /**
+          * This adds a new Passenger to the list and checks if the information is filled correctly
+          */
          public void mouseReleased(MouseEvent e) {
             String str = new String();
             int month = 0;
@@ -955,6 +1039,9 @@ public class UpdateBusReservations extends JPanel {
       // CLEAR PASSENGER INFORMATION
       clearPassengerReservationUpdate.addMouseListener(new MouseAdapter() {
          @Override
+         /**
+          * This clears all the fields in Passenger
+          */
          public void mouseReleased(MouseEvent e) {
             phonePassengerReservationUpdate.setText("");
             namePassengerReservationUpdate.setText("");
@@ -969,6 +1056,9 @@ public class UpdateBusReservations extends JPanel {
       // SEARCH PASSENGER BY PHONE NUMBER
       searchPassengerReservationUpdate.addMouseListener(new MouseAdapter() {
          @Override
+         /**
+          * This searches for Passenger by phone number and fills all the fields with the information in Passenger was found
+          */
          public void mouseReleased(MouseEvent e) {
             if (phonePassengerReservationUpdate.getText().equalsIgnoreCase("")) {
                JOptionPane.showMessageDialog(null, "You need to fill in the phone number first!");
@@ -998,6 +1088,9 @@ public class UpdateBusReservations extends JPanel {
       // REMOVE SELECTED PASSENGER
       removePassengerReservationUpdate.addMouseListener(new MouseAdapter() {
          @Override
+         /**
+          * This removes selected Passenger from the table
+          */
          public void mouseReleased(MouseEvent e) {
             
             int index = tablePassengerReservationUpdate.getSelectedRow();
@@ -1017,6 +1110,9 @@ public class UpdateBusReservations extends JPanel {
       // CLEAR ALL PASSENGERS FROM PASSENGERS TABLE
       clearAllPassengersReservationUpdate.addMouseListener(new MouseAdapter() {
          @Override
+         /**
+          * This clears all the Passengers from the Passengers table
+          */
          public void mouseReleased(MouseEvent arg0) {
             if (Autobus.okOrCancel("Are you sure you want to clear the list of the selected passengers?")==0) {
                newTablePassengerReservationUpdate = (DefaultTableModel) tablePassengerReservationUpdate.getModel();
@@ -1029,8 +1125,10 @@ public class UpdateBusReservations extends JPanel {
       // >>NEXT BUTTON
       nextReservationUpdate.addMouseListener(new MouseAdapter() {
          
-
          @Override
+         /**
+          * This checks if all the fields where filled correctly and update summary new Bus
+          */
          public void mouseReleased(MouseEvent e) {
             String str = new String();
             int month = 0;
@@ -1121,6 +1219,9 @@ public class UpdateBusReservations extends JPanel {
       // CLEAR BUTTON IN ADD PASSENGER
       clearPassengerReservationUpdate.addMouseListener(new MouseAdapter() {
          @Override
+         /**
+          * This clears all the fields in add Passenger
+          */
          public void mouseReleased(MouseEvent e) {
             phonePassengerReservationUpdate.setText("");
             namePassengerReservationUpdate.setText("");
@@ -1135,6 +1236,9 @@ public class UpdateBusReservations extends JPanel {
       // REMOVE BUTTON IN PASSENGERS LIST
       removePassengerReservationUpdate.addMouseListener(new MouseAdapter() {
          @Override
+         /**
+          * This removes thisPassenger from the table 
+          */
          public void mouseReleased(MouseEvent e) {
             newTablePassengerReservationUpdate = (DefaultTableModel) tablePassengerReservationUpdate.getModel(); 
             int index = tablePassengerReservationUpdate.getSelectedRow(); 
@@ -1151,6 +1255,9 @@ public class UpdateBusReservations extends JPanel {
       // UPDATE SELECT BUS TABLE FROM NEXT
       updateBusReservationsNext.lblSelectBusUpdBusResButton.addMouseListener(new MouseAdapter() {
          @Override
+         /**
+          * This updates the new information for this Bus Reservation
+          */
          public void mouseReleased(MouseEvent e) {
             updateSummaryNewBus();
          }
@@ -1161,6 +1268,9 @@ public class UpdateBusReservations extends JPanel {
       // CANCEL IN NEXT
       updateBusReservationsNext.cancelLabelNext.addMouseListener(new MouseAdapter() {
          @Override
+         /**
+          * This clears all fields and shows panel
+          */
          public void mouseReleased(MouseEvent e) {
             try {
                Autobus.frame.reservationNumberGenerator.cancelReservationNumber();
@@ -1202,6 +1312,9 @@ public class UpdateBusReservations extends JPanel {
       
       // DATE INTERVAL SEARCH BUTTON
       updateBusReservationsNext.searchLabelNext.addMouseListener(new MouseAdapter() {
+         /**
+          * This searches and lists available Buses and Chauffeurs according to Date Interval
+          */
          @Override
          public void mouseReleased(MouseEvent e) {
             String str = new String("");
@@ -1318,6 +1431,7 @@ public class UpdateBusReservations extends JPanel {
       });
    }
    
+   // GUI STUFF
    public UpdateBusReservations() {
       
       panel = new JPanel();
@@ -1794,6 +1908,9 @@ public class UpdateBusReservations extends JPanel {
       createEventsForNewBusReservationUpdatePanel();
    }
    
+   /**
+    * This lists all Passengers in the table
+    */
    public void listPassengers(){
       DefaultTableModel passengersTable = (DefaultTableModel) tablePassengerReservationUpdate.getModel();
       Autobus.frame.deleteAllRows(passengersTable);
@@ -1808,6 +1925,10 @@ public class UpdateBusReservations extends JPanel {
       }
    }
    
+   /**
+    * This updates Passengers table after changes
+    * @param newPassenger - new passenger 
+    */
    public void updatePassengerListNewBus(Passenger newPassenger){
       newTablePassengerReservationUpdate = (DefaultTableModel) tablePassengerReservationUpdate.getModel();
       Object[] rowData = new Object[5];      
@@ -1819,6 +1940,9 @@ public class UpdateBusReservations extends JPanel {
       newTablePassengerReservationUpdate.addRow(rowData);
    }
    
+   /**
+    * This updates Bus table in >>NEXT 
+    */
    public void updateSummaryNewBus(){
       String str = new String();
       str+= "Reservation#: "+Autobus.frame.reservationNumber;
@@ -1921,16 +2045,33 @@ public class UpdateBusReservations extends JPanel {
       }
       updateBusReservationsNext.summaryPaneNext.setText(str);
    }
+   /**
+    * This returns days between Dates according to the startDate and endDate
+    * @param startDate - start Date
+    * @param endDate - end Date
+    * @return
+    */
    public static int daysBetweenDates(java.util.Date startDate, java.util.Date endDate){
       long days = ChronoUnit.DAYS.between(startDate.toInstant(), endDate.toInstant());
       return (int)days;
    }
+   /**
+    * This setsScale according to the value and places and returnsIT
+    * @param value - value
+    * @param places - places
+    * @return
+    */
    public static double round(double value, int places) {
       if (places < 0) throw new IllegalArgumentException();
       BigDecimal bd = new BigDecimal(value);
       bd = bd.setScale(places, RoundingMode.HALF_UP);
       return bd.doubleValue();
   }
+   /**
+    * This returns parseDate
+    * @param date - date
+    * @return
+    */
    public static java.util.Date parseDate(String date) {
       try {
          return new SimpleDateFormat("yyyy-MM-d-H-m").parse(date);
@@ -1938,6 +2079,11 @@ public class UpdateBusReservations extends JPanel {
          return null;
       }
    }
+   /**
+    * This lists Bus according to startDate and durationInHours
+    * @param startDate - start date
+    * @param durationInHours - duration in hours
+    */
    public void listNewBusSelectBus(java.util.Date startDate, int durationInHours){
       newBusSelectBusTable = (DefaultTableModel) updateBusReservationsNext.tableSelectBusNext.getModel();
       deleteAllRows(newBusSelectBusTable);
@@ -1953,6 +2099,11 @@ public class UpdateBusReservations extends JPanel {
          }
       }
    }
+   /**
+    * This lists Chauffeur according to startDate and durationInHours
+    * @param startDate - start date
+    * @param durationInHours - duration in hours
+    */
    public void listNewBusSelectChauffeur(java.util.Date startDate, int durationInHours ){
       newBusSelectChauffeurTable = (DefaultTableModel) updateBusReservationsNext.tableSelectChauffeurNext.getModel();
       deleteAllRows(newBusSelectChauffeurTable);
@@ -1966,12 +2117,19 @@ public class UpdateBusReservations extends JPanel {
       }
    }
    
+   /**
+    * This removes all elements from the row
+    * @param model
+    */
    public void deleteAllRows(final DefaultTableModel model) {
       for (int i = model.getRowCount() - 1; i >= 0; i--) {
          model.removeRow(i);
       }
    }
 
+   /**
+    * This list elements in >>NEXT
+    */
    public void listElements(){
 
       Calendar cal = Calendar.getInstance();

@@ -19,7 +19,11 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 public class UpdateTourPanel extends JPanel {
-	private final JList<String> list;
+	/**
+    * 
+    */
+   private static final long serialVersionUID = 1L;
+   private final JList<String> list;
 	private final JCheckBox ticketsUpdTour;
 	private final JLabel lblAddNewPickUpButtonUpdTour;
 	private final JLabel lblClearAllPickUpsButtonUpdTour;
@@ -46,22 +50,30 @@ public class UpdateTourPanel extends JPanel {
 	private JLabel lblCancelUpdateTourButton;
 
 	/**
-	 * Create the panel.
+	 * All methods for Update Tour Panel
 	 */
-	
 	public void createEvents(){
 
-		startmonthUpdTour.getDocument().addDocumentListener(new DocumentListener() {
-			public void changedUpdate(DocumentEvent e) {
+		
+	   // START MONTH FIELD
+	   startmonthUpdTour.getDocument().addDocumentListener(new DocumentListener() {
+	      /**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startmonthUpdTour
+          */
+	      public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+	      /**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startmonthUpdTour
+          */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+			/**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startmonthUpdTour
+          */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
@@ -71,17 +83,25 @@ public class UpdateTourPanel extends JPanel {
 
 		});
 
+	   // START DAY FIELD
 		startdayUpdTour.getDocument().addDocumentListener(new DocumentListener() {
-			public void changedUpdate(DocumentEvent e) {
+		   /**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startdayUpdTour
+          */
+		   public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+		   /**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startdayUpdTour
+          */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+			/**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startdayUpdTour
+          */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
@@ -90,17 +110,25 @@ public class UpdateTourPanel extends JPanel {
 
 		});
 
+		// START YEAR FIELD
 		startyearUpdTour.getDocument().addDocumentListener(new DocumentListener() {
-			public void changedUpdate(DocumentEvent e) {
+		   /**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startyearUpdTour
+          */
+		   public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+		   /**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startyearUpdTour
+          */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+			/**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startyearUpdTour
+          */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
@@ -109,17 +137,25 @@ public class UpdateTourPanel extends JPanel {
 
 		});
 
+		// START HOUR FIELD
 		starthourUpdTour.getDocument().addDocumentListener(new DocumentListener() {
-			public void changedUpdate(DocumentEvent e) {
+		   /**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in starthourUpdTour
+          */
+		   public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+		   /**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in starthourUpdTour
+          */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+			/**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in starthourUpdTour
+          */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
@@ -128,17 +164,25 @@ public class UpdateTourPanel extends JPanel {
 
 		});
 
+		// START MINUTE FIELD
 		startMinuteUpdTour.getDocument().addDocumentListener(new DocumentListener() {
-			public void changedUpdate(DocumentEvent e) {
+		   /**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startMinuteUpdTour
+          */
+		   public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+		   /**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startMinuteUpdTour
+          */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+			/**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startMinuteUpdTour
+          */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
@@ -147,17 +191,25 @@ public class UpdateTourPanel extends JPanel {
 
 		});
 
+		// END MONTH FIELD
 		endMonthUpdTour.getDocument().addDocumentListener(new DocumentListener() {
-			public void changedUpdate(DocumentEvent e) {
+		   /**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endMonthUpdTour
+          */
+		   public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+		   /**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endMonthUpdTour
+          */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+			/**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endMonthUpdTour
+          */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
@@ -166,17 +218,25 @@ public class UpdateTourPanel extends JPanel {
 
 		});
 
+		// END DAY FIELD
 		endDayUpdTour.getDocument().addDocumentListener(new DocumentListener() {
-			public void changedUpdate(DocumentEvent e) {
+		   /**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endDayUpdTour
+          */
+		   public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+		   /**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endDayUpdTour
+          */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+			/**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endDayUpdTour
+          */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
@@ -185,17 +245,25 @@ public class UpdateTourPanel extends JPanel {
 
 		});
 
+		// END YEAR FIELD
 		endYearUpdTour.getDocument().addDocumentListener(new DocumentListener() {
-			public void changedUpdate(DocumentEvent e) {
+		   /**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endYearUpdTour
+          */
+		   public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+		   /**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endYearUpdTour
+          */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+			/**
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endYearUpdTour
+          */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
@@ -204,17 +272,25 @@ public class UpdateTourPanel extends JPanel {
 
 		});
 
+		// END HOUR FIELD
+		/**
+       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endHourUpdTour
+       */
 		endHourUpdTour.getDocument().addDocumentListener(new DocumentListener() {
 			public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+			/**
+	       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endHourUpdTour
+	       */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+			/**
+	       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endHourUpdTour
+	       */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
@@ -223,17 +299,25 @@ public class UpdateTourPanel extends JPanel {
 
 		});
 
+		// END MINUTE FIELD
+		/**
+       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endMinuteUpdTour
+       */
 		endMinuteUpdTour.getDocument().addDocumentListener(new DocumentListener() {
 			public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+			/**
+	       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endMinuteUpdTour
+	       */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
-
+			/**
+	       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endMinuteUpdTour
+	       */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
@@ -241,8 +325,12 @@ public class UpdateTourPanel extends JPanel {
 			}
 
 		});
+		// SEARCH BUTTON BUTTON
 		lblSearchButtonUpdTour.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * This searches for the Tour according to destination, startDate and endDate
+			 */
 			public void mouseReleased(MouseEvent e) {
 				String str = new String("");
 				int monthStart = 0;
@@ -358,9 +446,12 @@ public class UpdateTourPanel extends JPanel {
 			}
 		});
 
-
+		// ADD NEW PICK UP BUTTON
 		lblAddNewPickUpButtonUpdTour.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * Adds new pick up 
+			 */
 			public void mouseReleased(MouseEvent arg0) {
 				if (!pickUpTextFieldUpdTour.getText().equalsIgnoreCase("")) {
 					updateListPickUps(pickUpTextFieldUpdTour.getText());
@@ -368,8 +459,12 @@ public class UpdateTourPanel extends JPanel {
 			}
 		});
 
+		// CLEAR ALL PICK UP BUTTON
 		lblClearAllPickUpsButtonUpdTour.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * Clears all pick ups from the table
+			 */
 			public void mouseReleased(MouseEvent e) {
 				int index = list.getSelectedIndex();
 				if (index!=-1){
@@ -381,8 +476,12 @@ public class UpdateTourPanel extends JPanel {
 			}
 		});
 
+		// SAVE CHANGES BUTTON
 		lblSaveChangesButtonUpdTour.addMouseListener(new MouseAdapter() {
-			public void mouseReleased(MouseEvent event) {
+			/**
+			 * Saves this Tour with updated information
+			 */
+		   public void mouseReleased(MouseEvent event) {
 				String str = new String("");
 				int monthStart = 0;
 				int monthEnd = 0;
@@ -657,8 +756,12 @@ public class UpdateTourPanel extends JPanel {
 			}
 		 });
 
+		// UPDATE TOUR BUTTON
 		Autobus.frame.lblUpdateTourButton.addMouseListener(new MouseAdapter() {
-			public void mouseReleased(MouseEvent event){
+			/**
+			 * This updates tables with new information
+			 */
+		   public void mouseReleased(MouseEvent event){
 				currentlyUpdatingTour = Autobus.frame.toursArchive.get(Autobus.frame.tableTours.getSelectedRow());
 				int durationInHours =   (int)((currentlyUpdatingTour.getNewDateInterval()[1].getTime() -
 										currentlyUpdatingTour.getNewDateInterval()[0].getTime()) / 3600000);
@@ -675,7 +778,11 @@ public class UpdateTourPanel extends JPanel {
 			}
 		});
 
+		// CANCEL UPDATE BUTTON
 		lblCancelUpdateTourButton.addMouseListener(new MouseAdapter() {
+		   /**
+		    * This returns to panelTours after the button has been clicked
+		    */
 			public void mouseReleased(MouseEvent event) {
 				Autobus.frame.hideAllPanels();
 				Autobus.frame.panelTours.setVisible(true);
@@ -683,6 +790,7 @@ public class UpdateTourPanel extends JPanel {
 		});
 	}
 	
+	// GUI STUFF
 	public UpdateTourPanel() {
 		
 		JPanel panel = new JPanel();
@@ -1023,7 +1131,11 @@ public class UpdateTourPanel extends JPanel {
 				"ID", "Name"
 			}
 		) {
-			boolean[] columnEditables = new boolean[] {
+			/**
+          * 
+          */
+         private static final long serialVersionUID = 1L;
+         boolean[] columnEditables = new boolean[] {
 				false, false
 			};
 			public boolean isCellEditable(int row, int column) {
@@ -1040,7 +1152,11 @@ public class UpdateTourPanel extends JPanel {
 				"ID", "Type", "Seats"
 			}
 		) {
-			boolean[] columnEditables = new boolean[] {
+			/**
+          * 
+          */
+         private static final long serialVersionUID = 1L;
+         boolean[] columnEditables = new boolean[] {
 				false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
@@ -1084,6 +1200,11 @@ public class UpdateTourPanel extends JPanel {
 		this.createEvents();
 	}
 	
+	/**
+	 * This lists all Buses in table according to startDate and durationInHours
+	 * @param startDate - start date
+	 * @param durationInHours - duration in hours
+	 */
 	public void listBuses(java.util.Date startDate, int durationInHours){
 		DefaultTableModel selectBusTable = (DefaultTableModel) tableBusesUpdTour.getModel();
 		Autobus.frame.deleteAllRows(selectBusTable);
@@ -1098,6 +1219,11 @@ public class UpdateTourPanel extends JPanel {
 		}
 	}
 	
+	/**
+	 * This lists all Chauffeurs in table according to startDate and durationInHours
+    * @param startDate - start date
+    * @param durationInHours - duration in hours
+	 */
 	public void listChauffeurs(java.util.Date startDate, int durationInHours){
 		DefaultTableModel selectChauffeurTable = (DefaultTableModel) tableChauffeursUpdTour.getModel();
 		Autobus.frame.deleteAllRows(selectChauffeurTable);
@@ -1111,11 +1237,18 @@ public class UpdateTourPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * This updates pick up list for this Tour
+	 * @param newPickUp
+	 */
 	public void updateListPickUps(String newPickUp){
 		DefaultListModel<String> listModel = (DefaultListModel<String>) list.getModel();
 		listModel.addElement(newPickUp);
 	}
 
+	/**
+	 * This lists all fields with the information for this Tour
+	 */
 	public void listElements(){
 		destinationUpdTour.setText(currentlyUpdatingTour.getDestination());
 

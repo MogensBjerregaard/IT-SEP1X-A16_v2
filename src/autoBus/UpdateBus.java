@@ -1,36 +1,22 @@
 package autoBus;
 
 import javax.swing.JPanel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Color;
-import javax.swing.AbstractListModel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Calendar;
-
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
 import javax.swing.JRadioButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JScrollPane;
@@ -53,10 +39,20 @@ public class UpdateBus extends JPanel {
    private DefaultTableModel updateBusTable;
    private JLabel lblUpdateBus;
 
-   public void createEvents() {
 
+   /**
+    * All methods for this UpdateBus
+    */
+   public void createEvents() {
+       
+      /**
+        * Cancel Button
+        */
        lblCancelUpdateBusButton.addMouseListener(new MouseAdapter() {
              @Override
+             /**
+              * This shows an okOrCancel message 
+              */
              public void mouseReleased(MouseEvent event) {
                  if(Autobus.okOrCancel("Are you sure you want to cancel changing this bus?") == 0) {
                      Autobus.frame.hideAllPanels();
@@ -65,8 +61,14 @@ public class UpdateBus extends JPanel {
              }
          });
 
+       /**
+        * Show Full Description Button
+        */
       Autobus.frame.lblShowFullDescription.addMouseListener(new MouseAdapter() {
          @Override
+         /**
+          * This fills additional Bus information after the button has been clicked
+          */
          public void mouseReleased(MouseEvent event){
 
             try {
@@ -139,8 +141,14 @@ public class UpdateBus extends JPanel {
          }
       });
       
+      /**
+       * Update Bus button
+       */
       lblUpdateBus.addMouseListener(new MouseAdapter() {
          @Override
+         /**
+          * This updates vehicleID, pricePerHour, maxNumberOfSeats and model for this Bus. 
+          */
          public void mouseReleased(MouseEvent event){
             if(Autobus.okOrCancel("Are you sure you want to save these changes") == 0){
                currentlyUpdatingBus.setVehicleID(vehicleIdTextFieldUpdateBus.getText());
@@ -169,21 +177,39 @@ public class UpdateBus extends JPanel {
          }
       });
       
+      /**
+       * Standard Radio Button
+       */
       standardUpdateRadioButton.addActionListener(new ActionListener() {
+         /**
+          * Only standard Radio button is selected
+          */
          public void actionPerformed(ActionEvent arg0) {
             partyUpdateRadioButton.setSelected(false);
             luxuryUpdateRadioButton.setSelected(false);
          }
       });
       
+      /**
+       * Party Radio Button
+       */
       partyUpdateRadioButton.addActionListener(new ActionListener() {
+         /**
+          * Only party Radio button is selected
+          */
          public void actionPerformed(ActionEvent e) {
             standardUpdateRadioButton.setSelected(false);
             luxuryUpdateRadioButton.setSelected(false);
          }
       });
       
+      /**
+       * Luxury Radio Button
+       */
       luxuryUpdateRadioButton.addActionListener(new ActionListener() {
+         /**
+          * Only luxury Radio button is selected
+          */
          public void actionPerformed(ActionEvent e) {
             standardUpdateRadioButton.setSelected(false);
             partyUpdateRadioButton.setSelected(false);
@@ -191,6 +217,9 @@ public class UpdateBus extends JPanel {
       });
    }
    
+   /**
+    * GUI stuff
+    */
    public UpdateBus() {
       
       JPanel panel = new JPanel();
@@ -392,7 +421,11 @@ public class UpdateBus extends JPanel {
       		"Date", "Destination", "Chauffeur"
       	}
       ) {
-      	boolean[] columnEditables = new boolean[] {
+      	/**
+          * 
+          */
+         private static final long serialVersionUID = 1L;
+         boolean[] columnEditables = new boolean[] {
       		false, false, false
       	};
       	public boolean isCellEditable(int row, int column) {
