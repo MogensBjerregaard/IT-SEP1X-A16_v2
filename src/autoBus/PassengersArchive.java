@@ -18,7 +18,7 @@ public class PassengersArchive implements Serializable{
 	private ArrayList<Passenger> passengersArchive;
 
 	/**
-	 * This returns this passengersArchive
+	 * This returns this passengersArchive ArrayList
 	 * @return this passengersArchive
 	 */
 	public ArrayList<Passenger> getPassengersArchive() {
@@ -33,7 +33,7 @@ public class PassengersArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns size of this passengersArchive
+	 * This returns size of this passengersArchive ArrayList
 	 * @return size of this passengersArchive
 	 */
 	public int size(){
@@ -41,7 +41,7 @@ public class PassengersArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns a specified Passenger from passengersArchive
+	 * This returns a specified Passenger from passengersArchive ArrayList
 	 * @param index - index of this Passenger
 	 * @return Specified Passenger from passengers archive
 	 */
@@ -50,7 +50,7 @@ public class PassengersArchive implements Serializable{
 	}
 	
 	/**
-	 * This adds a new Passenger into passengersArchive
+	 * This adds a new Passenger into passengersArchive ArrayList
 	 * @param passenger - Passenger that is being added
 	 */
 	public void addPassenger(Passenger passenger){
@@ -58,7 +58,7 @@ public class PassengersArchive implements Serializable{
 	}
 	
 	/**
-	 * This removes specified Passenger from passengersArchive
+	 * This removes specified Passenger from passengersArchive ArrayList
 	 * @param index - index of Passenger
 	 */
 	public void removePassenger(int index){
@@ -86,7 +86,7 @@ public class PassengersArchive implements Serializable{
 	}
 	
 	/**
-    * This saves passengersArchive after changes
+    * This saves passengersArchive after changes have been made
     * @throws Exception
     */
 	public void savePassengersArchive() throws Exception{
@@ -108,7 +108,7 @@ public class PassengersArchive implements Serializable{
 	}
 	
 	/**
-    * This loads passengersArchive 
+    * This loads already existing passengersArchive 
     * @throws Exception
     */
 	@SuppressWarnings("unchecked")

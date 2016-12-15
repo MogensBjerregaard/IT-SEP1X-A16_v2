@@ -27,7 +27,7 @@ public class Date implements Serializable{
 		this.year=year;
 	}
 	/**
-	 * This returns if the year is leap
+	 * This returns boolean if the year is leap
 	 * @return true if the year is leap and false if year isn't leap
 	 */
 	public boolean isLeapYear(){
@@ -39,7 +39,7 @@ public class Date implements Serializable{
 	}
 	
 	/**
-	 * This returns the length of the month
+	 * This returns int with the length of the month
 	 * @return 31 if this month equals to 1 or 3 or 5 or 7 or 8 or 10 or 12. Else 30 if this month equals to 4, 6, 9, 11. Else 29 if this month equals to 2 and is leap year equals true. Else 28
 	 */
 	public int getLengthOfMonth(){
@@ -71,7 +71,7 @@ public class Date implements Serializable{
 	}
 	
 	/**
-	 * This calls goToNextDay() method
+	 * This calls goToNextDay() method that adds plus one day to the existing Date
 	 * @param days - amount of days
 	 */
 	public void advanceDays(int days){
@@ -106,7 +106,7 @@ public class Date implements Serializable{
 	}
 	
 	/**
-	 * This returns month of this Date
+	 * This returns int with month of this Date
 	 * @return month of this Date
 	 */
 	public int getMonth(){
@@ -114,7 +114,7 @@ public class Date implements Serializable{
 	}
 	
 	/**
-	 * This returns day of this Date
+	 * This returns int with day of this Date
 	 * @return day of this Date
 	 */
 	public int getDay(){
@@ -122,7 +122,7 @@ public class Date implements Serializable{
 	}
 	
 	/**
-	 * This returns year of this Date
+	 * This returns int with year of this Date
 	 * @return year of this Date
 	 */
 	public int getYear(){
@@ -138,7 +138,7 @@ public class Date implements Serializable{
 		return date;
 	}
 	/**
-	 * This compares otherDate with thisDate
+	 * This compares otherDate with thisDate and returns a boolean
 	 * @param otherDate - compared Date
 	 * @return if the dates are equal
 	 */
@@ -148,7 +148,7 @@ public class Date implements Serializable{
 				&& this.year==otherDate.year;
 	}
 	/**
-	 *  This returns new Date with month, day and year of this Date
+	 *  This returns new Date Copy with month, day and year of this Date
 	 * @return new Date with month, day and year of this Date
 	 */
 	public Date copy(){

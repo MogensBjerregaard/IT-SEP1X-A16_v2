@@ -25,7 +25,7 @@ public class ChauffeursArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns the information of the specific chauffeur from chauffeursArchive
+	 * This returns the information of the specific chauffeur from chauffeursArchive ArrayList
 	 * @param index - index of the Chauffeur
 	 * @return String that contains information about the specific Chauffeur
 	 */
@@ -34,7 +34,7 @@ public class ChauffeursArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns size of this chauffeursArchive
+	 * This returns int with size of this chauffeursArchive ArrayList
 	 * @return size of this chauffeurs archive
 	 */
 	public int size(){
@@ -42,7 +42,7 @@ public class ChauffeursArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns a specific Chauffeur from chauffeursArchive
+	 * This returns a specific Chauffeur from chauffeursArchive ArrayList with Chauffeur type
 	 * @param index - index of this Chauffeur
 	 * @return a specific Chauffeur from chauffeurs archive
 	 */
@@ -51,7 +51,7 @@ public class ChauffeursArchive implements Serializable{
 	}
 	
 	/**
-	 * This adds Chauffeur into chauffeursArchive 
+	 * This adds Chauffeur into chauffeursArchive ArrayList
 	 * @param chauffeur - chauffeur that is added
 	 */
 	public void addChauffeur(Chauffeur chauffeur){
@@ -59,7 +59,7 @@ public class ChauffeursArchive implements Serializable{
 	}
 	
 	/**
-	 * This removes a specific Chauffeur from chauffeursArchive
+	 * This removes a specific Chauffeur from chauffeursArchive ArrayList
 	 * @param index - index of the deleted Chauffeur
 	 */
 	public void removeChauffeur(int index){
@@ -87,7 +87,7 @@ public class ChauffeursArchive implements Serializable{
 	}
 	
 	/**
-    * This saves chauffeursArchive after changes
+    * This saves chauffeursArchive after changes have been made
     * @throws Exception
     */
 	public void saveChauffeursArchive() throws Exception{
@@ -109,7 +109,7 @@ public class ChauffeursArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns allChauffers from chauffeursArchive
+	 * This returns String with: allChauffers from chauffeursArchive
 	 * @return all chauffeurs from chauffeursArchive
 	 */
 	public String[] getAllChauffeurs(){
@@ -121,7 +121,7 @@ public class ChauffeursArchive implements Serializable{
 	}
 	
 	/**
-	 * Thus returns chauffeursArchive
+	 * Thus returns chauffeursArchive ArrayList
 	 * @return chauffeurs archive
 	 */
 	public ArrayList<Chauffeur> getChauffeurs(){
@@ -129,7 +129,7 @@ public class ChauffeursArchive implements Serializable{
 	}
 	
 	/**
-    * This loads chauffeursArchive 
+    * This loads already existing chauffeursArchive 
     * @throws Exception
     */
 	@SuppressWarnings("unchecked")
@@ -145,7 +145,7 @@ public class ChauffeursArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns a String that contains names of all Chauffeurs from chauffeursArchive
+	 * This returns a String that contains names of all Chauffeurs from chauffeursArchive ArrayList
 	 */
 	public String toString(){
 		String str = new String();
@@ -156,7 +156,7 @@ public class ChauffeursArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns a specified Chauffeur from chauffeursArchive
+	 * This returns a specified Chauffeur from chauffeursArchive with Chauffeur type
 	 * @param id - id of the Chauffeur
 	 * @return specified Chauffeur from chauffeurs archive
 	 */

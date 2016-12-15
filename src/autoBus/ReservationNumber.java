@@ -45,7 +45,7 @@ public class ReservationNumber implements Serializable{
 	}
 	
 	/**
-    * This saves reservationNumber after changes
+    * This saves reservationNumber after changes have been made
     * @throws Exception
     */
 	public void saveReservationNumber() throws Exception{
@@ -67,7 +67,7 @@ public class ReservationNumber implements Serializable{
 	}
 	
 	/**
-    * This loads reservationNumber 
+    * This loads already existing reservationNumber 
     * @throws Exception
     */
 	@SuppressWarnings("unchecked")
@@ -84,7 +84,7 @@ public class ReservationNumber implements Serializable{
 	}
 	
 	/**
-	 * This returns this ReservationNumber
+	 * This returns int with this ReservationNumber
 	 * @return this Reservation Number
 	 * @throws Exception
 	 */
@@ -97,7 +97,7 @@ public class ReservationNumber implements Serializable{
 	}
 	
 	/**
-	 * This cancels this ReservationNumber
+	 * This sets this ReservationNumber to 0
 	 * @throws Exception
 	 */
 	public void cancelReservationNumber() throws Exception{

@@ -28,7 +28,7 @@ public class Passenger implements Serializable{
 	}
 
 	/**
-	 * This returns name of this Passenger
+	 * This returns String with name of this Passenger
 	 * @return name of this Passenger
 	 */
 	public String getName() {
@@ -44,7 +44,7 @@ public class Passenger implements Serializable{
 	}
 
 	/**
-	 * This returns email of this Passenger
+	 * This returns String with email of this Passenger
 	 * @return email of this Passenger
 	 */
 	public String getEmail() {
@@ -60,7 +60,7 @@ public class Passenger implements Serializable{
 	}
 	
 	/**
-	 * This returns address of this Passenger
+	 * This returns String with address of this Passenger
 	 * @return address of this Passenger
 	 */
 	public String getAddress() {
@@ -76,7 +76,7 @@ public class Passenger implements Serializable{
 	}
 
 	/**
-	 * This returns birthday of this Passenger
+	 * This returns birthday of this Passenger with Date type
 	 * @return birthday of this Passenger
 	 */
 	public Date getBirthday() {
@@ -92,7 +92,7 @@ public class Passenger implements Serializable{
 	}
 
 	/**
-	 * This returns phonenumber of this Passenger
+	 * This returns String with phonenumber of this Passenger
 	 * @return phone number of this Passenger
 	 */
 	public String getPhonenumber() {

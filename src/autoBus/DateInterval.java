@@ -27,7 +27,7 @@ public class DateInterval implements Serializable{
 	}
 
 	/**
-	 * This returns startDate of this DateInterval
+	 * This returns startDate of this DateInterval with type Date
 	 * @return start date of this Date Interval
 	 */
 	public Date getStartDate() {
@@ -43,7 +43,7 @@ public class DateInterval implements Serializable{
 	}
 
 	/**
-	 * This returns endDate of this DateInterval
+	 * This returns endDate of this DateInterval with Date type
 	 * @return end date of this date Interval
 	 */
 	public Date getEndDate() {
@@ -59,7 +59,7 @@ public class DateInterval implements Serializable{
 	}
 	
 	/**
-	 * This returns startDateString.displayDate() of this DateInterval
+	 * This returns String with: startDateString.displayDate() of this DateInterval
 	 * @return displayed start date of this DateInterval
 	 */
 	public String getStartDateString(){
@@ -67,7 +67,7 @@ public class DateInterval implements Serializable{
 	}
 	
 	/**
-	 * This returns endDate.displayDate() of this DateInterval
+	 * This returns String with: endDate.displayDate() of this DateInterval
 	 * @return displayed end date of this DateInterval
 	 */
 	public String getEndDateString(){

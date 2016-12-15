@@ -29,7 +29,7 @@ public class TourReservation extends Reservation{
 	}
 
 	/**
-	 * This returns tour of this TourReservation
+	 * This returns tour of this TourReservation with Tour type
 	 * @return tour of this Tour Reservation
 	 */
 	public Tour getTour() {

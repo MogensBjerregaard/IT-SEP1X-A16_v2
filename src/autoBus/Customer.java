@@ -39,7 +39,7 @@ public class Customer implements Serializable{
 	}
 
 	/**
-	 * This returns moneySpent of this Customer
+	 * This returns double with moneySpent of this Customer
 	 * @return money spent of this Customer
 	 */
 	public double getMoneySpent() {
@@ -55,7 +55,7 @@ public class Customer implements Serializable{
 	}
 
 	/**
-	 * This returns discount of this Customer
+	 * This returns double with discount of this Customer
 	 * @return discount of this Customer
 	 */
 	public double getDiscount() {
@@ -71,7 +71,7 @@ public class Customer implements Serializable{
 	}
 
 	/**
-	 * This returns organisationName of this Customer
+	 * This returns String with: organisationName of this Customer
 	 * @return organisation name of this customer
 	 */
 	public String getOrganisationName() {
@@ -87,7 +87,7 @@ public class Customer implements Serializable{
 	}
 
 	/**
-	 * This returns name of this Customer
+	 * This returns String with name of this Customer
 	 * @return name of this Customer
 	 */
 	public String getName() {
@@ -103,7 +103,7 @@ public class Customer implements Serializable{
 	}
 
 	/**
-	 * This returns email of this Customer
+	 * This returns String with email of this Customer
 	 * @return email of this Customer
 	 */
 	public String getEmail() {
@@ -119,7 +119,7 @@ public class Customer implements Serializable{
 	}
 
 	/**
-	 * This returns address of this customer
+	 * This returns String with address of this customer
 	 * @return address of this Customer
 	 */
 	public String getAddress() {
@@ -135,7 +135,7 @@ public class Customer implements Serializable{
 	}
 
 	/**
-	 * This returns birthday of this Customer
+	 * This returns birthday of this Customer with Date type
 	 * @return birthday of this Customer
 	 */
 	public Date getBirthday() {
@@ -151,7 +151,7 @@ public class Customer implements Serializable{
 	}
 
 	/**
-	 * This returns phoneNumber of this Customer
+	 * This returns String with phoneNumber of this Customer
 	 * @return phone number of this Customer
 	 */
 	public String getPhonenumber() {
@@ -167,7 +167,7 @@ public class Customer implements Serializable{
 	}
 
 	/**
-	 * This returns organisationType of this Customer's organisation
+	 * This returns String with organisationType of this Customer's organisation
 	 * @return organisation type of this Customer's organisation
 	 */
 	public String getOrganisationType() {

@@ -60,7 +60,7 @@ public class UpdateBus extends JPanel {
        lblCancelUpdateBusButton.addMouseListener(new MouseAdapter() {
              @Override
              /**
-              * This shows an okOrCancel message 
+              * This shows an okOrCancel message after the button has been clicked and asks the user if he wants to cancel changing this bus
               */
              public void mouseReleased(MouseEvent event) {
                  if(Autobus.okOrCancel("Are you sure you want to cancel changing this bus?") == 0) {
@@ -76,7 +76,7 @@ public class UpdateBus extends JPanel {
       Autobus.frame.lblShowFullDescription.addMouseListener(new MouseAdapter() {
          @Override
          /**
-          * This fills additional Bus information after the button has been clicked
+          * This fills additional Bus information in necessary fields of the specific Bus after the button has been clicked
           */
          public void mouseReleased(MouseEvent event){
 
@@ -156,7 +156,7 @@ public class UpdateBus extends JPanel {
       lblUpdateBus.addMouseListener(new MouseAdapter() {
          @Override
          /**
-          * This updates vehicleID, pricePerHour, maxNumberOfSeats and model for this Bus. 
+          * This adds updated vehicleID, pricePerHour, maxNumberOfSeats and model information for this Bus
           */
          public void mouseReleased(MouseEvent event){
             if(Autobus.okOrCancel("Are you sure you want to save these changes") == 0){
@@ -191,7 +191,7 @@ public class UpdateBus extends JPanel {
        */
       standardUpdateRadioButton.addActionListener(new ActionListener() {
          /**
-          * Only standard Radio button is selected
+          * Makes only standard Radio button to be selected, disabling luxury and party radio buttons
           */
          public void actionPerformed(ActionEvent arg0) {
             partyUpdateRadioButton.setSelected(false);
@@ -204,7 +204,7 @@ public class UpdateBus extends JPanel {
        */
       partyUpdateRadioButton.addActionListener(new ActionListener() {
          /**
-          * Only party Radio button is selected
+          * Makes only party Radio button to be selected, disabling standard and luxury radio buttons
           */
          public void actionPerformed(ActionEvent e) {
             standardUpdateRadioButton.setSelected(false);
@@ -217,7 +217,7 @@ public class UpdateBus extends JPanel {
        */
       luxuryUpdateRadioButton.addActionListener(new ActionListener() {
          /**
-          * Only luxury Radio button is selected
+          * Makes only luxury Radio button to be selected, disabling standard and party radio buttons
           */
          public void actionPerformed(ActionEvent e) {
             standardUpdateRadioButton.setSelected(false);

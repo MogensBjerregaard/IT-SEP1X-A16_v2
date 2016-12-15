@@ -51,7 +51,7 @@ public class Tour implements Serializable{
 	}
 
 	/**
-	 * This returns bus for this Tour
+	 * This returns bus for this Tour with Bus type
 	 * @return bus for this Tour
 	 */
 	public Bus getBus() {
@@ -67,7 +67,7 @@ public class Tour implements Serializable{
 	}
 
 	/**
-	 * This returns totalPrice for this Tour
+	 * This returns double with totalPrice for this Tour
 	 * @return total price for this Tour
 	 */
 	public double getTotalPrice() {
@@ -83,7 +83,7 @@ public class Tour implements Serializable{
 	}
 
 	/**
-	 * This returns seatsAvailable for this Tour
+	 * This returns int with seatsAvailable for this Tour
 	 * @return seats available for this Tour
 	 */
 	public int getSeatsAvailable() {
@@ -122,7 +122,7 @@ public class Tour implements Serializable{
 	}
 
 	/**
-	 * This constructs a new Tour with empty information
+	 * This constructs a new Tour with empty information with Tour type
 	 * @param destination - destination for this Tour
 	 * @throws Exception
 	 */
@@ -161,7 +161,7 @@ public class Tour implements Serializable{
 		}
 		
 		/**
-		 * This returns Chauffeur of this Tour
+		 * This returns Chauffeur of this Tour with Chauffeur type
 		 * @return Chauffeur of this Tour
 		 */
 		public Chauffeur getChauffeursObject(){
@@ -169,7 +169,7 @@ public class Tour implements Serializable{
 		}
 		
 		/**
-		 * This returns a String that contains information about Chauffeur of this Tour
+		 * This returns a String that contains: information about Chauffeur of this Tour
 		 * @return A String that contains employee number and name of Chauffeur of this Tour
 		 */
 		public String getChauffeur(){
@@ -177,7 +177,7 @@ public class Tour implements Serializable{
 		}
 		
 		/**
-		 * This returns destination of this Tour
+		 * This returns String with; destination of this Tour
 		 * @return destination of this Tour
 		 */
 		public String getDestination() {
@@ -193,7 +193,7 @@ public class Tour implements Serializable{
 		}
 
 		/**
-		 * This returns pickUpPlaces of this Tour
+		 * This returns pickUpPlaces of this Tour with ArrayList<String> 
 		 * @return pick up places of this Tour
 		 */
 		public ArrayList<String> getPickUpPlaces() {
@@ -232,7 +232,7 @@ public class Tour implements Serializable{
 		}
 
 		/**
-		 * This returns pricePerPassenger of this Tour
+		 * This returns double with pricePerPassenger of this Tour
 		 * @return price per passenger of this Tour
 		 */
 		public double getPricePerPassenger() {
@@ -256,7 +256,7 @@ public class Tour implements Serializable{
 		}
 
 		/**
-		 * This returns services of this Tour
+		 * This returns services of this Tour with Services type
 		 * @return services of this Tour
 		 */
 		public Services getServices() {
@@ -294,7 +294,7 @@ public class Tour implements Serializable{
 		}
 
 		/**
-		 * This returns dateInterval for this Tour
+		 * This returns dateInterval for this Tour with DateInterval type
 		 * @return date interval for this Tour
 		 */
 		public DateInterval getDateInterval() {

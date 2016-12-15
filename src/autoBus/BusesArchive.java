@@ -18,14 +18,14 @@ public class BusesArchive implements Serializable{
 	private ArrayList<Bus> busesArchive;
 	
 	/**
-	 * Constructor for BusesArchive
+	 * This is a constructor that constructs busesArchive ArrrayList<Bus>
 	 */
 	public BusesArchive(){
 		busesArchive=new ArrayList<Bus>();
 	}
 	
 	/**
-	 * This returns busesArchive.size()
+	 * This returns int with busesArchive.size() ArrayList
 	 * @return size of this buses archive
 	 */
 	public int size(){
@@ -33,7 +33,7 @@ public class BusesArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns specified Bus from busesArchive
+	 * This returns specified Bus from busesArchive ArrayList
 	 * @param index - index of this Bus
 	 * @return specified Bus from buses archive
 	 */
@@ -42,7 +42,7 @@ public class BusesArchive implements Serializable{
 	}
 	
 	/**
-	 * This adds Bus in busesArchive
+	 * This adds Bus in busesArchive ArrayList
 	 * @param bus - bus that is added in buses Archive
 	 */
 	public void addBus(Bus bus){
@@ -50,7 +50,7 @@ public class BusesArchive implements Serializable{
 	}
 	
 	/**
-	 * This removes specified bus from busesArchive
+	 * This removes specified bus from busesArchive ArrayLIst
 	 * @param index - index of this Bus
 	 */
 	public void removeBus(int index){
@@ -78,7 +78,7 @@ public class BusesArchive implements Serializable{
 	}
 	
 	/**
-	 * This saves busesArchive after changes
+	 * This saves busesArchive after changes have been made
 	 * @throws Exception
 	 */
 	public void saveBusesArchive() throws Exception{
@@ -100,7 +100,7 @@ public class BusesArchive implements Serializable{
 	}
 	
 	/**
-	 * This loads busesArchive 
+	 * This loads already existing busesArchive 
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")

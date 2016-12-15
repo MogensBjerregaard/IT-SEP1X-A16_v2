@@ -24,7 +24,7 @@ public class Services implements Serializable{
 	}
 
 	/**
-	 * This returns breakfastIncluded
+	 * This returns breakfastIncluded boolean
 	 * @return breakfast included
 	 */
 	public boolean isBreakfastIncluded() {
@@ -40,7 +40,7 @@ public class Services implements Serializable{
 	}
 
 	/**
-	 * This returns lunchIncluded
+	 * This returns lunchIncluded boolean
 	 * @return lunch included
 	 */
 	public boolean isLunchIncluded() {
@@ -56,7 +56,7 @@ public class Services implements Serializable{
 	}
 
 	/**
-	 * This returns allInclusive
+	 * This returns allInclusive boolean
 	 * @return all inclusive
 	 */
 	public boolean isAllInclusive() {
@@ -72,7 +72,7 @@ public class Services implements Serializable{
 	}
 
 	/**
-	 * This returns entranceTickets
+	 * This returns entranceTickets boolean
 	 * @return entrance tickets
 	 */
 	public boolean isEntranceTickets() {
@@ -88,7 +88,7 @@ public class Services implements Serializable{
 	}
 	
 	/**
-	 * This returns getPriceBreakfast()
+	 * This returns double with getPriceBreakfast()
 	 * @return pricer for breakfast
 	 */
 	public double getPriceBreakfast() {
@@ -96,7 +96,7 @@ public class Services implements Serializable{
 	}
 	
 	/**
-	 * This returns getPriceLunch()
+	 * This returns double with getPriceLunch()
 	 * @return price for lunch
 	 */
 	public double getPriceLunch() {
@@ -104,7 +104,7 @@ public class Services implements Serializable{
 	}
 	
 	/**
-	 * This returns getPriceAllInclusive()
+	 * This returns double with getPriceAllInclusive()
 	 * @return price for all inclusive
 	 */
 	public double getPriceAllInclusive() {
@@ -112,7 +112,7 @@ public class Services implements Serializable{
 	}
 	
 	/**
-	 * This returns getPriceEntranceTickets()
+	 * This returns double with getPriceEntranceTickets()
 	 * @return price for entrance tickets
 	 */
 	public double getPriceEntranceTickets() {
@@ -120,7 +120,7 @@ public class Services implements Serializable{
 	}
 	
 	/**
-	 * This returns total price for all services that there included
+	 * This returns double with: total price for all services that there included
 	 * @return for all included services
 	 */
 	public double getTotalPrice(){
@@ -141,7 +141,7 @@ public class Services implements Serializable{
 	}
 	
 	/**
-	 * This returns str that contains information
+	 * This returns str that contains information about the services included
 	 * @return String that contains information according to services selected
 	 */
 	public String getServicesString(){

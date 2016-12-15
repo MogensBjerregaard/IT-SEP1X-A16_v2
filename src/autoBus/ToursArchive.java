@@ -25,7 +25,7 @@ public class ToursArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns size of this ToursArchive
+	 * This returns int with size of this ToursArchive ArrayList
 	 * @return size of this Tours Archive
 	 */
 	public int size(){
@@ -33,7 +33,7 @@ public class ToursArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns a specified Tour from this ToursArchive
+	 * This returns a specified Tour from this ToursArchive with Tour type
 	 * @param index - index of Tour
 	 * @return specified Tour from this Tours Archive
 	 */
@@ -42,7 +42,7 @@ public class ToursArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns this toursArchive
+	 * This returns this toursArchive ArrayList<Tour>
 	 * @return this toursArchive
 	 */
 	public ArrayList<Tour> getTours(){
@@ -50,7 +50,7 @@ public class ToursArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns dateInterval of specified Tour from this ToursArchive
+	 * This returns String with: dateInterval of specified Tour from this ToursArchive ArrayList<Tour>
 	 * @param index - index of Tour
 	 * @return date interval String for specified Tour from this ToursArchive
 	 */
@@ -59,7 +59,7 @@ public class ToursArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns pickUpPlaces of specified Tour from this ToursArchive
+	 * This returns String with: pickUpPlaces of specified Tour from this ToursArchive ArrayList<Tour>
 	 * @param index - index of Tour
 	 * @return pick up places for specified Tour from this ToursArchive
 	 */
@@ -68,7 +68,7 @@ public class ToursArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns Services of specified Tour from this ToursArchive
+	 * This returns String with: Services of specified Tour from this ToursArchive ArrayList<Tour>
 	 * @param index - index of Tour
 	 * @return Services for specified Tour from this ToursArchive
 	 */
@@ -77,7 +77,7 @@ public class ToursArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns pricePerPassengerString() for specified Tour from this ToursArchive
+	 * This returns String with: pricePerPassengerString() for specified Tour from this ToursArchive ArrayList<Tour>
 	 * @param index - index of Tour
 	 * @return price per passenger String for specified Tour from this ToursArchive
 	 */
@@ -86,7 +86,7 @@ public class ToursArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns busIdAndType for specified Tour from this ToursArchive
+	 * This returns String with: busIdAndType for specified Tour from this ToursArchive ArrayList<Tour>
 	 * @param index - index of Tour
 	 * @return bus ID and type String for specified Tour from this ToursArchive
 	 */
@@ -95,7 +95,7 @@ public class ToursArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns Chauffeur for specified Tour from this ToursArchive
+	 * This returns String with: Chauffeur for specified Tour from this ToursArchive ArrayList<Tour>
 	 * @param index - index of Tour
 	 * @return Chauffeur for specified Tour from this ToursArchive
 	 */
@@ -104,7 +104,7 @@ public class ToursArchive implements Serializable{
 	}
 	
 	/**
-	 * This adds a Tour to this toursArchive
+	 * This adds a Tour to this toursArchive ArrayList<Tour>
 	 * @param tour - Tour to be added
 	 */
 	public void addTour(Tour tour){
@@ -140,7 +140,7 @@ public class ToursArchive implements Serializable{
 	}
 	
 	/**
-    * This saves toursArchive after changes
+    * This saves toursArchive after changes have been made
     * @throws Exception
     */
 	public void saveToursArchive() throws Exception{
@@ -162,7 +162,7 @@ public class ToursArchive implements Serializable{
 	}
 	
 	/**
-    * This loads toursArchive 
+    * This loads already existing toursArchive 
     * @throws Exception
     */
 	@SuppressWarnings("unchecked")
@@ -196,7 +196,7 @@ public class ToursArchive implements Serializable{
 
 
 	/**
-	 * This returns this ToursArchive
+	 * This returns this ToursArchive ArrayList<Tour>
 	 * @return this Tours Archive
 	 */
 	public ArrayList<Tour> getToursArchive() {

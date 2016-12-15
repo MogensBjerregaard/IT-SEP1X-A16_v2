@@ -22,7 +22,7 @@ public abstract class Person{
 	}
 
 	/**
-	 * This returns name of this Person
+	 * This returns String with name of this Person
 	 * @return name of this Person
 	 */
 	public String getName() {
@@ -38,7 +38,7 @@ public abstract class Person{
 	}
 
 	/**
-	 * This sets email of this Person
+	 * This returns String with email of this Person
 	 * @return email of this Person
 	 */
 	public String getEmail() {
@@ -54,7 +54,7 @@ public abstract class Person{
 	}
 
 	/**
-	 * This returns address of this Person
+	 * This returns String withaddress of this Person
 	 * @return address of this Person
 	 */
 	public String getAddress() {
@@ -70,7 +70,7 @@ public abstract class Person{
 	}
 
 	/**
-	 * This gets birthday of this Person
+	 * This gets String with birthday of this Person
 	 * @return birthday of this Person
 	 */
 	public Date getBirthday() {

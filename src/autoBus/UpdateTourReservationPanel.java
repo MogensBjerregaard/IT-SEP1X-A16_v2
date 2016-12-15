@@ -71,7 +71,7 @@ public class UpdateTourReservationPanel extends JPanel {
 
 		// SEARCH FOR TOUR FIELD
 	   /**
-       * This searches for Tours by destination according to the symbols in Text Field
+       * This searches for Tours by destination according to the symbols in searchForTourInUpdTourRes TextField. Adds suitable Tour in tableToursInUpdTourRes and always refreshing tableToursInUpdTourRes table every time a symbol was added in searchForTourInUpdTourRes TextField by removing no more unsuitable Tours from the tableToursInUpdTourRes table and adding new once that are suitable 
        */
 	   searchForTourInUpdTourRes.getDocument().addDocumentListener(new DocumentListener() {
 	      public void deleteAllRows(final DefaultTableModel model) {
@@ -223,7 +223,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		});
 		// SEARCH CUSTOMER FIELD
 	   /**
-       * This searches for Customers by name according to the symbols in Text Field
+       * This searches for Customer by name according to the symbols in searchCustomerTextFieldInUpdTourRes TextField. Adds suitable Tour in tableCustomerInUpdTourRes and always refreshing tableCustomerInUpdTourRes table every time a symbol was added in searchCustomerTextFieldInUpdTourRes TextField by removing no more unsuitable Tours from the tableCustomerInUpdTourRes table and adding new once that are suitable 
        */
 		searchCustomerTextFieldInUpdTourRes.getDocument().addDocumentListener(new DocumentListener() {
 			public void deleteAllRows(final DefaultTableModel model) {
@@ -358,7 +358,7 @@ public class UpdateTourReservationPanel extends JPanel {
 
 		// SAVE UPDATED TOUR BUTTON
 		/**
-		 * Save all updates for this TourReservation
+		 * This checks if all the fields for this TouReservation are field correctly, updates previous information with the new one from the necessary fields. Notification "The changes you have made were saved" pops up, all panels are hidden and panelTourReservations is visible after the button has been pressed
 		 */
 		lblSaveUpdatedTourResButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -455,7 +455,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		lblCancelButtonInUpdateTourRes.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * Hides all the panels and shows panelTourReservations
+			 * This shows an okOrCancel notification that asks the user if he really wants to cancel updating this reservation. If user click OK, all panels are hidden and panelTourReservations in visible
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				if (Autobus.okOrCancel("Are you sure you want to cancel updating this reservation?") == 0) {
@@ -471,7 +471,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		lblSelectCustomerButtonInUpdTourRes.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This selects customer from customers list
+			 * This selects the Customer from tableCustomerInUpdTourRes table after the button has been pressed
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				int index = tableCustomerInUpdTourRes.getSelectedRow();
@@ -485,7 +485,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		lblSelectTourButtonInUpdTourRes.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-          * This selects tour from customers list
+          * This selects Tour from selectTourInUpdTourResPanel table after the button has been pressed
           */
 			public void mouseReleased(MouseEvent arg0) {
 				int index = tablePassengersInUpdTourRes.getSelectedRow();
@@ -497,7 +497,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		// REMOVE PASSENGER BUTTON
 		lblRemovePassengerButtonInUpdTourRes.addMouseListener(new MouseAdapter(){
 		   /**
-          * This removes passenger from the list
+          * This removes selected passenger from tablePassengersInUpdTourRes. An okOrCancel message pops up and asks if the user really wants to remove this passenger. If user clicks OK, selected Passenger tablePassengersInUpdTourRes in deleted
           */
 		   public void mouseReleased(MouseEvent event){
 				int index = tablePassengersInUpdTourRes.getSelectedRow();
@@ -518,7 +518,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		lblClearAllPassengersButtonInUpdTourRes.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This clears all the passengers from the list
+			 * This clears all the passengers from the tablePassengersInUpdTourRes table after the button has been pressed
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				DefaultTableModel tablePassengersModelInNewTourReservation = (DefaultTableModel)tablePassengersInUpdTourRes.getModel();
@@ -533,7 +533,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		lblSearchForPassengerInUpdTourRes.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This searxhes for the passenger by phone number
+			 * This searches for the passenger in passengersArchive by entered phone number in passengerPhoneInUpdTourRes TextField. If the passenger was found, information in passengerNameInUpdTourRes, passengerAddressInUpdTourRes, passengerEmailInUpdTourRes, passengerMonthInUpdTourRes, passengerDayInUpdTourRes, passengerYearInUpdTourRes. If the passenger wasn't found, notification pops up with message: "The passenger with entered phone number could not be found" after the button has been pressed
 			 */
 			public void mouseReleased(MouseEvent e) {
 				String phoneNumber = passengerPhoneInUpdTourRes.getText();
@@ -554,7 +554,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		lblClearButtonInUpdTourRes.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This clears all fields when the button has been clicked
+			 * This clears passengerPhoneInUpdTourRes, passengerNameInUpdTourRes, passengerAddressInUpdTourRes, passengerEmailInUpdTourRes, passengerMonthInUpdTourRes, passengerDayInUpdTourRes, passengerYearInUpdTourRes fields after the button has been pressed
 			 */
 			public void mouseReleased(MouseEvent e) {
 				passengerPhoneInUpdTourRes.setText("");
@@ -571,7 +571,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		lblAddNewPassengerButtonInUpdTourRes.addMouseListener(new MouseAdapter(){
 			@Override
 			/**
-			 * This adds passenger to this Tour and checks if the information was filled correctly
+			 * This adds passenger to tablePassengersInUpdTourRes table. Before that it checks passengerPhoneInUpdTourRes, passengerNameInUpdTourRes, passengerAddressInUpdTourRes, passengerEmailInUpdTourRes, passengerMonthInUpdTourRes, passengerDayInUpdTourRes, passengerYearInUpdTourRes fields if they are filled correctly. If some fields are field incorrectly, the message pops up and says what fields should be changed after the button has been pressed
 			 */
 			public void mouseReleased(MouseEvent e) {
 				String str="";
@@ -656,7 +656,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		lblClearCustomerButtonInUpdTourRes.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This clears all the fields in Customer
+			 * This clears customerNameInUpdTourRes, customerOrganisationInUpdTourRes, customerAddressInUpdTourRes, customerEmailInUpdTourRes, customerMonthInUpdTourRes, customerDayInUpdTourRes, customerYearInUpdTourRes, customersPhoneInUpdTourRes, radioButtonCompanyInUpdTourRes, radioButtonPriateInUpdTourRes, radioButtonSchoolInUpdTourRes, boxIsAPassengerInUpdTourRes fields after the button has been pressed
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				customerNameInUpdTourRes.setText("");
@@ -678,7 +678,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		Autobus.frame.lblUpdateTourReservation.addMouseListener(new MouseAdapter(){
 			@Override
 			/**
-			 * This fills the fields with the necessary information
+			 * This fills all the necessary fields according to the selected TourReservation from tableTourReservations table. If the tour wasn't selected and the button was pressed, a notification pops up with message: "You should first select the reservation you want to change from the table above!"
 			 */
 			public void mouseReleased(MouseEvent event){
 
@@ -705,7 +705,7 @@ public class UpdateTourReservationPanel extends JPanel {
 		lblAddNewCustomerButtonInUpdTourRes.addMouseListener(new MouseAdapter(){
 			@Override
 			/**
-			 * This adds new Customer when the button has been clicked
+			 * This adds new Customer to the TourReservation in selectedTourInUpdTourRes JLabel after the button was pressed. Before that it checks if customersPhoneInUpdTourRes, customerOrganisationInUpdTourRes, radioButtonCompanyInUpdTourRes, radioButtonSchoolInUpdTourRes, radioButtonPriateInUpdTourRes, customerNameInUpdTourRes, customerAddressInUpdTourRes, customerEmailInUpdTourRes, customerMonthInUpdTourRes, customerDayInUpdTourRes, customerYearInUpdTourRes are filled correctly. If some fields aren't filed with correct, the notification pops up that says what points show be changed after the button has been pressed
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				String str = new String();
@@ -1552,7 +1552,7 @@ public class UpdateTourReservationPanel extends JPanel {
 	}
 
 	/**
-    * This list all Customers in table
+    * This list all Customers for this TourReservation in tableCustomerInUpdTourRes table
     */
 	public void listCustomers(){
 		DefaultTableModel customersTable = (DefaultTableModel) tableCustomerInUpdTourRes.getModel();
@@ -1574,7 +1574,7 @@ public class UpdateTourReservationPanel extends JPanel {
 	}
 
 	/**
-	 * This updates Customer List after update has been made
+	 * This updates Customer for this TourReservation tableCustomerInUpdTourRes table after updated Chauffeur was added
 	 */
 	public void updateListCustomers(){
 		DefaultTableModel customersTable = (DefaultTableModel) tableCustomerInUpdTourRes.getModel();
@@ -1594,7 +1594,7 @@ public class UpdateTourReservationPanel extends JPanel {
 
 
 	/**
-	 * This list all Passengers in table
+	 * This list all Passengers of this TourReservaiton in tablePassengersInUpdTourRes table
 	 */
 	public void listPassengers(){
 		DefaultTableModel passengersTable = (DefaultTableModel) tablePassengersInUpdTourRes.getModel();
@@ -1616,7 +1616,7 @@ public class UpdateTourReservationPanel extends JPanel {
 	}
 
 	/**
-	 * This updates Passengers List after update has been made
+	 * This updates Passenger for this TourReservation tablePassengersInUpdTourRes table after updated Passenger was added
 	 * @param newPassengerInTheList
 	 */
 	public void updateListPassengers(Passenger newPassengerInTheList){
@@ -1633,7 +1633,7 @@ public class UpdateTourReservationPanel extends JPanel {
 	}
 
 	/**
-	 * This lists all Tours in table
+	 * This lists all Tours of this TourReservation tableToursInUpdTourRes
 	 */
 	public void listTours(){
 		DefaultTableModel toursTable = (DefaultTableModel) tableToursInUpdTourRes.getModel();

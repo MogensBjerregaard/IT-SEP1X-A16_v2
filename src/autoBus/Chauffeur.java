@@ -52,7 +52,7 @@ public class Chauffeur implements Serializable{
 	}
 
 	/**
-	 * This returns dateinterval of this chauffeur
+	 * This returns int with dateInterval of this Chauffeur
 	 * @return date interval of this Chauffeur
 	 */
 	public int getDatePointer() {
@@ -101,7 +101,7 @@ public class Chauffeur implements Serializable{
 		listOfStartEndDates.add(datePointer, newStartEndDate);
 	}
 	/**
-	 * This returns listOfStartEndDates
+	 * This returns listOfStartEndDates ArrayList
 	 * @return list of start end dates
 	 */
 	public  ArrayList<java.util.Date[]> getListOfStartEndDates() {
@@ -137,14 +137,14 @@ public class Chauffeur implements Serializable{
 	}
 	
 	/**
-	 * This returns employee's number and name
+	 * This returns String that contains employee's number and name
 	 */
 	public String toString(){
 		return "#"+employeeNumber+" "+name;
 	}
 	
 	/**
-	 * This returns phonenumber of this Chauffeur
+	 * This returns String with phonenumber of this Chauffeur
 	 * @return phone number of this Chauffeur
 	 */
 	public String getPhonenumber(){
@@ -176,7 +176,7 @@ public class Chauffeur implements Serializable{
 	}
 
 	/**
-	 * This returns externalEmployee for this Chauffeur
+	 * This returns boolean externalEmployee for this Chauffeur
 	 * @return external employee for this Chauffeur
 	 */
 	public boolean isExternalEmployee() {
@@ -193,7 +193,7 @@ public class Chauffeur implements Serializable{
 
 
 	/**
-	 * This returns available for this Chauffeur
+	 * This returns boolean available for this Chauffeur
 	 * @return available for this Chauffeur
 	 */
 	public boolean isAvailable() {
@@ -210,7 +210,7 @@ public class Chauffeur implements Serializable{
 
 
 	/**
-	 * This returns onlyOneDayTrips for this Chauffeur
+	 * This returns boolean onlyOneDayTrips for this Chauffeur
 	 * @return only one day trips for this Chauffeurs
 	 */
 	public boolean isOnlyOneDayTrips() {
@@ -234,7 +234,7 @@ public class Chauffeur implements Serializable{
 	}
 	
 	/**
-	 * This returns name of this Chauffeur
+	 * This returns String with name of this Chauffeur
 	 * @return name of this Chauffeur
 	 */
 	public String getName() {
@@ -250,7 +250,7 @@ public class Chauffeur implements Serializable{
 	}
 
 	/**
-	 * This returns email of this Chauffeur
+	 * This returns String with email of this Chauffeur
 	 * @return email of this Chauffeur
 	 */
 	public String getEmail() {
@@ -266,7 +266,7 @@ public class Chauffeur implements Serializable{
 	}
 
 	/**
-	 * This returns address for this Chauffeur
+	 * This returns String with address for this Chauffeur
 	 * @return address for this Chauffeur
 	 */
 	public String getAddress() {
@@ -282,7 +282,7 @@ public class Chauffeur implements Serializable{
 	}
 
 	/**
-	 * This returns birthday of this Chauffeur
+	 * This returns birthday of this Chauffeur with Date type
 	 * @return birthday of this Chauffeur
 	 */
 	public Date getBirthday() {
@@ -290,7 +290,7 @@ public class Chauffeur implements Serializable{
 	}
 	
 	/**
-	 * This returns birthday.displayDate() of this Chauffeur
+	 * This returns String with birthday.displayDate() of this Chauffeur
 	 * @return String that contains date, month and year of this Chauffeur
 	 */
 	public String getBirthDay(){

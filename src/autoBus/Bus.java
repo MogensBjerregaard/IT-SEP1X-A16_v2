@@ -8,7 +8,10 @@ public class Bus implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private  ArrayList<java.util.Date[]> listOfStartEndDates;
-	private int datePointer; /*an util field which helps to add new item to listOfStartEndDates in right place*/
+	/**
+	 * An util field which helps to add new item to listOfStartEndDates in right place
+	 */
+	private int datePointer;
 	private int maxNumberOfSeats;
 	private String vehicleID;
 	private double pricePerHour;
@@ -16,7 +19,7 @@ public class Bus implements Serializable{
 	private boolean availableForTours;
 
 	/**
-	 * This returns listOfStartEndDates
+	 * This returns listOfStartEndDates ArrayList
 	 * @return List of start end dates for this Bus
 	 */
 	public  ArrayList<java.util.Date[]> getListOfStartEndDates() {
@@ -24,7 +27,7 @@ public class Bus implements Serializable{
 	}
 	
 	/**
-	 * This returns datePointer
+	 * This returns datePointer int
 	 * @return An util field which helps to add new item to listOfStartEndDates in right place
 	 */
 	public int getDatePointer() {
@@ -33,7 +36,7 @@ public class Bus implements Serializable{
 
 	/**
 	 * This returns a String that contains: startMonth, startDay, startYear, startHour and startMinute
-	 * @return Earliest departure date string of this Bus
+	 * @return Earliest departure date String of this Bus
 	 */
 	public String getEarliestDepartureString(){
 		java.util.Date now = new java.util.Date();
@@ -111,22 +114,22 @@ public class Bus implements Serializable{
 	}
 
 	/**
-	 * This adds newStartEndDate in listOfStartEndDates
-	 * @param newStartEndDate - start and end date of the new reservation
+	 * This adds newStartEndDate in listOfStartEndDates table
+	 * @param newStartEndDate - start and end date of the new Reservation
 	 */
 	public void addNewReservationPeriod(java.util.Date[] newStartEndDate){
 		listOfStartEndDates.add(datePointer, newStartEndDate);
 	}
 	
 	/**
-	 * This returns vehicleId, model and maxNumberOfSeats of this Bus
+	 * This returns A string with: vehicleId, model and maxNumberOfSeats of this Bus
 	 */
 	public String toString(){
 		return "Bus ID#: "+vehicleID+", Type: "+model+", Seats: "+maxNumberOfSeats;
 	}
 	
 	/**
-	 * This returns naxNumberOfSeats of this Bus
+	 * This returns int with maxNumberOfSeats of this Bus
 	 * @return maximum number of seats of this Bus
 	 */
 	public int getMaxNumberOfSeats() {
@@ -143,7 +146,7 @@ public class Bus implements Serializable{
 
 
 	/**
-	 * This returns vehicleID of this Bus
+	 * This returns String with vehicleID of this Bus
 	 * @return ID of this Bus
 	 */
 	public String getVehicleID() {
@@ -159,7 +162,7 @@ public class Bus implements Serializable{
 	}
 
 	/**
-	 * This returns pricePerHour of this Bus
+	 * This returns double with pricePerHour of this Bus
 	 * @return price per hour of this Bus
 	 */
 	public double getPricePerHour() {
@@ -175,7 +178,7 @@ public class Bus implements Serializable{
 	}
 
 	/**
-	 * This returns model of this Bus
+	 * This returns String with model of this Bus
 	 * @return model of this Bus
 	 */
 	public String getModel() {
@@ -199,7 +202,7 @@ public class Bus implements Serializable{
 	}
 
 	/**
-	 * This returns availableForTours for this Bus
+	 * This returns boolean availableForTours for this Bus
 	 * @return available for tours for this Bus
 	 */
 	public boolean isAvailableForTours() {

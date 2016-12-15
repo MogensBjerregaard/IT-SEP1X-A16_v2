@@ -26,8 +26,8 @@ public abstract class Reservation implements Serializable{
 	}
 
 	/**
-	 * This returns totalPrice of the Reservation
-	 * @return total price of the Reservation
+	 * This returns double totalPrice of this Reservation
+	 * @return total price of this Reservation
 	 */
 	public double getTotalPrice() {
 		return totalPrice;
@@ -42,7 +42,7 @@ public abstract class Reservation implements Serializable{
 	}
 
 	/**
-	 * This returns reservationNumber of this Reservation
+	 * This returns int with reservationNumber of this Reservation
 	 * @return reservation number of this Reservation
 	 */
 	public int getReservationNumber() {
@@ -58,7 +58,7 @@ public abstract class Reservation implements Serializable{
 	}
 	
 	/**
-	 * This returns discount of this Reservation
+	 * This returns double discount of this Reservation
 	 * @return discount of this Reservation
 	 */
 	public double getDiscount() {
@@ -74,7 +74,7 @@ public abstract class Reservation implements Serializable{
 	}
 
 	/**
-	 * This returns passengers of this Reservation
+	 * This returns passengers of this Reservation with ArrayLIst<Pasenger> type
 	 * @return passengers of this Reservation
 	 */
 	public ArrayList<Passenger> getPassengers() {
@@ -110,7 +110,7 @@ public abstract class Reservation implements Serializable{
 	}
 	
 	/**
-	 * This returns Customer of this Reservation
+	 * This returns Customer of this Reservation with Customer type
 	 * @return Customer of this Reservation
 	 */
 	public Customer getCustomer() {

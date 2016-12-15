@@ -58,8 +58,8 @@ public class UpdateChauffeur extends JPanel
             {
                @Override
                /**
-                * This update additional information in fields for specified Chauffeur
-                */
+                * This updates employeeIDUpdateChauffeur, nameUpdateChauffeur, addressUpdateChauffeur, emailUpdateChauffeur, phoneUpdateChauffeur, mmUpdateChauffeur, ddUpdateChauffeur, yyyyUpdateChauffeur, externalCheckBoxUpdateChauffeur, oneDayCheckBoxUpdateChauffeur, tableUpdateChauffeur fields for selected Chauffeur after the button has been pressed
+                 */
                public void mouseReleased(MouseEvent event)
                {
 
@@ -149,7 +149,7 @@ public class UpdateChauffeur extends JPanel
       updateChauffeurLabelUpdateChauffeur.addMouseListener(new MouseAdapter() {
          @Override
          /**
-          * This updates Chauffeurs: enployeeNumber, name, address, birthday, externalEmployee, onlyOneDayTrips
+          * This updates Chauffeurs old information with the new that has been added in employeeIDUpdateChauffeur, nameUpdateChauffeur, addressUpdateChauffeur, emailUpdateChauffeur, phoneUpdateChauffeur, mmUpdateChauffeur, ddUpdateChauffeur, yyyyUpdateChauffeur, externalCheckBoxUpdateChauffeur, oneDayCheckBoxUpdateChauffeur, tableUpdateChauffeur fields
           */
          public void mouseReleased(MouseEvent event){
             if(Autobus.okOrCancel("Are you sure you want to save these changes") == 0){
@@ -183,7 +183,7 @@ public class UpdateChauffeur extends JPanel
       lblCancel.addMouseListener(new MouseAdapter() {
          @Override
          /**
-          * This shows okOrCancel message after the button has been clicked
+          * This makes an okOrCancel message pop up and ask the user if he really wants to cancel changing this chauffeur. If OK was pressed then all panels are hidden and panelChauffeurs is visible
           */
          public void mouseReleased(MouseEvent event){
             if(Autobus.okOrCancel("Are you sure you want to cancel changing this chauffeur?") == 0) {

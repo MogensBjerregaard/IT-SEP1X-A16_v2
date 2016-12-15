@@ -21,9 +21,9 @@ public class BusReservation extends Reservation{
 	 * @param customer-  customer  for this Bus Reservation
 	 * @param chauffeur - chauffeur  for this Bus Reservation
 	 * @param bus - bus  for this Bus Reservation
-	 * @param services-  services  for this Bus Reservation
+	 * @param services -  services  for this Bus Reservation
 	 * @param dateInterval - date interval  for this Bus Reservation
-	 * @param price- price  for this Bus Reservation
+	 * @param price - price  for this Bus Reservation
 	 */
 	public BusReservation(int reservationNumber, double discount, Customer customer, Chauffeur chauffeur, Bus bus,
 			Services services, DateInterval dateInterval, double price) {
@@ -38,7 +38,7 @@ public class BusReservation extends Reservation{
 	}
 
 	/**
-	 * This returns a String that contains: startDate and endDate
+	 * This returns a String that contains: startDate(month, day, year) and endDate(month, day, year)
 	 * @return departure date for this Bus Reservation
 	 */
 	public String getDepartureDate(){
@@ -62,7 +62,7 @@ public class BusReservation extends Reservation{
 	}
 
 	/**
-	 * This returns totalPrice of this Bus Reservation
+	 * This returns double with totalPrice of this Bus Reservation
 	 */
 	@Override
 	public double getTotalPrice() {
@@ -93,7 +93,7 @@ public class BusReservation extends Reservation{
 	}
 
 	/**
-	 * This returns price of this Bus Reservation
+	 * This returns double with price of this Bus Reservation
 	 * @return price of this Bus Reservation
 	 */
 	public double getPrice() {
@@ -176,7 +176,7 @@ public class BusReservation extends Reservation{
 	}
 	
 	/**
-	 * This returns dateInterval.getStartDateString() and dateInterval.getEndDateString() of this Bus Reservation
+	 * This returns String that contains: dateInterval.getStartDateString() and dateInterval.getEndDateString() of this Bus Reservation
 	 * @return start and end dates of this Bus Reservation
 	 */
 	public String getDateIntervalString(){

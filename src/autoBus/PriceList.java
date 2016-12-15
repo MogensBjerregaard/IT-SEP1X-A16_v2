@@ -48,7 +48,7 @@ public class PriceList implements Serializable{
 	}
 	
 	/**
-    * This saves priceList after changes
+    * This saves priceList after changes have been made
     * @throws Exception
     */
 	public void savePriceList() throws Exception{
@@ -70,7 +70,7 @@ public class PriceList implements Serializable{
 	}
 	
 	/**
-    * This loads priceList
+    * This loads already existing priceList
     * @throws Exception
     */
 	@SuppressWarnings("unchecked")
@@ -86,7 +86,7 @@ public class PriceList implements Serializable{
 	}
 	
 	/**
-	 * This returns price for Breakfast
+	 * This returns double with price for Breakfast
 	 * @return price for Breakfast
 	 */
 	public double getPriceBreakfast() {
@@ -102,7 +102,7 @@ public class PriceList implements Serializable{
 	}
 
 	/**
-	 * This returns price for Lunch
+	 * This returns double with price for Lunch
 	 * @return price for Lunch
 	 */
 	public double getPriceLunch() {
@@ -118,7 +118,7 @@ public class PriceList implements Serializable{
 	}
 
 	/**
-	 * This returns price for All Inclusive
+	 * This returns double with price for All Inclusive
 	 * @return price for All Inclusive
 	 */
 	public double getPriceAllInclusive() {
@@ -134,7 +134,7 @@ public class PriceList implements Serializable{
 	}
 	
 	/**
-	 * This returns price for EntranceTickets
+	 * This returns double with price for EntranceTickets
 	 * @return price for EntranceTickets
 	 */
 	public double getPriceEntranceTickets() {

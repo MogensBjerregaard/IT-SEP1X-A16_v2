@@ -18,7 +18,7 @@ public class ReservationsArchive implements Serializable{
 	private ArrayList<Reservation> reservationsArchive;
 
 	/**
-	 * This returns this ReservationArchive
+	 * This returns this ReservationArchive ArrayLIst
 	 * @return this Reservation Archive
 	 */
 	public ArrayList<Reservation> getReservationsArchive() {
@@ -33,7 +33,7 @@ public class ReservationsArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns size of this ReservationArchive
+	 * This returns int with size of this ReservationArchive ArrayLIst
 	 * @return size of this Reservation Archive
 	 */
 	public int size(){
@@ -75,9 +75,9 @@ public class ReservationsArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns Reservation from this ReservationNumber by specified reservationNumber
+	 * This returns Reservation from this ReservationArchive ArrayList by specified reservationNumber
 	 * @param reservationNumber - reservation number by which the Reservation is going to be searched
-	 * @return
+	 * @return reservation from this reservation archive by specified reservation number
 	 */
 	public Reservation getReservationByReservationNumber(int reservationNumber){
 		for (int i=0; i< reservationsArchive.size(); i++){
@@ -102,7 +102,7 @@ public class ReservationsArchive implements Serializable{
 	}
 	
 	/**
-    * This saves reservationsArchive after changes
+    * This saves reservationsArchive after changes have been made
     * @throws Exception
     */
 	public void saveReservationsArchive() throws Exception{
@@ -124,7 +124,7 @@ public class ReservationsArchive implements Serializable{
 	}
 	
 	/**
-    * This loads reservationsArchive 
+    * This loads already existing reservationsArchive 
     * @throws Exception
     */
 	@SuppressWarnings("unchecked")
@@ -193,7 +193,7 @@ public class ReservationsArchive implements Serializable{
 	}
 
 	/**
-	 * This returns index of Reservation from this ReservationsArchive
+	 * This returns int with index of Reservation from this ReservationsArchive ArrayList
 	 * @param reservation - reservation by which the index is going to be searched
 	 * @return
 	 */

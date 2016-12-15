@@ -25,7 +25,7 @@ public class CustomersArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns size of this customersArchive
+	 * This returns int with size of this customersArchive ArrayList
 	 * @return size of this customer archive
 	 */
 	public int size(){
@@ -33,7 +33,7 @@ public class CustomersArchive implements Serializable{
 	}
 	
 	/**
-	 * This returns specified Customer from this customersArchive
+	 * This returns specified Customer from this customersArchive ArrayList with Customer type
 	 * @param index - index of this Customer
 	 * @return specified Customer from this customers archive
 	 */
@@ -41,7 +41,7 @@ public class CustomersArchive implements Serializable{
 		return customersArchive.get(index);
 	}
 	/**
-	 * This returns this customersArchive
+	 * This returns this customersArchive with ArrayList<Customer> type
 	 * @return this customers archive
 	 */
 	public ArrayList<Customer> getListOfCustomers(){
@@ -49,7 +49,7 @@ public class CustomersArchive implements Serializable{
 	}
 	
 	/**
-	 * This adds customer into customersArchive
+	 * This adds customer into customersArchive ArrayList
 	 * @param customer - added Customer
 	 */
 	public void addCustomer(Customer customer){
@@ -57,8 +57,8 @@ public class CustomersArchive implements Serializable{
 	}
 	
 	/**
-	 * This removes specified Customer from customersArchive
-	 * @param index - index of this Customer
+	 * This removes specified Customer from customersArchive ArrayList
+	 * @param index - index of this Customer 
 	 */
 	public void removeCustomer(int index){
 		customersArchive.remove(index);
@@ -85,7 +85,7 @@ public class CustomersArchive implements Serializable{
 	}
 	
 	/**
-    * This saves customersArchive after changes
+    * This saves customersArchive after changes have been made
     * @throws Exception
     */
 	public void saveCustomersArchive() throws Exception{
@@ -107,7 +107,7 @@ public class CustomersArchive implements Serializable{
 	}
 	
 	/**
-    * This loads customersArchive 
+    * This loads already existing customersArchive 
     * @throws Exception
     */
 	@SuppressWarnings("unchecked")
