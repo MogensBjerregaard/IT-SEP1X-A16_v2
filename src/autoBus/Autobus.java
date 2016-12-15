@@ -9342,9 +9342,10 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 
 	/**
-	 * 
+	 * Formats the specific string, converting it to java.util.Date object
 	 * @param date
 	 * @return
+	 * @throws ParseException
 	 */
 	public static java.util.Date parseDate(String date) {
 		try {
@@ -9355,7 +9356,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 	
 	/**
-	 * 
+	 * Rounds the double- type number to the specific digit, specified by the "places" parameter.
 	 * @param value
 	 * @param places
 	 * @return
