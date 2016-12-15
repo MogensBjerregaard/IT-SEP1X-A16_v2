@@ -496,7 +496,8 @@ public class UpdateBusReservations extends JPanel {
                   str = str + "\nEnd minute does not appear to be a valid number!";
                }
 
-
+               javastartDate = parseDate(yearStart+"-" + monthStart + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
+               javaendDate = parseDate(yearEnd+"-" + monthEnd + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
                try {
                   services = new Services();
                } catch (Exception e1) {
@@ -557,14 +558,24 @@ public class UpdateBusReservations extends JPanel {
 
 
                } else {
-                  pricePerDay += currentlyUpdatingBusReservation.getBus().getPricePerHour()*8;//price/hour * 8 working hours per day = price/day
                   bus = currentlyUpdatingBusReservation.getBus();
+                  if(!bus.isAvailable(javastartDate, (int)((javaendDate.getTime() - javastartDate.getTime()) / 3600000) )) {
+                     JOptionPane.showMessageDialog(null, "The currently selected bus " + bus.getVehicleID() + "(" + bus.getModelString() + ") is unavailable in the given time period");
+                     bus = null;
+                     return;
+                  }
+                  pricePerDay += currentlyUpdatingBusReservation.getBus().getPricePerHour()*8;//price/hour * 8 working hours per day = price/day
                }
                if (!(updateBusReservationsNext.tableSelectChauffeurNext.getSelectedRow()==-1)) {
                   String chauffeurSelected = (String)newBusSelectChauffeurTable.getValueAt(updateBusReservationsNext.tableSelectChauffeurNext.getSelectedRow(), 0);
                   chauffeur = Autobus.frame.chauffeursArchive.getChauffeurById(chauffeurSelected);
                } else {
                   chauffeur = currentlyUpdatingBusReservation.getChauffeur();
+                  if(!chauffeur.isAvailable(javastartDate, (int)((javaendDate.getTime() - javastartDate.getTime()) / 3600000) )) {
+                     JOptionPane.showMessageDialog(null, "The currently selected chauffeur " + chauffeur.getName() + "(" + chauffeur.getPhonenumber() + ") is unavailable in the given time period");
+                     chauffeur = null;
+                     return;
+                  }
                }
                for (int i=0; i<Autobus.frame.customersArchive.size(); i++){
                   if (phoneCustomerReservationUpdate.getText().equalsIgnoreCase(Autobus.frame.customersArchive.get(i).getPhonenumber())) {
@@ -577,8 +588,6 @@ public class UpdateBusReservations extends JPanel {
 
 
                if (str.equalsIgnoreCase("")){
-                  javastartDate = parseDate(yearStart+"-" + monthStart + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
-                  javaendDate = parseDate(yearEnd+"-" + monthEnd + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
                   int customerIndex = -1;
                   Bus oldBus = currentlyUpdatingBusReservation.getBus();
                   for (int i = 0; i < oldBus.getListOfStartEndDates().size(); i++) {

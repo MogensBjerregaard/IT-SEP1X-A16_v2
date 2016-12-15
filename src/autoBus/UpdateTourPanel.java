@@ -574,22 +574,7 @@ public class UpdateTourPanel extends JPanel {
                    } catch (NumberFormatException e1) {
                        str = str + "\nEnd year does not appear to be a valid number!";
                    }
-				   Bus bus;
-				   if (tableBusesUpdTour.getSelectedRow()==-1){
-                       bus = currentlyUpdatingTour.getBus();
-                   }
-                   else{
-                       String strBus = (String)tableBusesUpdTour.getModel().getValueAt(tableBusesUpdTour.getSelectedRow(), 0);
-                       bus = Autobus.frame.busesArchive.getBusById(strBus);
-                   }
-				   Chauffeur chauffeur;
-				   if (tableChauffeursUpdTour.getSelectedRow()==-1){
-                       chauffeur = currentlyUpdatingTour.getChauffeursObject();
-                   }
-                   else{
-                       String strChauffeur =(String)tableChauffeursUpdTour.getModel().getValueAt(tableChauffeursUpdTour.getSelectedRow(), 0);
-                       chauffeur = Autobus.frame.chauffeursArchive.getChauffeurById(strChauffeur);
-                   }
+
 
 				   if (yearEnd<yearStart){
                        str += "\nEnd year cannont be before start year!";
@@ -637,18 +622,42 @@ public class UpdateTourPanel extends JPanel {
                    }
 
 				   if (str.equals("")) {
+					   javastartDate = Autobus.parseDate(yearStart+"-" + monthStart + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
+					   javaendDate = Autobus.parseDate(yearEnd+"-" + monthEnd + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
+
+					   Bus bus;
+					   if (tableBusesUpdTour.getSelectedRow()==-1){
+						   bus = currentlyUpdatingTour.getBus();
+						   if(!bus.isAvailable(javastartDate, (int)((javaendDate.getTime() - javastartDate.getTime()) / 3600000) )) {
+							   JOptionPane.showMessageDialog(null, "The currently selected bus " + bus.getVehicleID() + "(" + bus.getModelString() + ") is unavailable in the given time period");
+							   bus = null;
+							   return;
+						   }
+					   }
+					   else{
+						   String strBus = (String)tableBusesUpdTour.getModel().getValueAt(tableBusesUpdTour.getSelectedRow(), 0);
+						   bus = Autobus.frame.busesArchive.getBusById(strBus);
+					   }
+					   Chauffeur chauffeur;
+					   if (tableChauffeursUpdTour.getSelectedRow()==-1){
+						   chauffeur = currentlyUpdatingTour.getChauffeursObject();
+						   if(!chauffeur.isAvailable(javastartDate, (int)((javaendDate.getTime() - javastartDate.getTime()) / 3600000) )) {
+							   JOptionPane.showMessageDialog(null, "The currently selected chauffeur " + chauffeur.getName() + "(" + chauffeur.getPhonenumber() + ") is unavailable in the given time period");
+							   chauffeur = null;
+							   return;
+						   }
+					   }
+					   else{
+						   String strChauffeur =(String)tableChauffeursUpdTour.getModel().getValueAt(tableChauffeursUpdTour.getSelectedRow(), 0);
+						   chauffeur = Autobus.frame.chauffeursArchive.getChauffeurById(strChauffeur);
+					   }
+
                        if (currentDate.equals(startRentDate)&&startRentDate.before(endRentDate)||currentDate.before(startRentDate)&&startRentDate.before(endRentDate)) {
                            dayCount = Autobus.daysBetweenDates(startRentDate, endRentDate);
 
                        }
                        startDate = new Date(monthStart, dayStart, yearStart);
                        endDate = new Date(monthEnd, dayEnd, yearEnd);
-                       try {
-                           /*!!!!!!*///Autobus.frame.toursArchive.addTour(new Tour(destinationUpdTour.getText()));
-                       } catch (Exception e1) {
-
-                           e1.printStackTrace();
-                       }
                        DefaultListModel<String> listModel = (DefaultListModel<String>) list.getModel();
                        if (listModel.size()==0) {
                            currentlyUpdatingTour.clearPickUpPlaces();
@@ -660,8 +669,7 @@ public class UpdateTourPanel extends JPanel {
                                currentlyUpdatingTour.setPickUpPlaces((String) listModel.getElementAt(i));
                            }
                        }
-                       javastartDate = Autobus.parseDate(yearStart+"-" + monthStart + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
-                       javaendDate = Autobus.parseDate(yearEnd+"-" + monthEnd + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
+
                        Bus oldBus = currentlyUpdatingTour.getBus();
                        for (int i = 0; i < oldBus.getListOfStartEndDates().size(); i++) {
                            if(currentlyUpdatingTour.getNewDateInterval()[0].toString().equals(oldBus.getListOfStartEndDates().get(i)[0].toString())){
